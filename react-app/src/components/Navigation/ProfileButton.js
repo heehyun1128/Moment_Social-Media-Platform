@@ -39,12 +39,13 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      <div onClick={openMenu}>
+        <i class="fa-solid fa-user"></i>
+      </div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
+            <li id='profile-img-li'><img id='profile-img' src={user.profileImage} alt="" /></li>
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>

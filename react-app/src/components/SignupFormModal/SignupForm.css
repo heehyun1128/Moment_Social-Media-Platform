@@ -1,0 +1,25 @@
+#signup-modal-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#signup-form{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#label{
+  display: flex;
+}
+
+#required-field{
+  color:red
+}
+
+/* label{
+  display: flex;
+} */

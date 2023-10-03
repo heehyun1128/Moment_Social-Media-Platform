@@ -67,21 +67,27 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (username, email, password) => async (dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
+	console.log(formData)
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			username,
-			email,
-			password,
-		}),
+		body: formData
+		// headers: {
+		// 	"Content-Type": "application/json",
+		// },
+		// body: JSON.stringify({
+		// 	profile_image_url:profilePic,
+		// 	username,
+		// 	first_name:firstname,
+		// 	last_name:lastname,
+		// 	email,
+		// 	password,
+		// }),
 	});
 
 	if (response.ok) {
 		const data = await response.json();
+		console.log(data)
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
