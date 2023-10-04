@@ -1,7 +1,28 @@
 .profile-dropdown {
   position: absolute;
+  right:50px;
 }
 
 .hidden {
   display: none;
+}
+
+#navigation-section {
+  margin: 20px 50px 0px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#profile-img-li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#profile-img{
+  width:150px;
 }

@@ -2,7 +2,10 @@ from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.models import Post
 from flask_login import current_user, login_user, logout_user, login_required
+from app.api.s3_helpers import (
+    upload_file_to_s3, get_unique_filename)
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -11,10 +14,10 @@ def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
-    errorMessages = []
+    errorMessages = {}
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages[str(field)] = error
     return errorMessages
 
 
@@ -60,17 +63,43 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
+    print('1111111111111111',form.data)
+    
+    data=request.files
+    print('7777777777777',data)
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        #aws
+        image = form.data["profile_image_url"] #<FileStorage: 'usethisurl.png' ('image/png')>
+        
+        image.filename = get_unique_filename(image.filename)
+        print('xxxxxxxxxxxxxxxxxxxxx',image)
+        upload = upload_file_to_s3(image)
+
+        if "url" not in upload:
+            print({'errors': "profile image is not a valid url"})
+
+
+
+        url = upload["url"]
+
+
         user = User(
+            profile_image_url= url,
             username=form.data['username'],
             email=form.data['email'],
+            first_name=form.data['first_name'],
+            last_name=form.data['last_name'],
             password=form.data['password']
         )
         db.session.add(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
+    if form.errors:
+        print('dataaaa',form.data)
+        print('yyyyyyyyyyy',form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

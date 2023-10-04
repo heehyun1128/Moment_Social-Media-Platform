@@ -1,1 +1,20 @@
 /* TODO Add site wide styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
