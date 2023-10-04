@@ -16,6 +16,9 @@
 }
 
 #profile-img-li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width:100px;
   border-radius: 50%;
   overflow: hidden;
