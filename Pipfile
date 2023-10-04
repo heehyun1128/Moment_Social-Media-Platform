@@ -27,6 +27,7 @@ Mako = "==1.1.4"
 email-validator = "*"
 boto3 = "*"
 flask-cors = "*"
+botocore = "*"
 
 [dev-packages]
 

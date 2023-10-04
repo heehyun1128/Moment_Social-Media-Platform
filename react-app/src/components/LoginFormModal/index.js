@@ -8,7 +8,7 @@ function LoginFormModal() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
@@ -21,14 +21,21 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemoUserLogin = (e) => {
+    e.preventDefault()
+    setErrors({});
+    return dispatch(login('demo@aa.io', 'password'))
+      .then(closeModal)
+
+  }
   return (
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
-          {errors.map((error, idx) => (
+          {/* {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
-          ))}
+          ))} */}
         </ul>
         <label>
           Email
@@ -48,6 +55,7 @@ function LoginFormModal() {
             required
           />
         </label>
+        <button id="demo-submit-btn" onClick={handleDemoUserLogin}>Demo User</button>
         <button type="submit">Log In</button>
       </form>
     </>
