@@ -5,10 +5,11 @@ import PostCard from "../Post/PostCard/PostCard";
 import './Home.css'
 
 
+
 const Home = () => {
   const dispatch = useDispatch()
-  const allPostsObj = useSelector(state=>state.posts.Posts)
   
+  const allPostsObj = useSelector(state=>state.posts.Posts)
 
   
   useEffect(()=>{
@@ -22,12 +23,12 @@ const Home = () => {
   const allPosts = Object.values(allPostsObj)
 
   
-
+ 
 
 
   return (
     <div >
-      <div id='all-post-div'>
+      <div id='all-post-div' >
         {allPosts && allPosts.map(post => {
           console.log(post)
           return <PostCard post={post} />

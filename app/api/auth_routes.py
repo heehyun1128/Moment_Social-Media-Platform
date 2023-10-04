@@ -65,8 +65,8 @@ def sign_up():
     form = SignUpForm()
     print('1111111111111111',form.data)
     
-    data=request.files
-    print('7777777777777',data)
+    # data=request.files
+    # print('7777777777777',data)
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():

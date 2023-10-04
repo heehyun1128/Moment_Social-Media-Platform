@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
 import './PostCard.css'
-import { fetchSinglePost } from "../../../store/post";
 
 
 const PostCard = ({post}) => {
  
+  const history = useHistory()
 
-
+  const handleClickPostCard = (e) => {
+    e.preventDefault()
+    history.push(`/posts/${post?.id}`)
+  }
   return (
-    <div id='post-card-div'>
+    <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
         <img src={post?.previewImg} alt="" />
       </div>

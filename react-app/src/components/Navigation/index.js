@@ -4,24 +4,34 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import SearchBar from './SearchBar';
+import { useHistory } from 'react-router-dom';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
-
+	const history=useHistory()
+	const handleGoToPostForm = e=>{
+		e.preventDefault()
+		history.push('/posts/new')
+	}
 	return (
-		<ul id='navigation-section'>
-		<li id='search-bar'>
+		<div id='navigation-section'>
+		<div id='search-bar'>
 			<SearchBar />
-		</li>
-			<li>
+		</div>
+			<div>
 				<NavLink exact to="/">Moment</NavLink>
-			</li>
-			{isLoaded && (
-				<li id='profile-btn'>
-					<ProfileButton user={sessionUser} />
-				</li>
-			)}
-		</ul>
+			</div>
+			<div id='nav-right-div'>
+				<div id='one' onClick={handleGoToPostForm}>
+					<i class="fa-solid fa-pen"></i>
+				</div>
+				{isLoaded && (
+					<div id='profile-btn'>
+						<ProfileButton user={sessionUser} />
+					</div>
+				)}
+			</div>
+		</div>
 	);
 }
 

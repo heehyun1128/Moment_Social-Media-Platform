@@ -6,6 +6,9 @@ import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation"
 import Home from "./components/Home/Home";
+import PostDetail from "./components/Post/PostDetail/PostDetail";
+import PostForm from "./components/Post/PostForm/PostForm";
+
 
 
 function App() {
@@ -25,6 +28,12 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/posts/new">
+            <PostForm />
+          </Route>
+          <Route path="/posts/:postId">
+            <PostDetail />
           </Route>
           <Route path="/">
             <Home />

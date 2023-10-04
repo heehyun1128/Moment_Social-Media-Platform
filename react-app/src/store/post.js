@@ -1,8 +1,10 @@
 /** Action Type Constants: */
 export const LOAD_POSTS = 'products/LOAD_POSTS'
 export const GET_POST = 'products/GET_POST'
+export const LOAD_USER_POSTS = 'products/LOAD_USER_POSTS'
 export const EDIT_POST = 'products/EDIT_POST'
-export const GET_SINGLE_POST = 'products/GET_SINGLE_POST'
+export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
+export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
 
 
 
@@ -10,6 +12,11 @@ export const GET_SINGLE_POST = 'products/GET_SINGLE_POST'
 // load all posts
 export const loadPosts = posts => ({
   type: LOAD_POSTS,
+  posts
+})
+// load USER posts
+export const loadUserPosts = posts => ({
+  type: LOAD_USER_POSTS,
   posts
 })
 // load/post single post
@@ -23,10 +30,15 @@ export const editPost = post => ({
   post
 })
 
+// LOAD POST IMAGES
+export const loadPostImages = postImages => ({
+  type: LOAD_POST_IMAGES,
+  postImages
+})
 // GET POST IMAGES
-export const loadSinglePost = post =>({
-  type: GET_SINGLE_POST,
-  post
+export const getPostImage = postImage => ({
+  type: GET_POST_IMAGE,
+  postImage
 })
 
 
@@ -45,14 +57,12 @@ export const fetchAllPosts = () => async (dispatch) => {
     return errors
   }
 }
-
-// fetch single post
-export const fetchSinglePost = (postId) => async (dispatch) =>{
-  const res = await fetch(`/api/posts/${postId}`)
-  console.log(res)
+// fetch all USER posts
+export const fetchUserPosts = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/posts`)
   if (res.ok) {
     const data = await res.json()
-    dispatch(loadSinglePost(data))
+    dispatch(loadPosts(data))
     console.log(data)
     return data
   } else {
@@ -61,6 +71,57 @@ export const fetchSinglePost = (postId) => async (dispatch) =>{
   }
 }
 
+// fetch single post
+export const fetchSinglePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`)
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getPost(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+
+// create a post
+export const fetchCreatePost = (post) => async (dispatch) => {
+  const res = await fetch('/api/posts/new', {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(post)
+  })
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getPost(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+// create a post image
+export const fetchCreatePostImage = (formData) => async (dispatch) => {
+  console.log(formData.get('post_id'))
+  const postId=formData.get('post_id')
+  const res = await fetch(`/api/posts/${postId}/images`, {
+    method: "POST",
+    body: formData
+  })
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getPostImage(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
 
 
 // state
@@ -75,12 +136,27 @@ const postReducer = (state = initialState, action) => {
       }
       console.log(newState)
       return newState
-    case GET_POST:
-      newState={
+    case LOAD_USER_POSTS:
+      newState = {
         ...state,
-        singlePost:action.post
+        userPost: action.posts
+      }
+      return newState
+    case GET_POST:
+      newState = {
+        ...state,
+        singlePost: action.post
       }
       console.log(newState)
+      return newState
+    case GET_POST_IMAGE:
+      newState = {
+        ...state,
+        singlePost: {
+          ...state.singlePost,
+          postImage: action.postImage
+        }
+      }
       return newState
     default:
       return state

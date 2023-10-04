@@ -28,7 +28,7 @@ def seed_postimages():
     # post-2
     PostImage(
     preview=True,
-    post_image_url='https://images.unsplash.com/photo-1415201364774-f6…wfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60',
+    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWyegnZASn8QiNSuJZsCYtf8fGLdnewj5cRQ&usqp=CAU',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
@@ -50,7 +50,7 @@ def seed_postimages():
     # post-3
     PostImage(
     preview=True,
-    post_image_url='https://assets.editorial.aetnd.com/uploads/2015/02…opic-golden-gate-bridge-gettyimages-177770941.jpg',
+    post_image_url='https://cdn.britannica.com/95/94195-050-FCBF777E/Golden-Gate-Bridge-San-Francisco.jpg',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
@@ -151,7 +151,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
-    post_image_url='https://venturebeat.com/wp-content/uploads/2021/05…6933-e1624308433688.jpg?fit=2309%2C1154&strip=all',
+    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIUiy9Xpk28t1Ic4UkQrrtDXvbpewePN153Q&usqp=CAU',
     post_id=7,
     created_at=curr_date,
     updated_at=curr_date
