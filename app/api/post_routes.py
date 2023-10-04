@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask_login import login_required
 from app.forms import PostForm
 from app.models import Post,db,PostImage
+from app.api.auth_routes import validation_errors_to_error_messages
 #aws
 from flask import Blueprint, request
 
@@ -55,3 +56,6 @@ def edit_post(postId):
       title=form.data['title'],
       content=form.data['content']
     )
+    db.session.commit()
+    return post.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400
