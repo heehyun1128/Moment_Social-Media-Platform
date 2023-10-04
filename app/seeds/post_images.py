@@ -49,7 +49,7 @@ def seed_postimages():
     ),
     # post-3
     PostImage(
-    preview=False,
+    preview=True,
     post_image_url='https://assets.editorial.aetnd.com/uploads/2015/02…opic-golden-gate-bridge-gettyimages-177770941.jpg',
     post_id=3,
     created_at=curr_date,
@@ -93,7 +93,7 @@ def seed_postimages():
     ),
     # post-5
     PostImage(
-    preview=False,
+    preview=True,
     post_image_url='https://media-cdn.tripadvisor.com/media/photo-w/19/ab/49/ce/yifang.jpg',
     post_id=5,
     created_at=curr_date,
@@ -129,7 +129,7 @@ def seed_postimages():
     ),
     # post-6
     PostImage(
-    preview=False,
+    preview=True,
     post_image_url='https://s3-media0.fl.yelpcdn.com/bphoto/6ujB-4l4GeiQ0PcXzuja6A/o.jpg',
     post_id=6,
     created_at=curr_date,
@@ -157,7 +157,7 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://venturebeat.com/wp-content/uploads/2021/05…6933-e1624308433688.jpg?fit=2309%2C1154&strip=all',
     post_id=7,
     created_at=curr_date,

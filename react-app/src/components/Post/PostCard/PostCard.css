@@ -1,0 +1,16 @@
+#post-card-div{
+  background-color: rgb(237, 237, 237);
+  max-height: 500px;
+}
+
+#post-card-img-div{
+  width:380px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#post-card-img-div img{
+height:500px;
+}

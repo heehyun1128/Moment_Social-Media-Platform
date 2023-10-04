@@ -15,7 +15,26 @@ post_routes = Blueprint('posts', __name__)
 @post_routes.route('/')
 def get_all_posts():
   posts=Post.query.all()
-  return({'Posts':{idx+1:post.to_dict() for idx,post in enumerate(posts)}})
+  post_dict={}
+  for post in posts:
+    data=post.to_dict()
+    images = post.post_images
+    creator=post.creator
+
+    for img in images:
+      if img.preview:
+        data['previewImg'] = img.post_image_url
+        break
+    data['creator']=creator.to_dict()
+    post_dict[str(post.id)] = data
+  return {"Posts": post_dict}
+
+
+ 
+  # return({'Posts':{idx+1:post.to_dict() for idx,post in enumerate(posts)}})
+
+
+
 
 @post_routes.route('/<int:postId>')
 def get_post_detail(postId):
