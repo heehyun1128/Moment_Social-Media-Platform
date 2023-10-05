@@ -24,8 +24,13 @@ const EditPostForm = () => {
     dispatch(fetchSinglePost(postId))
 
   }, [dispatch, postId])
+ 
+  if (Object.values(errors).length) {
+    history.push('/404')
 
-  console.log(post)
+  }
+  if (!post) return (<></>)
+
   return (
     <PostForm 
       post={post}

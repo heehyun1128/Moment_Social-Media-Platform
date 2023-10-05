@@ -23,21 +23,28 @@ const PostForm = ({ post, formType }) => {
     setContent('')
   }
 
+  if(postPics.length<5){
+    console.log([...postPics, ...new Array(5 - postPics.length).fill(null)]) 
+    const newArr = [...postPics, ...new Array(5 - postPics.length).fill(null)]
+    setPostPics(newArr)
+    
+  }
   const handleImageChange = (e, index) => {
     const fileNames = [...selFileNames]
     if(e.target.files[0]){
       fileNames[index]=e.target.files[0].name
+      setSelFileNames(fileNames)
+
+      const newPics = [...postPics]
+      newPics[index] = null
+      newPics[index] = e.target.files[0]
+      setPostPics(newPics)
+      console.log(newPics)
     }else{
 
       fileNames[index]=fileNames[index] || 'No File Chosen'
     }
-    setSelFileNames(fileNames)
-   
-    const newPics = [...postPics]
-    newPics[index]=null
-    newPics[index] = e.target.files[0]
-    setPostPics(newPics)
-console.log(newPics)
+    
 
   }
 
@@ -143,7 +150,7 @@ console.log(newPics)
                     console.log(e.target.files[0])
                     // setPostPic(e.target.files[0])
                   }}
-                  onClick={handleImageChange}
+                 
                 />
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
