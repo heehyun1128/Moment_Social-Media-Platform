@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost } from "../../../store/post";
+import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost ,fetchUpdatePostImage} from "../../../store/post";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './PostForm.css'
@@ -16,7 +16,9 @@ const PostForm = ({ post, formType }) => {
   const [imgErrors, setImgErrors] = useState({});
   const [postImgArr, setPostImgArr] = useState([])
   const [selFileNames, setSelFileNames] = useState([]) 
+  const [backgroundImg,setBackgroundImg] = useState('') 
 
+    
   const resetForm = () => {
     setPostPics(new Array(5).fill(null))
     setTitle('')
@@ -60,7 +62,7 @@ const PostForm = ({ post, formType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const post = {
+     post = {
       title,
       content
     }
@@ -171,18 +173,19 @@ const PostForm = ({ post, formType }) => {
 
           <>
             <h4>Edit your post images</h4>
-            {post?.postImages.map((img, index) => (
+            {postPics.map((img, index) => (
 
               <div key={index}>
                 <input
                   type="file"
                   accept="image/*"
-                  key={img.id}
-                  id={img.id}
+                  key={img?.id}
+                  id={img?.id}
                   style={{
-                    backgroundImage: `url(${img?.postImageUrl})`,
+                    backgroundImage: img?.postImageUrl ? `url(${img?.postImageUrl})` : 'url(https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg)',
                     backgroundSize: 'cover',
-                    height: '500px',
+                    width: img?.postImageUrl &&'200px',
+                    height: img?.postImageUrl && '200px',
                   }}
                   onChange={(e) => {
                     handleImageChange(e, index)
@@ -191,6 +194,7 @@ const PostForm = ({ post, formType }) => {
                   }}
                  
                 />
+                <p>{selFileNames[index]}</p>
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
                 } */}

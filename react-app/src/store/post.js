@@ -112,7 +112,7 @@ export const fetchCreatePost = (post) => async (dispatch) => {
 // create a post image
 export const fetchCreatePostImage = (formData) => async (dispatch) => {
   console.log(formData.get('post_id'))
-  const postId=formData.get('post_id')
+  const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images`, {
     method: "POST",
     body: formData
@@ -147,9 +147,9 @@ export const fetchUpdatePost = (post) => async (dispatch) => {
   }
 }
 // UPDATE a post image
-export const fetchUpdatePostImage = (formData,imageId) => async (dispatch) => {
+export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
   console.log(formData.get('post_id'))
-  const postId=formData.get('post_id')
+  const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
     method: "POST",
     body: formData
