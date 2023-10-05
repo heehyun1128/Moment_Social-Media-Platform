@@ -3,6 +3,7 @@ export const LOAD_POSTS = 'products/LOAD_POSTS'
 export const GET_POST = 'products/GET_POST'
 export const LOAD_USER_POSTS = 'products/LOAD_USER_POSTS'
 export const EDIT_POST = 'products/EDIT_POST'
+export const EDIT_POST_IMAGE = 'products/EDIT_POST_IMAGE'
 export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
 
@@ -27,6 +28,11 @@ export const getPost = post => ({
 // edit a post
 export const editPost = post => ({
   type: EDIT_POST,
+  post
+})
+// edit a post IMAGE
+export const editPostImage = post => ({
+  type: EDIT_POST_IMAGE,
   post
 })
 
@@ -123,6 +129,43 @@ export const fetchCreatePostImage = (formData) => async (dispatch) => {
   }
 }
 
+// UPDATE a post
+export const fetchUpdatePost = (post) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${post.id}/edit`, {
+    method: "PUT",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(post)
+  })
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(editPost(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+// UPDATE a post image
+export const fetchUpdatePostImage = (formData,imageId) => async (dispatch) => {
+  console.log(formData.get('post_id'))
+  const postId=formData.get('post_id')
+  const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
+    method: "POST",
+    body: formData
+  })
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(editPostImage(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+
 
 // state
 const initialState = {}
@@ -143,6 +186,7 @@ const postReducer = (state = initialState, action) => {
       }
       return newState
     case GET_POST:
+    case EDIT_POST:
       newState = {
         ...state,
         singlePost: action.post
@@ -150,6 +194,7 @@ const postReducer = (state = initialState, action) => {
       console.log(newState)
       return newState
     case GET_POST_IMAGE:
+    case EDIT_POST_IMAGE:
       newState = {
         ...state,
         singlePost: {
@@ -158,6 +203,7 @@ const postReducer = (state = initialState, action) => {
         }
       }
       return newState
+
     default:
       return state
   }

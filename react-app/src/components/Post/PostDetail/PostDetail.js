@@ -20,6 +20,9 @@ const PostDetail = () => {
   // const handleMouseLeave =()=>{
   //   setImageId(null)
   // }
+  const handleOpenEditPostForm=()=>{
+   
+  }
     useEffect(() => {
       dispatch(fetchSinglePost(postId))
       
@@ -50,6 +53,10 @@ const PostDetail = () => {
               <img src={postCreator?.profileImage} alt="" />
             </div>
             <p>{post?.creator?.username}</p>
+          </div>
+          <div id='post-detail-btn-div'>
+            <button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>
+            <button><i class="fa-solid fa-trash-can"></i>DELETE POST</button>
           </div>
           <h4>{post?.title}</h4>
           <div id="post-content">

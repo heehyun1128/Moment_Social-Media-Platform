@@ -7,7 +7,9 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation"
 import Home from "./components/Home/Home";
 import PostDetail from "./components/Post/PostDetail/PostDetail";
-import PostForm from "./components/Post/PostForm/PostForm";
+
+import CreatePostForm from "./components/Post/PostForm/CreatePostForm";
+import EditPostForm from "./components/Post/PostForm/EditPostForm";
 
 
 
@@ -30,7 +32,10 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/posts/new">
-            <PostForm />
+            <CreatePostForm />
+          </Route>
+          <Route path="/posts/:postId/edit">
+            <EditPostForm />
           </Route>
           <Route path="/posts/:postId">
             <PostDetail />
