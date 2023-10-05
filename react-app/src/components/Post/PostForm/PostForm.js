@@ -99,17 +99,56 @@ const PostForm = ({ post, formType }) => {
       history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
+      // post = {
+      //   ...post,
+      //   title,
+      //   content
+      // }
+
+      // console.log(post)
+      // setPostImgArr(post?.postImages)
+      // const updateTextData = await dispatch(fetchUpdatePost(post))
+
+      // // const formData
+
       post = {
         ...post,
         title,
-        content
+        content,
+        postImages: postPics
+      }
+      console.log(post)
+
+      const textData = await dispatch(fetchUpdatePost(post));
+
+      // postPics?.map(async postPic => {
+      for (const postPic of postPics) {
+        if (postPic === null) continue
+        const formData = new FormData();
+        setImageLoading(true)
+
+        if (!isImageValid(postPic)) {
+          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
+          alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
+          return
+        } else {
+          formData.append('post_image_url', postPic)
+          formData.append('preview', true)
+          formData.append('post_id', textData.id)
+          console.log(postPic.id)
+          const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
+        }
       }
 
-      console.log(post)
-      setPostImgArr(post?.postImages)
-      const updateTextData = await dispatch(fetchUpdatePost(post))
+      if (textData.errors) {
+        setErrors(textData.errors);
 
-      // const formData
+      } else {
+        setImageLoading(false)
+
+      }
+      history.push(`/posts/${textData.id}`)
+      // resetForm()
     }
 
 
