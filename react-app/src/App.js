@@ -4,7 +4,14 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation"
+import Home from "./components/Home/Home";
+import PostDetail from "./components/Post/PostDetail/PostDetail";
+
+import CreatePostForm from "./components/Post/PostForm/CreatePostForm";
+import EditPostForm from "./components/Post/PostForm/EditPostForm";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +30,18 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/posts/new">
+            <CreatePostForm />
+          </Route>
+          <Route path="/posts/:postId/edit">
+            <EditPostForm />
+          </Route>
+          <Route path="/posts/:postId">
+            <PostDetail />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       )}

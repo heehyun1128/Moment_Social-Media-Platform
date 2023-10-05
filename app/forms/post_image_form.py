@@ -7,4 +7,4 @@ from app.api.s3_helpers import ALLOWED_EXTENSIONS
 class PostImageForm(FlaskForm):
   post_id=IntegerField(validators=[DataRequired()])
   preview=BooleanField(default=False)
-  post_image = FileField("post_image", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+  post_image_url = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])

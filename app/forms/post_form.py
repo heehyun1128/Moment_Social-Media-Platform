@@ -14,7 +14,7 @@ class PostForm(FlaskForm):
         raise ValidationError('Post title cannot exceed 100 characters')
   def validate_content(form,field):
     if not field.data:
-      raise validationError('Post content is required')
+      raise ValidationError('Post content is required')
     else:
       if len(field.data)>1000:
         raise ValidationError('Post content cannot exceed 1000 characters')

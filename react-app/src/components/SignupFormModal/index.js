@@ -17,6 +17,7 @@ function SignupFormModal() {
 	const [errors, setErrors] = useState({});
 	const { closeModal } = useModal();
 
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData();
@@ -67,8 +68,8 @@ function SignupFormModal() {
 						}}
 			
 					/>
-					{(imageLoading) && <p>Loading...</p>}
 				</label>
+					{(imageLoading) && <p>Loading...</p>}
 				<label>
 					<div id="label"> <p >Email</p> <p id='required-field'>*</p></div>
 					<input

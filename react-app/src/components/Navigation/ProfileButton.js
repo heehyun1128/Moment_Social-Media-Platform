@@ -48,6 +48,7 @@ function ProfileButton({ user }) {
             <li id='profile-img-li'><img id='profile-img' src={user.profileImage} alt="" /></li>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
