@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { fetchCreatePost, fetchCreatePostImage } from "../../../store/post";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const PostForm = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [postPic, setPostPic] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
   const [title, setTitle] = useState('')
@@ -12,7 +14,7 @@ const PostForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const formData = new FormData();
     setImageLoading(true)
 
@@ -22,31 +24,30 @@ const PostForm = () => {
     // if (!postPic.name.endsWith("pdf") && !postPic.name.endsWith("png") && !postPic.name.endsWith("jpg") && !postPic.name.endsWith("jpeg" && !postPic.name.endsWith("gif"))){
     //   alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
     // }
-   
-   
-    const post={
+    const imageExtensions = ["pdf", "png", "jpg", "jpeg", "gif"]
+    if (!imageExtensions?.some(extension => postPic?.name.endsWith(extension))) {
+      alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
+    }
+
+    const post = {
       title,
       content
     }
-    
     const textData = await dispatch(fetchCreatePost(post));
-    console.log(textData.id)
 
     formData.append('post_image_url', postPic)
     formData.append('preview', true)
     formData.append('post_id', textData.id)
     const imageData = await dispatch(fetchCreatePostImage(formData));
 
-    if (textData || imageData) {
-      setErrors({
-        ...textData,
-        ...imageData
-      });
+    if (textData.errors) {
+      setErrors(textData.errors);
 
     } else {
       setImageLoading(false)
 
     }
+    history.push(`/posts/${ textData.id }`)
 
   }
   return (
@@ -79,7 +80,7 @@ const PostForm = () => {
             onChange={(e) => {
               setTitle(e.target.value)
               console.log(e.target.value)
-              }}
+            }}
             required
           />
           {errors && errors.title &&
@@ -94,9 +95,9 @@ const PostForm = () => {
             value={content}
             placeholder="Add post Content here..."
             onChange={(e) => {
-              console.log(e.target.value) 
+              console.log(e.target.value)
               setContent(e.target.value)
-              }}
+            }}
             required
           />
           {errors && errors.title &&
