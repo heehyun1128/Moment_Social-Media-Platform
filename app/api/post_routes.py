@@ -119,7 +119,7 @@ def post_image(postId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT A POST IMAGE
-@post_routes.route('/<int:postId>/images/<int:imageId>',methods=['PUT'])
+@post_routes.route('/<int:postId>/images/<int:imageId>/edit',methods=['PUT'])
 @login_required
 def edit_image(postId):
   post=Post.query.get(postId)
@@ -128,7 +128,7 @@ def edit_image(postId):
   if post.creator_id != current_user.id:
     return {'errors':'Unauthorized'},401
   
-  form = PostImage()
+  form = PostImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
   if form.validate_on_submit():

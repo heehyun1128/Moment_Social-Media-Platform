@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSinglePost } from "../../../store/post";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from 'react-router-dom'
 import './PostDetail.css'
 import { fetchSingleUser } from "../../../store/user";
 
@@ -12,6 +12,7 @@ const PostDetail = () => {
   const postCreator = useSelector(state => state.users?.singleUser)
   const images = post?.postImages
   const [imageId, setImageId] = useState(null)
+  const history = useHistory()
 
   const handleMouseOver=(imageId)=>{
     setImageId(imageId)
@@ -21,7 +22,7 @@ const PostDetail = () => {
   //   setImageId(null)
   // }
   const handleOpenEditPostForm=()=>{
-   
+    history.push(`/posts/${postId}/edit`)
   }
     useEffect(() => {
       dispatch(fetchSinglePost(postId))

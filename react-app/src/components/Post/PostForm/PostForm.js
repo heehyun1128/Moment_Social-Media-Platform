@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost } from "../../../store/post";
+import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost, fetchUpdatePostImage } from "../../../store/post";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './PostForm.css'
 
 const PostForm = ({ post, formType }) => {
   console.log(post)
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [postPics, setPostPics] = useState(post?.postImages || new Array(5).fill(null))
@@ -14,33 +15,50 @@ const PostForm = ({ post, formType }) => {
   const [content, setContent] = useState(post?.content || '')
   const [errors, setErrors] = useState({});
   const [imgErrors, setImgErrors] = useState({});
-  const [postImgArr, setPostImgArr] = useState([])
-  const [selFileNames, setSelFileNames] = useState([]) 
+  const [selFileNames, setSelFileNames] = useState([])
+  const [backgroundImage, setBackgroundImage] = useState('')
+  const [backgroundSize, setBackgroundSize] = useState('')
 
+  // console.log(post.postImages)
+
+  console.log(post?.postImages)
+  console.log(postPics)
   const resetForm = () => {
     setPostPics(new Array(5).fill(null))
     setTitle('')
     setContent('')
   }
+  console.log(selFileNames)
 
+  console.log(postPics)
   const handleImageChange = (e, index) => {
+
     const fileNames = [...selFileNames]
-    if(e.target.files[0]){
-      fileNames[index]=e.target.files[0].name
-    }else{
-
-      fileNames[index]=fileNames[index] || 'No File Chosen'
-    }
-    setSelFileNames(fileNames)
-   
     const newPics = [...postPics]
-    newPics[index]=null
-    newPics[index] = e.target.files[0]
-    setPostPics(newPics)
-console.log(newPics)
 
+    if (e.target.files[0]) {
+      fileNames[index] = e.target.files[0].name
+      newPics[index] = e.target.files[0]
+      setSelFileNames(fileNames)
+
+      newPics[index] = null
+      setPostPics(newPics)
+    } else {
+
+      fileNames[index] = fileNames[index] || 'No File Chosen'
+    }
+    // setSelFileNames(fileNames)
+
+    // newPics[index] = null
+    // setPostPics(newPics)
+    console.log(postPics)
+    console.log({
+      ...post,
+      title,
+      content,
+      postImages: postPics
+    })
   }
-
 
   const isImageValid = (postPic) => {
     const imageExtensions = ["pdf", "png", "jpg", "jpeg", "gif"]
@@ -53,13 +71,13 @@ console.log(newPics)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const post = {
-      title,
-      content
-    }
-    const textData = await dispatch(fetchCreatePost(post));
 
     if (formType === 'createPost') {
+      post = {
+        title,
+        content
+      }
+      const textData = await dispatch(fetchCreatePost(post));
       // postPics?.map(async postPic => {
       for (const postPic of postPics) {
         if (postPic === null) continue
@@ -69,18 +87,14 @@ console.log(newPics)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
-          return 
+          return
         } else {
           formData.append('post_image_url', postPic)
           formData.append('preview', true)
           formData.append('post_id', textData.id)
           const imageData = await dispatch(fetchCreatePostImage(formData));
         }
-
-
       }
-
-
 
       if (textData.errors) {
         setErrors(textData.errors);
@@ -91,29 +105,55 @@ console.log(newPics)
       }
       history.push(`/posts/${textData.id}`)
       resetForm()
-    } else if (formType === 'updatePost') {
+    } else if (formType === 'updatePost') { //UPDATE POSTS
       post = {
         ...post,
         title,
-        content
+        content,
+        postImages: postPics
+      }
+      console.log(post)
+
+      const textData = await dispatch(fetchUpdatePost(post));
+
+      // postPics?.map(async postPic => {
+      for (const postPic of postPics) {
+        if (postPic === null) continue
+        const formData = new FormData();
+        setImageLoading(true)
+
+        if (!isImageValid(postPic)) {
+          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
+          alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
+          return
+        } else {
+          formData.append('post_image_url', postPic)
+          formData.append('preview', true)
+          formData.append('post_id', textData.id)
+          console.log(postPic.id)
+          const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
+        }
       }
 
-      console.log(post)
-      setPostImgArr(post?.postImages)
-      const updateTextData = await dispatch(fetchUpdatePost(post))
+      if (textData.errors) {
+        setErrors(textData.errors);
 
-      // const formData
+      } else {
+        setImageLoading(false)
+
+      }
+      history.push(`/posts/${textData.id}`)
+      // resetForm()
+
+
+
+
+
+
+
+
+
     }
-
-
-
-
-
-
-
-
-
-
   }
   return (
     <div>
@@ -121,38 +161,7 @@ console.log(newPics)
       {formType === "updatePost" && <h2>Update your post</h2>}
       <form form id='create-post-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
-        {formType === "updatePost" &&
 
-          <>
-            <h4>Edit your post images</h4>
-            {post?.postImages.map((img, index) => (
-
-              <div key={index}>
-                <input
-                  type="file"
-                  accept="image/*"
-                  key={img.id}
-                  id={img.id}
-                  style={{
-                    backgroundImage: `url(${img?.postImageUrl})`,
-                    backgroundSize: 'cover',
-                    height: '500px',
-                  }}
-                  onChange={(e) => {
-                    handleImageChange(e, index)
-                    console.log(e.target.files[0])
-                    // setPostPic(e.target.files[0])
-                  }}
-                  onClick={handleImageChange}
-                />
-                {/* {imgErrors && imgErrors.image &&
-                  <p className="errors">{errors.image}</p>
-                } */}
-              </div>
-            ))}
-          </>
-
-        }
 
         {formType === "createPost" &&
           <>
@@ -178,6 +187,40 @@ console.log(newPics)
             })}
 
           </>
+        }
+
+        {formType === "updatePost" &&
+
+          <>
+            <h4>Edit your post images</h4>
+            {post?.postImages.map((img, index) => (
+
+              <div key={index}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  key={img.id}
+                  id={img.id}
+                  style={{
+                    backgroundImage: `url(${img?.postImageUrl})`,
+                    backgroundSize: 'cover',
+                    height: '500px',
+
+                  }}
+                  onChange={(e) => {
+                    handleImageChange(e, index)
+                    console.log(e.target.files[0])
+                    // setPostPic(e.target.files[0])
+                  }}
+
+                />
+                {/* {imgErrors && imgErrors.image &&
+                  <p className="errors">{errors.image}</p>
+                } */}
+              </div>
+            ))}
+          </>
+
         }
 
         <div id="post-title-div">
