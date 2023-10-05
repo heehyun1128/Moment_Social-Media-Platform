@@ -11,9 +11,10 @@ const EditPostForm = () => {
   const [errors, setErrors] = useState({});
 
   // get editted post
-  const post = useSelector(state=>state.posts?.singlePost)
+  const post = useSelector(state => state.posts?state.posts.singlePost:{})
   const sessionUser = useSelector(state => state.session?.user)
   
+  // dispatch(fetchSinglePost(postId))
   
   // user auth
   if (!sessionUser || (post?.creator_id &&sessionUser && sessionUser.id !== post?.creator_id)) {
@@ -24,8 +25,8 @@ const EditPostForm = () => {
     dispatch(fetchSinglePost(postId))
 
   }, [dispatch, postId])
-
   console.log(post)
+  if(!post) return null
   return (
     <PostForm 
       post={post}

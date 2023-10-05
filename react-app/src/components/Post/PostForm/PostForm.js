@@ -19,7 +19,7 @@ const PostForm = ({ post, formType }) => {
   const [backgroundImage, setBackgroundImage] = useState('')
   const [backgroundSize, setBackgroundSize] = useState('')
 
-  // console.log(post.postImages)
+  console.log(post?.title)
 
   console.log(post?.postImages)
   console.log(postPics)
