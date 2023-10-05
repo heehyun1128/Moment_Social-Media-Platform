@@ -117,14 +117,17 @@ const PostForm = ({ post, formType }) => {
         ...post,
         title,
         content,
-        postImages: postPics
+     
       }
       console.log(post)
+      setPostPics(postPics.filter(pic => pic !== null))
 
       const textData = await dispatch(fetchUpdatePost(post));
 
+      
       // postPics?.map(async postPic => {
       for (const postPic of postPics) {
+        console.log(postPic)
         if (postPic === null) continue
         const formData = new FormData();
         setImageLoading(true)
