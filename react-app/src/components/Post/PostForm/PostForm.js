@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost ,fetchUpdatePostImage} from "../../../store/post";
+import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost, fetchUpdatePostImage } from "../../../store/post";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './PostForm.css'
@@ -15,28 +15,28 @@ const PostForm = ({ post, formType }) => {
   const [errors, setErrors] = useState({});
   const [imgErrors, setImgErrors] = useState({});
   const [postImgArr, setPostImgArr] = useState([])
-  const [selFileNames, setSelFileNames] = useState([]) 
-  const [selImageUrls, setSelImageUrls] = useState([]) 
-  const [backgroundImg,setBackgroundImg] = useState('') 
+  const [selFileNames, setSelFileNames] = useState([])
+  const [selImageUrls, setSelImageUrls] = useState([])
+  const [backgroundImg, setBackgroundImg] = useState('')
 
-    
+
   const resetForm = () => {
     setPostPics(new Array(5).fill(null))
     setTitle('')
     setContent('')
   }
 
-  if(postPics.length<5){
-    console.log([...postPics, ...new Array(5 - postPics.length).fill(null)]) 
+  if (postPics.length < 5) {
+    console.log([...postPics, ...new Array(5 - postPics.length).fill(null)])
     const newArr = [...postPics, ...new Array(5 - postPics.length).fill(null)]
     setPostPics(newArr)
-    
+
   }
   const handleImageChange = (e, index) => {
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
-    if(e.target.files[0]){
-      fileNames[index]=e.target.files[0].name
+    if (e.target.files[0]) {
+      fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
       imageUrls[index] = URL.createObjectURL(e.target.files[0])
@@ -48,18 +48,19 @@ const PostForm = ({ post, formType }) => {
       setPostPics(newPics.filter(pic => pic !== null))
       // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
-    }else{
+    } else {
 
-      fileNames[index]=fileNames[index] || 'No File Chosen'
+      fileNames[index] = fileNames[index] || 'No File Chosen'
     }
-    
+
 
   }
 
 
   const isImageValid = (postPic) => {
     const imageExtensions = ["pdf", "png", "jpg", "jpeg", "gif"]
-    if (!imageExtensions?.some(extension => postPic?.name.endsWith(extension))) {
+    if (!imageExtensions?.some(extension => postPic?.postImageUrl?.endsWith(extension) ||
+      postPic?.name?.endsWith(extension))) {
       return false
     } else {
       return true
@@ -68,7 +69,7 @@ const PostForm = ({ post, formType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-     
+
 
     if (formType === 'createPost') {
       post = {
@@ -85,7 +86,7 @@ const PostForm = ({ post, formType }) => {
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
-          return 
+          return
         } else {
           formData.append('post_image_url', postPic)
           formData.append('preview', true)
@@ -104,23 +105,28 @@ const PostForm = ({ post, formType }) => {
       history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
-     
+
 
       post = {
         ...post,
         title,
         content,
-     
+
       }
       console.log(post)
-      
+
       console.log(postPics)
 
       const textData = await dispatch(fetchUpdatePost(post));
 
-      
+
       // postPics?.map(async postPic => {
       for (const postPic of postPics) {
+        let editedImgId
+        if(postPic &&postPic.id){
+          editedImgId=postPic.id
+
+        }
         console.log(postPic)
         if (postPic === null) continue
         const formData = new FormData();
@@ -135,7 +141,11 @@ const PostForm = ({ post, formType }) => {
           formData.append('preview', true)
           formData.append('post_id', textData.id)
           console.log(postPic.id)
-          const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
+          if(postPic && postPic.id){
+            const imageData = await dispatch(fetchUpdatePostImage(formData, postPic?.id));
+          }else{
+            await dispatch(fetchCreatePostImage(formData))
+          }
         }
       }
 
@@ -181,7 +191,7 @@ const PostForm = ({ post, formType }) => {
                   style={{
                     backgroundImage: img?.postImageUrl ? `url(${img?.postImageUrl})` : 'url(https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg)',
                     backgroundSize: 'cover',
-                    width: img?.postImageUrl &&'200px',
+                    width: img?.postImageUrl && '200px',
                     height: img?.postImageUrl && '200px',
                   }}
                   onChange={(e) => {
@@ -189,7 +199,7 @@ const PostForm = ({ post, formType }) => {
                     console.log(e.target.files[0])
                     // setPostPic(e.target.files[0])
                   }}
-                 
+
                 />
                 <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
                 <p>{selFileNames[index]}</p>
@@ -220,6 +230,7 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
+                <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
                 <p>{selFileNames[index]}</p>
                 {/* {(imageLoading) && <p>Loading...</p>} */}
               </div>

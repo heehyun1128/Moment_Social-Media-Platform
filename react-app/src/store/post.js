@@ -151,7 +151,7 @@ export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
   console.log(formData.get('post_id'))
   const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
-    method: "POST",
+    method: "PUT",
     body: formData
   })
   console.log(res)

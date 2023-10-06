@@ -121,25 +121,24 @@ def post_image(postId):
 # EDIT A POST IMAGE
 @post_routes.route('/<int:postId>/images/<int:imageId>/edit',methods=['PUT'])
 @login_required
-def edit_image(postId):
+def edit_image(postId,imageId):
   post=Post.query.get(postId)
+  postImage = PostImage.query.get(imageId)
   if not post:
     return {'errors':'Post not found'},404
   if post.creator_id != current_user.id:
     return {'errors':'Unauthorized'},401
   
-  form = PostImage()
+  form = PostImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
   if form.validate_on_submit():
-    updated_image=PostImage(
-      preview=form.data['preview'],
-      post_image_url=form.data['post_image_url'],
-      
-    )
+    postImage.preview=form.data['preview']
+    postImage.post_image_url=form.data['post_image_url']
+  
    
     db.session.commit()
-    return updated_image.to_dict()
+    return postImage.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT A POST
