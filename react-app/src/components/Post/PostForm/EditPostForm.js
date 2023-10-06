@@ -6,7 +6,7 @@ import PostForm from './PostForm';
 
 const EditPostForm = () => {
   const {postId} = useParams()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const history = useHistory()
   const [errors, setErrors] = useState({});
 
@@ -16,7 +16,7 @@ const EditPostForm = () => {
   
   
   // user auth
-  if (!sessionUser || (post?.creatorId &&sessionUser && sessionUser.id !== post?.creatorId)) {
+  if (!sessionUser || (Number(post?.creatorId) && sessionUser && Number(sessionUser.id) !== Number(post?.creatorId))) {
     history.push('/')
   }
 

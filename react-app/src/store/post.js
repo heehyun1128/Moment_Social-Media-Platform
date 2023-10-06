@@ -6,6 +6,8 @@ export const EDIT_POST = 'products/EDIT_POST'
 export const EDIT_POST_IMAGE = 'products/EDIT_POST_IMAGE'
 export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
+export const REMOVE_POST = 'products/REMOVE_POST'
+export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
 
 
 
@@ -28,6 +30,11 @@ export const getPost = post => ({
 // edit a post
 export const editPost = post => ({
   type: EDIT_POST,
+  post
+})
+// DELETE a post
+export const removePost = post => ({
+  type: REMOVE_POST,
   post
 })
 // edit a post IMAGE
@@ -53,6 +60,7 @@ export const getPostImage = postImage => ({
 // fetch all posts
 export const fetchAllPosts = () => async (dispatch) => {
   const res = await fetch('/api/posts')
+
   if (res.ok) {
     const data = await res.json()
     dispatch(loadPosts(data))
@@ -66,6 +74,7 @@ export const fetchAllPosts = () => async (dispatch) => {
 // fetch all USER posts
 export const fetchUserPosts = (userId) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/posts`)
+  console.log(res)
   if (res.ok) {
     const data = await res.json()
     dispatch(loadPosts(data))
@@ -166,6 +175,23 @@ export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
   }
 }
 
+// DELETE A POST
+export const fetchDeletePost = (postId)=>async(dispatch)=>{
+  const res = await fetch(`/api/posts/${postId}`,{
+    method:'DELETE'
+  })
+  console.log(res)
+  if (res.ok) {
+
+    dispatch(removePost(postId))
+
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+
+
 
 // state
 const initialState = {}
@@ -204,6 +230,13 @@ const postReducer = (state = initialState, action) => {
       }
       return newState
 
+    case REMOVE_POST:
+      newState = {
+        ...state,
+        singlePost: null
+      }
+      
+      return newState
     default:
       return state
   }

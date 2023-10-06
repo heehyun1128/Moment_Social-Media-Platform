@@ -194,6 +194,7 @@ def delete_postimage(postId,imageId):
 @login_required
 def delete_post(postId):
   post=Post.query.get(postId)
+  print('QQQQQQQQQQQ',post)
   if not post:
     return {'errors':'404 Post not found'},404
   if post.creator_id != current_user.id:
