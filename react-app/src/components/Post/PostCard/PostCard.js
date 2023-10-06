@@ -14,9 +14,9 @@ const PostCard = ({post}) => {
   return (
     <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
-        <img src={post && post?.previewImage} alt="" />
+        {post&&<img src={post && post?.previewImg} alt="" />}
       </div>
-      <h4>{post?.title}</h4>
+      {post && <h4>{post?.title}</h4>}
       
     </div>
   )

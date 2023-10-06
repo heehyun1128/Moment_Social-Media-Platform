@@ -20,11 +20,13 @@ const PostForm = ({ post, formType }) => {
   const [backgroundImg, setBackgroundImg] = useState('')
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
-  const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(false)
+  const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
-
+  console.log(isCancelImageUpdate)
+  // GET INITIAL IMAGE URLS
+  const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
   useEffect(() => {
-    const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
+    // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     console.log(initialUrls)
     initialUrls && setSelImageUrls(initialUrls)
   }, [post?.postImages])
@@ -33,20 +35,27 @@ const PostForm = ({ post, formType }) => {
     console.log("undo image change")
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
+    console.log([...isCancelImageUpdate])
+    const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
+
+
+    imgUpdateBtnClicked[index] = false
+    console.log(imgUpdateBtnClicked)
+    setIsCancelImageUpdate(imgUpdateBtnClicked)
 
     fileNames[index] = ''
     setSelFileNames(fileNames)
 
     // postImageUrl
-    imageUrls[index] = post?.postImages[index].postImageUrl
+    imageUrls[index] = post?.postImages[index]?.postImageUrl
     setSelImageUrls(imageUrls)
-
+    console.log('imageUrls', imageUrls)
     const newPics = [...postPics]
+
     newPics[index] = post?.postImages[index]
-    console.log(newPics)
+    console.log('new', newPics)
 
     setPostPics(newPics.filter(pic => pic !== null))
-    setIsCancelImageUpdate(false) 
   }
   const handleDeselectImg = (index) => {
     console.log('first')
@@ -90,6 +99,11 @@ const PostForm = ({ post, formType }) => {
 
     console.log(imageInputIds)
     if (e.target.files[0]) {
+      const imgUpdateBtnClicked = [...isCancelImageUpdate]
+      imgUpdateBtnClicked[index] = true
+
+      setIsCancelImageUpdate(imgUpdateBtnClicked)
+
       fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
@@ -108,12 +122,11 @@ const PostForm = ({ post, formType }) => {
       setPostPics(newPics.filter(pic => pic !== null))
       // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
-      setIsCancelImageUpdate(true)
+      // setIsCancelImageUpdate(true)
     } else {
 
       fileNames[index] = fileNames[index] || 'No File Chosen'
     }
-
 
   }
 
@@ -127,10 +140,9 @@ const PostForm = ({ post, formType }) => {
       return true
     }
   }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
 
     if (formType === 'createPost') {
       post = {
@@ -143,7 +155,7 @@ const PostForm = ({ post, formType }) => {
         if (postPic === null) continue
         const formData = new FormData();
         setImageLoading(true)
-
+        console.log(postPic)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
@@ -184,7 +196,7 @@ const PostForm = ({ post, formType }) => {
       // postPics?.map(async postPic => {
       for (let i = 0; i < postPics.length; i++) {
         const postPic = postPics[i]
-        if (postPic === null) continue
+        if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
         console.log(postPic) //pics not clicked on will have postPic.id
 
@@ -263,8 +275,8 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
-                {img && isCancelImageUpdate && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE</div>}
-                { <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>}
+                {img && isCancelImageUpdate[index] && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE {isCancelImageUpdate[index]}</div>}
+                {<div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>}
                 <p>{selFileNames[index]}</p>
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>

@@ -8,22 +8,20 @@ import './Home.css'
 
 const Home = () => {
   const dispatch = useDispatch()
-  
-  const allPostsObj = useSelector(state=>state.posts.Posts)
 
-  
-  useEffect(()=>{
+  const allPostsObj = useSelector(state => state.posts.Posts)
+  console.log(allPostsObj)
+
+  useEffect(() => {
     dispatch(fetchAllPosts())
-  },[dispatch])
-  
+  }, [dispatch])
 
-  if (!allPostsObj || Object.values(allPostsObj).length===0){
-     return null
-    }
+
+  if (!allPostsObj || Object.values(allPostsObj).length === 0) {
+    return null
+  }
   const allPosts = Object.values(allPostsObj)
-
-  
- 
+  console.log(allPosts)
 
 
   return (

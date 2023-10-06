@@ -32,7 +32,7 @@ def user(id):
         post_images=PostImage.query.filter_by(post_id=post.id).all()
         for img in post_images:
             if img.preview:
-                data["previewImage"] = img.post_image_url
+                data["previewImg"] = img.post_image_url
                 break
         post_dict[str(post.id)] = data
         print('OOOOOOOOOOOOOOOOOOO',post_dict)
