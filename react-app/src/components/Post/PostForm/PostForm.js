@@ -151,18 +151,25 @@ const PostForm = ({ post, formType }) => {
       }
       const textData = await dispatch(fetchCreatePost(post));
       // postPics?.map(async postPic => {
+      let preview = false
       for (const postPic of postPics) {
-        if (postPic === null) continue
+        if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
         setImageLoading(true)
-        console.log(postPic)
+        console.log(postPics.indexOf(postPic))
+        if (postPics.indexOf(postPic) === 0) {
+          preview = true
+        }else{
+          preview=false
+        }
+        console.log(preview)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
           return
         } else {
           formData.append('post_image_url', postPic)
-          formData.append('preview', true)
+          formData.append('preview', preview)
           formData.append('post_id', textData.id)
           const imageData = await dispatch(fetchCreatePostImage(formData));
         }
@@ -196,6 +203,7 @@ const PostForm = ({ post, formType }) => {
       // postPics?.map(async postPic => {
       for (let i = 0; i < postPics.length; i++) {
         const postPic = postPics[i]
+        console.log(postPics.indexOf(postPic))
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
         console.log(postPic) //pics not clicked on will have postPic.id
