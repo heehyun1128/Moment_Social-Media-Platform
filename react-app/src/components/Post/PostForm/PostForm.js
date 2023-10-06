@@ -191,8 +191,8 @@ const PostForm = ({ post, formType }) => {
                   }}
                  
                 />
+                <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
                 <p>{selFileNames[index]}</p>
-                <img src={selImageUrls[index]} alt="" />
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
                 } */}

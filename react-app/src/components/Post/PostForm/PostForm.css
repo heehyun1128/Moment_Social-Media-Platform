@@ -2,3 +2,13 @@ input[type=file] {
   width: 90px;
   color: transparent;
 }
+
+#upload-img-preview{
+  max-width:200px;
+  max-height:200px;
+  overflow:hidden;
+}
+
+#upload-img-preview img{
+  max-width: 200px;
+}
