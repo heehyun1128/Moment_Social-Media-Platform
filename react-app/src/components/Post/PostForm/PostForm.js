@@ -18,9 +18,15 @@ const PostForm = ({ post, formType }) => {
   const [selFileNames, setSelFileNames] = useState([])
   const [selImageUrls, setSelImageUrls] = useState([])
   const [backgroundImg, setBackgroundImg] = useState('')
-  const [edittedImgId, setEdittedImgId] = useState(null)
+  // const [edittedImgIdList, setEdittedImgIdList] = useState([])
+  const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
 
+  // useEffect(() => {
+  //   setImgInputIdList(postPics.map(pic => pic?.id))
+    
+  // }, [postPics])
 
+  
   const resetForm = () => {
     setPostPics(new Array(5).fill(null))
     setTitle('')
@@ -34,17 +40,29 @@ const PostForm = ({ post, formType }) => {
 
   }
   const handleImageChange = (e, index) => {
-    console.log(e.target.id)
-    setEdittedImgId(e.target.id)
+    console.log(imgInputIdList)
+    // const edittedImgId=e.target.id
+    // if(!edittedImgIdList.includes(edittedImgId)){
+    //   setEdittedImgIdList([...edittedImgIdList,edittedImgId])
+    // }
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
+    const imageInputIds = [...imgInputIdList]
+
+    console.log(imageInputIds)
     if (e.target.files[0]) {
       fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
       imageUrls[index] = URL.createObjectURL(e.target.files[0])
       setSelImageUrls(imageUrls)
-      console.log(URL.createObjectURL(e.target.files[0]))
+    
+      imageInputIds[index] = Number(e.target.id)
+      console.log(imageInputIds[index])
+      setImgInputIdList(imageInputIds)
+
+      console.log(imgInputIdList)
+
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
@@ -124,11 +142,13 @@ const PostForm = ({ post, formType }) => {
 
 
       // postPics?.map(async postPic => {
-      for (const postPic of postPics) {
+      for (let i = 0; i < postPics.length; i++) {
+        const postPic = postPics[i]
         if (postPic === null) continue
         const formData = new FormData();
-        console.log(postPic.id)
+        console.log(postPic) //pics not clicked on will have postPic.id
 
+        const edittedImgId = imgInputIdList[i]
         setImageLoading(true)
 
         if (!isImageValid(postPic)) {
@@ -139,7 +159,7 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', true)
           formData.append('post_id', textData.id)
-          console.log(edittedImgId)
+          // console.log(edittedImgId)
 
           if (postPic && postPic.id) {
             const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
@@ -188,8 +208,8 @@ const PostForm = ({ post, formType }) => {
                 <input
                   type="file"
                   accept="image/*"
-                  key={img?.id}
-                  id={img?.id}
+                  key={imgInputIdList[index]}
+                  id={imgInputIdList[index]}
                   style={{
                     backgroundImage: img?.postImageUrl ? `url(${img?.postImageUrl})` : 'url(https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg)',
                     backgroundSize: 'cover',
