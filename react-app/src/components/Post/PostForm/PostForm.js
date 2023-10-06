@@ -20,9 +20,36 @@ const PostForm = ({ post, formType }) => {
   const [backgroundImg, setBackgroundImg] = useState('')
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
+  const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(false)
+  // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
 
-  const handleDeselectImg = (index)=>{
-    console.log('first') 
+  useEffect(() => {
+    const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
+    console.log(initialUrls)
+    initialUrls && setSelImageUrls(initialUrls)
+  }, [post?.postImages])
+
+  const handleUndoImageUpdate = (index) => {
+    console.log("undo image change")
+    const fileNames = [...selFileNames]
+    const imageUrls = [...selImageUrls]
+
+    fileNames[index] = ''
+    setSelFileNames(fileNames)
+
+    // postImageUrl
+    imageUrls[index] = post?.postImages[index].postImageUrl
+    setSelImageUrls(imageUrls)
+
+    const newPics = [...postPics]
+    newPics[index] = post?.postImages[index]
+    console.log(newPics)
+
+    setPostPics(newPics.filter(pic => pic !== null))
+    setIsCancelImageUpdate(false) 
+  }
+  const handleDeselectImg = (index) => {
+    console.log('first')
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
 
@@ -38,7 +65,7 @@ const PostForm = ({ post, formType }) => {
     setPostPics(newPics.filter(pic => pic !== null))
   }
 
-  
+
   const resetForm = () => {
     setPostPics(new Array(5).fill(null))
     setTitle('')
@@ -68,7 +95,7 @@ const PostForm = ({ post, formType }) => {
       // get selected image URL
       imageUrls[index] = URL.createObjectURL(e.target.files[0])
       setSelImageUrls(imageUrls)
-    
+
       imageInputIds[index] = Number(e.target.id)
       console.log(imageInputIds[index])
       setImgInputIdList(imageInputIds)
@@ -81,6 +108,7 @@ const PostForm = ({ post, formType }) => {
       setPostPics(newPics.filter(pic => pic !== null))
       // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
+      setIsCancelImageUpdate(true)
     } else {
 
       fileNames[index] = fileNames[index] || 'No File Chosen'
@@ -222,12 +250,12 @@ const PostForm = ({ post, formType }) => {
                   accept="image/*"
                   key={imgInputIdList[index]}
                   id={imgInputIdList[index]}
-                  style={{
-                    backgroundImage: img?.postImageUrl ? `url(${img?.postImageUrl})` : 'url(https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg)',
-                    backgroundSize: 'cover',
-                    width: img?.postImageUrl && '200px',
-                    height: img?.postImageUrl && '200px',
-                  }}
+                  // style={{
+                  //   backgroundImage: img?.postImageUrl ? `url(${img?.postImageUrl})` : 'url(https://png.pngtree.com/png-vector/20190214/ourmid/pngtree-vector-plus-icon-png-image_515260.jpg)',
+                  //   backgroundSize: 'cover',
+                  //   width: img?.postImageUrl && '50px',
+                  //   height: img?.postImageUrl && '50px',
+                  // }}
                   onChange={(e) => {
                     handleImageChange(e, index)
                     console.log(e.target.files[0])
@@ -235,7 +263,8 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
-                <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
+                {img && isCancelImageUpdate && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE</div>}
+                { <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>}
                 <p>{selFileNames[index]}</p>
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
@@ -264,7 +293,7 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
-                {pic&&<div onClick={()=>handleDeselectImg(index)}>DESELECT IMAGE</div>}
+                {pic && <div onClick={() => handleDeselectImg(index)}>DESELECT IMAGE</div>}
                 <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
                 <p>{selFileNames[index]}</p>
                 {/* {(imageLoading) && <p>Loading...</p>} */}
