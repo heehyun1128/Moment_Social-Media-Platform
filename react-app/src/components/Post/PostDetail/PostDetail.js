@@ -8,11 +8,15 @@ import { fetchSingleUser } from "../../../store/user";
 const PostDetail = () => {
   const { postId } = useParams()
   const dispatch = useDispatch()
+
   const post = useSelector(state => state.posts?.singlePost)
   const postCreator = useSelector(state => state.users?.singleUser)
+  const sessionUser = useSelector(state => state.session?.user)
+
   const images = post?.postImages
   const [imageId, setImageId] = useState(null)
   const history = useHistory();
+  
   const handleMouseOver=(imageId)=>{
     setImageId(imageId)
     
@@ -55,8 +59,10 @@ const PostDetail = () => {
             <p>{post?.creator?.username}</p>
           </div>
           <div id='post-detail-btn-div'>
-            <button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>
-            <button><i class="fa-solid fa-trash-can"></i>DELETE POST</button>
+            {sessionUser && post?.creatorId=== sessionUser.id &&<button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>}
+            {sessionUser && post?.creatorId === sessionUser.id && <button><i class="fa-solid fa-trash-can"></i>DELETE POST</button>}
+           
+            
           </div>
           <h4>{post?.title}</h4>
           <div id="post-content">

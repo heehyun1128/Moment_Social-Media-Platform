@@ -18,6 +18,7 @@ const PostForm = ({ post, formType }) => {
   const [selFileNames, setSelFileNames] = useState([])
   const [selImageUrls, setSelImageUrls] = useState([])
   const [backgroundImg, setBackgroundImg] = useState('')
+  const [edittedImgId, setEdittedImgId] = useState(null)
 
 
   const resetForm = () => {
@@ -33,6 +34,8 @@ const PostForm = ({ post, formType }) => {
 
   }
   const handleImageChange = (e, index) => {
+    console.log(e.target.id)
+    setEdittedImgId(e.target.id)
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
     if (e.target.files[0]) {
@@ -122,14 +125,10 @@ const PostForm = ({ post, formType }) => {
 
       // postPics?.map(async postPic => {
       for (const postPic of postPics) {
-        let editedImgId
-        if(postPic &&postPic.id){
-          editedImgId=postPic.id
-
-        }
-        console.log(postPic)
         if (postPic === null) continue
         const formData = new FormData();
+        console.log(postPic.id)
+
         setImageLoading(true)
 
         if (!isImageValid(postPic)) {
@@ -140,10 +139,13 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', true)
           formData.append('post_id', textData.id)
-          console.log(postPic.id)
-          if(postPic && postPic.id){
-            const imageData = await dispatch(fetchUpdatePostImage(formData, postPic?.id));
-          }else{
+          console.log(edittedImgId)
+
+          if (postPic && postPic.id) {
+            const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
+          } else if (edittedImgId) {
+            const imageData = await dispatch(fetchUpdatePostImage(formData, edittedImgId));
+          } else {
             await dispatch(fetchCreatePostImage(formData))
           }
         }

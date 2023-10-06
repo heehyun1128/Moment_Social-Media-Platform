@@ -126,6 +126,8 @@ def edit_image(postId,imageId):
   postImage = PostImage.query.get(imageId)
   if not post:
     return {'errors':'Post not found'},404
+  if not postImage:
+    return {'errors':'404 not found'},404
   if post.creator_id != current_user.id:
     return {'errors':'Unauthorized'},401
   
@@ -133,10 +135,17 @@ def edit_image(postId,imageId):
   form['csrf_token'].data = request.cookies['csrf_token']
 
   if form.validate_on_submit():
-    postImage.preview=form.data['preview']
-    postImage.post_image_url=form.data['post_image_url']
-  
+    imgFile=form.data["post_image_url"] 
+    imgFile.filename = get_unique_filename(imgFile.filename)
+    upload = upload_file_to_s3(imgFile)
+
+    if "url" not in upload:
+            print({'errors': "post image is not a valid url"})
+    url = upload["url"]
    
+    postImage.preview=form.data['preview']
+    postImage.post_image_url=url
+  
     db.session.commit()
     return postImage.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -154,10 +163,9 @@ def edit_post(postId):
   form=PostForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    updated_post=Post(
-      title=form.data['title'],
-      content=form.data['content']
-    )
+   
+    post.title=form.data['title']
+    post.content=form.data['content']
     db.session.commit()
     return post.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -176,7 +184,7 @@ def delete_postimage(postId,imageId):
 
   if not image:
     return {'errors':'404 Image not found'},404
-  post.post_images.remove(image)
+
   db.session.delete(image)
   db.session.commit()
   return {'message':'Post image successfully deleted!'},200

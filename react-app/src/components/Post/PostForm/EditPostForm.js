@@ -16,7 +16,7 @@ const EditPostForm = () => {
   
   
   // user auth
-  if (!sessionUser || (post?.creator_id &&sessionUser && sessionUser.id !== post?.creator_id)) {
+  if (!sessionUser || (post?.creatorId &&sessionUser && sessionUser.id !== post?.creatorId)) {
     history.push('/')
   }
 
