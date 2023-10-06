@@ -21,10 +21,22 @@ const PostForm = ({ post, formType }) => {
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
 
-  // useEffect(() => {
-  //   setImgInputIdList(postPics.map(pic => pic?.id))
-    
-  // }, [postPics])
+  const handleDeselectImg = (index)=>{
+    console.log('first') 
+    const fileNames = [...selFileNames]
+    const imageUrls = [...selImageUrls]
+
+    fileNames[index] = ''
+    setSelFileNames(fileNames)
+
+    imageUrls[index] = ''
+    setSelImageUrls(imageUrls)
+
+    const newPics = [...postPics]
+    newPics[index] = null
+
+    setPostPics(newPics.filter(pic => pic !== null))
+  }
 
   
   const resetForm = () => {
@@ -252,6 +264,7 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
+                {pic&&<div onClick={()=>handleDeselectImg(index)}>DESELECT IMAGE</div>}
                 <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>
                 <p>{selFileNames[index]}</p>
                 {/* {(imageLoading) && <p>Loading...</p>} */}
