@@ -143,7 +143,7 @@ def edit_image(postId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT A POST
-@post_routes.route('/<int:postId>',methods=['PUT'])
+@post_routes.route('/<int:postId>/edit',methods=['PUT'])
 @login_required
 def edit_post(postId):
   post = Post.query.get(postId)

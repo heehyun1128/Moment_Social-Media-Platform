@@ -16,6 +16,7 @@ const PostForm = ({ post, formType }) => {
   const [imgErrors, setImgErrors] = useState({});
   const [postImgArr, setPostImgArr] = useState([])
   const [selFileNames, setSelFileNames] = useState([]) 
+  const [selImageUrls, setSelImageUrls] = useState([]) 
   const [backgroundImg,setBackgroundImg] = useState('') 
 
     
@@ -33,14 +34,19 @@ const PostForm = ({ post, formType }) => {
   }
   const handleImageChange = (e, index) => {
     const fileNames = [...selFileNames]
+    const imageUrls = [...selImageUrls]
     if(e.target.files[0]){
       fileNames[index]=e.target.files[0].name
       setSelFileNames(fileNames)
-
+      // get selected image URL
+      imageUrls[index] = URL.createObjectURL(e.target.files[0])
+      setSelImageUrls(imageUrls)
+      console.log(URL.createObjectURL(e.target.files[0]))
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
-      setPostPics(newPics)
+      setPostPics(newPics.filter(pic => pic !== null))
+      // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
     }else{
 
@@ -62,13 +68,14 @@ const PostForm = ({ post, formType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-     post = {
-      title,
-      content
-    }
-    const textData = await dispatch(fetchCreatePost(post));
+     
 
     if (formType === 'createPost') {
+      post = {
+        title,
+        content
+      }
+      const textData = await dispatch(fetchCreatePost(post));
       // postPics?.map(async postPic => {
       for (const postPic of postPics) {
         if (postPic === null) continue
@@ -86,11 +93,7 @@ const PostForm = ({ post, formType }) => {
           const imageData = await dispatch(fetchCreatePostImage(formData));
         }
 
-
       }
-
-
-
       if (textData.errors) {
         setErrors(textData.errors);
 
@@ -101,17 +104,7 @@ const PostForm = ({ post, formType }) => {
       history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
-      // post = {
-      //   ...post,
-      //   title,
-      //   content
-      // }
-
-      // console.log(post)
-      // setPostImgArr(post?.postImages)
-      // const updateTextData = await dispatch(fetchUpdatePost(post))
-
-      // // const formData
+     
 
       post = {
         ...post,
@@ -120,7 +113,8 @@ const PostForm = ({ post, formType }) => {
      
       }
       console.log(post)
-      setPostPics(postPics.filter(pic => pic !== null))
+      
+      console.log(postPics)
 
       const textData = await dispatch(fetchUpdatePost(post));
 
@@ -198,6 +192,7 @@ const PostForm = ({ post, formType }) => {
                  
                 />
                 <p>{selFileNames[index]}</p>
+                <img src={selImageUrls[index]} alt="" />
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
                 } */}
