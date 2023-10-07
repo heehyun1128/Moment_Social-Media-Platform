@@ -8,7 +8,7 @@ from flask import Blueprint, request
 
 from flask_login import current_user, login_required
 from .s3_helpers import (
-    upload_file_to_s3, get_unique_filename)
+    upload_file_to_s3, get_unique_filename,remove_file_from_s3)
 
 post_routes = Blueprint('posts', __name__)
 
@@ -124,6 +124,8 @@ def post_image(postId):
 def edit_image(postId,imageId):
   post=Post.query.get(postId)
   postImage = PostImage.query.get(imageId)
+  # print('000000000000000000000000',postImage.to_dict())
+  # print('12345678909876543234567',form.data['preview'])
   if not post:
     return {'errors':'Post not found'},404
   if not postImage:
@@ -134,6 +136,7 @@ def edit_image(postId,imageId):
   form = PostImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
+  print('qqqqqqqqqqqqqqqq',form.data['preview'])
   if form.validate_on_submit():
     imgFile=form.data["post_image_url"] 
     imgFile.filename = get_unique_filename(imgFile.filename)
@@ -146,6 +149,10 @@ def edit_image(postId,imageId):
     postImage.preview=form.data['preview']
     postImage.post_image_url=url
   
+    db.session.commit()
+    return postImage.to_dict()
+  elif postImage != None:
+    postImage.preview=form.data['preview']
     db.session.commit()
     return postImage.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
@@ -170,24 +177,25 @@ def edit_post(postId):
     return post.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-#DELETE A POST IMAGE
-@post_routes.route('/<int:postId>/images/<int:imageId>',methods=['DELETE'])
-@login_required
-def delete_postimage(postId,imageId):
-  post=Post.query.get(postId)
-  if not post:
-    return {'errors':'404 Post not found'},404
-  if post.creator_id != current_user.id:
-    return {'errors':'You do not have the authorization to delete the post'},403
+# #DELETE A POST IMAGE
+# @post_routes.route('/<int:postId>/images/<int:imageId>',methods=['DELETE'])
+# @login_required
+# def delete_postimage(postId,imageId):
+#   post=Post.query.get(postId)
+#   if not post:
+#     return {'errors':'404 Post not found'},404
+#   if post.creator_id != current_user.id:
+#     return {'errors':'You do not have the authorization to delete the post'},403
   
-  image=PostImage.query.get(imageId)
+#   image=PostImage.query.get(imageId)
 
-  if not image:
-    return {'errors':'404 Image not found'},404
+#   if not image:
+#     return {'errors':'404 Image not found'},404
 
-  db.session.delete(image)
-  db.session.commit()
-  return {'message':'Post image successfully deleted!'},200
+#   remove_file_from_s3(image.post_image_url)
+#   db.session.delete(image)
+#   db.session.commit()
+#   return {'message':'Post image successfully deleted!'},200
 
 #DELETE A POST
 @post_routes.route('/<int:postId>',methods=['DELETE'])

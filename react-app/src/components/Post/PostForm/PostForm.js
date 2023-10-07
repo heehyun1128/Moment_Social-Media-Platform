@@ -3,6 +3,7 @@ import { fetchCreatePost, fetchCreatePostImage, fetchUpdatePost, fetchUpdatePost
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './PostForm.css'
+import { fetchDeletePostImage } from "../../../store/postImage";
 
 const PostForm = ({ post, formType }) => {
   console.log(post)
@@ -21,16 +22,36 @@ const PostForm = ({ post, formType }) => {
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
+  const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
   console.log(isCancelImageUpdate)
   // GET INITIAL IMAGE URLS
   const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
+
   useEffect(() => {
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     console.log(initialUrls)
     initialUrls && setSelImageUrls(initialUrls)
   }, [post?.postImages])
 
+  const handleRemoveImg = (index) => {
+    const imgInputLi=[...imgInputIdList]
+    imgInputLi[index]=null
+    setImgInputIdList(imgInputLi)
+    const imageId = postPics[index].id
+    const isImageDeleted = [...deleteImageCalled]
+    console.log(isImageDeleted)
+    isImageDeleted[index] = true
+    console.log(isImageDeleted[index])
+    setDeleteImageCalled(isImageDeleted)
+    const newPics = [...postPics]
+    newPics[index] = null
+    console.log(newPics)
+    setPostPics(newPics.filter(pic => pic !== null))
+    dispatch(fetchDeletePostImage(imageId))
+    alert('Image successfully deleted!')
+  }
+  console.log(deleteImageCalled)
   const handleUndoImageUpdate = (index) => {
     console.log("undo image change")
     const fileNames = [...selFileNames]
@@ -103,7 +124,7 @@ const PostForm = ({ post, formType }) => {
       imgUpdateBtnClicked[index] = true
 
       setIsCancelImageUpdate(imgUpdateBtnClicked)
-
+      console.log(e.target.files[0].name)
       fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
@@ -119,7 +140,7 @@ const PostForm = ({ post, formType }) => {
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
-      setPostPics(newPics.filter(pic => pic !== null))
+      setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
       // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
       // setIsCancelImageUpdate(true)
@@ -159,8 +180,8 @@ const PostForm = ({ post, formType }) => {
         console.log(postPics.indexOf(postPic))
         if (postPics.indexOf(postPic) === 0) {
           preview = true
-        }else{
-          preview=false
+        } else {
+          preview = false
         }
         console.log(preview)
         if (!isImageValid(postPic)) {
@@ -193,14 +214,12 @@ const PostForm = ({ post, formType }) => {
         content,
 
       }
-      console.log(post)
-
-      console.log(postPics)
 
       const textData = await dispatch(fetchUpdatePost(post));
 
 
-      // postPics?.map(async postPic => {
+      let preview = false
+      console.log(postPics)
       for (let i = 0; i < postPics.length; i++) {
         const postPic = postPics[i]
         console.log(postPics.indexOf(postPic))
@@ -210,22 +229,33 @@ const PostForm = ({ post, formType }) => {
 
         const edittedImgId = imgInputIdList[i]
         setImageLoading(true)
+        console.log(postPics.indexOf(postPic))
+        if (postPics.indexOf(postPic) === 0) {
+          preview = true
+        } else {
+          preview = false
+        }
+
+        console.log(isImageValid(postPic))
 
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
           return
         } else {
+          console.log(postPic, preview)
           formData.append('post_image_url', postPic)
-          formData.append('preview', true)
+          formData.append('preview', preview)
           formData.append('post_id', textData.id)
           // console.log(edittedImgId)
-
+          console.log(postPic)
+          console.log(edittedImgId)
           if (postPic && postPic.id) {
             const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
           } else if (edittedImgId) {
             const imageData = await dispatch(fetchUpdatePostImage(formData, edittedImgId));
-          } else {
+          } else if (postPic) {
+            console.log('called')
             await dispatch(fetchCreatePostImage(formData))
           }
         }
@@ -262,7 +292,7 @@ const PostForm = ({ post, formType }) => {
 
           <>
             <h4>Edit your post images</h4>
-            {postPics.map((img, index) => (
+            {postPics && postPics.map((img, index) => (
 
               <div key={index}>
                 <input
@@ -283,8 +313,9 @@ const PostForm = ({ post, formType }) => {
                   }}
 
                 />
+                {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
                 {img && isCancelImageUpdate[index] && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE {isCancelImageUpdate[index]}</div>}
-                {<div id='upload-img-preview'><img src={selImageUrls[index]} alt="" /></div>}
+                {img && !deleteImageCalled[index] && <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" />{deleteImageCalled[index] + ''}</div>}
                 <p>{selFileNames[index]}</p>
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
@@ -299,7 +330,7 @@ const PostForm = ({ post, formType }) => {
           <>
             <h4>Add an image to start</h4>
 
-            {postPics.map((pic, index) => {
+            {postPics && postPics.map((pic, index) => {
               console.log(index)
               return <div key={index} id="post-image-div">
                 <input

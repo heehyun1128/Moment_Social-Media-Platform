@@ -7,7 +7,7 @@ export const EDIT_POST_IMAGE = 'products/EDIT_POST_IMAGE'
 export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
 export const REMOVE_POST = 'products/REMOVE_POST'
-export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
+// export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
 
 
 
@@ -42,6 +42,13 @@ export const editPostImage = post => ({
   type: EDIT_POST_IMAGE,
   post
 })
+
+// DELETE a IMAGE
+// export const removePostImage = postImageId => ({
+//   type: REMOVE_POST_IMAGE,
+//   postImageId
+// })
+
 
 // LOAD POST IMAGES
 export const loadPostImages = postImages => ({
@@ -157,11 +164,23 @@ export const fetchUpdatePost = (post) => async (dispatch) => {
 }
 // UPDATE a post image
 export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
-  console.log(formData.get('post_id'))
+  console.log(formData.keys(), imageId)
+  // Access all keys using an iterator
+  const entriesIterator = formData.entries();
+
+  for (const [key, value] of entriesIterator) {
+  // Check if the value is an object
+  if (typeof value === 'object' && value !== null) {
+    console.log(key + ': ' + JSON.stringify(value, null, 2));
+  } else {
+    console.log(key + ': ' + value);
+  }
+}
+ 
   const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
     method: "PUT",
-    body: formData
+    body: formData 
   })
   console.log(res)
   if (res.ok) {
@@ -190,6 +209,21 @@ export const fetchDeletePost = (postId)=>async(dispatch)=>{
     return errors
   }
 }
+// DELETE A POST IMAGE
+// export const fetchDeletePostImage = (postId,imageId)=>async(dispatch)=>{
+//   const res = await fetch(`/api/posts/${postId}/images/${imageId}`,{
+//     method:'DELETE'
+//   })
+//   console.log(res)
+//   if (res.ok) {
+
+//     dispatch(removePostImage(imageId))
+
+//   } else {
+//     const errors = await res.json()
+//     return errors
+//   }
+// }
 
 
 
@@ -235,11 +269,19 @@ const postReducer = (state = initialState, action) => {
         ...state,
         singlePost: null
       }
-      
       return newState
+    // case REMOVE_POST_IMAGE:
+    //   newState = {
+    //     ...state,
+    //     singlePost: {
+    //       ...state.singlePost,
+    //       postImage:null
+    //     }
+    //   }
+    //   return newState
     default:
       return state
-  }
+  } 
 }
 
 export default postReducer
