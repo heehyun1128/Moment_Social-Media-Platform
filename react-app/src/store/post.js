@@ -6,6 +6,8 @@ export const EDIT_POST = 'products/EDIT_POST'
 export const EDIT_POST_IMAGE = 'products/EDIT_POST_IMAGE'
 export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
+export const REMOVE_POST = 'products/REMOVE_POST'
+// export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
 
 
 
@@ -30,11 +32,23 @@ export const editPost = post => ({
   type: EDIT_POST,
   post
 })
+// DELETE a post
+export const removePost = post => ({
+  type: REMOVE_POST,
+  post
+})
 // edit a post IMAGE
 export const editPostImage = post => ({
   type: EDIT_POST_IMAGE,
   post
 })
+
+// DELETE a IMAGE
+// export const removePostImage = postImageId => ({
+//   type: REMOVE_POST_IMAGE,
+//   postImageId
+// })
+
 
 // LOAD POST IMAGES
 export const loadPostImages = postImages => ({
@@ -53,6 +67,7 @@ export const getPostImage = postImage => ({
 // fetch all posts
 export const fetchAllPosts = () => async (dispatch) => {
   const res = await fetch('/api/posts')
+
   if (res.ok) {
     const data = await res.json()
     dispatch(loadPosts(data))
@@ -63,19 +78,20 @@ export const fetchAllPosts = () => async (dispatch) => {
     return errors
   }
 }
-// fetch all USER posts
-export const fetchUserPosts = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/posts`)
-  if (res.ok) {
-    const data = await res.json()
-    dispatch(loadPosts(data))
-    console.log(data)
-    return data
-  } else {
-    const errors = await res.json()
-    return errors
-  }
-}
+// // fetch all USER posts
+// export const fetchUserPosts = (userId) => async (dispatch) => {
+//   const res = await fetch(`/api/users/${userId}/posts`)
+//   console.log(res)
+//   if (res.ok) {
+//     const data = await res.json()
+//     dispatch(loadPosts(data))
+//     console.log(data)
+//     return data
+//   } else {
+//     const errors = await res.json()
+//     return errors
+//   }
+// }
 
 // fetch single post
 export const fetchSinglePost = (postId) => async (dispatch) => {
@@ -112,7 +128,7 @@ export const fetchCreatePost = (post) => async (dispatch) => {
 // create a post image
 export const fetchCreatePostImage = (formData) => async (dispatch) => {
   console.log(formData.get('post_id'))
-  const postId=formData.get('post_id')
+  const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images`, {
     method: "POST",
     body: formData
@@ -147,12 +163,24 @@ export const fetchUpdatePost = (post) => async (dispatch) => {
   }
 }
 // UPDATE a post image
-export const fetchUpdatePostImage = (formData,imageId) => async (dispatch) => {
-  console.log(formData.get('post_id'))
-  const postId=formData.get('post_id')
+export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
+  console.log(formData.keys(), imageId)
+  // Access all keys using an iterator
+  const entriesIterator = formData.entries();
+
+  for (const [key, value] of entriesIterator) {
+  // Check if the value is an object
+  if (typeof value === 'object' && value !== null) {
+    console.log(key + ': ' + JSON.stringify(value, null, 2));
+  } else {
+    console.log(key + ': ' + value);
+  }
+}
+ 
+  const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
-    method: "POST",
-    body: formData
+    method: "PUT",
+    body: formData 
   })
   console.log(res)
   if (res.ok) {
@@ -165,6 +193,38 @@ export const fetchUpdatePostImage = (formData,imageId) => async (dispatch) => {
     return errors
   }
 }
+
+// DELETE A POST
+export const fetchDeletePost = (postId)=>async(dispatch)=>{
+  const res = await fetch(`/api/posts/${postId}`,{
+    method:'DELETE'
+  })
+  console.log(res)
+  if (res.ok) {
+
+    dispatch(removePost(postId))
+
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+// DELETE A POST IMAGE
+// export const fetchDeletePostImage = (postId,imageId)=>async(dispatch)=>{
+//   const res = await fetch(`/api/posts/${postId}/images/${imageId}`,{
+//     method:'DELETE'
+//   })
+//   console.log(res)
+//   if (res.ok) {
+
+//     dispatch(removePostImage(imageId))
+
+//   } else {
+//     const errors = await res.json()
+//     return errors
+//   }
+// }
+
 
 
 // state
@@ -204,9 +264,24 @@ const postReducer = (state = initialState, action) => {
       }
       return newState
 
+    case REMOVE_POST:
+      newState = {
+        ...state,
+        singlePost: null
+      }
+      return newState
+    // case REMOVE_POST_IMAGE:
+    //   newState = {
+    //     ...state,
+    //     singlePost: {
+    //       ...state.singlePost,
+    //       postImage:null
+    //     }
+    //   }
+    //   return newState
     default:
       return state
-  }
+  } 
 }
 
 export default postReducer

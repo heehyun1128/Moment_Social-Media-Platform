@@ -9,7 +9,11 @@ import { useHistory } from 'react-router-dom';
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const history=useHistory()
+
 	const handleGoToPostForm = e=>{
+		if(!sessionUser){
+			alert('Please Sign Up or Log In to create a post.')
+		}
 		e.preventDefault()
 		history.push('/posts/new')
 	}

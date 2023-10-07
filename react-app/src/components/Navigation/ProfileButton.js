@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom'
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -9,7 +10,13 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const history = useHistory()
+  const sessionUser = useSelector(state => state.session?.user)
 
+  const handleViewAllPosts = () => {
+    history.push(`/profile/${sessionUser.id}`)
+    closeMenu()
+  }
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -19,7 +26,7 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (!ulRef?.current?.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -48,7 +55,8 @@ function ProfileButton({ user }) {
             <li id='profile-img-li'><img id='profile-img' src={user.profileImage} alt="" /></li>
             <li>{user.username}</li>
             <li>{user.email}</li>
-            
+
+            <div onClick={handleViewAllPosts}>View All Posts</div>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
@@ -66,6 +74,7 @@ function ProfileButton({ user }) {
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+
           </>
         )}
       </ul>

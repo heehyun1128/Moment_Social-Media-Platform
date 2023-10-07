@@ -10,6 +10,7 @@ import PostDetail from "./components/Post/PostDetail/PostDetail";
 
 import CreatePostForm from "./components/Post/PostForm/CreatePostForm";
 import EditPostForm from "./components/Post/PostForm/EditPostForm";
+import UserProfile from "./components/UserProfile/UserProfile";
 
 
 
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/posts/:postId">
             <PostDetail />
+          </Route>
+          <Route path="/profile/:userId">
+            <UserProfile />
           </Route>
           <Route path="/">
             <Home />

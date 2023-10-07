@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required
-from app.models import User,db
+from app.models import User,db,PostImage
 #aws
 from flask import Blueprint, request
 
@@ -17,10 +17,9 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('/<int:id>/posts')
 # @login_required
 def user(id):
-    """
-    Query for a user by id and returns that user in a dictionary
-    """
+  
     current_user = User.query.get(id)
+    
     if not current_user:
         return {'errors': "User not found"}, 404
     
@@ -30,12 +29,13 @@ def user(id):
     for post in user_posts:
         data=post.to_dict()
         #get post images
-        post_images=post.post_images
+        post_images=PostImage.query.filter_by(post_id=post.id).all()
         for img in post_images:
             if img.preview:
-                data["previewImage"] = img.post_image_url
+                data["previewImg"] = img.post_image_url
                 break
-            post_dict[str(post.id)] = data
+        post_dict[str(post.id)] = data
+        print('OOOOOOOOOOOOOOOOOOO',post_dict)
     return post_dict
 
 @user_routes.route('/<int:id>')

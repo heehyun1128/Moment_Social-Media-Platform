@@ -6,7 +6,7 @@ import PostForm from './PostForm';
 
 const EditPostForm = () => {
   const {postId} = useParams()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const history = useHistory()
   const [errors, setErrors] = useState({});
 
@@ -16,7 +16,7 @@ const EditPostForm = () => {
   
   
   // user auth
-  if (!sessionUser || (post?.creator_id &&sessionUser && sessionUser.id !== post?.creator_id)) {
+  if (!sessionUser || (Number(post?.creatorId) && sessionUser && Number(sessionUser.id) !== Number(post?.creatorId))) {
     history.push('/')
   }
 
@@ -24,8 +24,13 @@ const EditPostForm = () => {
     dispatch(fetchSinglePost(postId))
 
   }, [dispatch, postId])
+ 
+  if (Object.values(errors).length) {
+    history.push('/404')
 
-  console.log(post)
+  }
+  if (!post) return (<></>)
+
   return (
     <PostForm 
       post={post}

@@ -8,7 +8,7 @@ from flask import Blueprint, request
 
 from flask_login import current_user, login_required
 from .s3_helpers import (
-    upload_file_to_s3, get_unique_filename)
+    upload_file_to_s3, get_unique_filename,remove_file_from_s3)
 
 post_routes = Blueprint('posts', __name__)
 
@@ -119,31 +119,46 @@ def post_image(postId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT A POST IMAGE
-@post_routes.route('/<int:postId>/images/<int:imageId>',methods=['PUT'])
+@post_routes.route('/<int:postId>/images/<int:imageId>/edit',methods=['PUT'])
 @login_required
-def edit_image(postId):
+def edit_image(postId,imageId):
   post=Post.query.get(postId)
+  postImage = PostImage.query.get(imageId)
+  # print('000000000000000000000000',postImage.to_dict())
+  # print('12345678909876543234567',form.data['preview'])
   if not post:
     return {'errors':'Post not found'},404
+  if not postImage:
+    return {'errors':'404 not found'},404
   if post.creator_id != current_user.id:
     return {'errors':'Unauthorized'},401
   
-  form = PostImage()
+  form = PostImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
+  print('qqqqqqqqqqqqqqqq',form.data['preview'])
   if form.validate_on_submit():
-    updated_image=PostImage(
-      preview=form.data['preview'],
-      post_image_url=form.data['post_image_url'],
-      
-    )
+    imgFile=form.data["post_image_url"] 
+    imgFile.filename = get_unique_filename(imgFile.filename)
+    upload = upload_file_to_s3(imgFile)
+
+    if "url" not in upload:
+            print({'errors': "post image is not a valid url"})
+    url = upload["url"]
    
+    postImage.preview=form.data['preview']
+    postImage.post_image_url=url
+  
     db.session.commit()
-    return updated_image.to_dict()
+    return postImage.to_dict()
+  elif postImage != None:
+    postImage.preview=form.data['preview']
+    db.session.commit()
+    return postImage.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 # EDIT A POST
-@post_routes.route('/<int:postId>',methods=['PUT'])
+@post_routes.route('/<int:postId>/edit',methods=['PUT'])
 @login_required
 def edit_post(postId):
   post = Post.query.get(postId)
@@ -155,38 +170,39 @@ def edit_post(postId):
   form=PostForm()
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
-    updated_post=Post(
-      title=form.data['title'],
-      content=form.data['content']
-    )
+   
+    post.title=form.data['title']
+    post.content=form.data['content']
     db.session.commit()
     return post.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-#DELETE A POST IMAGE
-@post_routes.route('/<int:postId>/images/<int:imageId>',methods=['DELETE'])
-@login_required
-def delete_postimage(postId,imageId):
-  post=Post.query.get(postId)
-  if not post:
-    return {'errors':'404 Post not found'},404
-  if post.creator_id != current_user.id:
-    return {'errors':'You do not have the authorization to delete the post'},403
+# #DELETE A POST IMAGE
+# @post_routes.route('/<int:postId>/images/<int:imageId>',methods=['DELETE'])
+# @login_required
+# def delete_postimage(postId,imageId):
+#   post=Post.query.get(postId)
+#   if not post:
+#     return {'errors':'404 Post not found'},404
+#   if post.creator_id != current_user.id:
+#     return {'errors':'You do not have the authorization to delete the post'},403
   
-  image=PostImage.query.get(imageId)
+#   image=PostImage.query.get(imageId)
 
-  if not image:
-    return {'errors':'404 Image not found'},404
-  post.post_images.remove(image)
-  db.session.delete(image)
-  db.session.commit()
-  return {'message':'Post image successfully deleted!'},200
+#   if not image:
+#     return {'errors':'404 Image not found'},404
+
+#   remove_file_from_s3(image.post_image_url)
+#   db.session.delete(image)
+#   db.session.commit()
+#   return {'message':'Post image successfully deleted!'},200
 
 #DELETE A POST
 @post_routes.route('/<int:postId>',methods=['DELETE'])
 @login_required
 def delete_post(postId):
   post=Post.query.get(postId)
+  print('QQQQQQQQQQQ',post)
   if not post:
     return {'errors':'404 Post not found'},404
   if post.creator_id != current_user.id:
