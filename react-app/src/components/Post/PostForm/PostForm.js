@@ -26,9 +26,9 @@ const PostForm = ({ post, formType }) => {
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
   console.log(isCancelImageUpdate)
   // GET INITIAL IMAGE URLS
-  const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
-
+  
   useEffect(() => {
+    const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     console.log(initialUrls)
     initialUrls && setSelImageUrls(initialUrls)
@@ -40,8 +40,9 @@ const PostForm = ({ post, formType }) => {
     setImgInputIdList(imgInputLi)
     const imageId = postPics[index].id
     const isImageDeleted = [...deleteImageCalled]
-    console.log(isImageDeleted)
+    console.log(isImageDeleted) 
     isImageDeleted[index] = true
+    console.log(isImageDeleted) 
     console.log(isImageDeleted[index])
     setDeleteImageCalled(isImageDeleted)
     const newPics = [...postPics]
@@ -51,6 +52,7 @@ const PostForm = ({ post, formType }) => {
     dispatch(fetchDeletePostImage(imageId))
     alert('Image successfully deleted!')
   }
+  
   console.log(deleteImageCalled)
   const handleUndoImageUpdate = (index) => {
     console.log("undo image change")
@@ -282,6 +284,8 @@ const PostForm = ({ post, formType }) => {
 
 
   }
+  console.log(postPics) 
+  console.log(selImageUrls)
   return (
     <div>
       {formType === "createPost" && <h2>Create a post</h2>}
@@ -315,7 +319,8 @@ const PostForm = ({ post, formType }) => {
                 />
                 {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
                 {img && isCancelImageUpdate[index] && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE {isCancelImageUpdate[index]}</div>}
-                {img && !deleteImageCalled[index] && <div id='upload-img-preview'><img src={selImageUrls[index]} alt="" />{deleteImageCalled[index] + ''}</div>}
+                {!deleteImageCalled[index] && <div id='upload-img-preview'><img id='update-img-display' src={selImageUrls[index]} alt="" />
+                </div>}
                 <p>{selFileNames[index]}</p>
                 {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
