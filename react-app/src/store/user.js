@@ -1,5 +1,6 @@
 const LOAD_USERS='users/LOAD_USERS'
 const LOAD_SINGLE_USER = 'users/LOAD_SINGLE_USER'
+const LOAD_USER_POST = 'users/LOAD_USER_POST'
 
 export const loadUsers = users=>({
   type:LOAD_USERS,
@@ -8,6 +9,10 @@ export const loadUsers = users=>({
 export const getUser = user=>({
   type: LOAD_SINGLE_USER,
   user
+})
+export const loadUserPosts = posts=>({
+  type: LOAD_USER_POST,
+  posts
 })
 
 
@@ -40,6 +45,20 @@ export const fetchSingleUser = (userId) => async (dispatch) => {
   }
 }
 
+// fetch all USER posts
+export const fetchUserPosts = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/posts`)
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(loadUserPosts(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
 
 const initialState = {}
 const userReducer = (state = initialState, action) => {
@@ -57,6 +76,16 @@ const userReducer = (state = initialState, action) => {
       newState = {
         ...state,
         singleUser: action.user
+      }
+      console.log(newState)
+      return newState
+    case LOAD_USER_POST:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          userPosts:action.posts
+        }
       }
       console.log(newState)
       return newState

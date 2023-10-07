@@ -78,20 +78,20 @@ export const fetchAllPosts = () => async (dispatch) => {
     return errors
   }
 }
-// fetch all USER posts
-export const fetchUserPosts = (userId) => async (dispatch) => {
-  const res = await fetch(`/api/users/${userId}/posts`)
-  console.log(res)
-  if (res.ok) {
-    const data = await res.json()
-    dispatch(loadPosts(data))
-    console.log(data)
-    return data
-  } else {
-    const errors = await res.json()
-    return errors
-  }
-}
+// // fetch all USER posts
+// export const fetchUserPosts = (userId) => async (dispatch) => {
+//   const res = await fetch(`/api/users/${userId}/posts`)
+//   console.log(res)
+//   if (res.ok) {
+//     const data = await res.json()
+//     dispatch(loadPosts(data))
+//     console.log(data)
+//     return data
+//   } else {
+//     const errors = await res.json()
+//     return errors
+//   }
+// }
 
 // fetch single post
 export const fetchSinglePost = (postId) => async (dispatch) => {
