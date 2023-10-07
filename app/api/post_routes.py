@@ -1,7 +1,7 @@
 from flask import Blueprint,jsonify
 from flask_login import login_required
-from app.forms import PostForm,PostImageForm
-from app.models import Post,db,PostImage
+from app.forms import PostForm,PostImageForm,CommentForm
+from app.models import Post,db,PostImage,Comment
 from app.api.auth_routes import validation_errors_to_error_messages
 #aws
 from flask import Blueprint, request
@@ -38,7 +38,7 @@ def get_post_detail(postId):
 
   return data
   
-# GET ALL POSTS
+# GET ALL POSTS & POST IMAGES & POST COMMENTS
 @post_routes.route('/')
 def get_all_posts():
   posts=Post.query.all()
@@ -47,12 +47,20 @@ def get_all_posts():
     data=post.to_dict()
     images = post.post_images
     creator=post.creator
+    comments=post.comments
 
     for img in images:
       if img.preview:
         data['previewImg'] = img.post_image_url
         break
     data['creator']=creator.to_dict()
+    print('@@@@@@@@@@@@@',comments)
+    data['comments'] = []
+    for comment in comments:
+      if comment:
+        data['comments'].append(comment.to_dict())
+       
+    print('!!!!!!!!!!!!!!!!',data['comments'])
     post_dict[str(post.id)] = data
   return {"Posts": post_dict}
 
@@ -115,8 +123,33 @@ def post_image(postId):
     return jsonify({'message': 'Form submitted successfully'})
 
   if form.errors:
-        print('errrrrrrrrrrrr',form.errors)
+        return {'errors':form.errors}
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+#CREATE A POST COMMENT
+@post_routes.route('/<int:postId>/comments',methods=['POST'])
+@login_required
+def post_comment(postId):
+  post=Post.query.get(postId)
+  if not post:
+    return {'errors':'Post not found'},404
+  if post.creator_id != current_user.id:
+    return {'errors':'Unauthorized'},401
+  
+  form = CommentForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    new_comment=Comment(
+      content=form.data['content'],
+      user_id=current_user.id,
+      post_id=postId
+    )
+    db.session.add(new_comment)
+    db.session.commit() 
+    return new_comment.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
 
 # EDIT A POST IMAGE
 @post_routes.route('/<int:postId>/images/<int:imageId>/edit',methods=['PUT'])
@@ -177,25 +210,7 @@ def edit_post(postId):
     return post.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# #DELETE A POST IMAGE
-# @post_routes.route('/<int:postId>/images/<int:imageId>',methods=['DELETE'])
-# @login_required
-# def delete_postimage(postId,imageId):
-#   post=Post.query.get(postId)
-#   if not post:
-#     return {'errors':'404 Post not found'},404
-#   if post.creator_id != current_user.id:
-#     return {'errors':'You do not have the authorization to delete the post'},403
-  
-#   image=PostImage.query.get(imageId)
 
-#   if not image:
-#     return {'errors':'404 Image not found'},404
-
-#   remove_file_from_s3(image.post_image_url)
-#   db.session.delete(image)
-#   db.session.commit()
-#   return {'message':'Post image successfully deleted!'},200
 
 #DELETE A POST
 @post_routes.route('/<int:postId>',methods=['DELETE'])
@@ -211,3 +226,5 @@ def delete_post(postId):
   db.session.delete(post)
   db.session.commit()
   return {'message':'Post successfully deleted!'},200
+
+
