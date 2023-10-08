@@ -4,12 +4,16 @@ import session from './session'
 import postReducer from './post'
 import userReducer from './user'
 import postImageReducer from './postImage';
+import commentReducer from './comment';
+import commentImageReducer from './commentImage';
 
 const rootReducer = combineReducers({
   session,
   posts:postReducer,
   users:userReducer,
-  postImages: postImageReducer
+  postImages: postImageReducer,
+  comments:commentReducer,
+  commentImages: commentImageReducer,
 });
 
 

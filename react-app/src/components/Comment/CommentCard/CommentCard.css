@@ -1,0 +1,39 @@
+#comment-creator-pic-div{
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:50px;
+  width:50px;
+  overflow: hidden;
+  background-color: #efdddd;
+}
+
+#comment-creator-pic-div img{
+
+width:120%;
+height:120%;
+object-fit:cover;
+}
+
+#comment-creator-div{
+  display: flex;
+  align-items: center;
+}
+
+#comment-card-div{
+  background-color: #f1f1f1;
+  margin:15px 30px;
+  border-radius: 50px;
+}
+#comment-img-div{
+  max-width: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+#comment-img-div img{
+  object-fit: cover;
+  
+}
+
+

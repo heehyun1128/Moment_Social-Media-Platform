@@ -4,6 +4,7 @@ import { fetchDeletePost, fetchSinglePost } from "../../../store/post";
 import { useParams, useHistory } from "react-router-dom";
 import './PostDetail.css'
 import { fetchSingleUser } from "../../../store/user";
+import CommentDetail from "../../Comment/CommentDetail/CommentDetail";
 
 const PostDetail = () => {
   const { postId } = useParams()
@@ -12,6 +13,7 @@ const PostDetail = () => {
 
   const post = useSelector(state => state.posts?.singlePost)
   const postCreator = useSelector(state => state.users?.singleUser)
+  
 
   const sessionUser = useSelector(state => state.session?.user)
   
@@ -42,11 +44,14 @@ const PostDetail = () => {
     dispatch(fetchSinglePost(postId))
   }, [dispatch, postId])
   useEffect(() => {
-    // console.log(post)
+    console.log(post)
     post && post.creatorId && dispatch(fetchSingleUser(post?.creatorId))
 
   }, [dispatch, post, post?.creatorId])
 
+  if (!post || !postCreator || !sessionUser){
+    return null
+  }
   
   return (
     <div>
@@ -80,6 +85,12 @@ const PostDetail = () => {
             {post?.content}
           </div>
         </div>
+      </div>
+      <div>
+        {post &&  <div> {post.numOfComments} Comments</div>}
+      </div>
+      <div id="comment-detail-div">
+        <CommentDetail post={post}/>
       </div>
     </div>
   )
