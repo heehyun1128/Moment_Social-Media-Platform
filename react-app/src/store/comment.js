@@ -40,14 +40,14 @@ export const getCommentImage = commentImage => ({
 })
 
 // edit a comment IMAGE
-export const editCommentImage = comment => ({
+export const editCommentImage = image => ({
   type: EDIT_COMMENT_IMAGE,
-  comment
+  image
 })
 
-// fetch all comments
-export const fetchAllComments = () => async (dispatch) => {
-  const res = await fetch('/api/comments')
+// fetch all post comments
+export const fetchAllPostComments = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}/comments`)
 
   if (res.ok) {
     const data = await res.json()
@@ -63,7 +63,7 @@ export const fetchAllComments = () => async (dispatch) => {
 // fetch single comment
 export const fetchSingleComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`)
- 
+
   if (res.ok) {
     const data = await res.json()
     dispatch(getComment(data))
@@ -74,10 +74,26 @@ export const fetchSingleComment = (commentId) => async (dispatch) => {
     return errors
   }
 }
+// fetch single comment image
+export const fetchSingleCommentImage = (commentId) => async (dispatch) => {
+  const res = await fetch(`/api/comments/${commentId}/images`)
+
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getCommentImage(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
 
 // create a comment
-export const fetchCreateComment = (comment) => async (dispatch) => {
-  const res = await fetch('/api/comments/new', {
+export const fetchCreateComment = (postId, comment) => async (dispatch) => {
+  console.log(comment)
+  console.log(postId)
+  const res = await fetch(`/api/posts/${postId}/comments/new`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(comment)
@@ -95,6 +111,7 @@ export const fetchCreateComment = (comment) => async (dispatch) => {
 
 // UPDATE a comment
 export const fetchUpdateComment = (comment) => async (dispatch) => {
+  console.log(comment)
   const res = await fetch(`/api/comments/${comment.id}/edit`, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
@@ -113,7 +130,7 @@ export const fetchUpdateComment = (comment) => async (dispatch) => {
 
 // DELETE A COMMENT
 export const fetchDeleteComment = (commentId) => async (dispatch) => {
-  const res = await fetch(`/api/posts/${commentId}`, {
+  const res = await fetch(`/api/comments/${commentId}`, {
     method: 'DELETE'
   })
   console.log(res)
@@ -189,15 +206,24 @@ const commentReducer = (state = initialState, action) => {
     case LOAD_COMMENTS:
       newState = {
         ...state,
-        ...action.comments
+        comments: {
+          ...state.comments
+        }
       }
-      console.log(newState)
+      action.comments.Comments.forEach(comment => {
+        newState.comments[comment.id] = comment
+      })
+      console.log(newState.comments)
       return newState
-   
+
     case GET_COMMENT:
     case EDIT_COMMENT:
       newState = {
         ...state,
+        comments: {
+          ...state.comments,
+          [action.comment.id]: action.comment
+        },
         singleComment: action.comment
       }
       console.log(newState)
@@ -208,18 +234,35 @@ const commentReducer = (state = initialState, action) => {
         ...state,
         singleComment: {
           ...state.singleComment,
-          commentImage: action.commentImage
+          commentImages: {
+            ...state.commentImages,
+            ...action.commentImage
+          }
         }
       }
       return newState
 
+    case LOAD_COMMENT_IMAGES:
+      newState = {
+        ...state,
+        singleComment: {
+          ...state.singleComment,
+          commentImages:action.commentImages
+        }
+      }
+      return newState
     case REMOVE_COMMENT:
       newState = {
         ...state,
-        singleComment: null
+        comments:{
+          ...state.comments
+        },
+        singleComment:null
       }
+      delete newState.comments[action.commentId]
+      console.log('newState',newState)
       return newState
-  
+
     default:
       return state
   }

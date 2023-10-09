@@ -86,7 +86,32 @@ def get_all_posts():
   # return({'Posts':{idx+1:post.to_dict() for idx,post in enumerate(posts)}})
 
 
+# GET ALL POST COMMENTS
+@post_routes.route('/<int:postId>/comments')
+def get_all_postcomments(postId):
+  post=Post.query.get(postId)
+  comments=post.comments
 
+  comments_data =[]
+  for comment in comments:
+    if comment:
+      images=CommentImage.query.filter_by(comment_id=comment.id)
+      comment_image_urls=[]
+      for img in images:
+          imgUrl=img.comment_image_url
+          comment_image_urls.append(img.comment_image_url)
+      comment_data={
+        'id':comment.id,
+        'postId':post.id,
+        'content':comment.content,
+        'commentCreator':User.query.get(comment.user_id).to_dict(),
+        'commentImages':comment_image_urls,
+        'createdAt':comment.created_at,
+        'updatedAt':comment.updated_at,
+      }
+      comments_data.append(comment_data)
+
+  return {'Comments':comments_data}
 
 # CREATE A POST
 @post_routes.route('/new',methods=['POST'])
@@ -146,14 +171,14 @@ def post_image(postId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #CREATE A POST COMMENT
-@post_routes.route('/<int:postId>/comments',methods=['POST'])
+@post_routes.route('/<int:postId>/comments/new',methods=['POST'])
 @login_required
 def post_comment(postId):
   post=Post.query.get(postId)
+ 
   if not post:
     return {'errors':'Post not found'},404
-  if post.creator_id != current_user.id:
-    return {'errors':'Unauthorized'},401
+  
   
   form = CommentForm()
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -162,11 +187,33 @@ def post_comment(postId):
     new_comment=Comment(
       content=form.data['content'],
       user_id=current_user.id,
-      post_id=postId
+      post_id=postId,
+      
     )
     db.session.add(new_comment)
     db.session.commit() 
-    return new_comment.to_dict()
+    comment_creator = {
+       'id':new_comment.user.id,
+       'username':new_comment.user.username,
+       'profileImage':new_comment.user.profile_image_url,
+    }
+    post_obj={
+       'id':post.id,
+       'title':post.title,
+       'content':post.content
+    }
+    comment_obj = {
+       'id':new_comment.id,
+       'content':new_comment.content,
+       'userId':new_comment.user_id,
+       'postId':new_comment.post_id,
+       'createdAt':new_comment.created_at,
+       'updatedAt':new_comment.updated_at,
+       'post':post_obj,
+       'commentCreator':comment_creator,
+       'commentImages':new_comment.comment_images,
+    }
+    return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 

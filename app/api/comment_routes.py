@@ -22,7 +22,6 @@ def get_comment_detail(commentId):
     return {"errors":'comment not found'},404
   comment_images=comment.comment_images
   user=User.query.get(comment.user_id)
-  print('000000000',user.to_dict())
 
 
   data={
@@ -35,6 +34,7 @@ def get_comment_detail(commentId):
     'commentImages':[img.to_dict() for img in comment_images],
     'username':user.username
   }
+  print('000000000',data)
 
   return data
   
@@ -70,7 +70,7 @@ def comment_image(commentId):
 
     db.session.add(new_image)
     db.session.commit()
-    return jsonify({'message': 'Form submitted successfully'})
+    return {'commentImage':new_image.to_dict()}
 
   if form.errors:
         return {'errors':form.errors}
@@ -79,10 +79,11 @@ def comment_image(commentId):
 
 #EDIT A COMMENT
 
-@comment_routes.route('/<int:commentId>',methods=['PUT'])
+@comment_routes.route('/<int:commentId>/edit',methods=['PUT'])
 @login_required
 def edit_comment(commentId):
   comment=Comment.query.get(commentId)
+  
   if not comment:
     return {'errors':'comment not found'},404
   if comment.user_id != current_user.id:
@@ -93,7 +94,30 @@ def edit_comment(commentId):
   if form.validate_on_submit():
       comment.content=form.data['content']
       db.session.commit()
-      return comment.to_dict()
+
+      comment_creator = {
+       'id':comment.user.id,
+       'username':comment.user.username,
+       'profileImage':comment.user.profile_image_url,
+    }
+      post_obj={
+       'id':comment.post.id,
+       'title':comment.post.title,
+       'content':comment.post.content
+    }
+      comment_obj = {
+       'id':comment.id,
+       'content':comment.content,
+       'userId':comment.user_id,
+       'postId':comment.post_id,
+       'createdAt':comment.created_at,
+       'updatedAt':comment.updated_at,
+       'post':post_obj,
+       'commentCreator':comment_creator,
+       'commentImages':comment.comment_images,
+    }
+      
+      return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 

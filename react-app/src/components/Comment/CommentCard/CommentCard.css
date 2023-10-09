@@ -22,9 +22,11 @@ object-fit:cover;
 }
 
 #comment-card-div{
-  background-color: #f1f1f1;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 4px rgb(192, 192, 192);
   margin:15px 30px;
-  border-radius: 50px;
+  border-radius: 30px;
+  padding:20px;
 }
 #comment-img-div{
   max-width: 260px;
