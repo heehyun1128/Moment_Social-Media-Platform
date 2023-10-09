@@ -23,9 +23,9 @@ export const editComment = comment => ({
   comment
 })
 // DELETE a comment
-export const removeComment = comment => ({
+export const removeComment = commentId => ({
   type: REMOVE_COMMENT,
-  comment
+  commentId
 })
 
 // LOAD COMMENT IMAGES
@@ -252,14 +252,14 @@ const commentReducer = (state = initialState, action) => {
       }
       return newState
     case REMOVE_COMMENT:
+      console.log(action.commentId)
+      const commentObj = {...state.comments}
+      delete commentObj[action.commentId]
       newState = {
         ...state,
-        comments:{
-          ...state.comments
-        },
+        comments: commentObj,
         singleComment:null
       }
-      delete newState.comments[action.commentId]
       console.log('newState',newState)
       return newState
 

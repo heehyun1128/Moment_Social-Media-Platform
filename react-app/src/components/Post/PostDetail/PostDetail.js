@@ -33,6 +33,7 @@ const PostDetail = () => {
 
   const images = post?.postImages
 
+  const numOfComments = commentArr.length
   const handleMouseOver = (index) => {
 
 
@@ -117,7 +118,7 @@ const PostDetail = () => {
       </div>
       <div id="comment-section">
         <CommentForm />
-        {/* {post && <div> {post.numOfComments} Comments</div>} */}
+        {post && <div> {numOfComments} Comments</div>}
 
         <div id="comment-detail-div">
           <CommentDetail comments={postComments} />
