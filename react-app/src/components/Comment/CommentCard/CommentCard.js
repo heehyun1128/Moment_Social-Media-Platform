@@ -10,7 +10,7 @@ import DeleteCommentModal from '../CommentModal/DeleteCommentModal'
 
 const CommentCard = ({ comment }) => {
   const singleComment = useSelector(state => state.comments?.singleComment)
-  console.log(comment)
+  console.log(comment?.commentImages)
   const sessionUser = useSelector((state) => state.session.user)
   // const commentImages = useSelector(state => state.comments?.singleComment?.commentImages)
   const dispatch = useDispatch()
@@ -30,10 +30,14 @@ const CommentCard = ({ comment }) => {
 
       <div id="comment-creator-div">
         <div id='comment-creator-pic-div'>
-          {comment.commentCreator?.profileImage ?
-            <img src={comment.commentCreator?.profileImage} alt="" />
+          {comment?.profileImage ?
+            <img src={comment?.profileImage} alt="" />
             : <i class="fa-solid fa-user fa-lg"></i>
           }
+          {/* {comment.commentCreator?.profileImage ?
+            <img src={comment.commentCreator?.profileImage} alt="" />
+            : <i class="fa-solid fa-user fa-lg"></i>
+          } */}
         </div>
 
         {comment && comment.commentCreator && comment.commentCreator.username && <p id="comment-creator-username">{comment.commentCreator.username}</p>}
@@ -42,15 +46,15 @@ const CommentCard = ({ comment }) => {
       <div id="comment-content-div">
         <div id="comment-content">{comment?.content}</div>
       
-        <div id='comment-img-div'>{singleComment?.commentImages && singleComment?.commentImages?.map(image =>
-          <img src={image?.commentImageUrl} alt="" />
-        )}</div>
-        {/* <div id='comment-img-div'>{comment?.commentImages && comment?.commentImages?.map(image =>
-          <img src={image} alt="" />
+        {/* <div id='comment-img-div'>{singleComment?.commentImages && singleComment?.commentImages?.map(image =>
+          <img src={image.commentImageUrl} alt="" />
         )}</div> */}
+        <div id='comment-img-div'>{comment?.commentImages && comment?.commentImages?.map(image =>
+          <img src={image.commentImageUrl} alt="" />
+        )}</div>
       </div>
       <div>
-        {sessionUser && comment?.commentCreator?.id === sessionUser?.id &&
+        {sessionUser && comment?.userId === sessionUser?.id &&
           <><OpenModalButton
             buttonText="Edit Comment"
 

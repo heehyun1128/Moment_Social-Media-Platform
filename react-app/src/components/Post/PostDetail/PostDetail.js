@@ -118,7 +118,7 @@ const PostDetail = () => {
       </div>
       <div id="comment-section">
         <CommentForm />
-        {post && <div> {numOfComments} Comments</div>}
+        {/* {post && <div> {numOfComments} Comments</div>} */}
 
         <div id="comment-detail-div">
           <CommentDetail comments={postComments} />

@@ -34,15 +34,17 @@ export const loadCommentImages = commentImages => ({
   commentImages
 })
 // GET COMMENT IMAGES
-export const getCommentImage = commentImage => ({
+export const getCommentImage = (commentId,commentImage )=> ({
   type: GET_COMMENT_IMAGE,
+  commentId,
   commentImage
 })
 
 // edit a comment IMAGE
-export const editCommentImage = image => ({
+export const editCommentImage = (commentId, commentImage) => ({
   type: EDIT_COMMENT_IMAGE,
-  image
+  commentId,
+  commentImage
 })
 
 // fetch all post comments
@@ -80,7 +82,7 @@ export const fetchSingleCommentImage = (commentId) => async (dispatch) => {
 
   if (res.ok) {
     const data = await res.json()
-    dispatch(getCommentImage(data))
+    dispatch(getCommentImage(commentId,data))
     console.log(data)
     return data
   } else {
@@ -156,7 +158,7 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     console.log('data',data)
-    dispatch(getCommentImage(data))
+    dispatch(getCommentImage(commentId,data))
     console.log(data)
     return data
   } else {
@@ -188,7 +190,7 @@ export const fetchUpdateCommentImage = (formData, imageId) => async (dispatch) =
   console.log(res)
   if (res.ok) {
     const data = await res.json()
-    dispatch(editCommentImage(data))
+    dispatch(editCommentImage(commentId,data))
     console.log(data)
     return data
   } else {
@@ -237,7 +239,17 @@ const commentReducer = (state = initialState, action) => {
           ...state.singleComment,
           ...action.commentImage
 
+        },
+        comments: {
+          ...state.comments,
+          [action.commentId]: {
+            ...state.comments[action.commentId],
+           
+              ...action.commentImage
+            
+          }
         }
+        
       }
       console.log(newState)
       return newState
