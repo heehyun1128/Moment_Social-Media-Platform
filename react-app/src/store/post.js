@@ -1,13 +1,12 @@
 /** Action Type Constants: */
-export const LOAD_POSTS = 'products/LOAD_POSTS'
-export const GET_POST = 'products/GET_POST'
-export const LOAD_USER_POSTS = 'products/LOAD_USER_POSTS'
-export const EDIT_POST = 'products/EDIT_POST'
-export const EDIT_POST_IMAGE = 'products/EDIT_POST_IMAGE'
-export const LOAD_POST_IMAGES = 'products/LOAD_POST_IMAGES'
-export const GET_POST_IMAGE = 'products/GET_POST_IMAGE'
-export const REMOVE_POST = 'products/REMOVE_POST'
-// export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
+export const LOAD_POSTS = 'posts/LOAD_POSTS'
+export const GET_POST = 'posts/GET_POST'
+export const LOAD_USER_POSTS = 'posts/LOAD_USER_POSTS'
+export const EDIT_POST = 'posts/EDIT_POST'
+export const EDIT_POST_IMAGE = 'posts/EDIT_POST_IMAGE'
+export const LOAD_POST_IMAGES = 'posts/LOAD_POST_IMAGES'
+export const GET_POST_IMAGE = 'posts/GET_POST_IMAGE'
+export const REMOVE_POST = 'posts/REMOVE_POST'
 
 
 

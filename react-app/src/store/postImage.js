@@ -1,6 +1,6 @@
-export const REMOVE_POST_IMAGE = 'products/REMOVE_POST_IMAGE'
+export const REMOVE_POST_IMAGE = 'posts/REMOVE_POST_IMAGE'
 
-// DELETE a IMAGE
+// DELETE an IMAGE
 export const deletePostImage = postImageId => ({
   type: REMOVE_POST_IMAGE,
   postImageId

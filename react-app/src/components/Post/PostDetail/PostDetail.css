@@ -18,7 +18,7 @@
 }
 
 .post-image{
-  width:100px;
+  width:60px;
   cursor: pointer;
   border-radius: 20px;
   background-size: cover;
@@ -29,6 +29,7 @@
 
 #active{
   flex:1;
+  /* min-width:500px; */
   margin:0;
   
 }
@@ -62,4 +63,8 @@ border-radius: 50%;
 }
 #post-detail-btn-div i{
   margin-right:15px;
+}
+
+#comment-section{
+  background-color: #eeeeee;
 }

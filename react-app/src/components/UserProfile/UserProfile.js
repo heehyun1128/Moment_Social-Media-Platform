@@ -29,7 +29,9 @@ const UserProfile = () => {
   console.log(userPostArr)
   return (
     <div>
+    <h1>{sessionUser && sessionUser.username}'s Profile Page</h1>
       <div id='user-post-div' >
+      <h4>All Posts</h4>
         {userPostArr && userPostArr.map(post => {
           console.log(post)
           return <PostCard post={post} />

@@ -22,7 +22,7 @@ class User(db.Model, UserMixin):
     
     #relationships
     posts=db.relationship("Post",back_populates="creator")
-    comments=db.relationship("Comment",back_populates="user")
+    comments=db.relationship("Comment",back_populates="user",cascade="all, delete, delete-orphan")
 
     @property
     def password(self):

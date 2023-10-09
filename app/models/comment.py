@@ -17,7 +17,7 @@ class Comment(db.Model):
 
   post=db.relationship("Post",back_populates="comments")
   user=db.relationship("User",back_populates="comments")
-  comment_images=db.relationship("CommentImage",back_populates="comment")
+  comment_images=db.relationship("CommentImage",back_populates="comment",cascade="all, delete, delete-orphan")
 
   def to_dict(self):
         return {
@@ -28,3 +28,5 @@ class Comment(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at
         }
+  
+

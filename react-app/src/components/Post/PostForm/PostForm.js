@@ -111,6 +111,7 @@ const PostForm = ({ post, formType }) => {
 
   }
   const handleImageChange = (e, index) => {
+    e.preventDefault();
     console.log(imgInputIdList)
     // const edittedImgId=e.target.id
     // if(!edittedImgIdList.includes(edittedImgId)){

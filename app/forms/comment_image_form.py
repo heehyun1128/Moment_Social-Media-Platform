@@ -6,4 +6,5 @@ from app.api.s3_helpers import ALLOWED_EXTENSIONS
 
 class CommentImageForm(FlaskForm):
   comment_id=IntegerField(validators=[DataRequired()])
-  comment_image = FileField("comment_image", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+  comment_image_url = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+

@@ -1,0 +1,41 @@
+#comment-creator-pic-div{
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height:50px;
+  width:50px;
+  overflow: hidden;
+  background-color: #efdddd;
+}
+
+#comment-creator-pic-div img{
+
+width:120%;
+height:120%;
+object-fit:cover;
+}
+
+#comment-creator-div{
+  display: flex;
+  align-items: center;
+}
+
+#comment-card-div{
+  background-color: #ffffff;
+  box-shadow: 2px 2px 4px rgb(192, 192, 192);
+  margin:15px 30px;
+  border-radius: 30px;
+  padding:20px;
+}
+#comment-img-div{
+  max-width: 260px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+#comment-img-div img{
+  object-fit: cover;
+  
+}
+
+
