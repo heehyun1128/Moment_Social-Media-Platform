@@ -4,8 +4,9 @@ import './PostCard.css'
 
 
 const PostCard = ({post}) => {
- 
+ console.log(post)
   const history = useHistory()
+  const createdDate = post?.createdAt.slice(0,16)
 
   const handleClickPostCard = (e) => {
     e.preventDefault()
@@ -17,7 +18,8 @@ const PostCard = ({post}) => {
         {post&&<img src={post && post?.previewImg} alt="" />}
       </div>
       {post && <h4>{post?.title}</h4>}
-      
+      {post && <p>Created by: {post?.creator?.username}</p>}
+      {post && <p>Created at: {createdDate}</p>}
     </div>
   )
 }
