@@ -117,9 +117,10 @@ def edit_comment(commentId):
        'updatedAt':comment.updated_at,
        'post':post_obj,
        'commentCreator':comment_creator,
-       'commentImages':comment.comment_images,
+       'commentImages':[img.to_dict() for img in comment.comment_images],
     }
-      
+      db.session.commit()
+      print('YYYYYYYYOOOOOOOOUUUUUUUUUUUUUUUUU',comment_obj)
       return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
@@ -130,7 +131,9 @@ def edit_comment(commentId):
 @login_required
 def edit_image(commentId,imageId):
   comment=Comment.query.get(commentId)
+  print('COMMENTTTTTTTTT',comment)
   commentImage = CommentImage.query.get(imageId)
+  print('DDDDDDDDDDDD',commentImage)
   # print('000000000000000000000000',CommentImage.to_dict())
   # print('12345678909876543234567',form.data['preview'])
   if not comment:
@@ -143,7 +146,7 @@ def edit_image(commentId,imageId):
   form = CommentImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
-  print('qqqqqqqqqqqqqqqq',form.data['preview'])
+ 
   if form.validate_on_submit():
     imgFile=form.data["comment_image_url"]
     imgFile.filename = get_unique_filename(imgFile.filename)
@@ -153,6 +156,7 @@ def edit_image(commentId,imageId):
             print({'errors': "Comment image is not a valid url"})
     url = upload["url"]
 
+    
     commentImage.comment_image_url=url
 
     db.session.commit()

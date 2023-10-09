@@ -14,7 +14,8 @@ const EditCommentModal = ({ comment }) => {
   const history = useHistory()
   console.log(comment)
   const { closeModal } = useModal();
-
+  const commentImageId=comment?.commentImages[0]?.id
+  console.log(commentImageId)
   const resetForm = () => {
     setImage(null)
     setContent('')
@@ -29,13 +30,14 @@ const EditCommentModal = ({ comment }) => {
       'id': comment.id,
       content
     }
-    console.log(comment)
+    // console.log(comment)
     const textData = await dispatch(fetchUpdateComment(comment));
-    console.log(textData.id)
-    // const formData = new FormData()
-    // formData.append('comment_image_url', image)
-    // formData.append('comment_id', textData.id)
-    // const data = await dispatch(fetchUpdateCommentImage(formData))
+    
+    const formData = new FormData()
+    formData.append('comment_image_url', image)
+    formData.append('comment_id', textData.id)
+    console.log('formData - editimagemodal',formData)
+    const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
 
     resetForm()
     closeModal();
@@ -52,6 +54,16 @@ const EditCommentModal = ({ comment }) => {
             setContent(e.target.value)
           }}
           required
+        />
+        <input
+          type="file"
+          accept="image/*"
+          // value={profilePic}
+          onChange={(e) => {
+            console.log(e.target.files[0])
+            setImage(e.target.files[0])
+          }}
+
         />
         <button>Submit</button>
       </form>

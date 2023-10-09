@@ -169,7 +169,8 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
 
 // UPDATE a comment image
 export const fetchUpdateCommentImage = (formData, imageId) => async (dispatch) => {
-  console.log(formData.keys(), imageId)
+  console.log(formData)
+  console.log(imageId)
   // Access all keys using an iterator
   const entriesIterator = formData.entries();
 
