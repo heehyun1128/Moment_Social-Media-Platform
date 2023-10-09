@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUpdateComment, fetchUpdateCommentImage } from '../../../store/comment';
+import { fetchCreateCommentImage, fetchUpdateComment, fetchUpdateCommentImage } from '../../../store/comment';
 import { useParams, useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal';
 
@@ -12,10 +12,13 @@ const EditCommentModal = ({ comment }) => {
   const [content, setContent] = useState(comment?.content)
   const { postId } = useParams()
   const history = useHistory()
-  console.log(comment)
+  console.log(comment?.commentImages?.length)
   const { closeModal } = useModal();
   const commentImageId=comment?.commentImages[0]?.id
   console.log(commentImageId)
+
+  
+
   const resetForm = () => {
     setImage(null)
     setContent('')
@@ -33,11 +36,18 @@ const EditCommentModal = ({ comment }) => {
     // console.log(comment)
     const textData = await dispatch(fetchUpdateComment(comment));
     
+
     const formData = new FormData()
     formData.append('comment_image_url', image)
     formData.append('comment_id', textData.id)
     console.log('formData - editimagemodal',formData)
-    const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+    if (comment?.commentImages?.length){
+
+      const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+    }else{
+      await dispatch(fetchCreateCommentImage(formData))
+    }
+    // CALL FETCH CREATE COMMENT IMAGE IF NO EXISTING COMMENT IMAGE
 
     resetForm()
     closeModal();
