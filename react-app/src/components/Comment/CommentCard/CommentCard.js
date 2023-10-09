@@ -9,18 +9,22 @@ import DeleteCommentModal from '../CommentModal/DeleteCommentModal'
 
 
 const CommentCard = ({ comment }) => {
-  // const singleComment = useSelector(state => state.comments?.singleComment)
+  const singleComment = useSelector(state => state.comments?.singleComment)
+  console.log(comment)
   const sessionUser = useSelector((state) => state.session.user)
   // const commentImages = useSelector(state => state.comments?.singleComment?.commentImages)
   const dispatch = useDispatch()
 
   // console.log(commentImages)
-  // useEffect(() => {
-  //   dispatch(fetchSingleComment(comment.id))
-  // }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchSingleComment(comment.id))
+  }, [dispatch])
 
-  // console.log(singleComment)
-
+  console.log(singleComment?.commentImages)
+  singleComment?.commentImages.forEach(c => console.log(c.commentImageUrl))
+  if (!singleComment){
+    return null
+  }
   return (
     <div id='comment-card-div'>
 
@@ -37,9 +41,10 @@ const CommentCard = ({ comment }) => {
       </div>
       <div id="comment-content-div">
         <div id="comment-content">{comment?.content}</div>
-        {/* <div id='comment-img-div'>{singleComment?.commentImages && singleComment?.commentImages?.map(image =>
-          <img src={image} alt="" />
-        )}</div> */}
+      
+        <div id='comment-img-div'>{singleComment?.commentImages && singleComment?.commentImages?.map(image =>
+          <img src={image?.commentImageUrl} alt="" />
+        )}</div>
         {/* <div id='comment-img-div'>{comment?.commentImages && comment?.commentImages?.map(image =>
           <img src={image} alt="" />
         )}</div> */}

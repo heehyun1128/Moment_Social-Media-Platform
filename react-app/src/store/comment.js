@@ -63,7 +63,7 @@ export const fetchAllPostComments = (postId) => async (dispatch) => {
 // fetch single comment
 export const fetchSingleComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`)
-
+console.log(res)
   if (res.ok) {
     const data = await res.json()
     dispatch(getComment(data))
@@ -155,6 +155,7 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
   console.log(res)
   if (res.ok) {
     const data = await res.json()
+    console.log('data',data)
     dispatch(getCommentImage(data))
     console.log(data)
     return data
@@ -234,12 +235,11 @@ const commentReducer = (state = initialState, action) => {
         ...state,
         singleComment: {
           ...state.singleComment,
-          commentImages: {
-            ...state.commentImages,
-            ...action.commentImage
-          }
+          ...action.commentImage
+
         }
       }
+      console.log(newState)
       return newState
 
     case LOAD_COMMENT_IMAGES:

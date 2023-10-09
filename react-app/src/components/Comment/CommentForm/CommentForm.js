@@ -48,7 +48,7 @@ const CommentForm = () => {
           }}
           required
         />
-        {/* <input
+        <input
           type="file"
           accept="image/*"
           // value={profilePic}
@@ -57,7 +57,7 @@ const CommentForm = () => {
             setImage(e.target.files[0])
             }}
 
-        /> */}
+        />
         <button>Submit</button>
       </form>
     </div>

@@ -28,7 +28,7 @@ def get_comment_detail(commentId):
     'id':commentId,
     'content':comment.content,
     'userId':comment.user_id,
-    'commentId':comment.comment_id,
+    'postId':comment.post_id,
     'createdAt':comment.created_at,
     'updatedAt':comment.updated_at,
     'commentImages':[img.to_dict() for img in comment_images],
@@ -66,11 +66,13 @@ def comment_image(commentId):
       comment_image_url=url,
       comment_id=form.data['comment_id']
     )
-    
 
     db.session.add(new_image)
     db.session.commit()
-    return {'commentImage':new_image.to_dict()}
+    image_list = [img.to_dict() for img in [new_image]]
+    
+    print('PRINTTTTTTTTTTTTTTTTTT',new_image.to_dict())
+    return {'commentImages':image_list}
 
   if form.errors:
         return {'errors':form.errors}
