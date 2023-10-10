@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllPostComments, fetchSingleCommentImage } from '../../../store/comment'
 
 const CommentDetail = ({comments}) => {
-  // console.log(post)
+  console.log(comments)
   
   const dispatch=useDispatch()
 

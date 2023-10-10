@@ -9,7 +9,7 @@ import DeleteCommentModal from '../CommentModal/DeleteCommentModal'
 
 
 const CommentCard = ({ comment }) => {
-  const singleComment = useSelector(state => state.comments?.singleComment)
+  // const singleComment = useSelector(state => state.comments?.singleComment)
   console.log(comment?.commentImages)
   const sessionUser = useSelector((state) => state.session.user)
   // const commentImages = useSelector(state => state.comments?.singleComment?.commentImages)
@@ -20,11 +20,11 @@ const CommentCard = ({ comment }) => {
     dispatch(fetchSingleComment(comment.id))
   }, [dispatch])
 
-  console.log(singleComment?.commentImages)
-  singleComment?.commentImages.forEach(c => console.log(c.commentImageUrl))
-  if (!singleComment) {
-    return null
-  }
+  // console.log(singleComment?.commentImages)
+  // singleComment?.commentImages.forEach(c => console.log(c.commentImageUrl))
+  // if (!singleComment) {
+  //   return null
+  // }
   return (
     <div id='comment-card-div'>
 
