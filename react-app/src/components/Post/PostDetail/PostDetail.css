@@ -13,7 +13,7 @@
   /* justify-content: center; */
   text-align: center;
   height:fit-content;
-  margin:50px 30px 10px;
+  margin:50px 30px 20px;
   
 }
 
@@ -42,6 +42,8 @@ justify-content: center;
 align-items: center;
 overflow: hidden;
 border-radius: 50%;
+background-color: #e2a3a3;
+
 }
 #post-detail-user-pic-div img{
   width:200%;

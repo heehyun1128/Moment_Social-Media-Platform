@@ -13,10 +13,10 @@ function ProfileButton({ user }) {
   const history = useHistory()
   const sessionUser = useSelector(state => state.session?.user)
 
-  const handleViewAllPosts = () => {
-    history.push(`/profile/${sessionUser.id}`)
-    closeMenu()
-  }
+  // const handleViewAllPosts = () => {
+  //   history.push(`/profile/${sessionUser.id}`)
+  //   closeMenu()
+  // }
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -56,7 +56,7 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
 
-            <div onClick={handleViewAllPosts}>View All Posts</div>
+            {/* <div onClick={handleViewAllPosts}>View All Posts</div> */}
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

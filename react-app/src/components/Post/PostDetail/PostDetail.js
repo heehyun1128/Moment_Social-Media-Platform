@@ -60,6 +60,11 @@ const PostDetail = () => {
     e.preventDefault();
     history.push(`/posts/${postId}/edit`)
   }
+
+  // const handleViewUserProfile = e => {
+  //   e.preventDefault();
+  //   history.push(`/profile/${post.creator.id}`)
+  // }
   useEffect(() => {
     dispatch(fetchSinglePost(postId))
   }, [dispatch, postId])
@@ -98,9 +103,11 @@ const PostDetail = () => {
           ))}
         </div>
         <div id="post-detail">
-          <div id="post-detail-user">
+          <div id="post-detail-user" 
+          // onClick={handleViewUserProfile}
+          >
             <div id='post-detail-user-pic-div'>
-              <img src={postCreator?.profileImage} alt="" />
+              {postCreator?.profileImage ? <img src={postCreator?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-lg"></i>}
             </div>
             <p>{post?.creator?.username}</p>
           </div>

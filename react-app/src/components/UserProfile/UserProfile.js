@@ -9,11 +9,12 @@ const UserProfile = () => {
   const dispatch = useDispatch()
   const history = useHistory();
   const sessionUser = useSelector(state => state.session?.user)
+ 
 
  
-  if (!sessionUser || (sessionUser && Number(sessionUser.id) !== Number(userId))) {
-    history.push('/')
-  }
+  // if (!sessionUser || (sessionUser && Number(sessionUser.id) !== Number(userId))) {
+  //   history.push('/')
+  // }
 
   const userPosts=useSelector(state=>state.users?.singleUser?.userPosts)
  

@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../../store/post";
 import PostCard from "../Post/PostCard/PostCard";
 import './Home.css'
-
+import { NavLink, useLocation } from 'react-router-dom'
 
 
 const Home = () => {
   const dispatch = useDispatch()
-
+  const location = useLocation()
+  const currentPath = location.pathname
   const allPostsObj = useSelector(state => state.posts.Posts)
   console.log(allPostsObj)
 
@@ -26,14 +27,17 @@ const Home = () => {
 
   return (
     <div >
-      <div id='all-post-div' >
-        {allPosts && allPosts.map(post => {
-          console.log(post)
-          return <PostCard post={post} />
-        })}
+      
+       
+        <div id='all-post-div' >
+          {allPosts && allPosts.map(post => {
+            console.log(post)
+            return <PostCard post={post} />
+          })}
+        </div>
       </div>
-    </div>
-  )
+   
+      )
 }
 
-export default Home
+      export default Home

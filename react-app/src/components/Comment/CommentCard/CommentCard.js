@@ -22,14 +22,14 @@ const CommentCard = ({ comment }) => {
 
   console.log(singleComment?.commentImages)
   singleComment?.commentImages.forEach(c => console.log(c.commentImageUrl))
-  if (!singleComment){
+  if (!singleComment) {
     return null
   }
   return (
     <div id='comment-card-div'>
 
       <div id="comment-creator-div">
-        <div id='comment-creator-pic-div'>
+        <div id=''>
           {comment?.profileImage ?
             <img src={comment?.profileImage} alt="" />
             : <i class="fa-solid fa-user fa-lg"></i>
@@ -45,7 +45,7 @@ const CommentCard = ({ comment }) => {
       </div>
       <div id="comment-content-div">
         <div id="comment-content">{comment?.content}</div>
-      
+
         {/* <div id='comment-img-div'>{singleComment?.commentImages && singleComment?.commentImages?.map(image =>
           <img src={image.commentImageUrl} alt="" />
         )}</div> */}
