@@ -60,7 +60,7 @@ const CommentForm = () => {
             }}
 
           />
-          <button>Submit</button>
+          <button id='submit-comment-btn'>Submit</button>
         </form>
       </div>
     </div>

@@ -26,7 +26,7 @@ const Home = () => {
 
 
   return (
-    <div >
+ 
       
        
         <div id='all-post-div' >
@@ -35,7 +35,7 @@ const Home = () => {
             return <PostCard post={post} />
           })}
         </div>
-      </div>
+    
    
       )
 }

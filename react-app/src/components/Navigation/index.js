@@ -60,7 +60,7 @@ function Navigation({ isLoaded }) {
 							<li>
 								<div onClick={handleViewAllPosts}>
 									<i class="fa-solid fa-book-open"></i>
-									<span >View Your Posts</span>
+									<span >View My Posts</span>
 								</div>
 							</li>
 						</ul>

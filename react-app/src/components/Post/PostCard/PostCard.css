@@ -12,13 +12,14 @@
 }
 
 #post-card-img-div{
-  width:30vw;
+  max-width: 100%;
+  /* width:30vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  box-shadow: 0 0 10px gray;
+  box-shadow: 0 0 10px gray; */
 }
 
 #post-card-div h4{
@@ -30,10 +31,14 @@
 }
 
 #post-card-img-div img{
-height:500px;
+/* height:500px; */
+max-width:100%;
 }
 
 #post-card-div{
-  margin:0 10px;
+  /* margin:0 10px; */
+  width: 100%;
+    margin-bottom: 10px;
+  height: fit-content;
 }
 

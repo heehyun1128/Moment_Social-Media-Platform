@@ -1,6 +1,10 @@
 .profile-dropdown {
   position: absolute;
   right: 50px;
+  background-color: rgba(241, 241, 241,.9);
+  border-radius: 15px;
+  padding:10px;
+  
 }
 
 .hidden {
@@ -72,8 +76,8 @@ font-weight: 700;
   list-style: none;
   border-radius: 12px;
   box-shadow: 2px 4px 10px white;
-  background-color: rgba(0, 0, 0, .8);
-  color: white;
+  background-color: rgba(225, 225, 225, 0.9);
+  color: rgba(55, 55, 55, .9);
   padding: 0 15px 15px 15px;
   display: flex;
   flex-direction: column;
@@ -89,7 +93,7 @@ font-weight: 700;
 }
 
 #icon-nav li>* {
-  color: white;
+  color: rgb(70, 70, 70);
   text-decoration: none;
   display: flex;
   justify-content: center;

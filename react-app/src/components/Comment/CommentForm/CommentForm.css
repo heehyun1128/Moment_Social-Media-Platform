@@ -56,7 +56,7 @@ height:fit-content;
   align-items: center;
 }
 
-#modal-content{
+#edit-comment-modal{
   width:50%;
   height:300px;
   border-radius: 20px;
@@ -65,14 +65,14 @@ height:fit-content;
   justify-content: center;
 }
 
-#modal-content div{
+#edit-comment-modal div{
   width: 80%;
 }
-#modal-content div form{
+#edit-comment-modal div form{
   width: 90%;
   min-width: fit-content;
 }
-#modal-content div form div{
+#edit-comment-modal div form div{
   width: 100%;
 }
 
