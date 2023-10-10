@@ -79,7 +79,7 @@ const PostDetail = () => {
     dispatch(fetchAllPostComments(postId))
   }, [dispatch, postId])
 
-  if (!post || !postCreator || !sessionUser) {
+  if (!post || !postCreator ) {
     return null
   }
   if (!commentObj) {

@@ -70,3 +70,14 @@ background-color: #e2a3a3;
 #comment-section{
   background-color: #eeeeee;
 }
+
+#post-detail h4{
+  margin: 15px 5px;
+  font-size: 20px;
+}
+
+#post-content{
+  padding:10px;
+  font-size: 14px;
+  color: rgb(71, 71, 71);
+}
