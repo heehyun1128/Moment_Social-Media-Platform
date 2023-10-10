@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateComment, fetchCreateCommentImage } from '../../../store/comment'
 import { useParams } from 'react-router-dom'
+import './CommentForm.css'
 
 const CommentForm = () => {
   const dispatch = useDispatch()
@@ -37,29 +38,31 @@ const CommentForm = () => {
 
   return (
     <div>
-      <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
-        <textarea
-          type="text"
-          value={content}
-          placeholder="Add comment here..."
-          onChange={(e) => {
-            console.log(e.target.value)
-            setContent(e.target.value)
-          }}
-          required
-        />
-        <input
-          type="file"
-          accept="image/*"
-          // value={profilePic}
-          onChange={(e) => {
-            console.log(e.target.files[0])
-            setImage(e.target.files[0])
+      <div id='comment-form-div'>
+        <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
+          <textarea
+            type="text"
+            value={content}
+            placeholder="Add comment here..."
+            onChange={(e) => {
+              console.log(e.target.value)
+              setContent(e.target.value)
+            }}
+            required
+          />
+          <input
+            type="file"
+            accept="image/*"
+            // value={profilePic}
+            onChange={(e) => {
+              console.log(e.target.files[0])
+              setImage(e.target.files[0])
             }}
 
-        />
-        <button>Submit</button>
-      </form>
+          />
+          <button id='submit-comment-btn'>Submit</button>
+        </form>
+      </div>
     </div>
   )
 }

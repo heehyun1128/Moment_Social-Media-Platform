@@ -60,6 +60,11 @@ const PostDetail = () => {
     e.preventDefault();
     history.push(`/posts/${postId}/edit`)
   }
+
+  // const handleViewUserProfile = e => {
+  //   e.preventDefault();
+  //   history.push(`/profile/${post.creator.id}`)
+  // }
   useEffect(() => {
     dispatch(fetchSinglePost(postId))
   }, [dispatch, postId])
@@ -74,7 +79,7 @@ const PostDetail = () => {
     dispatch(fetchAllPostComments(postId))
   }, [dispatch, postId])
 
-  if (!post || !postCreator || !sessionUser) {
+  if (!post || !postCreator ) {
     return null
   }
   if (!commentObj) {
@@ -98,9 +103,11 @@ const PostDetail = () => {
           ))}
         </div>
         <div id="post-detail">
-          <div id="post-detail-user">
+          <div id="post-detail-user" 
+          // onClick={handleViewUserProfile}
+          >
             <div id='post-detail-user-pic-div'>
-              <img src={postCreator?.profileImage} alt="" />
+              {postCreator?.profileImage ? <img src={postCreator?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-lg"></i>}
             </div>
             <p>{post?.creator?.username}</p>
           </div>
@@ -118,7 +125,7 @@ const PostDetail = () => {
       </div>
       <div id="comment-section">
         <CommentForm />
-        {post && <div> {numOfComments} Comments</div>}
+        {/* {post && <div> {numOfComments} Comments</div>} */}
 
         <div id="comment-detail-div">
           <CommentDetail comments={postComments} />

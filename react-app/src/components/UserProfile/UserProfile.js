@@ -3,17 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import PostCard from "../Post/PostCard/PostCard";
 import { fetchUserPosts } from "../../store/user";
+import './UserProfile.css'
 
 const UserProfile = () => {
   const { userId } = useParams()
   const dispatch = useDispatch()
   const history = useHistory();
   const sessionUser = useSelector(state => state.session?.user)
+ 
 
  
-  if (!sessionUser || (sessionUser && Number(sessionUser.id) !== Number(userId))) {
-    history.push('/')
-  }
+  // if (!sessionUser || (sessionUser && Number(sessionUser.id) !== Number(userId))) {
+  //   history.push('/')
+  // }
 
   const userPosts=useSelector(state=>state.users?.singleUser?.userPosts)
  
@@ -28,10 +30,10 @@ const UserProfile = () => {
   if (!sessionUser) { return null }
   console.log(userPostArr)
   return (
-    <div>
+    <div id='profile-page-main-div'>
     <h1>{sessionUser && sessionUser.username}'s Profile Page</h1>
+      <h2>All Posts</h2>
       <div id='user-post-div' >
-      <h4>All Posts</h4>
         {userPostArr && userPostArr.map(post => {
           console.log(post)
           return <PostCard post={post} />

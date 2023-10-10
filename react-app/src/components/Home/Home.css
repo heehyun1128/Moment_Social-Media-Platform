@@ -1,7 +1,13 @@
 #all-post-div{
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
   justify-items: center;
-  align-items: end ;
+  background-color: #fff !important;
+  align-items: end ; */
+box-sizing: border-box;
+  width: 1400px;
+  margin: 20px auto;
+  columns: 4;
+  column-gap: 10px;
 }

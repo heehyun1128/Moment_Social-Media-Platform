@@ -1,18 +1,44 @@
-#post-card-div{
+#all-post-div:nth-child(odd){
   background-color: rgb(237, 237, 237);
   max-height: 600px;
   height:fit-content;
 
 }
+#all-post-div:nth-child(odd){
+  background-color: rgb(237, 237, 237);
+  max-height: 700px;
+  height:fit-content;
+
+}
 
 #post-card-img-div{
-  width:380px;
+  max-width: 100%;
+  /* width:30vw;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray; */
+}
+
+#post-card-div h4{
+  font-size: 18px;
+}
+#post-card-div p{
+  font-size: 14px;
+  color:gray;
 }
 
 #post-card-img-div img{
-height:500px;
+/* height:500px; */
+max-width:100%;
 }
+
+#post-card-div{
+  /* margin:0 10px; */
+  width: 100%;
+    margin-bottom: 10px;
+  height: fit-content;
+}
+
