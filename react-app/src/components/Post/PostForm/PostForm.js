@@ -62,7 +62,7 @@ const PostForm = ({ post, formType }) => {
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
 
 
-    imgUpdateBtnClicked[index] = false
+    imgUpdateBtnClicked[index] = true
     console.log(imgUpdateBtnClicked)
     setIsCancelImageUpdate(imgUpdateBtnClicked)
 
@@ -339,7 +339,9 @@ const PostForm = ({ post, formType }) => {
                       
                   </div>}
                   {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE {isCancelImageUpdate[index]}</div>}
+                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
+                  {/* {isCancelImageUpdate[index]} */}
+                  </div>}
                   {/* <p>{selFileNames[index]}</p> */}
                   {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
@@ -361,7 +363,8 @@ const PostForm = ({ post, formType }) => {
               return <div key={index} id="post-image-div">
                 <div id='upload-img-preview'>
                   <img src={selImageUrls[index]} alt="" />
-                  {pic && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
+                  {selImageUrls[index] && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
+                  
                   {!selImageUrls[index] && <label id='create-post-input-label'>
                   <input
                     type="file"
@@ -391,7 +394,7 @@ const PostForm = ({ post, formType }) => {
           <h4>Title</h4>
           <input
             type="text"
-            placeholder="Please give you post a title..."
+            placeholder="Please give your post a title..."
             value={title}
             onChange={(e) => {
               setTitle(e.target.value)
