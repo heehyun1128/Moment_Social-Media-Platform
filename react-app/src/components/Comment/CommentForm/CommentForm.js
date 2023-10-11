@@ -13,6 +13,7 @@ const CommentForm = () => {
   console.log('postId',postId)
   const [selImage, setSelImage] = useState(null)
   const [isSubmitted,setIsSubmitted]=useState(false)
+  const [imageLoading, setImageLoading] = useState(false)
 
   const displayFile = e => {
     console.log('called')
@@ -54,11 +55,13 @@ const CommentForm = () => {
       formData.append('comment_id', textData.id)
       const data = await dispatch(fetchCreateCommentImage(formData))
       setIsSubmitted(true)
+      setImageLoading(true)
     }
     
 
     resetForm()
     setImage(null)
+    setImageLoading(false)
 
   }
 
@@ -91,7 +94,7 @@ const CommentForm = () => {
               }}
 
             />
-            <button id='submit-comment-btn'>Submit Comment</button>
+            {imageLoading ? <p>Submitting...</p>:<button id='submit-comment-btn'>Submit Comment</button>}
           </div>
         </form>
       </div>

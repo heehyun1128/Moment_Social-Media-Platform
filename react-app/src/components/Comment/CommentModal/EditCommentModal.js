@@ -17,6 +17,7 @@ const EditCommentModal = ({ comment }) => {
   const commentImageId = comment?.commentImages[0]?.id
   // console.log(commentImageId)
   const [selImage, setSelImage] = useState(null)
+  const [imageLoading, setImageLoading] = useState(false)
 
   useEffect(() => {
     const initialUrl = comment?.commentImages[0]?.commentImageUrl
@@ -54,17 +55,20 @@ const EditCommentModal = ({ comment }) => {
     const formData = new FormData()
     formData.append('comment_image_url', image)
     formData.append('comment_id', textData.id)
-    console.log('formData - editimagemodal', formData)
-    if (comment?.commentImages?.length) {
+    console.log(comment?.commentImages)
+    // if (comment?.commentImages?.length) {
 
+      setImageLoading(true)
       const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
-    } else {
-      await dispatch(fetchCreateCommentImage(formData))
-    }
+    // } else {
+    //   await dispatch(fetchCreateCommentImage(formData))
+    //   setImageLoading(true)
+    // }
     // CALL FETCH CREATE COMMENT IMAGE IF NO EXISTING COMMENT IMAGE
 
     resetForm()
     closeModal();
+    // setImageLoading(false)
   }
   return (
     <div id='edit-comment-modal'>
@@ -105,7 +109,7 @@ const EditCommentModal = ({ comment }) => {
             </label>
           </div>
 
-          <button id='edit-comment-btn'>Submit</button>
+          {imageLoading ? <p>Submitting...</p> : <button id='edit-comment-btn'>Submit</button>}
         </form>
       </div>
     </div>

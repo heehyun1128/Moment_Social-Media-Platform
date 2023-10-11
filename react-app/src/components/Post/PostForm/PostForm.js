@@ -200,7 +200,7 @@ const PostForm = ({ post, formType }) => {
       for (const postPic of postPics) {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
-        setImageLoading(true)
+        
         console.log(postPics.indexOf(postPic))
         if (postPics.indexOf(postPic) === 0) {
           preview = true
@@ -217,16 +217,18 @@ const PostForm = ({ post, formType }) => {
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
           const imageData = await dispatch(fetchCreatePostImage(formData));
+          setImageLoading(true)
         }
 
       }
       if (textData.errors) {
         setErrors(textData.errors);
 
-      } else {
-        setImageLoading(false)
+      } 
+      // else {
+      //   setImageLoading(false)
 
-      }
+      // }
       history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
@@ -289,7 +291,7 @@ const PostForm = ({ post, formType }) => {
         setErrors(textData.errors);
 
       } else {
-        setImageLoading(false)
+        setImageLoading(true)
 
       }
       history.push(`/posts/${textData.id}`)
@@ -444,7 +446,7 @@ const PostForm = ({ post, formType }) => {
             <p className="errors">{errors.content}</p>
           }
         </div>
-        <button id='submit-post-btn' type="submit">POST</button>
+        {imageLoading ? <p>Submitting...</p> : <button id='submit-post-btn' type="submit">POST</button>}
       </form>
     </div>
   )

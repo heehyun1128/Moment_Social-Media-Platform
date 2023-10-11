@@ -23,10 +23,10 @@ const DeleteCommentModal = ({commentId}) => {
     <div id="delete-modal-container">
       <h3 id='delete-modal-header'>Confirm Delete</h3>
       <p className="delete-modal-msg">
-        Are you sure you want to remove this event?
+        Are you sure you want to remove this comment?
       </p>
-      <button onClick={handleDelete} className="delete-modal-btn yes">{`Yes (Delete Event)`}</button>
-      <button onClick={closeDeleteModal} className="delete-modal-btn no">{`No (Keep Event)`}</button>
+      <button onClick={handleDelete} className="delete-modal-btn yes">{`Confirm Deletion`}</button>
+      <button onClick={closeDeleteModal} className="delete-modal-btn no">{`Cancel Deletion`}</button>
     </div>
   )
 }

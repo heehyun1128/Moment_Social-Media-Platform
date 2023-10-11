@@ -245,8 +245,9 @@ const commentReducer = (state = initialState, action) => {
           ...state.comments,
           [action.commentId]: {
             ...state.comments[action.commentId],
-           
-              ...action.commentImage
+           commentImages:
+             [
+                action.commentImage]
             
           }
         }
