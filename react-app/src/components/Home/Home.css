@@ -8,6 +8,6 @@
 box-sizing: border-box;
   width: 1000px;
   margin: 20px auto;
-  columns: 3;
+  columns: 5;
   column-gap: 10px;
 }
