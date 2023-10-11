@@ -100,14 +100,20 @@ def get_all_postcomments(postId):
       for img in images:
           imgUrl=img.comment_image_url
           comment_image_urls.append(img.comment_image_url)
+      comment_image_obj={
+         'commentImageUrl':comment_image_urls
+      }
       comment_data={
         'id':comment.id,
         'postId':post.id,
         'content':comment.content,
         'commentCreator':User.query.get(comment.user_id).to_dict(),
-        'commentImages':comment_image_urls,
+        'commentImages':[comment_image_obj],
         'createdAt':comment.created_at,
         'updatedAt':comment.updated_at,
+        'profileImage':comment.user.profile_image_url,
+        'username':comment.user.username,
+        'userId':comment.user_id
       }
       comments_data.append(comment_data)
 

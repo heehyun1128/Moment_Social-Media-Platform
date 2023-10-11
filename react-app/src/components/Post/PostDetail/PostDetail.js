@@ -79,7 +79,10 @@ const PostDetail = () => {
     dispatch(fetchAllPostComments(postId))
   }, [dispatch, postId])
 
-  if (!post || !postCreator ) {
+  // if(!post){
+  //   history.push('/404')
+  // }
+  if (!post || !postCreator) {
     return null
   }
   if (!commentObj) {
@@ -103,7 +106,7 @@ const PostDetail = () => {
           ))}
         </div>
         <div id="post-detail">
-          <div id="post-detail-user" 
+          <div id="post-detail-user"
           // onClick={handleViewUserProfile}
           >
             <div id='post-detail-user-pic-div'>
@@ -128,6 +131,7 @@ const PostDetail = () => {
         {/* {post && <div> {numOfComments} Comments</div>} */}
 
         <div id="comment-detail-div">
+          <h4>All Comments</h4>
           <CommentDetail comments={postComments} />
         </div>
       </div>

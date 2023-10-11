@@ -29,7 +29,7 @@ function LoginFormModal() {
 
   }
   return (
-    <>
+    <div id='login-modal'>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <ul>
@@ -55,10 +55,10 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button id="demo-submit-btn" onClick={handleDemoUserLogin}>Demo User</button>
-        <button type="submit">Log In</button>
+        <button className="login-form-submit-btn" onClick={handleDemoUserLogin}>Demo User</button>
+        <button className="login-form-submit-btn" type="submit">Log In</button>
       </form>
-    </>
+    </div>
   );
 }
 

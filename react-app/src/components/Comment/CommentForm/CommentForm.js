@@ -11,12 +11,30 @@ const CommentForm = () => {
   const [content,setContent] = useState('')
   const {postId}=useParams()
   console.log('postId',postId)
+  const [selImage, setSelImage] = useState(null)
+  const [isSubmitted,setIsSubmitted]=useState(false)
 
+  const displayFile = e => {
+    console.log('called')
+    e.stopPropagation()
+    const image = e.target.files[0]
+    const imageUrl = URL.createObjectURL(image)
+    setSelImage(imageUrl)
+  }
   const resetForm = () => {
     setImage(null)
     setContent('')
   }
 
+  const isImageValid = (image) => {
+    const imageExtensions = ["pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    if (!imageExtensions?.some(extension => image?.postImageUrl?.endsWith(extension) ||
+      image?.name?.endsWith(extension))) {
+      return false
+    } else {
+      return true
+    }
+  }
   const handleSubmit= async (e)=>{
     e.preventDefault()
     if (!sessionUser){
@@ -26,19 +44,29 @@ const CommentForm = () => {
       content
     }
     const textData = await dispatch(fetchCreateComment(postId,comment));
-    console.log(textData.id)
     const formData = new FormData()
-    formData.append('comment_image_url',image)
-    formData.append('comment_id', textData.id)
-    const data = await dispatch(fetchCreateCommentImage(formData))
+    if(image && !isImageValid(image)){
+      alert('Pictures must end with "pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      return
+    }else{
+
+      formData.append('comment_image_url',image)
+      formData.append('comment_id', textData.id)
+      const data = await dispatch(fetchCreateCommentImage(formData))
+      setIsSubmitted(true)
+    }
+    
 
     resetForm()
+    setImage(null)
 
   }
 
   return (
     <div>
       <div id='comment-form-div'>
+      <div></div>
+      <h4>Add your comment here</h4>
         <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
           <textarea
             type="text"
@@ -50,17 +78,21 @@ const CommentForm = () => {
             }}
             required
           />
-          <input
-            type="file"
-            accept="image/*"
-            // value={profilePic}
-            onChange={(e) => {
-              console.log(e.target.files[0])
-              setImage(e.target.files[0])
-            }}
+          <div id='submit-comment-div'>
+            {selImage &&!isSubmitted && <img src={selImage} id='comment-img' alt='' />}
+            <input
+              type="file"
+              accept="image/*"
+              // value={profilePic}
+              onChange={(e) => {
+                console.log(e.target.files[0])
+                setImage(e.target.files[0])
+                displayFile(e)
+              }}
 
-          />
-          <button id='submit-comment-btn'>Submit</button>
+            />
+            <button id='submit-comment-btn'>Submit Comment</button>
+          </div>
         </form>
       </div>
     </div>

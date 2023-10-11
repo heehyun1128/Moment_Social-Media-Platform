@@ -13,7 +13,12 @@ function Navigation({ isLoaded }) {
 
 
 	const handleViewAllPosts = () => {
+		if (!sessionUser) {
+			alert('Please Sign Up or Log In to view your comments.')
+		}else{
+
 		history.push(`/profile/${sessionUser.id}`)
+		}
 
 	}
 
@@ -51,6 +56,14 @@ function Navigation({ isLoaded }) {
 									<span>Home</span>
 								</NavLink>
 							</li>
+							{/* <li>
+								{isLoaded && (
+									<div className='one' id='profile-btn'>
+										<ProfileButton user={sessionUser} />
+										<span>User</span>
+									</div>
+								)}
+							</li> */}
 							<li>
 								<div onClick={handleGoToPostForm}>
 									<i class="fa-solid fa-pen"></i>

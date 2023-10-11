@@ -156,7 +156,7 @@ const PostForm = ({ post, formType }) => {
 
 
   const isImageValid = (postPic) => {
-    const imageExtensions = ["pdf", "png", "jpg", "jpeg", "gif"]
+    const imageExtensions = ["pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
     if (!imageExtensions?.some(extension => postPic?.postImageUrl?.endsWith(extension) ||
       postPic?.name?.endsWith(extension))) {
       return false
@@ -189,7 +189,7 @@ const PostForm = ({ post, formType }) => {
         console.log(preview)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
+          alert('Pictures must end with "pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
           return
         } else {
           formData.append('post_image_url', postPic)
@@ -243,7 +243,7 @@ const PostForm = ({ post, formType }) => {
 
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ')
+          alert('Pictures must end with "pdf","PDF" ,"png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           return
         } else {
           console.log(postPic, preview)
@@ -295,38 +295,59 @@ const PostForm = ({ post, formType }) => {
 
         {formType === "updatePost" &&
 
-          <>
+          <div id='edit-post-div'>
             <h4>Edit your post images</h4>
-            {postPics && postPics.map((img, index) => (
+            <div id='edit-post-main'>
+              {postPics && postPics.map((img, index) => (
 
-              <div key={index}>
-                <label id='edit-post-input-label'>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    key={imgInputIdList[index]}
-                    id={imgInputIdList[index]}
+                <div id='edit-post-input-div' key={index}>
+                  {/* <label id='edit-post-input-label'>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      key={imgInputIdList[index]}
+                      id={imgInputIdList[index]}
 
-                    onChange={(e) => {
-                      handleImageChange(e, index)
-                      console.log(e.target.files[0])
-                      // setPostPic(e.target.files[0])
-                    }}
+                      onChange={(e) => {
+                        handleImageChange(e, index)
+                        console.log(e.target.files[0])
+                        // setPostPic(e.target.files[0])
+                      }}
 
-                  />
-                  <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
-                </label>
-                {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                {img && isCancelImageUpdate[index] && <div onClick={() => handleUndoImageUpdate(index)}>UNDO IMAGE CHANGE {isCancelImageUpdate[index]}</div>}
-                {!deleteImageCalled[index] && <div id='upload-img-preview'><img id='update-img-display' src={selImageUrls[index]} alt="" />
-                </div>}
-                {/* <p>{selFileNames[index]}</p> */}
-                {/* {imgErrors && imgErrors.image &&
+                    />
+                    <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+                  </label> */}
+                  
+                  {!deleteImageCalled[index] && <div id='upload-img-preview'>
+                  <img id='update-img-display' src={selImageUrls[index]} alt="" />
+                    {!selImageUrls[index]  && <label id='edit-post-input-label'>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        key={imgInputIdList[index]}
+                        id={imgInputIdList[index]}
+
+                        onChange={(e) => {
+                          handleImageChange(e, index)
+                          console.log(e.target.files[0])
+                          // setPostPic(e.target.files[0])
+                        }}
+
+                      />
+                      <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+                    </label>}
+                      
+                  </div>}
+                  {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
+                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE {isCancelImageUpdate[index]}</div>}
+                  {/* <p>{selFileNames[index]}</p> */}
+                  {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
                 } */}
-              </div>
-            ))}
-          </>
+                </div>
+              ))}
+            </div>
+          </div>
 
         }
 
@@ -340,9 +361,8 @@ const PostForm = ({ post, formType }) => {
               return <div key={index} id="post-image-div">
                 <div id='upload-img-preview'>
                   <img src={selImageUrls[index]} alt="" />
-                  {pic && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>-</div>}
-                </div>
-                <label id='create-post-input-label'>
+                  {pic && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
+                  {!selImageUrls[index] && <label id='create-post-input-label'>
                   <input
                     type="file"
                     accept="image/*"
@@ -355,7 +375,8 @@ const PostForm = ({ post, formType }) => {
 
                   />
                   <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
-                </label>
+                </label>}
+                </div>
 
                 {/* <p>{selFileNames[index]}</p> */}
 

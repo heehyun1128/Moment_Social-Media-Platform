@@ -6,8 +6,8 @@
   background-color: #fff !important;
   align-items: end ; */
 box-sizing: border-box;
-  width: 1400px;
+  width: 1000px;
   margin: 20px auto;
-  columns: 4;
+  columns: 3;
   column-gap: 10px;
 }

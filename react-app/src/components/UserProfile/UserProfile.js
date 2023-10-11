@@ -31,7 +31,12 @@ const UserProfile = () => {
   console.log(userPostArr)
   return (
     <div id='profile-page-main-div'>
-    <h1>{sessionUser && sessionUser.username}'s Profile Page</h1>
+    <div id='profile-info-div'>
+        <div id='profile-info-img-div'>
+          <img src={sessionUser.profileImage} alt="" />
+        </div>
+        <h4>{sessionUser && sessionUser.username}</h4>
+    </div>
       <h2>All Posts</h2>
       <div id='user-post-div' >
         {userPostArr && userPostArr.map(post => {

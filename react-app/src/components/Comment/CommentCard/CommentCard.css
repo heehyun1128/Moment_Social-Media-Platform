@@ -35,7 +35,7 @@ object-fit:cover;
 }
 #comment-img-div img{
   object-fit: cover;
-  
+  max-width: 260px;
 }
 
 
