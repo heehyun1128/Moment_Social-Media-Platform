@@ -7,7 +7,7 @@ const SearchBar = () => {
     alert('Feature comming soon!')
   }
   return (
-    <div id='search-box'>
+    <div id='search-box' style={{display:'none'}}>
       <form action="">
         <input id='search-text' 
         onClick={handleSearch}

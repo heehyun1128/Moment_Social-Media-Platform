@@ -43,7 +43,7 @@ const PostForm = ({ post, formType }) => {
     dispatch(fetchDeletePostImage(imageId))
     const isImageDeleted = [...deleteImageCalled]
     isImageDeleted[index] = true
-    
+    console.log(postPics)
   
     setDeleteImageCalled(isImageDeleted)
     const newPics = [...postPics]
@@ -64,6 +64,11 @@ const PostForm = ({ post, formType }) => {
     } 
   console.log(updatedPicArr)
     setPostPics(updatedPicArr)
+    const imageUrls = [...selImageUrls]
+    imageUrls[index] = null
+    setSelImageUrls(imageUrls)
+    console.log('imageUrls', imageUrls)
+    
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
     alert('Image successfully deleted!')
@@ -334,9 +339,9 @@ const PostForm = ({ post, formType }) => {
                     <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
                   </label> */}
                   
-                  {!deleteImageCalled[index] && <div id='upload-img-preview'>
+                  { <div id='upload-img-preview'>
                   <img id='update-img-display' src={selImageUrls[index]} alt="" />
-                    {!selImageUrls[index]  && <label id='edit-post-input-label'>
+                    { <label id='edit-post-input-label'>
                       <input
                         type="file"
                         accept="image/*"
@@ -354,8 +359,8 @@ const PostForm = ({ post, formType }) => {
                     </label>}
                       
                   </div>}
-                  {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
+                  {selImageUrls[index] && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
+                  {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
                   {/* {isCancelImageUpdate[index]} */}
                   </div>}
                   {/* <p>{selFileNames[index]}</p> */}
