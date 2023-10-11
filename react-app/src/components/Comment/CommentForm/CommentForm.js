@@ -12,6 +12,7 @@ const CommentForm = () => {
   const {postId}=useParams()
   console.log('postId',postId)
   const [selImage, setSelImage] = useState(null)
+  const [isSubmitted,setIsSubmitted]=useState(false)
 
   const displayFile = e => {
     console.log('called')
@@ -25,6 +26,15 @@ const CommentForm = () => {
     setContent('')
   }
 
+  const isImageValid = (image) => {
+    const imageExtensions = ["pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    if (!imageExtensions?.some(extension => image?.postImageUrl?.endsWith(extension) ||
+      image?.name?.endsWith(extension))) {
+      return false
+    } else {
+      return true
+    }
+  }
   const handleSubmit= async (e)=>{
     e.preventDefault()
     if (!sessionUser){
@@ -34,11 +44,18 @@ const CommentForm = () => {
       content
     }
     const textData = await dispatch(fetchCreateComment(postId,comment));
-    console.log(textData.id)
     const formData = new FormData()
-    formData.append('comment_image_url',image)
-    formData.append('comment_id', textData.id)
-    const data = await dispatch(fetchCreateCommentImage(formData))
+    if(image && !isImageValid(image)){
+      alert('Pictures must end with "pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      return
+    }else{
+
+      formData.append('comment_image_url',image)
+      formData.append('comment_id', textData.id)
+      const data = await dispatch(fetchCreateCommentImage(formData))
+      setIsSubmitted(true)
+    }
+    
 
     resetForm()
     setImage(null)
@@ -62,7 +79,7 @@ const CommentForm = () => {
             required
           />
           <div id='submit-comment-div'>
-            {selImage && <img src={selImage} id='comment-img' alt='' />}
+            {selImage &&!isSubmitted && <img src={selImage} id='comment-img' alt='' />}
             <input
               type="file"
               accept="image/*"

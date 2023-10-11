@@ -82,6 +82,7 @@ textarea{
   border-radius: 10px;
   border: none;
   box-shadow: 2px 2px 4px gray;
+  cursor: pointer;
 }
 
 #create-post-input-label input, #edit-post-input-label input{
@@ -117,10 +118,14 @@ textarea{
 #create-post-input-label:hover{
   cursor:pointer !important;
 }
+#edit-post-input-label:hover{
+  cursor:pointer !important;
+}
 
-#create-post-main{
+#create-post-main,#edit-post-main{
   display: flex;
 }
+
 
 #create-post-form{
   width: 100%;
@@ -138,4 +143,19 @@ textarea{
 #post-form-div h4{
   width: 100%;
   margin-left:80px;
+}
+
+#remove-image-div,#deslect-image-div{
+  box-shadow: 0 0 4px gray;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#edit-post-input-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

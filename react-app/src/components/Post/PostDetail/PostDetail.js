@@ -79,6 +79,9 @@ const PostDetail = () => {
     dispatch(fetchAllPostComments(postId))
   }, [dispatch, postId])
 
+  // if(!post){
+  //   history.push('/404')
+  // }
   if (!post || !postCreator) {
     return null
   }

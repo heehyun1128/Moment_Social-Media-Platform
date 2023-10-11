@@ -11,7 +11,7 @@ import PostDetail from "./components/Post/PostDetail/PostDetail";
 import CreatePostForm from "./components/Post/PostForm/CreatePostForm";
 import EditPostForm from "./components/Post/PostForm/EditPostForm";
 import UserProfile from "./components/UserProfile/UserProfile";
-
+import PageNotFound from './components/PageNotFound/PageNotFound'
 
 
 function App() {
@@ -26,26 +26,32 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/login" >
             <LoginFormPage />
           </Route>
-          <Route path="/signup">
+          <Route exact path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/posts/new">
+          <Route exact path="/posts/new">
             <CreatePostForm />
           </Route>
-          <Route path="/posts/:postId/edit">
+          <Route exact path="/posts/:postId/edit">
             <EditPostForm />
           </Route>
-          <Route path="/posts/:postId">
+          <Route exact path="/posts/:postId">
             <PostDetail />
           </Route>
-          <Route path="/profile/:userId">
+          <Route exact path="/profile/:userId">
             <UserProfile />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path='404'>
+            <PageNotFound />
+          </Route>
+          <Route>
+            <PageNotFound />
           </Route>
         </Switch>
       )}

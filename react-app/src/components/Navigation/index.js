@@ -41,11 +41,11 @@ function Navigation({ isLoaded }) {
 				{/* <div className='one' onClick={handleGoToPostForm}>
 					<i class="fa-solid fa-pen"></i>
 				</div> */}
-				{/* {isLoaded && (
+				{isLoaded && (
 					<div className='one' id='profile-btn'>
 						<ProfileButton user={sessionUser} />
 					</div>
-				)} */}
+				)}
 				<div id="navigation-tab">
 					<i class="fa-solid fa-layer-group"></i>
 					<div id='icon-nav-div'>
@@ -56,14 +56,14 @@ function Navigation({ isLoaded }) {
 									<span>Home</span>
 								</NavLink>
 							</li>
-							<li>
+							{/* <li>
 								{isLoaded && (
 									<div className='one' id='profile-btn'>
 										<ProfileButton user={sessionUser} />
 										<span>User</span>
 									</div>
 								)}
-							</li>
+							</li> */}
 							<li>
 								<div onClick={handleGoToPostForm}>
 									<i class="fa-solid fa-pen"></i>

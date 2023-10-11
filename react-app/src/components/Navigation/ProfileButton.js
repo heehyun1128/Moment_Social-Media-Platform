@@ -49,6 +49,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
+    
       <div onClick={openMenu}>
         <i class="fa-solid fa-user"></i>
       </div>
