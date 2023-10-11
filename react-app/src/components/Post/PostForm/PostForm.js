@@ -341,8 +341,7 @@ const PostForm = ({ post, formType }) => {
                 <div id='upload-img-preview'>
                   <img src={selImageUrls[index]} alt="" />
                   {pic && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>-</div>}
-                </div>
-                <label id='create-post-input-label'>
+                  {!selImageUrls[index] && <label id='create-post-input-label'>
                   <input
                     type="file"
                     accept="image/*"
@@ -355,7 +354,8 @@ const PostForm = ({ post, formType }) => {
 
                   />
                   <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
-                </label>
+                </label>}
+                </div>
 
                 {/* <p>{selFileNames[index]}</p> */}
 

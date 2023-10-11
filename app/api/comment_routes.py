@@ -178,4 +178,5 @@ def delete_comment(commentId):
   
   db.session.delete(comment)
   db.session.commit()
+  
   return {'message':'Comment successfully deleted!'},200

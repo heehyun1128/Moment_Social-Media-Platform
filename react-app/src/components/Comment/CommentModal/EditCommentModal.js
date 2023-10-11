@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateCommentImage, fetchUpdateComment, fetchUpdateCommentImage } from '../../../store/comment';
 import { useParams, useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal';
-
+import '../CommentForm/CommentForm.css'
 
 const EditCommentModal = ({ comment }) => {
   const dispatch = useDispatch()
@@ -17,6 +17,13 @@ const EditCommentModal = ({ comment }) => {
   const commentImageId = comment?.commentImages[0]?.id
   // console.log(commentImageId)
   const [selImage, setSelImage] = useState(null)
+
+  useEffect(() => {
+    const initialUrl = comment?.commentImages[0]?.commentImageUrl
+    // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
+    
+    initialUrl && setSelImage(initialUrl)
+  }, [comment?.commentImages])
 
   const displayFile = e => {
     console.log('called')

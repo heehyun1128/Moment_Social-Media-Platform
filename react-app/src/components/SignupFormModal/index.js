@@ -16,7 +16,21 @@ function SignupFormModal() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState({});
 	const { closeModal } = useModal();
+	const [selImage, setSelImage] = useState(null)
 
+
+	const displayFile = e => {
+		console.log('called')
+		e.stopPropagation()
+		const image = e.target.files[0]
+		const imageUrl = URL.createObjectURL(image)
+		setSelImage(imageUrl)
+	}
+
+	const handleDeselectImg = e=>{
+		e.preventDefault()
+		setSelImage(null)
+	}
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -56,7 +70,7 @@ function SignupFormModal() {
 			<h1>Sign Up</h1>
 			<form id='signup-form' onSubmit={handleSubmit} encType="multipart/form-data">
 			
-				<label>
+				<label >
 					<div>Profile Picture</div>
 					<input
 						type="file"
@@ -65,13 +79,18 @@ function SignupFormModal() {
 						onChange={(e) => {
 							console.log(e.target.files[0])
 							setProfilePic(e.target.files[0])
+							displayFile(e)
 						}}
 			
 					/>
+					<div id='image-preview-box'>
+						{selImage && <img src={selImage} id='profile-img-preview' alt='' />}
+						{selImage && <div id='deslect-image-btn' onClick={handleDeselectImg}>Deslect Image</div>}
+					</div>
 				</label>
-					{(imageLoading) && <p>Loading...</p>}
+					{/* {(imageLoading) && <p>Loading...</p>} */}
 				<label>
-					<div id="label"> <p >Email</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >Email</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
 						value={email}
@@ -84,7 +103,7 @@ function SignupFormModal() {
 				}
 				<label>
 				
-					<div id="label"> <p >Username</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >Username</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
 						value={username}
@@ -97,7 +116,7 @@ function SignupFormModal() {
 				}
 				<label>
 				
-					<div id="label"> <p >First Name</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >First Name</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
 						name="first_name"
@@ -113,7 +132,7 @@ function SignupFormModal() {
 					<p className="errors">{errors.first_name}</p>
 				}
 				<label>
-					<div id="label"> <p >Last Name</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >Last Name</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
 						name="last_name"
@@ -129,7 +148,7 @@ function SignupFormModal() {
 					<p className="errors">{errors.last_name}</p>
 				}
 				<label>
-					<div id="label"> <p >Password</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >Password</p> <p id='required-field'>*</p></div>
 					<input
 						type="password"
 						value={password}
@@ -138,7 +157,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					<div id="label"> <p >Confirm Password</p> <p id='required-field'>*</p></div>
+					<div className="label"> <p >Confirm Password</p> <p id='required-field'>*</p></div>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -149,7 +168,7 @@ function SignupFormModal() {
 				{errors   && errors.passwordNotMatched &&
 					<p className="errors">{errors.passwordNotMatched}</p>
 				}
-				<button type="submit">Sign Up</button>
+				<button id='signup-btn' type="submit">Sign Up</button>
 			</form>
 		</div>
 	);

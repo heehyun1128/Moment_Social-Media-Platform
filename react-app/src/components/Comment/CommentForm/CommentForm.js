@@ -11,7 +11,15 @@ const CommentForm = () => {
   const [content,setContent] = useState('')
   const {postId}=useParams()
   console.log('postId',postId)
+  const [selImage, setSelImage] = useState(null)
 
+  const displayFile = e => {
+    console.log('called')
+    e.stopPropagation()
+    const image = e.target.files[0]
+    const imageUrl = URL.createObjectURL(image)
+    setSelImage(imageUrl)
+  }
   const resetForm = () => {
     setImage(null)
     setContent('')
@@ -33,12 +41,15 @@ const CommentForm = () => {
     const data = await dispatch(fetchCreateCommentImage(formData))
 
     resetForm()
+    setImage(null)
 
   }
 
   return (
     <div>
       <div id='comment-form-div'>
+      <div></div>
+      <h4>Add your comment here</h4>
         <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
           <textarea
             type="text"
@@ -50,17 +61,21 @@ const CommentForm = () => {
             }}
             required
           />
-          <input
-            type="file"
-            accept="image/*"
-            // value={profilePic}
-            onChange={(e) => {
-              console.log(e.target.files[0])
-              setImage(e.target.files[0])
-            }}
+          <div id='submit-comment-div'>
+            {selImage && <img src={selImage} id='comment-img' alt='' />}
+            <input
+              type="file"
+              accept="image/*"
+              // value={profilePic}
+              onChange={(e) => {
+                console.log(e.target.files[0])
+                setImage(e.target.files[0])
+                displayFile(e)
+              }}
 
-          />
-          <button id='submit-comment-btn'>Submit</button>
+            />
+            <button id='submit-comment-btn'>Submit Comment</button>
+          </div>
         </form>
       </div>
     </div>

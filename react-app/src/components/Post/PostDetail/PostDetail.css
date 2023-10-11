@@ -1,6 +1,6 @@
 #post-img-container{
   display: flex;
-  min-width:700px;
+  min-width:650px;
   height: 500px;
   overflow: hidden;
   flex-wrap: nowrap;
@@ -74,6 +74,11 @@ background-color: #e2a3a3;
 
 #comment-section{
   background-color: #eeeeee;
+  margin-top: 20px;
+}
+#comment-section h4{
+  margin-left: 36px;
+  margin-top:20px;
 }
 
 #post-detail h4{

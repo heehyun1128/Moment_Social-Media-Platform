@@ -18,8 +18,17 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-#modal-content {
+#modal #modal-content {
   position: absolute;
   background-color:white;
   border-radius: 20px;
+  min-width:40vw;
+  min-height:50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:fit-content !important;
+  height: fit-content !important;
+  padding: 10px;
 }
