@@ -58,8 +58,8 @@ const EditCommentModal = ({ comment }) => {
     console.log(comment?.commentImages)
     // if (comment?.commentImages?.length) {
 
-      const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
       setImageLoading(true)
+      const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
     // } else {
     //   await dispatch(fetchCreateCommentImage(formData))
     //   setImageLoading(true)
@@ -68,7 +68,7 @@ const EditCommentModal = ({ comment }) => {
 
     resetForm()
     closeModal();
-    setImageLoading(false)
+    // setImageLoading(false)
   }
   return (
     <div id='edit-comment-modal'>
