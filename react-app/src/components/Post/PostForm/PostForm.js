@@ -38,18 +38,34 @@ const PostForm = ({ post, formType }) => {
     const imgInputLi=[...imgInputIdList]
     imgInputLi[index]=null
     setImgInputIdList(imgInputLi)
+
     const imageId = postPics[index].id
+    dispatch(fetchDeletePostImage(imageId))
     const isImageDeleted = [...deleteImageCalled]
-    console.log(isImageDeleted) 
     isImageDeleted[index] = true
-    console.log(isImageDeleted) 
-    console.log(isImageDeleted[index])
+    
+  
     setDeleteImageCalled(isImageDeleted)
     const newPics = [...postPics]
-    newPics[index] = null
     console.log(newPics)
-    setPostPics(newPics.filter(pic => pic !== null))
-    dispatch(fetchDeletePostImage(imageId))
+    newPics[index] = null
+    // newPics.splice(index,1,null)
+
+    const picsLeft = newPics.filter(pic => pic !== null)
+    console.log(picsLeft) 
+    const updatedPicArr = []
+    updatedPicArr.push(...picsLeft)
+    console.log(updatedPicArr)
+    if (updatedPicArr.length<5){
+      const numSpotsToFill = 5 - picsLeft.length
+      for(let i=0;i<numSpotsToFill;i++){
+        updatedPicArr.push(null)
+      }
+    } 
+  console.log(updatedPicArr)
+    setPostPics(updatedPicArr)
+    // setPostPics(newPics.filter(pic => pic !== null))
+    // dispatch(fetchDeletePostImage(imageId))
     alert('Image successfully deleted!')
   }
   
@@ -62,7 +78,7 @@ const PostForm = ({ post, formType }) => {
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
 
 
-    imgUpdateBtnClicked[index] = false
+    imgUpdateBtnClicked[index] = true
     console.log(imgUpdateBtnClicked)
     setIsCancelImageUpdate(imgUpdateBtnClicked)
 
@@ -339,7 +355,9 @@ const PostForm = ({ post, formType }) => {
                       
                   </div>}
                   {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE {isCancelImageUpdate[index]}</div>}
+                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
+                  {/* {isCancelImageUpdate[index]} */}
+                  </div>}
                   {/* <p>{selFileNames[index]}</p> */}
                   {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
@@ -361,7 +379,8 @@ const PostForm = ({ post, formType }) => {
               return <div key={index} id="post-image-div">
                 <div id='upload-img-preview'>
                   <img src={selImageUrls[index]} alt="" />
-                  {pic && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
+                  {selImageUrls[index] && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
+                  
                   {!selImageUrls[index] && <label id='create-post-input-label'>
                   <input
                     type="file"
@@ -391,7 +410,7 @@ const PostForm = ({ post, formType }) => {
           <h4>Title</h4>
           <input
             type="text"
-            placeholder="Please give you post a title..."
+            placeholder="Please give your post a title..."
             value={title}
             onChange={(e) => {
               setTitle(e.target.value)

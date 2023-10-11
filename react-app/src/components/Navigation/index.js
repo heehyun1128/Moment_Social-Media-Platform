@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
 
 	const handleViewAllPosts = () => {
 		if (!sessionUser) {
-			alert('Please Sign Up or Log In to view your comments.')
+			alert('Please Sign Up or Log In to view your posts.')
 		}else{
 
 		history.push(`/profile/${sessionUser.id}`)
