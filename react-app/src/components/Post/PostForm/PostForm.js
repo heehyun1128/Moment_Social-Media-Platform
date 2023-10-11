@@ -354,8 +354,8 @@ const PostForm = ({ post, formType }) => {
                     </label>}
                       
                   </div>}
-                  {img && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                  {img && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
+                  {selImageUrls[index] && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
+                  {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div'  onClick={() => handleUndoImageUpdate(index)}>DESLECT IMAGE 
                   {/* {isCancelImageUpdate[index]} */}
                   </div>}
                   {/* <p>{selFileNames[index]}</p> */}
