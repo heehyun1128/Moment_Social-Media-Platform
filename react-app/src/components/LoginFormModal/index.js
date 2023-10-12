@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -11,13 +12,34 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  useEffect(() => {
+    const handleEnterKeyDown = e => {
+      if (e.code === "Enter" || e.code === "NumpadEnter") {
+        if (!email || !password) {
+          alert('Email and password are required for login!')
+        }else{
+
+          e.preventDefault();
+          handleSubmit(e)
+        }
+      }
+    };
+    document.addEventListener("keydown", handleEnterKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleEnterKeyDown);
+    };
+  }, [email,password]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(email)
+    console.log(password)
+    
     const data = await dispatch(login(email, password));
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
 
