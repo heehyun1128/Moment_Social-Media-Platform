@@ -23,6 +23,7 @@ const PostForm = ({ post, formType }) => {
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
   const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
+  const [deselectImageCalled, setdeSelectImageCalled] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
   console.log(isCancelImageUpdate)
   // GET INITIAL IMAGE URLS
@@ -63,11 +64,12 @@ const PostForm = ({ post, formType }) => {
       }
     }
     console.log(updatedPicArr)
-    setPostPics(updatedPicArr)
+    setPostPics(prevPostPics=>updatedPicArr)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
     setSelImageUrls(imageUrls)
-    console.log('imageUrls', imageUrls)
+    console.log('after removing existing images when update','postPics',postPics)
+    console.log('after removing existing images when update','imageUrls', imageUrls)
 
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
@@ -80,9 +82,12 @@ const PostForm = ({ post, formType }) => {
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
     console.log([...isCancelImageUpdate])
+
+    const deselectImage = [...deselectImageCalled]
+    deselectImage[index]=true
+    setDeleteImageCalled(deselectImage)
+
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
-
-
     imgUpdateBtnClicked[index] = true
     console.log(imgUpdateBtnClicked)
     setIsCancelImageUpdate(imgUpdateBtnClicked)
@@ -91,15 +96,15 @@ const PostForm = ({ post, formType }) => {
     setSelFileNames(fileNames)
 
     // postImageUrl
-    imageUrls[index] = post?.postImages[index]?.postImageUrl
+    imageUrls[index] = ''
     setSelImageUrls(imageUrls)
-    console.log('imageUrls', imageUrls)
+    console.log('after deselect on update - imageUrls', imageUrls)
     const newPics = [...postPics]
 
     newPics[index] = post?.postImages[index]
     console.log('new', newPics)
 
-    setPostPics(newPics.filter(pic => pic !== null))
+    setPostPics(newPics)
   }
   const handleDeselectImg = (index) => {
     console.log('first')
@@ -115,7 +120,9 @@ const PostForm = ({ post, formType }) => {
     const newPics = [...postPics]
     newPics[index] = null
 
-    setPostPics(newPics.filter(pic => pic !== null))
+    // setPostPics(newPics.filter(pic => pic !== null))
+    setPostPics(newPics)
+    console.log('after deselct',postPics)
   }
 
 
@@ -338,7 +345,7 @@ const PostForm = ({ post, formType }) => {
 
 
                   {<div id='upload-img-preview'>
-                    <img id='update-img-display' src={selImageUrls[index]} alt="" />
+                    { <img id='update-img-display' src={selImageUrls[index]} alt="" />}
                     {<label id='edit-post-input-label'>
                       <input
                         type="file"
