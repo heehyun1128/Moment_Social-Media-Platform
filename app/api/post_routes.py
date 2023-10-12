@@ -71,7 +71,7 @@ def get_all_posts():
         data['previewImg'] = img.post_image_url
         break
     data['creator']=creator.to_dict()
-    print('@@@@@@@@@@@@@',comments)
+  
     data['comments'] = []
     for comment in comments:
       if comment:
@@ -79,7 +79,7 @@ def get_all_posts():
         comment_data['commentCreator'] = comment.user.to_dict()
         data['comments'].append(comment_data)
        
-    print('!!!!!!!!!!!!!!!!',data['comments'])
+ 
     post_dict[str(post.id)] = data
   return {"Posts": post_dict}
 
@@ -118,6 +118,7 @@ def get_all_postcomments(postId):
       comments_data.append(comment_data)
 
   return {'Comments':comments_data}
+  # return {'Comments':comments_data}
 
 # CREATE A POST
 @post_routes.route('/new',methods=['POST'])

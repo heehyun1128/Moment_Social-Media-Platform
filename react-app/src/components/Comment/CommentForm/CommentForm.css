@@ -12,6 +12,9 @@
 #comment-field {
   min-width: 350px;
   min-height: 80px;
+  outline: none;
+  border:none;
+  box-shadow: 0 0 4px gray;
 }
 #edit-comment-form textarea,#create-comment-form textarea {
   transform-origin:  center top;
@@ -69,7 +72,9 @@ align-items: flex-start;
 }
 
 #edit-comment-modal div{
-  width: 80%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 #edit-comment-modal div form{
   width: 90%;
@@ -81,10 +86,12 @@ align-items: flex-start;
 
 
 #edit-comment-img-container{
-  min-width: 450px;
+  margin-top: 20px;
+  width: 100%;
+  /* min-width: 450px; */
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: flex-start !important;
 }
 #edit-comment-input-label{
   min-width: 450px;
@@ -92,9 +99,7 @@ align-items: flex-start;
   align-items: center;
   justify-content: space-between;
 }
-#edit-comment-img-container{
-  margin-top: 20px;
-}
+
 
 #edit-comment-form i:hover{
   cursor: pointer;
@@ -122,7 +127,9 @@ align-items: flex-start;
   width: 100px;
   height: 100px;
   border-radius:15px;
-  border: 0.5px solid gray;
+  outline: none;
+  border: none;
+  box-shadow: 0 0 4px gray;
 }
 
 #edit-comment-btn{
@@ -135,11 +142,14 @@ height: 30px;
   align-items: center;
   cursor: pointer;
   margin-top: 20px;
-  width:60px;
+  width:30vw;
+  background-color: #fff;
+  color: #ddaaaa;;
 }
 
 #edit-comment-btn:hover {
   background-color: #ddaaaa;
+  color:gray;
 }
 
 textarea{
@@ -158,4 +168,8 @@ padding: 15px;
 
 #submit-comment-div>*{
   margin-right: 15px;
+}
+
+#submit-comment-btn{
+  height:30px;
 }

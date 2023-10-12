@@ -15,11 +15,19 @@ const PostCard = ({post}) => {
   return (
     <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
-        {post&&<img src={post && post?.previewImg} alt="" />}
+        <div id='img-box'>
+          {post && <img src={post && post?.previewImg} alt="" />}
+        <div id="mask"></div>
+        <h3 id='view-more'>View More</h3>
+          
+        </div>
+        <div id="text-box">
+          {post && <h4>{post?.title}</h4>}
+          {post && <p> {post?.creator?.username}</p>}
+          {post && <p>{createdDate}</p>}
+        </div>
       </div>
-      {post && <h4>{post?.title}</h4>}
-      {post && <p>Created by: {post?.creator?.username}</p>}
-      {post && <p>Created at: {createdDate}</p>}
+      
     </div>
   )
 }

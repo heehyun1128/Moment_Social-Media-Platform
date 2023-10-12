@@ -10,11 +10,12 @@
 #post-detail-div{
   width:fit-content;
   display: flex;
-  /* justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   height:fit-content;
   margin:50px 30px 20px;
-  
+  width: 95vw;
 }
 
 .post-image{
@@ -47,11 +48,17 @@ background-color: #e2a3a3;
 }
 #post-detail-user-pic-div img{
   width:200%;
+  
 }
 
 #post-detail-user{
   display: flex;
   align-items: center;
+  margin-top:20px;
+}
+
+#post-detail-user>*{
+  margin-right: 20px;
 }
 
 #post-detail-btn-div{

@@ -18,12 +18,15 @@ const EditCommentModal = ({ comment }) => {
   // console.log(commentImageId)
   const [selImage, setSelImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
+  const [initialUrl,setInitialUrl] = useState(null)
 
   useEffect(() => {
-    const initialUrl = comment?.commentImages[0]?.commentImageUrl
+    const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
+    console.log(initialImgUrl)
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     
-    initialUrl && setSelImage(initialUrl)
+    initialImgUrl && setSelImage(initialImgUrl)
+    initialImgUrl && setInitialUrl(initialImgUrl)
   }, [comment?.commentImages])
 
   const displayFile = e => {
@@ -53,13 +56,18 @@ const EditCommentModal = ({ comment }) => {
 
 
     const formData = new FormData()
+    formData.append('comment_id', textData.id)
     if(image){
 
       formData.append('comment_image_url', image)
       setImageLoading(true)
-      const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+      if (initialUrl){
+
+        const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+      }else{
+        await dispatch(fetchCreateCommentImage(formData))
+      }
     }
-    formData.append('comment_id', textData.id)
     // console.log(comment?.commentImages)
     // if (comment?.commentImages?.length) {
 

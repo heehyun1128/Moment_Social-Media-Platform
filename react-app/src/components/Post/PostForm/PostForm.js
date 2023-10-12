@@ -216,8 +216,8 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-          const imageData = await dispatch(fetchCreatePostImage(formData));
           setImageLoading(true)
+          const imageData = await dispatch(fetchCreatePostImage(formData));
         }
 
       }

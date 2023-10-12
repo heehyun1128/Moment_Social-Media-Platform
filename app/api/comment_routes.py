@@ -33,7 +33,8 @@ def get_comment_detail(commentId):
     'updatedAt':comment.updated_at,
     'commentImages':[img.to_dict() for img in comment_images],
     'username':user.username,
-    'profileImage':user.profile_image_url
+    'profileImage':user.profile_image_url,
+    'commentCreator':User.query.get(comment.user_id).to_dict(),
   }
   print('000000000',data)
 

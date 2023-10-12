@@ -17,9 +17,9 @@ const PostDetail = () => {
   const post = useSelector(state => state.posts?.singlePost)
   const postCreator = useSelector(state => state.users?.singleUser)
   // comments
-  const commentObj = useSelector((state) => (state.comments?.comments ? state.comments?.comments : {}))
+  const commentObj = useSelector((state) => (state.comments ? state.comments?.comments : {}))
   console.log('commentObj', commentObj)
-  const commentArr = Object.values(commentObj)
+  const commentArr = commentObj&&Object.values(commentObj)
   console.log('commentArr', commentArr)
   console.log('post?.id', post?.id)
   // get post comments
@@ -33,7 +33,7 @@ const PostDetail = () => {
 
   const images = post?.postImages
 
-  const numOfComments = commentArr.length
+  const numOfComments = commentArr?.length
   const handleMouseOver = (index) => {
 
 
@@ -114,15 +114,16 @@ const PostDetail = () => {
             </div>
             <p>{post?.creator?.username}</p>
           </div>
+          
+          <h4>{post?.title}</h4>
+          <div id="post-content">
+            {post?.content}
+          </div>
           <div id='post-detail-btn-div'>
             {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>}
             {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleDeletePost}><i class="fa-solid fa-trash-can"></i>DELETE POST</button>}
 
 
-          </div>
-          <h4>{post?.title}</h4>
-          <div id="post-content">
-            {post?.content}
           </div>
         </div>
       </div>

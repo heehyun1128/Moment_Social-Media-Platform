@@ -30,8 +30,8 @@ const CommentCard = ({ comment }) => {
 
       <div id="comment-creator-div">
         <div id='comment-creator-pic-div'>
-          {comment?.profileImage ?
-            <img src={comment?.profileImage} alt="" />
+          {comment?.commentCreator?.profileImage ?
+            <img src={comment?.commentCreator?.profileImage} alt="" />
             : <i class="fa-solid fa-user fa-lg"></i>
           }
           {/* {comment.commentCreator?.profileImage ?
@@ -40,7 +40,7 @@ const CommentCard = ({ comment }) => {
           } */}
           
         </div>
-        {comment?.username && <p id="comment-creator-username">{comment?.username}</p>}
+        {comment?.commentCreator?.username && <p id="comment-creator-username">{comment?.commentCreator?.username}</p>}
 
         {/* {comment && comment.commentCreator && comment.commentCreator.username && <p id="comment-creator-username">{comment.commentCreator.username}</p>} */}
 

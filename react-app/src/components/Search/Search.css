@@ -1,0 +1,12 @@
+#search-results-div{
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  box-sizing: border-box;
+    width: 85vw;
+    margin: 20px auto;
+    columns: 3;
+    column-gap: 5px;
+   
+}
