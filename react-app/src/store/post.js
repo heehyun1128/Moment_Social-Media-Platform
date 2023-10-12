@@ -7,6 +7,7 @@ export const EDIT_POST_IMAGE = 'posts/EDIT_POST_IMAGE'
 export const LOAD_POST_IMAGES = 'posts/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'posts/GET_POST_IMAGE'
 export const REMOVE_POST = 'posts/REMOVE_POST'
+export const SEARCH_POSTS = 'posts/SEARCH_POSTS'
 
 
 
@@ -60,7 +61,12 @@ export const getPostImage = postImage => ({
   postImage
 })
 
-
+export const searchPosts = (posts) => {
+  return {
+    type: SEARCH_POSTS,
+    posts
+  }
+};
 
 /** Thunk Action Creators: */
 // fetch all posts
@@ -208,21 +214,18 @@ export const fetchDeletePost = (postId)=>async(dispatch)=>{
     return errors
   }
 }
-// DELETE A POST IMAGE
-// export const fetchDeletePostImage = (postId,imageId)=>async(dispatch)=>{
-//   const res = await fetch(`/api/posts/${postId}/images/${imageId}`,{
-//     method:'DELETE'
-//   })
-//   console.log(res)
-//   if (res.ok) {
 
-//     dispatch(removePostImage(imageId))
-
-//   } else {
-//     const errors = await res.json()
-//     return errors
-//   }
-// }
+export const fetchSearchedPosts = (searchTerm) => async (dispatch) => {
+  const res = await fetch(`/api/search/?q=${searchTerm}`)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(searchPosts(data))
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
 
 
 
@@ -269,15 +272,15 @@ const postReducer = (state = initialState, action) => {
         singlePost: null
       }
       return newState
-    // case REMOVE_POST_IMAGE:
-    //   newState = {
-    //     ...state,
-    //     singlePost: {
-    //       ...state.singlePost,
-    //       postImage:null
-    //     }
-    //   }
-    //   return newState
+    case SEARCH_POSTS:
+      newState = {
+        ...state,
+        searchPosts: {
+          ...action.posts
+        }
+      }
+      console.log(newState)
+      return newState
     default:
       return state
   } 

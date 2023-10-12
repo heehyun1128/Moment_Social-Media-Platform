@@ -17,9 +17,9 @@ const PostDetail = () => {
   const post = useSelector(state => state.posts?.singlePost)
   const postCreator = useSelector(state => state.users?.singleUser)
   // comments
-  const commentObj = useSelector((state) => (state.comments?.comments ? state.comments?.comments : {}))
+  const commentObj = useSelector((state) => (state.comments ? state.comments?.comments : {}))
   console.log('commentObj', commentObj)
-  const commentArr = Object.values(commentObj)
+  const commentArr = commentObj&&Object.values(commentObj)
   console.log('commentArr', commentArr)
   console.log('post?.id', post?.id)
   // get post comments
@@ -30,10 +30,12 @@ const PostDetail = () => {
 
   const [imageId, setImageId] = useState(null)
   const [isActive, setIsActive] = useState(['active', '', '', '', ''])
+  const [isHidden, setIsHidden] = useState(['hidden', 'hidden', 'hidden', 'hidden', 'hidden'])
+  const [isImageClicked, setIsImageClicked] = useState(['no', 'no', 'no', 'no', 'no'])
 
   const images = post?.postImages
 
-  const numOfComments = commentArr.length
+  const numOfComments = commentArr?.length
   const handleMouseOver = (index) => {
 
 
@@ -45,10 +47,22 @@ const PostDetail = () => {
     console.log(isActive)
     setIsActive(activeDivs)
   }
-  // const handleMouseLeave =()=>{
-  //   setImageId(null)
-  // }
+  const handleImageClick=(index)=>{
+   
+    const hiddenDivs = [...isHidden]
+   
+      hiddenDivs[index] = ''
+      setIsHidden(hiddenDivs)
+      
+ 
+    
+  }
 
+  const handleEnlargedViewClick = (index) =>{
+    const hiddenDivs = [...isHidden]
+    hiddenDivs[index] = 'hidden'
+    setIsHidden(hiddenDivs)
+  }
 
   const handleDeletePost = async (e) => {
     e.preventDefault();
@@ -94,15 +108,27 @@ const PostDetail = () => {
       <div id="post-detail-div">
         <div id="post-img-container">
           {images?.map((image, index) => (
-            <div
-              className='post-image'
-              // id={image?.preview === true ? 'active' : image?.id === imageId ? 'active' : ''}
-              id={isActive[index]}
-              key={index}
-              onMouseEnter={() => handleMouseOver(index)}
-              // onMouseEnter={() => handleMouseOver(image?.id)}
-              // onMouseLeave={handleMouseLeave(image?.id)}
-              style={{ backgroundImage: `url(${image?.postImageUrl})` }} alt="" />
+           <>
+              <div
+                className='post-image'
+                // id={image?.preview === true ? 'active' : image?.id === imageId ? 'active' : ''}
+                id={isActive[index]}
+                key={index}
+                onClick={()=>handleImageClick(index)}
+                onMouseEnter={() => handleMouseOver(index)}
+                // onMouseEnter={() => handleMouseOver(image?.id)}
+                // onMouseLeave={handleMouseLeave(image?.id)}
+                style={{ backgroundImage: `url(${image?.postImageUrl})` }} alt="" >
+                  {isActive[index] && <h4 id='click-image-detail'>Click Image to View Detail</h4>}
+                </div>
+              <div 
+              className="enlarged-view" 
+              id={isHidden[index]}
+              onClick={()=>handleEnlargedViewClick(index)}
+              >
+                <img  src={image?.postImageUrl} alt="" />
+              </div>
+           </>
           ))}
         </div>
         <div id="post-detail">
@@ -114,15 +140,16 @@ const PostDetail = () => {
             </div>
             <p>{post?.creator?.username}</p>
           </div>
+          
+          <h4>{post?.title}</h4>
+          <div id="post-content">
+            {post?.content}
+          </div>
           <div id='post-detail-btn-div'>
             {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>}
             {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleDeletePost}><i class="fa-solid fa-trash-can"></i>DELETE POST</button>}
 
 
-          </div>
-          <h4>{post?.title}</h4>
-          <div id="post-content">
-            {post?.content}
           </div>
         </div>
       </div>

@@ -5,16 +5,19 @@
   overflow: hidden;
   flex-wrap: nowrap;
   margin-right: 20px;
+  width: 80%;
 }
 
 #post-detail-div{
   width:fit-content;
   display: flex;
-  /* justify-content: center; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   height:fit-content;
   margin:50px 30px 20px;
-  
+  width: 100vw;
 }
 
 .post-image{
@@ -47,11 +50,17 @@ background-color: #e2a3a3;
 }
 #post-detail-user-pic-div img{
   width:200%;
+  
 }
 
 #post-detail-user{
   display: flex;
   align-items: center;
+  margin-top:20px;
+}
+
+#post-detail-user>*{
+  margin-right: 20px;
 }
 
 #post-detail-btn-div{
@@ -90,4 +99,30 @@ background-color: #e2a3a3;
   padding:10px;
   font-size: 14px;
   color: rgb(71, 71, 71);
+  width:500px;
+overflow-wrap: break-word;
+  height:fit-content;
+}
+
+#hidden{
+  display: none;
+}
+
+.enlarged-view{
+  position: fixed;
+  top:10vh;
+  left:0;
+  height: 100vh;
+  width:100vw;
+  background-color: rgba(43, 43, 43,.8);
+}
+
+.enlarged-view img{
+height: 80%;
+
+}
+
+#click-image-detail{
+  color:rgb(240, 240, 240);
+  background-color: rgba(133, 133, 133,.8);
 }

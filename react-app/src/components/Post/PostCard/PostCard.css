@@ -1,4 +1,4 @@
-#all-post-div:nth-child(odd){
+/* #all-post-div:nth-child(odd){
   background-color: rgb(237, 237, 237);
   max-height: 600px;
   height:fit-content;
@@ -9,10 +9,15 @@
   max-height: 700px;
   height:fit-content;
 
-}
+} */
 
-#post-card-img-div{
-  max-width: 100%;
+#post-card-img-div {
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border-radius: 5px;
+  /* overflow: hidden; */
+  box-shadow: 0 2px 20px gray;
   /* width:30vw;
   overflow: hidden;
   display: flex;
@@ -21,26 +26,106 @@
   border-radius: 10px;
   box-shadow: 0 0 10px gray; */
 }
+#view-more{
+position: absolute;
+  left: 37%;
+  top: 50%;
+  display: none;
+  transition: 1s fade-in;
+  transform: scale(0);
+  color:white;
+  
 
-#post-card-div h4{
-  font-size: 18px;
 }
-#post-card-div p{
+
+#mask {
+  background-color: rgba(21, 21, 21, 0.7);
+  position: absolute;
+  width: 0;
+  height: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  transition: 0.2s ease;
+  transform: scale(0);
+  transform-origin: center left;
+  display: none;
+  opacity: 0;
+  animation: enlargeWidth 0.2s ease-in;
+}
+@keyframes enlargeWidth {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+#post-card-img-div:hover #mask{
+  width: 100%;
+  display: block;
+  transform: scale(1);
+  opacity: 1;
+}
+#post-card-img-div:hover #view-more{
+  
+  display: block;
+  transform: scale(1);
+  opacity: 1;
+}
+
+
+#post-card-div p {
   font-size: 14px;
-  color:gray;
+  color: gray;
 }
 
-#post-card-img-div img{
-/* height:500px; */
-max-width:100%;
+#post-card-img-div img {
+  /* height:500px; */
+  width: 100%;
 }
 
-#post-card-div{
+#post-card-div {
   /* margin:0 10px; */
   width: 100%;
-    margin-bottom: 10px;
+  margin-bottom: 10px;
   height: fit-content;
   break-inside: avoid;
-    page-break-inside: avoid;
+  page-break-inside: avoid;
+  position:relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
+/* #img-mask-div{
+  position: relative;
+  width: 100%;
+
+}
+#img-mask-div img{
+  width:100%;
+} */
+
+#post-card-div:hover {
+  cursor: pointer;
+}
+
+#post-card-div h4 {
+  font-size: 14px;
+}
+
+#img-box{
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* #text-box{
+  position:relative;
+  margin-top: -50px;
+  padding: 10px;
+  text-align: center;
+} */

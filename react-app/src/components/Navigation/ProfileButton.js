@@ -57,8 +57,10 @@ function ProfileButton({ user }) {
         {user ? (
           <>
             <div id='profile-main'>
-              <div id='profile-img-li'><img id='profile-img' src={user.profileImage} alt="" /></div>
-              <div>Welcome, {user.username}</div>
+              <div id='profile-img-li'>
+                {user?.profileImage ? <img id='profile-img' src={user?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-xl"></i> }
+              </div>
+              <div>Welcome, {user?.username}</div>
             </div>
             {/* <li>{user.email}</li> */}
 

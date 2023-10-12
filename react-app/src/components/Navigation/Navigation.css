@@ -1,4 +1,5 @@
 .profile-dropdown {
+  z-index: 9999 ;
   position: fixed;
   right: 35%;
   top: 40%;
@@ -34,7 +35,7 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 #title-div {
@@ -69,6 +70,7 @@
   border-radius: 50%;
   overflow: hidden;
   margin:5px 15px 20px;
+  background-color: #e5b7b7;
 }
 
 img#profile-img {
@@ -98,6 +100,7 @@ img#profile-img {
   position: absolute;
   right: -20px;
   top: 40px;
+  z-index: 999 !important;
 }
 
 #icon-nav {
@@ -207,7 +210,8 @@ img#profile-img {
   height: 40px;
   border-radius: 50%;
   background-color: white;
-  border: none;
+  border: none !important;
+  box-shadow: none !important;
   display: flex;
   justify-content: center;
   align-items: center;

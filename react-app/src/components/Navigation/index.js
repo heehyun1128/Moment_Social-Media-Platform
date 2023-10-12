@@ -5,12 +5,15 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import SearchBar from './SearchBar';
 import { useHistory } from 'react-router-dom';
+import { useSearchContext } from '../../context/Search';
+
+
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
 
-
+	const { searchContent, setSearchContent } = useSearchContext()
 
 	const handleViewAllPosts = () => {
 		if (!sessionUser) {
@@ -32,7 +35,9 @@ function Navigation({ isLoaded }) {
 	return (
 		<div id='navigation-section'>
 			<div id='search-bar'>
-				<SearchBar />
+				<SearchBar 
+				searchContent={searchContent }
+				setSearchContent={setSearchContent}/>
 			</div>
 			<div id='title-div'>
 				<NavLink  exact to="/">Moment</NavLink>

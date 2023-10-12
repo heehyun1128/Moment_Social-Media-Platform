@@ -18,12 +18,17 @@ const EditCommentModal = ({ comment }) => {
   // console.log(commentImageId)
   const [selImage, setSelImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
+  const [initialUrl,setInitialUrl] = useState(null)
+  const [errors, setErrors] = useState({});
+
 
   useEffect(() => {
-    const initialUrl = comment?.commentImages[0]?.commentImageUrl
+    const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
+    console.log(initialImgUrl)
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     
-    initialUrl && setSelImage(initialUrl)
+    initialImgUrl && setSelImage(initialImgUrl)
+    initialImgUrl && setInitialUrl(initialImgUrl)
   }, [comment?.commentImages])
 
   const displayFile = e => {
@@ -51,15 +56,27 @@ const EditCommentModal = ({ comment }) => {
     // console.log(comment)
     const textData = await dispatch(fetchUpdateComment(comment));
 
+    if (textData && textData.errors) {
+      setErrors(textData.errors)
+      return
+    }
 
     const formData = new FormData()
-    formData.append('comment_image_url', image)
-    formData.append('comment_id', textData.id)
-    console.log(comment?.commentImages)
+    formData.append('comment_id', textData?.id)
+    if (textData?.id && image){
+
+      formData.append('comment_image_url', image)
+      setImageLoading(true)
+      if (initialUrl){
+
+        const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+      }else{
+        await dispatch(fetchCreateCommentImage(formData))
+      }
+    }
+    // console.log(comment?.commentImages)
     // if (comment?.commentImages?.length) {
 
-      setImageLoading(true)
-      const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
     // } else {
     //   await dispatch(fetchCreateCommentImage(formData))
     //   setImageLoading(true)
@@ -87,6 +104,9 @@ const EditCommentModal = ({ comment }) => {
                 }}
                 required
               />
+              {errors && errors.content &&
+                <p className="errors">{errors.content}</p>
+              }
               <span className='icon-span'><i class="fa-solid fa-comment fa-lg"></i><p className='icon-text'>Add Comment</p></span>
             </label>
           </div>
@@ -105,7 +125,7 @@ const EditCommentModal = ({ comment }) => {
                 }}
 
               />
-              <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+              <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Update Image</p></span>
             </label>
           </div>
 

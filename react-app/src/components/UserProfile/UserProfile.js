@@ -33,7 +33,10 @@ const UserProfile = () => {
     <div id='profile-page-main-div'>
     <div id='profile-info-div'>
         <div id='profile-info-img-div'>
-          <img src={sessionUser.profileImage} alt="" />
+          {sessionUser?.profileImage? <img src={sessionUser.profileImage} alt="" /> :
+            <i class="fa-solid fa-user fa-lg"></i>
+          
+          }
         </div>
         <h4>{sessionUser && sessionUser.username}</h4>
     </div>
@@ -44,6 +47,7 @@ const UserProfile = () => {
           return <PostCard post={post} />
         })}
       </div>
+      {!userPostArr.length && <p>No Posts here</p>}
     </div>
   )
 }

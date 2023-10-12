@@ -71,19 +71,18 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         #aws
+        url=None
         image = form.data["profile_image_url"] #<FileStorage: 'usethisurl.png' ('image/png')>
-        
-        image.filename = get_unique_filename(image.filename)
-        print('xxxxxxxxxxxxxxxxxxxxx',image)
-        upload = upload_file_to_s3(image)
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            print('xxxxxxxxxxxxxxxxxxxxx',image)
+            upload = upload_file_to_s3(image)
 
-        if "url" not in upload:
-            print({'errors': "profile image is not a valid url"})
-
-
-
-        url = upload["url"]
-
+            if "url" not in upload:
+                # print({'errors': "profile image is not a valid url"})
+                url=None
+            else:
+                url = upload["url"]
 
         user = User(
             profile_image_url= url,

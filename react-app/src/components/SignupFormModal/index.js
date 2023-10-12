@@ -6,7 +6,7 @@ import "./SignupForm.css";
 
 function SignupFormModal() {
 	const dispatch = useDispatch();
-	const [profilePic,setProfilePic] = useState(null);
+	const [profilePic, setProfilePic] = useState(null);
 	const [imageLoading, setImageLoading] = useState(false)
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
@@ -27,7 +27,7 @@ function SignupFormModal() {
 		setSelImage(imageUrl)
 	}
 
-	const handleDeselectImg = e=>{
+	const handleDeselectImg = e => {
 		e.preventDefault()
 		setSelImage(null)
 	}
@@ -38,8 +38,10 @@ function SignupFormModal() {
 
 		setImageLoading(true)
 		if (password === confirmPassword) {
+			if (profilePic) {
 
-			formData.append('profile_image_url',profilePic)
+				formData.append('profile_image_url', profilePic)
+			}
 			formData.append('username', username)
 			formData.append('first_name', firstname)
 			formData.append('last_name', lastname)
@@ -55,10 +57,10 @@ function SignupFormModal() {
 				setImageLoading(false)
 				closeModal();
 			}
-			
+
 		} else {
 			setErrors({
-				passwordNotMatched:"Confirm Password field must be the same as the Password field"
+				passwordNotMatched: "Confirm Password field must be the same as the Password field"
 			});
 			console.log(errors)
 		}
@@ -69,7 +71,7 @@ function SignupFormModal() {
 		<div id='signup-modal-div'>
 			<h1>Sign Up</h1>
 			<form id='signup-form' onSubmit={handleSubmit} encType="multipart/form-data">
-			
+
 				<label >
 					<div>Profile Picture</div>
 					<input
@@ -81,14 +83,14 @@ function SignupFormModal() {
 							setProfilePic(e.target.files[0])
 							displayFile(e)
 						}}
-			
+
 					/>
 					<div id='image-preview-box'>
 						{selImage && <img src={selImage} id='profile-img-preview' alt='' />}
 						{selImage && <div id='deslect-image-btn' onClick={handleDeselectImg}>Deslect Image</div>}
 					</div>
 				</label>
-					{/* {(imageLoading) && <p>Loading...</p>} */}
+				{/* {(imageLoading) && <p>Loading...</p>} */}
 				<label>
 					<div className="label"> <p >Email</p> <p id='required-field'>*</p></div>
 					<input
@@ -102,7 +104,7 @@ function SignupFormModal() {
 					<p className="errors">{errors.email}</p>
 				}
 				<label>
-				
+
 					<div className="label"> <p >Username</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
@@ -111,11 +113,11 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				{errors   && errors.username &&
+				{errors && errors.username &&
 					<p className="errors">{errors.username}</p>
 				}
 				<label>
-				
+
 					<div className="label"> <p >First Name</p> <p id='required-field'>*</p></div>
 					<input
 						type="text"
@@ -128,7 +130,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				{errors   && errors.first_name &&
+				{errors && errors.first_name &&
 					<p className="errors">{errors.first_name}</p>
 				}
 				<label>
@@ -139,12 +141,12 @@ function SignupFormModal() {
 						value={lastname}
 						onChange={(e) => {
 							setLastname(e.target.value)
-						
+
 						}}
 						required
 					/>
 				</label>
-				{errors  && errors.last_name &&
+				{errors && errors.last_name &&
 					<p className="errors">{errors.last_name}</p>
 				}
 				<label>
@@ -165,7 +167,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				{errors   && errors.passwordNotMatched &&
+				{errors && errors.passwordNotMatched &&
 					<p className="errors">{errors.passwordNotMatched}</p>
 				}
 				<button id='signup-btn' type="submit">Sign Up</button>

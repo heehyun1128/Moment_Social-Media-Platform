@@ -7,11 +7,11 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation"
 import Home from "./components/Home/Home";
 import PostDetail from "./components/Post/PostDetail/PostDetail";
-
 import CreatePostForm from "./components/Post/PostForm/CreatePostForm";
 import EditPostForm from "./components/Post/PostForm/EditPostForm";
 import UserProfile from "./components/UserProfile/UserProfile";
 import PageNotFound from './components/PageNotFound/PageNotFound'
+import Search from "./components/Search/Search";
 
 
 function App() {
@@ -43,6 +43,9 @@ function App() {
           </Route>
           <Route exact path="/profile/:userId">
             <UserProfile />
+          </Route>
+          <Route path="/search" >
+            <Search />
           </Route>
           <Route exact path="/">
             <Home />
