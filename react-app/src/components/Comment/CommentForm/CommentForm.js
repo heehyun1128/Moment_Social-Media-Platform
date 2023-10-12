@@ -53,9 +53,9 @@ const CommentForm = () => {
 
       formData.append('comment_image_url',image)
       formData.append('comment_id', textData.id)
+      setImageLoading(true)
       const data = await dispatch(fetchCreateCommentImage(formData))
       setIsSubmitted(true)
-      setImageLoading(true)
     }
     
 
@@ -94,7 +94,7 @@ const CommentForm = () => {
               }}
 
             />
-            {imageLoading ? <p>Submitting...</p>:<button id='submit-comment-btn'>Submit Comment</button>}
+            {imageLoading ? (<p>Submitting...</p>):(<button id='submit-comment-btn'>Submit Comment</button>)}
           </div>
         </form>
       </div>

@@ -52,7 +52,7 @@ const CommentCard = ({ comment }) => {
           <img src={image.commentImageUrl} alt="" />
         )}</div> */}
         <div id='comment-img-div'>{comment?.commentImages && comment?.commentImages?.map(image =>
-          <img src={image.commentImageUrl} alt="" />
+          <img src={image?.commentImageUrl} alt="" />
         )}</div>
       </div>
       <div>

@@ -53,13 +53,16 @@ const EditCommentModal = ({ comment }) => {
 
 
     const formData = new FormData()
-    formData.append('comment_image_url', image)
-    formData.append('comment_id', textData.id)
-    console.log(comment?.commentImages)
-    // if (comment?.commentImages?.length) {
+    if(image){
 
+      formData.append('comment_image_url', image)
       setImageLoading(true)
       const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+    }
+    formData.append('comment_id', textData.id)
+    // console.log(comment?.commentImages)
+    // if (comment?.commentImages?.length) {
+
     // } else {
     //   await dispatch(fetchCreateCommentImage(formData))
     //   setImageLoading(true)
@@ -105,7 +108,7 @@ const EditCommentModal = ({ comment }) => {
                 }}
 
               />
-              <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+              <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Update Image</p></span>
             </label>
           </div>
 
