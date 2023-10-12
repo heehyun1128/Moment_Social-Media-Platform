@@ -67,7 +67,7 @@ const PostForm = ({ post, formType }) => {
     setPostPics(prevPostPics=>updatedPicArr)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
-    setSelImageUrls(imageUrls)
+    setSelImageUrls(prevImageUrls=>imageUrls)
     console.log('after removing existing images when update','postPics',postPics)
     console.log('after removing existing images when update','imageUrls', imageUrls)
 
@@ -365,9 +365,9 @@ const PostForm = ({ post, formType }) => {
 
                   </div>}
                   {selImageUrls[index] && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
-                  {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div' onClick={() => handleUndoImageUpdate(index)}>DESELECT IMAGE
+                  {/* {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div' onClick={() => handleUndoImageUpdate(index)}>DESELECT IMAGE */}
                     {/* {isCancelImageUpdate[index]} */}
-                  </div>}
+                  {/* </div>} */}
                   {/* <p>{selFileNames[index]}</p> */}
                   {/* {imgErrors && imgErrors.image &&
                   <p className="errors">{errors.image}</p>
@@ -445,7 +445,7 @@ const PostForm = ({ post, formType }) => {
             }}
             required
           />
-          {errors && errors.title &&
+          {errors && errors.content &&
             <p className="errors">{errors.content}</p>
           }
         </div>

@@ -73,8 +73,8 @@ def comment_image(commentId):
     db.session.commit()
     image_list = [img.to_dict() for img in [new_image]]
     
-    print('PRINTTTTTTTTTTTTTTTTTT',new_image.to_dict())
-    return {'commentImages':image_list}
+    print('OOOOOOOOOOOO',new_image)
+    return new_image.to_dict()
 
   if form.errors:
         return {'errors':form.errors}

@@ -19,6 +19,8 @@ const EditCommentModal = ({ comment }) => {
   const [selImage, setSelImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
   const [initialUrl,setInitialUrl] = useState(null)
+  const [errors, setErrors] = useState({});
+
 
   useEffect(() => {
     const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
@@ -54,10 +56,14 @@ const EditCommentModal = ({ comment }) => {
     // console.log(comment)
     const textData = await dispatch(fetchUpdateComment(comment));
 
+    if (textData && textData.errors) {
+      setErrors(textData.errors)
+      return
+    }
 
     const formData = new FormData()
-    formData.append('comment_id', textData.id)
-    if(image){
+    formData.append('comment_id', textData?.id)
+    if (textData?.id && image){
 
       formData.append('comment_image_url', image)
       setImageLoading(true)
@@ -98,6 +104,9 @@ const EditCommentModal = ({ comment }) => {
                 }}
                 required
               />
+              {errors && errors.content &&
+                <p className="errors">{errors.content}</p>
+              }
               <span className='icon-span'><i class="fa-solid fa-comment fa-lg"></i><p className='icon-text'>Add Comment</p></span>
             </label>
           </div>

@@ -99,6 +99,9 @@ background-color: #e2a3a3;
   padding:10px;
   font-size: 14px;
   color: rgb(71, 71, 71);
+  width:500px;
+overflow-wrap: break-word;
+  height:fit-content;
 }
 
 #hidden{
