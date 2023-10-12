@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, Length, ValidationError
 
 class PostForm(FlaskForm):
   title = StringField('title',validators=[DataRequired(),Length(max=100)])
-  content=TextAreaField('content',validators=[DataRequired(),Length(max=1000)])
+  content=TextAreaField('content',validators=[DataRequired(),Length(max=10000)])
 
   def validate_title(form,field):
     if not field.data:
@@ -16,5 +16,5 @@ class PostForm(FlaskForm):
     if not field.data:
       raise ValidationError('Post content is required')
     else:
-      if len(field.data)>1000:
-        raise ValidationError('Post content cannot exceed 1000 characters')
+      if len(field.data)>10000:
+        raise ValidationError('Post content cannot exceed 10000 characters')

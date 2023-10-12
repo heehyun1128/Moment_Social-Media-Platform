@@ -7,7 +7,7 @@ class Comment(db.Model):
         __table_args__ = {'schema': SCHEMA}
   
   id = db.Column(db.Integer,primary_key=True)
-  content=db.Column(db.String(1000),nullable=False)
+  content=db.Column(db.String(10000),nullable=False)
   user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   post_id = db.Column(

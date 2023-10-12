@@ -8,7 +8,7 @@ class Post(db.Model):
   
   id = db.Column(db.Integer,primary_key=True)
   title= db.Column(db.String(255),nullable=False)
-  content=db.Column(db.String(1000),nullable=False)
+  content=db.Column(db.String(10000),nullable=False)
   creator_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
   created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
