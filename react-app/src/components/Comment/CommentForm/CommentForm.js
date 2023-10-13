@@ -20,7 +20,7 @@ const CommentForm = () => {
     console.log('called')
     e.stopPropagation()
     const image = e.target.files[0]
-    const imageUrl = URL.createObjectURL(image)
+    const imageUrl = image && URL.createObjectURL(image)
     setSelImage(imageUrl)
   }
   const resetForm = () => {
@@ -107,7 +107,7 @@ const CommentForm = () => {
 
             />
             
-            {imageLoading ? (<p>Submitting...</p>):(<button id='submit-comment-btn'>Submit Comment</button>)}
+            {imageLoading ? (<p>Submitting...</p>):(<button id='submit-comment-btn'>SUBMIT COMMENT</button>)}
           </div>
         </form>
       </div>

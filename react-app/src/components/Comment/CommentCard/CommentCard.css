@@ -49,4 +49,7 @@ object-fit:cover;
 }
 #comment-content{
   width:60vw;
+margin-bottom: 15px;
+    overflow-wrap: break-word;
+    height: fit-content;
 }

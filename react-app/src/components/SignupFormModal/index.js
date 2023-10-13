@@ -69,7 +69,7 @@ function SignupFormModal() {
 
 	return (
 		<div id='signup-modal-div'>
-			<h1>Sign Up</h1>
+			<h1>SIGN UP</h1>
 			<form id='signup-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
 				<label >
@@ -170,7 +170,7 @@ function SignupFormModal() {
 				{errors && errors.passwordNotMatched &&
 					<p className="errors">{errors.passwordNotMatched}</p>
 				}
-				<button id='signup-btn' type="submit">Sign Up</button>
+				<button id='signup-btn' type="submit">SIGN UP</button>
 			</form>
 		</div>
 	);

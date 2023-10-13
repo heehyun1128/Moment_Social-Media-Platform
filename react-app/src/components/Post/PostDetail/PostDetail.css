@@ -16,7 +16,7 @@
   align-items: center;
   text-align: center;
   height:fit-content;
-  margin:50px 30px 20px;
+  margin:30px 30px 20px;
   width: 100vw;
 }
 
@@ -36,7 +36,9 @@
   margin:0;
   
 }
-
+#post-detail{
+  width:80vw;
+}
 #post-detail-user-pic-div{
 width:50px;
 height:50px;
@@ -99,7 +101,7 @@ background-color: #e2a3a3;
   padding:10px;
   font-size: 14px;
   color: rgb(71, 71, 71);
-  width:500px;
+  width:80vw;
 overflow-wrap: break-word;
   height:fit-content;
 }
@@ -112,7 +114,7 @@ overflow-wrap: break-word;
   position: fixed;
   top:10vh;
   left:0;
-  height: 100vh;
+  height: 120vh;
   width:100vw;
   background-color: rgba(43, 43, 43,.8);
 }
