@@ -63,6 +63,7 @@ const CommentForm = () => {
 
         const data = await dispatch(fetchCreateCommentImage(formData))
         setIsSubmitted(true)
+        setSelImage('')
       }
     }
     
@@ -94,7 +95,7 @@ const CommentForm = () => {
             <p className="errors">{errors.content}</p>
           }
           <div id='submit-comment-div'>
-            {selImage &&!isSubmitted && <img src={selImage} id='comment-img' alt='' />}
+            {selImage && <img src={selImage} id='comment-img' alt='' />}
             <input
               type="file"
               accept="image/*"

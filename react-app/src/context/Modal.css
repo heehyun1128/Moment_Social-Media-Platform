@@ -31,6 +31,6 @@
   justify-content: center;
   align-items: center;
   width:fit-content !important;
-  height: 90vh !important;
+  height: fit-content !important;
   padding: 10px;
 }

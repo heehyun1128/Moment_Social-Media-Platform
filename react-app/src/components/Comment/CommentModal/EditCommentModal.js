@@ -35,7 +35,7 @@ const EditCommentModal = ({ comment }) => {
     console.log('called')
     e.stopPropagation()
     const image = e.target.files[0]
-    const imageUrl = URL.createObjectURL(image)
+    const imageUrl = image && URL.createObjectURL(image)
     setSelImage(imageUrl)
   }
 
