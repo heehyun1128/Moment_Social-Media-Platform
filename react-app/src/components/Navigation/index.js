@@ -6,7 +6,7 @@ import './Navigation.css';
 import SearchBar from './SearchBar';
 import { useHistory } from 'react-router-dom';
 import { useSearchContext } from '../../context/Search';
-
+import logo from '../images/logo.JPG'
 
 
 function Navigation({ isLoaded }) {
@@ -33,35 +33,36 @@ function Navigation({ isLoaded }) {
 		history.push('/posts/new')
 	}
 	return (
-		<div id='navigation-section'>
-			<div id='search-bar'>
-				<SearchBar 
-				searchContent={searchContent }
-				setSearchContent={setSearchContent}/>
-			</div>
-			<div id='title-div'>
-				<NavLink  exact to="/">Moment</NavLink>
-			</div>
-			<div id='nav-right-div'>
-				{/* <div className='one' onClick={handleGoToPostForm}>
+		<div id='nav-container'>
+			<div id='navigation-section'>
+				<div id='search-bar'>
+					<SearchBar
+						searchContent={searchContent}
+						setSearchContent={setSearchContent} />
+				</div>
+				<div id='title-div'>
+					<NavLink exact to="/"><img src={logo} alt="" /></NavLink>
+				</div>
+				<div id='nav-right-div'>
+					{/* <div className='one' onClick={handleGoToPostForm}>
 					<i class="fa-solid fa-pen"></i>
 				</div> */}
-				{isLoaded && (
-					<div className='one' id='profile-btn'>
-						<ProfileButton user={sessionUser} />
-					</div>
-				)}
-				<div id="navigation-tab">
-					<i class="fa-solid fa-layer-group"></i>
-					<div id='icon-nav-div'>
-						<ul id='icon-nav'>
-							<li>
-								<NavLink exact to='/'>
-									<i class="fa-solid fa-house"></i>
-									<span>Home</span>
-								</NavLink>
-							</li>
-							{/* <li>
+					{isLoaded && (
+						<div className='one' id='profile-btn'>
+							<ProfileButton user={sessionUser} />
+						</div>
+					)}
+					<div id="navigation-tab">
+						<i class="fa-solid fa-layer-group"></i>
+						<div id='icon-nav-div'>
+							<ul id='icon-nav'>
+								<li>
+									<NavLink exact to='/'>
+										<i class="fa-solid fa-house"></i>
+										<span>HOME</span>
+									</NavLink>
+								</li>
+								{/* <li>
 								{isLoaded && (
 									<div className='one' id='profile-btn'>
 										<ProfileButton user={sessionUser} />
@@ -69,19 +70,20 @@ function Navigation({ isLoaded }) {
 									</div>
 								)}
 							</li> */}
-							<li>
-								<div onClick={handleGoToPostForm}>
-									<i class="fa-solid fa-pen"></i>
-									<span>Create a Post</span>
-								</div>
-							</li>
-							<li>
-								<div onClick={handleViewAllPosts}>
-									<i class="fa-solid fa-book-open"></i>
-									<span >View My Posts</span>
-								</div>
-							</li>
-						</ul>
+								<li>
+									<div onClick={handleGoToPostForm}>
+										<i class="fa-solid fa-pen"></i>
+										<span>CREATE A POST</span>
+									</div>
+								</li>
+								<li>
+									<div onClick={handleViewAllPosts}>
+										<i class="fa-solid fa-book-open"></i>
+										<span >VIEW MY POSTS</span>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>

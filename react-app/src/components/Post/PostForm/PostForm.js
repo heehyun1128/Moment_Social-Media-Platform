@@ -363,7 +363,7 @@ const PostForm = ({ post, formType }) => {
                         }}
 
                       />
-                      <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+                      <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Select Image</p></span>
                     </label>}
 
                   </div>}
@@ -441,7 +441,7 @@ const PostForm = ({ post, formType }) => {
           <textarea
             type="text"
             value={content}
-            placeholder="Add post Content here..."
+            placeholder="Add post content here..."
             onChange={(e) => {
               console.log(e.target.value)
               setContent(e.target.value)

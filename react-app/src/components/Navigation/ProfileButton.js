@@ -66,7 +66,7 @@ function ProfileButton({ user }) {
 
             {/* <div onClick={handleViewAllPosts}>View All Posts</div> */}
           
-              <button id='logout-btn' onClick={handleLogout}>Log Out</button>
+            <button id='logout-btn' onClick={handleLogout}>LOG OUT</button>
             
           </>
         ) : (
@@ -75,14 +75,14 @@ function ProfileButton({ user }) {
           
             <OpenModalButton
               id='login-btn'
-              buttonText=" Log In"
+              buttonText=" LOG IN"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             <h4 id='signup-login-h4'>or </h4>
             <OpenModalButton
               id='signup-btn'
-              buttonText=" Sign Up"
+              buttonText=" SIGN UP"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />

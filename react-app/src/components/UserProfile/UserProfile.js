@@ -40,7 +40,7 @@ const UserProfile = () => {
         </div>
         <h4>{sessionUser && sessionUser.username}</h4>
     </div>
-      <h2>All Posts</h2>
+      <h2>YOUR POSTS</h2>
       <div id='user-post-div' >
         {userPostArr && userPostArr.map(post => {
           console.log(post)

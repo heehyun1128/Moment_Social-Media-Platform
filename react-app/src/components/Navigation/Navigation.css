@@ -40,10 +40,12 @@
 
 #title-div {
   position: absolute;
-  left: 45%;
+  left: 42%;
 
 }
-
+#title-div img{
+  height:150px;
+}
 #title-div a {
   font-size: 35px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -53,12 +55,13 @@
 
 
 #navigation-section {
-  margin: 20px 50px 0px;
-  height: 60px;
+  padding: 20px 100px 0px 30px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+  background-color: #fff;
 }
 
 #profile-img-li {
@@ -98,8 +101,8 @@ img#profile-img {
   display: none;
   height: fit-content;
   position: absolute;
-  right: -20px;
-  top: 40px;
+  right: 70px;
+  top: 110px;
   z-index: 999 !important;
 }
 
@@ -142,7 +145,7 @@ img#profile-img {
 }
 
 #icon-nav>*:hover {
-  background-color: #f0abab;
+  background-color: #debbbb;
   outline: none;
 }
 
@@ -183,8 +186,8 @@ img#profile-img {
 
 #search-box {
   top: 20px;
-  left: 100px;
-  transform: translate(-50%, -50%);
+  left: 70px;
+  transform: translate(0%, -50%);
   height: 50px;
   padding: 5px;
   border-radius: 50%;

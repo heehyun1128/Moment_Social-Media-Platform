@@ -10,5 +10,5 @@ class CommentForm(FlaskForm):
 
   def validate_content(form,field):
       if len(field.data)>1000:
-        raise ValidationError('Post content cannot exceed 1000 characters')
+        raise ValidationError('Comment content cannot exceed 1000 characters')
 
