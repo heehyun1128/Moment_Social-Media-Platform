@@ -62,8 +62,8 @@ const CommentForm = () => {
       if(textData.id){
 
         const data = await dispatch(fetchCreateCommentImage(formData))
+        setIsSubmitted(true)
       }
-      setIsSubmitted(true)
     }
     
 

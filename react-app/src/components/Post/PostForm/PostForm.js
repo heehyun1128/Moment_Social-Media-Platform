@@ -52,19 +52,19 @@ const PostForm = ({ post, formType }) => {
     newPics[index] = null
     // newPics.splice(index,1,null)
 
-    const picsLeft = newPics.filter(pic => pic !== null)
-    console.log(picsLeft)
-    const updatedPicArr = []
-    updatedPicArr.push(...picsLeft)
-    console.log(updatedPicArr)
-    if (updatedPicArr.length < 5) {
-      const numSpotsToFill = 5 - picsLeft.length
-      for (let i = 0; i < numSpotsToFill; i++) {
-        updatedPicArr.push(null)
-      }
-    }
-    console.log(updatedPicArr)
-    setPostPics(prevPostPics=>updatedPicArr)
+    // const picsLeft = newPics.filter(pic => pic !== null)
+    // console.log(picsLeft)
+    // const updatedPicArr = []
+    // updatedPicArr.push(...picsLeft)
+    // console.log(updatedPicArr)
+    // if (updatedPicArr.length < 5) {
+    //   const numSpotsToFill = 5 - picsLeft.length
+    //   for (let i = 0; i < numSpotsToFill; i++) {
+    //     updatedPicArr.push(null)
+    //   }
+    // }
+    // console.log(updatedPicArr)
+    setPostPics(newPics)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
     setSelImageUrls(prevImageUrls=>imageUrls)
@@ -223,8 +223,11 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-          setImageLoading(true)
-          const imageData = await dispatch(fetchCreatePostImage(formData));
+          if(textData && textData.id){
+            setImageLoading(true)
+
+            const imageData = await dispatch(fetchCreatePostImage(formData));
+          }
         }
 
       }
@@ -258,44 +261,44 @@ const PostForm = ({ post, formType }) => {
       }
 
       let preview = false
-      console.log(postPics)
+     
       for (let i = 0; i < postPics.length; i++) {
         const postPic = postPics[i]
-        // console.log(postPics.indexOf(postPic))
+
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
-        // console.log(postPic) //pics not clicked on will have postPic.id
-
         const edittedImgId = imgInputIdList[i]
-        setImageLoading(true)
-        // console.log(postPics.indexOf(postPic))
+        
+
         if (postPics.indexOf(postPic) === 0) {
           preview = true
         } else {
           preview = false
         }
 
-        // console.log(isImageValid(postPic))
 
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "pdf","PDF" ,"png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           return
         } else {
-          // console.log(postPic, preview)
+       
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
           // console.log(edittedImgId)
           // console.log(postPic)
           // console.log(edittedImgId)
-          if (postPic && postPic.id) {
-            const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
-          } else if (edittedImgId) {
-            const imageData = await dispatch(fetchUpdatePostImage(formData, edittedImgId));
-          } else if (postPic) {
-            // console.log('called')
-            await dispatch(fetchCreatePostImage(formData))
+          if(textData.id){
+            setImageLoading(true)
+            if (postPic && postPic.id) {
+              const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
+            } else if (edittedImgId) {
+              const imageData = await dispatch(fetchUpdatePostImage(formData, edittedImgId));
+            } else if (postPic) {
+              // console.log('called')
+              await dispatch(fetchCreatePostImage(formData))
+            }
           }
         }
       }
