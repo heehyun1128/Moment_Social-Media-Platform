@@ -1,0 +1,14 @@
+.delete-modal-btn{
+  margin-right: 20px;
+}
+
+#delete-modal-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#delete-modal-container>*{
+  margin-bottom: 20px;
+
+}

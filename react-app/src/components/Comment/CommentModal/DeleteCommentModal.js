@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch} from "react-redux"
 import { useModal } from '../../../context/Modal'
 import { fetchDeleteComment } from '../../../store/comment'
+import './DeleteCommentModal.css'
 
 const DeleteCommentModal = ({commentId}) => {
   const dispatch = useDispatch()
@@ -21,12 +22,12 @@ const DeleteCommentModal = ({commentId}) => {
   }
   return (
     <div id="delete-modal-container">
-      <h3 id='delete-modal-header'>Confirm Delete</h3>
-      <p className="delete-modal-msg">
+      <h3 id='delete-modal-header'>CONFIRM DELETION</h3>
+      <h4 className="delete-modal-msg">
         Are you sure you want to remove this comment?
-      </p>
-      <button onClick={handleDelete} className="delete-modal-btn yes">{`Confirm Deletion`}</button>
-      <button onClick={closeDeleteModal} className="delete-modal-btn no">{`Cancel Deletion`}</button>
+      </h4>
+      <button onClick={handleDelete} className="delete-modal-btn yes">{`CONFIRM DELETION`}</button>
+      <button onClick={closeDeleteModal} className="delete-modal-btn no">{`CANCEL DELETION`}</button>
     </div>
   )
 }

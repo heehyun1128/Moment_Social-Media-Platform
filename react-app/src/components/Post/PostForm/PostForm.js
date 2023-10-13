@@ -167,11 +167,12 @@ const PostForm = ({ post, formType }) => {
       setImgInputIdList(imageInputIds)
 
       console.log(imgInputIdList)
-
+console.log(postPics)
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
-      setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
+      setPostPics(newPics)
+      // setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
       // setPostPics(postPics.filter(pic => pic !== null))
       console.log(newPics)
       // setIsCancelImageUpdate(true)
