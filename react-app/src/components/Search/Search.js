@@ -27,7 +27,7 @@ const Search = () => {
   return (
     <div >
       <div >
-        <h1 >Search Result: {queryTerm}</h1>
+        <h1 style={{'textAlign':'center'}}>Search Result: {queryTerm}</h1>
       </div>
       {!found ?
         <div>

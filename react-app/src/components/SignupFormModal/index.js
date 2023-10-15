@@ -73,7 +73,7 @@ function SignupFormModal() {
 			<form id='signup-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
 				<label >
-					<div>Profile Picture</div>
+					<div>Profile Picture (optional)</div>
 					<input
 						type="file"
 						accept="image/*"
@@ -87,7 +87,7 @@ function SignupFormModal() {
 					/>
 					<div id='image-preview-box'>
 						{selImage && <img src={selImage} id='profile-img-preview' alt='' />}
-						{selImage && <div id='deslect-image-btn' onClick={handleDeselectImg}>Deslect Image</div>}
+						{/* {selImage && <div id='deslect-image-btn' onClick={handleDeselectImg}>Deslect Image</div>} */}
 					</div>
 				</label>
 				{/* {(imageLoading) && <p>Loading...</p>} */}

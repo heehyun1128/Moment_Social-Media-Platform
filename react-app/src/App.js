@@ -12,10 +12,12 @@ import EditPostForm from "./components/Post/PostForm/EditPostForm";
 import UserProfile from "./components/UserProfile/UserProfile";
 import PageNotFound from './components/PageNotFound/PageNotFound'
 import Search from "./components/Search/Search";
-
+import AllPost from "./components/Post/AllPost/AllPost";
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation()
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
@@ -23,7 +25,7 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {location.pathname !== '/' && <Navigation isLoaded={isLoaded} />}
       {isLoaded && (
         <Switch>
           <Route exact path="/login" >
@@ -34,6 +36,9 @@ function App() {
           </Route>
           <Route exact path="/posts/new">
             <CreatePostForm />
+          </Route>
+          <Route exact path="/posts/all">
+            <AllPost />
           </Route>
           <Route exact path="/posts/:postId/edit">
             <EditPostForm />

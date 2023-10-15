@@ -40,7 +40,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/')
+    history.push('/posts/all')
     closeMenu()
   };
 

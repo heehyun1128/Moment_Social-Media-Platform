@@ -17,7 +17,7 @@ const EditPostForm = () => {
   
   // user auth
   if (!sessionUser || (Number(post?.creatorId) && sessionUser && Number(sessionUser.id) !== Number(post?.creatorId))) {
-    history.push('/')
+    history.push('/posts/all')
   }
 
   useEffect(() => {

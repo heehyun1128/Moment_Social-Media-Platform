@@ -41,7 +41,7 @@ function Navigation({ isLoaded }) {
 						setSearchContent={setSearchContent} />
 				</div>
 				<div id='title-div'>
-					<NavLink exact to="/"><img src={logo} alt="" /></NavLink>
+					<NavLink exact to="/">MOMENT</NavLink>
 				</div>
 				<div id='nav-right-div'>
 					{/* <div className='one' onClick={handleGoToPostForm}>
@@ -57,9 +57,9 @@ function Navigation({ isLoaded }) {
 						<div id='icon-nav-div'>
 							<ul id='icon-nav'>
 								<li>
-									<NavLink exact to='/'>
+									<NavLink exact to='/posts/all'>
 										<i class="fa-solid fa-house"></i>
-										<span>HOME</span>
+										<span>VIEW ALL POSTS</span>
 									</NavLink>
 								</li>
 								{/* <li>
@@ -79,7 +79,7 @@ function Navigation({ isLoaded }) {
 								<li>
 									<div onClick={handleViewAllPosts}>
 										<i class="fa-solid fa-book-open"></i>
-										<span >VIEW MY POSTS</span>
+										<span >MY POSTS</span>
 									</div>
 								</li>
 							</ul>

@@ -1,14 +1,61 @@
-#all-post-div{
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
-  justify-items: center;
-  background-color: #fff !important;
-  align-items: end ; */
-box-sizing: border-box;
-  width: 85vw;
-  margin: 60px auto 20px;
-  columns: 3;
-  column-gap: 5px;
-  z-index:-999999 !important;
+#home-div {
+  background-color: #c69a9a;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+}
+
+
+#round {
+  position: absolute;
+  border-radius: 50%;
+  height: 100vh;
+  width: 100vh;
+  background-color: #4e4e4e;
+  left: -40vh;
+}
+
+#header {
+  position: absolute;
+  animation: move 1.5s ease-in-out forwards;
+  right: -32vw;
+  top: -10vh;
+  color: rgba(82, 82, 82,.9);
+
+}
+
+#home-text {
+  text-transform: uppercase;
+  font-family: fantasy;
+  font-size: 40px;
+  position: absolute;
+  top: 30vh;
+  left: 20vh;
+  color: white;
+}
+
+/* #site-name {
+  position: absolute;
+  top: 0;
+  left: 10vh;
+  color: white;
+}
+
+#home-btn {
+  position: absolute;
+  top: 10vh;
+  left: 20vh;
+  width:10vw;
+  height: 30px;
+ 
+} */
+
+@keyframes move {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
 }

@@ -14,7 +14,7 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  
+  /* background-color: rgba(198, 174, 174, 0.7); */
   color:rgb(53, 53, 53);
 }
 
@@ -41,3 +41,12 @@ button:hover{
   color: rgb(255, 255, 255);
   cursor: pointer;
 }
+
+/* input:focus{
+  background-color: rgba(198, 154, 154,.8);
+
+}
+textarea:focus{
+
+  background-color: rgba(198, 154, 154, .8);
+} */

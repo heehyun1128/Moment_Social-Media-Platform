@@ -10,7 +10,7 @@
   justify-content: center;
   grid-template-columns: repeat(3, 1fr);
   margin-top:20px;
-  /* width:80%; */
+  width:90vw;
 }
 
 #profile-info-div{
