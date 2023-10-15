@@ -7,6 +7,9 @@ import { fetchSingleUser } from "../../../store/user";
 import CommentDetail from "../../Comment/CommentDetail/CommentDetail";
 import CommentForm from "../../Comment/CommentForm/CommentForm";
 import { fetchAllPostComments } from "../../../store/comment";
+import OpenModalButton from "../../OpenModalButton";
+import DeleteCommentModal from "../../Comment/CommentModal/DeleteCommentModal";
+import DeletePostModal from "../../Comment/CommentModal/DeletePostModal";
 
 
 const PostDetail = () => {
@@ -146,8 +149,16 @@ const PostDetail = () => {
             {post?.content}
           </div>
           <div id='post-detail-btn-div'>
-            {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleOpenEditPostForm}><i class="fa-solid fa-pen-to-square"></i>EDIT POST</button>}
-            {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleDeletePost}><i class="fa-solid fa-trash-can"></i>DELETE POST</button>}
+            {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleOpenEditPostForm}>EDIT POST</button>}
+            {sessionUser && post?.creatorId === sessionUser.id && 
+           
+              < OpenModalButton
+              buttonText="DELETE POST"
+
+            modalComponent={<DeletePostModal postId={post?.id} />}
+
+            />
+            }
 
 
           </div>

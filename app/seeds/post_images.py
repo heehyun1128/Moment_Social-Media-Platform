@@ -28,6 +28,13 @@ def seed_postimages():
     # post-2
     PostImage(
     preview=True,
+    post_image_url='https://t3.ftcdn.net/jpg/05/52/92/66/360_F_552926654_GxwGf2l2mDjnKCA2E0alsGCWQsHmJAtm.webp',
+    post_id=2,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
     post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWyegnZASn8QiNSuJZsCYtf8fGLdnewj5cRQ&usqp=CAU',
     post_id=2,
     created_at=curr_date,
@@ -35,14 +42,14 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://images.unsplash.com/photo-1546872006-43d8f…wfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60',
+    post_image_url='https://t4.ftcdn.net/jpg/06/20/14/25/240_F_620142554_R1xbcjpihHeX33sdF1Bhhz8GONMAyrMR.jpg',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://images.unsplash.com/photo-1635520356736-90…W58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',
+    post_image_url='https://t3.ftcdn.net/jpg/05/69/36/82/240_F_569368264_EfL3uEgVfamQR0MNh0MNlEhjE9N02nSZ.jpg',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
@@ -51,6 +58,34 @@ def seed_postimages():
     PostImage(
     preview=True,
     post_image_url='https://cdn.britannica.com/95/94195-050-FCBF777E/Golden-Gate-Bridge-San-Francisco.jpg',
+    post_id=3,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
+    post_image_url='https://www.queenanne.com/resourcefiles/mainimages/golden-gate-bridge-at-san-francisco-top.jpg?version=8082022205612',
+    post_id=3,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
+    post_image_url='https://t3.ftcdn.net/jpg/00/83/52/48/360_F_83524810_OObPtC0QCkWYHxCdY563NOnYbSfZ3wqI.webp',
+    post_id=3,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
+    post_image_url='https://t4.ftcdn.net/jpg/02/43/21/87/240_F_243218764_MumH4UFsZCdcpkhNaRMBCrtOIZbhLpNY.jpg',
+    post_id=3,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
+    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaw7AvHxZKrA-6jBm7wQR5IKDoAUtD6-g0Q&usqp=CAU',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
@@ -65,7 +100,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://ashateahouse.com/cdn/shop/t/61/assets/home…lider-slide-1.jpg?v=28364239999428077381639504305',
+    post_image_url='https://s3-media0.fl.yelpcdn.com/bphoto/92mcXsjz7jBq8afhkI76oA/o.jpg',
     post_id=4,
     created_at=curr_date,
     updated_at=curr_date
@@ -151,6 +186,13 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
+    post_image_url='https://images.pexels.com/photos/1181373/pexels-photo-1181373.jpeg',
+    post_id=7,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
     post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIUiy9Xpk28t1Ic4UkQrrtDXvbpewePN153Q&usqp=CAU',
     post_id=7,
     created_at=curr_date,
@@ -158,11 +200,36 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://venturebeat.com/wp-content/uploads/2021/05…6933-e1624308433688.jpg?fit=2309%2C1154&strip=all',
+    post_image_url='https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg',
     post_id=7,
     created_at=curr_date,
     updated_at=curr_date
     ),
+    #8
+    PostImage(
+    preview=True,
+    post_image_url='https://www.rollingstone.com/wp-content/uploads/2021/04/super-junior.jpg?w=1581&h=1054&crop=1',
+    post_id=8,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    #9
+    PostImage(
+    preview=True,
+    post_image_url='https://www.madpaws.com.au/wp-content/uploads/2021/03/Samoyed-768x799.png',
+    post_id=9,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    #10
+    PostImage(
+    preview=True,
+    post_image_url='https://catinaflat.blog/wp-content/uploads/2022/05/what-is-a-tabby-cat-copy.jpg',
+    post_id=10,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+   
    
   ]
   db.session.add_all(post_images)

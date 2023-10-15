@@ -58,11 +58,36 @@ def seed_posts():
     # 7
     Post(
       title= 'Programming is fun!',
-      content= "",
+      content= "I enjoy programming a lot! Programming allows you to tackle complex problems and find elegant solutions. It's like solving puzzles, which can be intellectually stimulating and rewarding. Programming skills are applicable in a wide range of fields, from web development to data science. This versatility can open up diverse career opportunities.The programming community is often friendly and supportive. You can learn from others, collaborate on open-source projects, and find like-minded individuals.",
       creator_id=3,
       created_at=curr_date,
       updated_at=curr_date
     ),
+    # 8
+    Post(
+      title= 'Super Junior - my favorite k-pop group',
+      content= "Super Junior is a highly popular and influential South Korean boy band formed in 2005. They are known for their significant contributions to the K-pop (Korean pop) music industry and have gained a massive global fanbase. The group's original concept was to be a rotational project, with members joining and leaving, but over time, they evolved into a more stable group. They have produced a wide range of music, including pop, hip-hop, R&B, and ballads. They are known for their energetic performances, catchy songs, and a charismatic stage presence. My favorite song from Super Junior is 'Burn the Floor'. I highly recommend it!",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    # 9
+    Post(
+      title= 'Kuma says Hi~~',
+      content= "Kuma is 4 years old now. He is lovely and friendly. He loves to be around with people but can get overly excited around other dogs. Kuma loves meats and snacks. His favorite snack is the Kirkland Dental Chews from Costco",
+      creator_id=1,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    # 10
+    Post(
+      title= 'What is your favorite breed of cat?',
+      content= "My cat is a domestic medium hair gray tabby. She's so adorable! What's your cat's breed? What is your favorite breed of cat?",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    
   ]
 
   db.session.add_all(posts)
