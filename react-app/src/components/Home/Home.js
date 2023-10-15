@@ -1,43 +1,34 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts } from "../../store/post";
-import PostCard from "../Post/PostCard/PostCard";
 import './Home.css'
-import { NavLink, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 
 const Home = () => {
-  const dispatch = useDispatch()
-  const location = useLocation()
-  const currentPath = location.pathname
-  const allPostsObj = useSelector(state => state.posts.Posts)
-  console.log(allPostsObj)
-
-  useEffect(() => {
-    dispatch(fetchAllPosts())
-  }, [dispatch])
-
-
-  if (!allPostsObj || Object.values(allPostsObj).length === 0) {
-    return null
+  const history = useHistory()
+  const handleGoToAllPosts = e => {
+    e.preventDefault()
+    history.push('/posts/all')
   }
-  const allPosts = Object.values(allPostsObj)
-  console.log(allPosts)
 
 
   return (
- 
-      
+
+
+
+    <div id='home-div' >
+      <div id='round'>
+      </div>
+      <div id='home-text'>
+        <h2 id='site-name'>MOMENT <p></p> </h2>
        
-        <div id='all-post-div' >
-          {allPosts && allPosts.map(post => {
-            console.log(post)
-            return <PostCard post={post} />
-          })}
-        </div>
-    
-   
-      )
+        <h1 id='header'>Capture Best Moments in Life </h1>
+        <button id='home-btn' onClick={handleGoToAllPosts}>Discover More</button>
+
+      </div>
+    </div>
+
+
+  )
 }
 
-      export default Home
+export default Home

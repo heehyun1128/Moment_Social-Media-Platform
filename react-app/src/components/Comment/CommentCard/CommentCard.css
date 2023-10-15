@@ -36,10 +36,12 @@ object-fit:cover;
   max-width: 260px;
   border-radius: 20px;
   overflow: hidden;
+  max-height: 320px;
 }
 #comment-img-div img{
   object-fit: cover;
   max-width: 260px;
+  max-height: 320px;
 }
 
 

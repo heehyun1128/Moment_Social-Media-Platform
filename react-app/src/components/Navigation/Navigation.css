@@ -48,9 +48,11 @@
 }
 #title-div a {
   font-size: 35px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: rgb(228, 157, 157);
+  /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+  color: #c69a9a;
+  font-size: 40px;
   font-weight: 700;
+  
 }
 
 

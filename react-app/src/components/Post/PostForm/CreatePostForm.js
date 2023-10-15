@@ -12,7 +12,7 @@ const CreatePostForm = () => {
   const history = useHistory()
   const sessionUser = useSelector(state => state.session?.user)
   if (!sessionUser || (Number(post?.creatorId) && sessionUser && Number(sessionUser.id) !== Number(post?.creatorId))) {
-    history.push('/')
+    history.push('/posts/all')
   }
   return (
     <PostForm
