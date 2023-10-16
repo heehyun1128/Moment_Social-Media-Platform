@@ -36,9 +36,9 @@ function Navigation({ isLoaded }) {
 		<div id='nav-container'>
 			<div id='navigation-section'>
 				<div id='search-bar'>
-					<SearchBar
+					{/* <SearchBar
 						searchContent={searchContent}
-						setSearchContent={setSearchContent} />
+						setSearchContent={setSearchContent} /> */}
 				</div>
 				<div id='title-div'>
 					<NavLink exact to="/">MOMENT</NavLink>

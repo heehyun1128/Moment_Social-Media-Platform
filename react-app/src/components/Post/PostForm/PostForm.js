@@ -185,7 +185,7 @@ console.log(postPics)
 
 
   const isImageValid = (postPic) => {
-    const imageExtensions = ["pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    const imageExtensions = [ "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
     if (!imageExtensions?.some(extension => postPic?.postImageUrl?.endsWith(extension) ||
       postPic?.name?.endsWith(extension))) {
       return false
@@ -218,14 +218,14 @@ console.log(postPics)
         console.log(preview)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+          alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
           return
         } else {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
           if(textData && textData.id){
-            setImageLoading(true)
+            
 
             const imageData = await dispatch(fetchCreatePostImage(formData));
           }
@@ -237,11 +237,14 @@ console.log(postPics)
         setErrors(textData.errors);
         return
 
+      }else{
+        setImageLoading(true)
       }
       // else {
       //   setImageLoading(false)
 
       // }
+
       history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
@@ -280,7 +283,7 @@ console.log(postPics)
 
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "pdf","PDF" ,"png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           return
         } else {
        
@@ -291,7 +294,7 @@ console.log(postPics)
           // console.log(postPic)
           // console.log(edittedImgId)
           if(textData.id){
-            setImageLoading(true)
+           
             if (postPic && postPic.id) {
               const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
             } else if (edittedImgId) {

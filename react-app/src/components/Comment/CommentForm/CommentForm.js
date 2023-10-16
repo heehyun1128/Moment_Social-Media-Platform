@@ -29,7 +29,7 @@ const CommentForm = () => {
   }
 
   const isImageValid = (image) => {
-    const imageExtensions = ["pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    const imageExtensions = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
     if (!imageExtensions?.some(extension => image?.postImageUrl?.endsWith(extension) ||
       image?.name?.endsWith(extension))) {
       return false
@@ -52,7 +52,7 @@ const CommentForm = () => {
     }
     const formData = new FormData()
     if(image && !isImageValid(image)){
-      alert('Pictures must end with "pdf", "PDF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
       return
     }else{
 

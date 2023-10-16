@@ -44,6 +44,16 @@ const EditCommentModal = ({ comment }) => {
     setContent('')
   }
 
+  const isImageValid = (image) => {
+    const imageExtensions = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    if (!imageExtensions?.some(extension => image?.postImageUrl?.endsWith(extension) ||
+      image?.name?.endsWith(extension))) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     // if (!sessionUser) {
@@ -63,6 +73,10 @@ const EditCommentModal = ({ comment }) => {
 
     const formData = new FormData()
     formData.append('comment_id', textData?.id)
+    if (image && !isImageValid(image)) {
+      alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      return
+    }
     if (textData?.id && image){
 
       formData.append('comment_image_url', image)
