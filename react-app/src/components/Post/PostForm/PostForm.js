@@ -67,9 +67,9 @@ const PostForm = ({ post, formType }) => {
     setPostPics(newPics)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
-    setSelImageUrls(prevImageUrls=>imageUrls)
-    console.log('after removing existing images when update','postPics',postPics)
-    console.log('after removing existing images when update','imageUrls', imageUrls)
+    setSelImageUrls(prevImageUrls => imageUrls)
+    console.log('after removing existing images when update', 'postPics', postPics)
+    console.log('after removing existing images when update', 'imageUrls', imageUrls)
 
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
@@ -84,7 +84,7 @@ const PostForm = ({ post, formType }) => {
     console.log([...isCancelImageUpdate])
 
     const deselectImage = [...deselectImageCalled]
-    deselectImage[index]=true
+    deselectImage[index] = true
     setDeleteImageCalled(deselectImage)
 
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
@@ -122,7 +122,7 @@ const PostForm = ({ post, formType }) => {
 
     // setPostPics(newPics.filter(pic => pic !== null))
     setPostPics(newPics)
-    console.log('after deselct',postPics)
+    console.log('after deselct', postPics)
   }
 
 
@@ -167,7 +167,7 @@ const PostForm = ({ post, formType }) => {
       setImgInputIdList(imageInputIds)
 
       console.log(imgInputIdList)
-console.log(postPics)
+      console.log(postPics)
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
@@ -185,7 +185,7 @@ console.log(postPics)
 
 
   const isImageValid = (postPic) => {
-    const imageExtensions = [ "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
+    const imageExtensions = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
     if (!imageExtensions?.some(extension => postPic?.postImageUrl?.endsWith(extension) ||
       postPic?.name?.endsWith(extension))) {
       return false
@@ -219,16 +219,20 @@ console.log(postPics)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+          setImageLoading(false)
           return
         } else {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-          if(textData && textData.id){
-            
+          if (textData && textData.id) {
+
 
             const imageData = await dispatch(fetchCreatePostImage(formData));
+
+            setImageLoading(true)
           }
+
         }
 
       }
@@ -237,12 +241,9 @@ console.log(postPics)
         setErrors(textData.errors);
         return
 
-      }else{
-        setImageLoading(true)
       }
-      // else {
-      //   setImageLoading(false)
-
+      // else{
+      //   setImageLoading(true)
       // }
 
       history.push(`/posts/${textData.id}`)
@@ -265,14 +266,14 @@ console.log(postPics)
       }
 
       let preview = false
-     
+
       for (let i = 0; i < postPics.length; i++) {
         const postPic = postPics[i]
 
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
         const edittedImgId = imgInputIdList[i]
-        
+
 
         if (postPics.indexOf(postPic) === 0) {
           preview = true
@@ -284,17 +285,18 @@ console.log(postPics)
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          setImageLoading(false)
           return
         } else {
-       
+
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
           // console.log(edittedImgId)
           // console.log(postPic)
           // console.log(edittedImgId)
-          if(textData.id){
-           
+          if (textData.id) {
+
             if (postPic && postPic.id) {
               const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
             } else if (edittedImgId) {
@@ -303,12 +305,13 @@ console.log(postPics)
               // console.log('called')
               await dispatch(fetchCreatePostImage(formData))
             }
+            setImageLoading(true)
           }
         }
       }
 
 
-      setImageLoading(true)
+
 
 
       // if (textData.errors) {
@@ -352,7 +355,7 @@ console.log(postPics)
 
 
                   {<div id='upload-img-preview'>
-                    { <img id='update-img-display' src={selImageUrls[index]} alt="" />}
+                    {<img id='update-img-display' src={selImageUrls[index]} alt="" />}
                     {<label id='edit-post-input-label'>
                       <input
                         type="file"
@@ -373,7 +376,7 @@ console.log(postPics)
                   </div>}
                   {selImageUrls[index] && !deleteImageCalled[index] && !isCancelImageUpdate[index] && <div id='remove-image-div' onClick={() => handleRemoveImg(index)}>REMOVE IMAGE</div>}
                   {/* {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div' onClick={() => handleUndoImageUpdate(index)}>DESELECT IMAGE */}
-                    {/* {isCancelImageUpdate[index]} */}
+                  {/* {isCancelImageUpdate[index]} */}
                   {/* </div>} */}
                   {/* <p>{selFileNames[index]}</p> */}
                   {/* {imgErrors && imgErrors.image &&

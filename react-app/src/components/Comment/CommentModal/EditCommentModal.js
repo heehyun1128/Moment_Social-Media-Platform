@@ -64,28 +64,38 @@ const EditCommentModal = ({ comment }) => {
       content
     }
     // console.log(comment)
-    const textData = await dispatch(fetchUpdateComment(comment));
+    // const textData = await dispatch(fetchUpdateComment(comment));
 
-    if (textData && textData.errors) {
-      setErrors(textData.errors)
-      return
-    }
+    // if (textData && textData.errors) {
+    //   setErrors(textData.errors)
+    //   return
+    // }
 
-    const formData = new FormData()
-    formData.append('comment_id', textData?.id)
+    // const formData = new FormData()
+    // formData.append('comment_id', textData?.id)
     if (image && !isImageValid(image)) {
       alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
       return
-    }
-    if (textData?.id && image){
+    }else{
+      const textData = await dispatch(fetchUpdateComment(comment));
 
-      formData.append('comment_image_url', image)
-      setImageLoading(true)
-      if (initialUrl){
+      if (textData && textData.errors) {
+        setErrors(textData.errors)
+        return
+      }
 
-        const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
-      }else{
-        await dispatch(fetchCreateCommentImage(formData))
+      const formData = new FormData()
+      formData.append('comment_id', textData?.id)
+      if (textData?.id && image){
+  
+        formData.append('comment_image_url', image)
+        setImageLoading(true)
+        if (initialUrl){
+  
+          const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
+        }else{
+          await dispatch(fetchCreateCommentImage(formData))
+        }
       }
     }
     // console.log(comment?.commentImages)
