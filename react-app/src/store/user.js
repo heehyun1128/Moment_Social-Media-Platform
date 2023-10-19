@@ -2,6 +2,9 @@ const LOAD_USERS='users/LOAD_USERS'
 const LOAD_SINGLE_USER = 'users/LOAD_SINGLE_USER'
 const LOAD_USER_POST = 'users/LOAD_USER_POST'
 const EDIT_USER_IMAGE = 'users/EDIT_USER_IMAGE'
+const LOAD_USER_LIKE_POST ='users/LOAD_USER_LIKE_POST'
+const ADD_LIKE = 'users/ADD_LIKE'
+const DELETE_LIKE = 'users/DELETE_LIKE'
 
 export const loadUsers = users=>({
   type:LOAD_USERS,
@@ -14,6 +17,19 @@ export const getUser = user=>({
 export const loadUserPosts = posts=>({
   type: LOAD_USER_POST,
   posts
+})
+export const loadUserLikedPosts = posts=>({
+  type: LOAD_USER_LIKE_POST,
+  posts
+})
+
+export const addLike = postId => ({
+  type: ADD_LIKE,
+  postId
+})
+export const delLike = postId => ({
+  type: DELETE_LIKE,
+  postId
 })
 
 export const editUserImage = userImage => ({
@@ -65,6 +81,52 @@ export const fetchUserPosts = (userId) => async (dispatch) => {
     return errors
   }
 }
+// fetch USER liked posts
+export const fetchUserLikedPosts = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/likes`)
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(loadUserLikedPosts(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+
+export const fetchAddLike = postId => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}/likes`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(postId)
+  });
+  if (response.ok) {
+    console.log(response)
+    const data = await response.json()
+    dispatch(addLike(postId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
+export const fetchRemoveLike = postId => async (dispatch) => {
+  const response = await fetch(`/api/likes/${postId}`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(delLike(postId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
+
+
 // edit user profile image
 export const fetchUserProfileImage = (userId,formData) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/profile-update`, {
@@ -121,6 +183,29 @@ const userReducer = (state = initialState, action) => {
           ...action.userImage
         }
       }
+      return newState
+    case LOAD_USER_LIKE_POST:
+      newState={
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          likedPosts:action.posts
+        }
+      }
+      return newState
+    case DELETE_LIKE:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          likedPosts: {
+            ...state.singleUser.likedPosts,
+            // [action.post.id]:null
+          }
+          
+        }
+      }
+      delete newState.singleUser.likedPosts[action.postId]
       return newState
     default:
       return state

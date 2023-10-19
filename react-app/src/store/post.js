@@ -8,6 +8,8 @@ export const LOAD_POST_IMAGES = 'posts/LOAD_POST_IMAGES'
 export const GET_POST_IMAGE = 'posts/GET_POST_IMAGE'
 export const REMOVE_POST = 'posts/REMOVE_POST'
 export const SEARCH_POSTS = 'posts/SEARCH_POSTS'
+export const LOAD_POST_LIKES = 'posts/LOAD_POST_LIKES'
+
 
 
 
@@ -65,6 +67,13 @@ export const searchPosts = (posts) => {
   return {
     type: SEARCH_POSTS,
     posts
+  }
+};
+// LikedPosts
+export const getLikes = (postId) => {
+  return {
+    type: LOAD_POST_LIKES,
+    postId
   }
 };
 

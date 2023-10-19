@@ -40,6 +40,25 @@ def user(id):
         print('OOOOOOOOOOOOOOOOOOO',post_dict)
     return post_dict
 
+@user_routes.route('/<int:id>/likes')
+@login_required
+def get_likes(id):
+    
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+
+    user_like_posts=curr_user.like_posts
+    print('OOOOOOOOOO',user_like_posts)
+    like_dict = {}
+
+    for like in user_like_posts:
+        data = like.to_dict()
+        
+        like_dict[str(like.id)] = data
+
+    return like_dict
+
 @user_routes.route('/<int:id>')
 def get_user(id):
     user_in_search = User.query.get(id)

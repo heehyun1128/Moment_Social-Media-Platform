@@ -23,6 +23,7 @@ class User(db.Model, UserMixin):
     #relationships
     posts=db.relationship("Post",back_populates="creator")
     comments=db.relationship("Comment",back_populates="user",cascade="all, delete, delete-orphan")
+    like_posts=db.relationship("Post",secondary='likes',back_populates='like_users')
 
     @property
     def password(self):
