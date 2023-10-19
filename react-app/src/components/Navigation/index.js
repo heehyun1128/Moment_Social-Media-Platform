@@ -32,6 +32,15 @@ function Navigation({ isLoaded }) {
 		e.preventDefault()
 		history.push('/posts/new')
 	}
+
+	// const handleUserSettings =e=>{
+	// 	// if (!sessionUser) {
+	// 	// 	alert('')
+	// 	// }
+	// 	e.preventDefault()
+		
+	// }
+
 	return (
 		<div id='nav-container'>
 			<div id='navigation-section'>
@@ -79,9 +88,15 @@ function Navigation({ isLoaded }) {
 								<li>
 									<div onClick={handleViewAllPosts}>
 										<i class="fa-solid fa-book-open"></i>
-										<span >MY POSTS</span>
+										<span >MY PAGE</span>
 									</div>
 								</li>
+								{/* <li>
+									<div onClick={handleUserSettings}>
+										<i class="fa-solid fa-gears"></i>
+										<span >SETTINGS</span>
+									</div>
+								</li> */}
 							</ul>
 						</div>
 					</div>

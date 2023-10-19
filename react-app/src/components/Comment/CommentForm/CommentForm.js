@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateComment, fetchCreateCommentImage } from '../../../store/comment'
 import { useParams } from 'react-router-dom'
 import './CommentForm.css'
+import Loading from '../../Loading/Loading';
 
 const CommentForm = () => {
   const dispatch = useDispatch()
@@ -112,7 +113,12 @@ const CommentForm = () => {
 
             />
 
-            {imageLoading ? (<p>Submitting...</p>) : (<button id='submit-comment-btn'>SUBMIT COMMENT</button>)}
+            {imageLoading ? (
+              <>
+                <Loading />
+                <p>Submitting...</p>
+              </>
+              ) : (<button id='submit-comment-btn'>SUBMIT COMMENT</button>)}
           </div>
         </form>
       </div>

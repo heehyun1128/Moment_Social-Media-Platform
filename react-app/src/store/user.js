@@ -1,6 +1,7 @@
 const LOAD_USERS='users/LOAD_USERS'
 const LOAD_SINGLE_USER = 'users/LOAD_SINGLE_USER'
 const LOAD_USER_POST = 'users/LOAD_USER_POST'
+const EDIT_USER_IMAGE = 'users/EDIT_USER_IMAGE'
 
 export const loadUsers = users=>({
   type:LOAD_USERS,
@@ -13,6 +14,11 @@ export const getUser = user=>({
 export const loadUserPosts = posts=>({
   type: LOAD_USER_POST,
   posts
+})
+
+export const editUserImage = userImage => ({
+  type: EDIT_USER_IMAGE,
+  userImage
 })
 
 
@@ -59,6 +65,24 @@ export const fetchUserPosts = (userId) => async (dispatch) => {
     return errors
   }
 }
+// edit user profile image
+export const fetchUserProfileImage = (userId,formData) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/profile-update`, {
+    method: "PUT",
+    body: formData
+  })
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(editUserImage(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    console.log(errors)
+    return errors
+  }
+}
 
 const initialState = {}
 const userReducer = (state = initialState, action) => {
@@ -89,7 +113,15 @@ const userReducer = (state = initialState, action) => {
       }
       console.log(newState)
       return newState
-
+    case EDIT_USER_IMAGE:
+      newState={
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          ...action.userImage
+        }
+      }
+      return newState
     default:
       return state
   }

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import './PostForm.css'
 import { fetchDeletePostImage } from "../../../store/postImage";
+import Loading from "../../Loading/Loading";
 
 const PostForm = ({ post, formType }) => {
   console.log(post)
@@ -459,7 +460,10 @@ const PostForm = ({ post, formType }) => {
             <p className="errors">{errors.content}</p>
           }
         </div>
-        {imageLoading ? <p>Submitting...</p> : <button id='submit-post-btn' type="submit">POST</button>}
+        {imageLoading ? <>
+        <Loading />
+          <p>Submitting...</p>
+        </> : <button id='submit-post-btn' type="submit">POST</button>}
       </form>
     </div>
   )

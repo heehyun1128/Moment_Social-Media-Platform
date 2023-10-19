@@ -4,6 +4,8 @@ import { fetchCreateCommentImage, fetchUpdateComment, fetchUpdateCommentImage } 
 import { useParams, useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal';
 import '../CommentForm/CommentForm.css'
+import Loading from '../../Loading/Loading';
+
 
 const EditCommentModal = ({ comment }) => {
   const dispatch = useDispatch()
@@ -153,7 +155,12 @@ const EditCommentModal = ({ comment }) => {
             </label>
           </div>
 
-          {imageLoading ? <p>Submitting...</p> : <button id='edit-comment-btn'>Submit</button>}
+          {imageLoading ? 
+           <>
+              <Loading />
+              <p>Submitting...</p>
+           </>
+           : <button id='edit-comment-btn'>Submit</button>}
         </form>
       </div>
     </div>
