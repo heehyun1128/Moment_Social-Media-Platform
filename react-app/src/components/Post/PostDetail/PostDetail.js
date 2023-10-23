@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchDeletePost, fetchSinglePost } from "../../../store/post";
 import { useParams, useHistory } from "react-router-dom";
 import './PostDetail.css'
-import { fetchSingleUser } from "../../../store/user";
+import { fetchAddFollowed, fetchAddFollower, fetchFollowers, fetchRemoveFollowed, fetchRemoveFollower, fetchSingleUser } from "../../../store/user";
 import CommentDetail from "../../Comment/CommentDetail/CommentDetail";
 import CommentForm from "../../Comment/CommentForm/CommentForm";
 import { fetchAllPostComments } from "../../../store/comment";
@@ -22,7 +22,7 @@ const PostDetail = () => {
   // comments
   const commentObj = useSelector((state) => (state.comments ? state.comments?.comments : {}))
   console.log('commentObj', commentObj)
-  const commentArr = commentObj&&Object.values(commentObj)
+  const commentArr = commentObj && Object.values(commentObj)
   console.log('commentArr', commentArr)
   console.log('post?.id', post?.id)
   // get post comments
@@ -30,12 +30,15 @@ const PostDetail = () => {
   console.log(postComments)
 
   const sessionUser = useSelector(state => state.session?.user)
+  const postCreatorFollowers = postCreator && postCreator.followers
+  const postCreatorFollowerArr = postCreatorFollowers && Object.values(postCreatorFollowers)
+  console.log(postCreatorFollowerArr)
 
   const [imageId, setImageId] = useState(null)
   const [isActive, setIsActive] = useState(['active', '', '', '', ''])
   const [isHidden, setIsHidden] = useState(['hidden', 'hidden', 'hidden', 'hidden', 'hidden'])
   const [isImageClicked, setIsImageClicked] = useState(['no', 'no', 'no', 'no', 'no'])
-
+  const [isFollowed, setIsFollowed] = useState(false)
   const images = post?.postImages
 
   const numOfComments = commentArr?.length
@@ -50,18 +53,18 @@ const PostDetail = () => {
     console.log(isActive)
     setIsActive(activeDivs)
   }
-  const handleImageClick=(index)=>{
-   
+  const handleImageClick = (index) => {
+
     const hiddenDivs = [...isHidden]
-   
-      hiddenDivs[index] = ''
-      setIsHidden(hiddenDivs)
-      
- 
-    
+
+    hiddenDivs[index] = ''
+    setIsHidden(hiddenDivs)
+
+
+
   }
 
-  const handleEnlargedViewClick = (index) =>{
+  const handleEnlargedViewClick = (index) => {
     const hiddenDivs = [...isHidden]
     hiddenDivs[index] = 'hidden'
     setIsHidden(hiddenDivs)
@@ -82,9 +85,43 @@ const PostDetail = () => {
   //   e.preventDefault();
   //   history.push(`/profile/${post.creator.id}`)
   // }
+  const handleFollowUser = async (e) => {
+    e.preventDefault()
+    if (!isFollowed) {
+
+      await dispatch(fetchAddFollower(postCreator?.id, sessionUser?.id))
+      await dispatch(fetchAddFollowed(sessionUser?.id, postCreator?.id))
+      setIsFollowed(true)
+    } else {
+      // unfollow
+      await dispatch(fetchRemoveFollower(postCreator?.id, sessionUser?.id))
+      alert("Successfully unfollowed user!")
+      // await dispatch(fetchRemoveFollowed(sessionUser?.id, postCreator?.id))
+      setIsFollowed(false)
+    }
+  }
   useEffect(() => {
     dispatch(fetchSinglePost(postId))
   }, [dispatch, postId])
+
+  // set follow status
+  useEffect(() => {
+    dispatch(fetchFollowers(postCreator?.id))
+
+  }, [dispatch, postCreator?.id])
+
+  useEffect(() => {
+    if (postCreatorFollowerArr) {
+
+      for (let follower of postCreatorFollowerArr) {
+        if (follower?.id === sessionUser?.id) {
+          setIsFollowed(true)
+        }
+      }
+    }
+
+
+  }, [dispatch, postCreatorFollowerArr, sessionUser.id])
 
   useEffect(() => {
     console.log(post)
@@ -96,9 +133,7 @@ const PostDetail = () => {
     dispatch(fetchAllPostComments(postId))
   }, [dispatch, postId])
 
-  // if(!post){
-  //   history.push('/404')
-  // }
+
   if (!post || !postCreator) {
     return null
   }
@@ -111,27 +146,27 @@ const PostDetail = () => {
       <div id="post-detail-div">
         <div id="post-img-container">
           {images?.map((image, index) => (
-           <>
+            <>
               <div
                 className='post-image'
                 // id={image?.preview === true ? 'active' : image?.id === imageId ? 'active' : ''}
                 id={isActive[index]}
                 key={index}
-                onClick={()=>handleImageClick(index)}
+                onClick={() => handleImageClick(index)}
                 onMouseEnter={() => handleMouseOver(index)}
                 // onMouseEnter={() => handleMouseOver(image?.id)}
                 // onMouseLeave={handleMouseLeave(image?.id)}
                 style={{ backgroundImage: `url(${image?.postImageUrl})` }} alt="" >
-                  {isActive[index] && <h4 id='click-image-detail'>Click Image to View Detail</h4>}
-                </div>
-              <div 
-              className="enlarged-view" 
-              id={isHidden[index]}
-              onClick={()=>handleEnlargedViewClick(index)}
-              >
-                <img  src={image?.postImageUrl} alt="" />
+                {isActive[index] && <h4 id='click-image-detail'>Click Image to View Detail</h4>}
               </div>
-           </>
+              <div
+                className="enlarged-view"
+                id={isHidden[index]}
+                onClick={() => handleEnlargedViewClick(index)}
+              >
+                <img src={image?.postImageUrl} alt="" />
+              </div>
+            </>
           ))}
         </div>
         <div id="post-detail">
@@ -142,22 +177,28 @@ const PostDetail = () => {
               {postCreator?.profileImage ? <img src={postCreator?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-lg"></i>}
             </div>
             <p>{post?.creator?.username}</p>
+            {sessionUser && post && post.creator && sessionUser?.id !== post?.creator?.id && <div id="follow-btn" onClick={handleFollowUser}>
+              { !isFollowed ?
+                'FOLLOW' : 'FOLLOWING'}
+            </div>}
+
+
           </div>
-          
+
           <h4>{post?.title}</h4>
           <div id="post-content">
             {post?.content}
           </div>
           <div id='post-detail-btn-div'>
             {sessionUser && post?.creatorId === sessionUser.id && <button onClick={handleOpenEditPostForm}>EDIT POST</button>}
-            {sessionUser && post?.creatorId === sessionUser.id && 
-           
+            {sessionUser && post?.creatorId === sessionUser.id &&
+
               < OpenModalButton
-              buttonText="DELETE POST"
+                buttonText="DELETE POST"
 
-            modalComponent={<DeletePostModal postId={post?.id} />}
+                modalComponent={<DeletePostModal postId={post?.id} />}
 
-            />
+              />
             }
 
 

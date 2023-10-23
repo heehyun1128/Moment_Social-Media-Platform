@@ -4,6 +4,7 @@ from .posts import seed_posts,undo_posts
 from .post_images import seed_postimages,undo_postimages
 from .comments import seed_comments,undo_comments
 from .comment_images import seed_commentimages,undo_commentimages
+from .follows import seed_followed,seed_followers,undo_followed,undo_followers
 # from .like import seed_liked_posts,undo_liked_posts
 
 from app.models.db import db, environment, SCHEMA
@@ -23,8 +24,12 @@ def seed():
         # undo_liked_posts()
         undo_postimages()
         undo_posts()
+        undo_followers()
+        undo_followed()
         undo_users()
     seed_users()
+    seed_followed()
+    seed_followers()
     seed_posts()
     seed_postimages()
     # seed_liked_posts()
@@ -40,4 +45,6 @@ def undo():
     undo_postimages()
     undo_posts()
     undo_users()
+    undo_followed()
+    undo_followers()
     # Add other undo functions here

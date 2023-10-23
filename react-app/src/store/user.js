@@ -5,6 +5,12 @@ const EDIT_USER_IMAGE = 'users/EDIT_USER_IMAGE'
 const LOAD_USER_LIKE_POST ='users/LOAD_USER_LIKE_POST'
 const ADD_LIKE = 'users/ADD_LIKE'
 const DELETE_LIKE = 'users/DELETE_LIKE'
+const LOAD_FOLLOWER = 'users/LOAD_FOLLOWER'
+const LOAD_FOLLOWED = 'users/LOAD_FOLLOWED'
+const ADD_FOLLOWER = 'users/ADD_FOLLOWER'
+const ADD_FOLLOWED = 'users/ADD_FOLLOWED'
+const DELETE_FOLLOWER = 'users/DELETE_FOLLOWER'
+const DELETE_FOLLOWED = 'users/DELETE_FOLLOWED'
 
 export const loadUsers = users=>({
   type:LOAD_USERS,
@@ -37,6 +43,30 @@ export const editUserImage = userImage => ({
   userImage
 })
 
+export const getFollowers = users => ({
+  type: LOAD_FOLLOWER,
+  users
+})
+export const getFollowed = users => ({
+  type: LOAD_FOLLOWED,
+  users
+})
+export const addFollower = user => ({
+  type: ADD_FOLLOWER,
+  user
+})
+export const addFollowed = user => ({
+  type: ADD_FOLLOWED,
+  user
+})
+export const delFollower = userId => ({
+  type: DELETE_FOLLOWER,
+  userId
+})
+export const delFollowed = userId => ({
+  type: DELETE_FOLLOWED,
+  userId
+})
 
 // fetch all users
 export const fetchAllUsers = () => async (dispatch) => {
@@ -145,6 +175,96 @@ export const fetchUserProfileImage = (userId,formData) => async (dispatch) => {
     return errors
   }
 }
+// get all followers
+export const fetchFollowers = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/followers`)
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getFollowers(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+// get all followed
+export const fetchFollowed = (userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}/followed`)
+  console.log(res)
+  if (res.ok) {
+    const data = await res.json()
+    dispatch(getFollowed(data))
+    console.log(data)
+    return data
+  } else {
+    const errors = await res.json()
+    return errors
+  }
+}
+
+// add follower
+export const fetchAddFollower = (userId,followerId )=> async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/followers/${followerId}`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, followerId })
+  });
+  if (response.ok) {
+    console.log(response)
+    const data = await response.json()
+    dispatch(addFollower(followerId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
+// add followed
+export const fetchAddFollowed = (userId,followedId )=> async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/followed/${followedId}`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ userId, followedId })
+  });
+  if (response.ok) {
+    console.log(response)
+    const data = await response.json()
+    dispatch(addFollower(followedId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
+
+export const fetchRemoveFollower = (userId,followerId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/followers/${followerId}/delete`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(delFollower(followerId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
+export const fetchRemoveFollowed = (userId,followedId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/followed/${followedId}/delete`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(delFollower(followedId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
 
 const initialState = {}
 const userReducer = (state = initialState, action) => {
@@ -200,12 +320,80 @@ const userReducer = (state = initialState, action) => {
           ...state.singleUser,
           likedPosts: {
             ...state.singleUser.likedPosts,
-            // [action.post.id]:null
+       
           }
           
         }
       }
       delete newState.singleUser.likedPosts[action.postId]
+      return newState
+    case LOAD_FOLLOWER:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followers: action.users
+        }
+      }
+      return newState
+    case ADD_FOLLOWER:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followers: {
+            ...state.singleUser.followers,
+            [action.user.id]:action.user
+          }
+        }
+      }
+      return newState
+    case DELETE_FOLLOWER:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followers: {
+            ...state.singleUser.followers
+          }
+
+        }
+      }
+      delete newState.singleUser.followers[action.userId]
+      return newState
+    case LOAD_FOLLOWED:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followed: action.users
+        }
+      }
+      return newState
+    case ADD_FOLLOWED:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followed: {
+            ...state.singleUser.followed,
+            [action.user.id]:action.user
+          }
+        }
+      }
+      return newState
+    case DELETE_FOLLOWED:
+      newState = {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          followed: {
+            ...state.singleUser.followed
+          }
+
+        }
+      }
+      delete newState.singleUser.followed[action.userId]
       return newState
     default:
       return state

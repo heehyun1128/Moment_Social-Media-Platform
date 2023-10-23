@@ -14,8 +14,8 @@ import PageNotFound from './components/PageNotFound/PageNotFound'
 import Search from "./components/Search/Search";
 import AllPost from "./components/Post/AllPost/AllPost";
 import { useLocation } from 'react-router-dom';
-import UserPost from "./components/Post/UserPost/UserPost";
-import Like from "./components/Like/Like";
+// import UserPost from "./components/Post/UserPost/UserPost";
+// import Like from "./components/Like/Like";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,12 +48,12 @@ function App() {
           <Route exact path="/posts/:postId">
             <PostDetail />
           </Route>
-          <Route exact path="/profile/:userId/liked-posts">
+          {/* <Route exact path="/profile/:userId/liked-posts">
             <Like />
-          </Route>
-          <Route exact path="/profile/:userId/posts">
+          </Route> */}
+          {/* <Route exact path="/profile/:userId/posts">
             <UserPost />
-          </Route>
+          </Route> */}
           <Route exact path="/profile/:userId">
             <UserProfile />
           </Route>

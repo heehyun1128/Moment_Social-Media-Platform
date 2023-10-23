@@ -29,16 +29,51 @@ def user(id):
 
     post_dict = {}
     for post in user_posts:
+        creator=post.creator
+        post_likes=post.like_users
         data=post.to_dict()
+        data['creator']=creator.to_dict()
         #get post images
         post_images=PostImage.query.filter_by(post_id=post.id).all()
         for img in post_images:
             if img.preview:
                 data["previewImg"] = img.post_image_url
                 break
+        data['likeUsers']=[like.to_dict() for like in post_likes] 
         post_dict[str(post.id)] = data
         print('OOOOOOOOOOOOOOOOOOO',post_dict)
     return post_dict
+
+# get followers
+@user_routes.route('/<int:id>/followers')
+@login_required
+def get_followers(id):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    followers=curr_user.followers
+    follower_dict={}
+
+    for follower in followers:
+        data=follower.to_dict()
+        follower_dict[str(follower.id)]=data
+    return follower_dict
+
+# get followed
+@user_routes.route('/<int:id>/followed')
+@login_required
+def get_followed(id):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    followed_users=curr_user.followed
+    followed_dict={}
+
+    for followed in followed_users:
+        data=followed.to_dict()
+        followed_dict[str(followed.id)]=data
+    return followed_dict
+
 
 @user_routes.route('/<int:id>/likes')
 @login_required
@@ -49,12 +84,22 @@ def get_likes(id):
         return {'errors':"User not found"}, 404
 
     user_like_posts=curr_user.like_posts
+    
     print('OOOOOOOOOO',user_like_posts)
     like_dict = {}
 
     for like in user_like_posts:
         data = like.to_dict()
+        liked_post_likes=like.like_users
+        post_images=like.post_images
+        for img in post_images:
+            if img.preview:
+                data["previewImg"] = img.post_image_url
+                break
         
+    
+        data['likeUsers']=[like.to_dict() for like in liked_post_likes]
+
         like_dict[str(like.id)] = data
 
     return like_dict
@@ -75,6 +120,33 @@ def users():
     """
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
+
+
+# create followers
+@user_routes.route('/<int:id>/followers/<int:followerId>',methods=['POST'])
+@login_required
+def add_followers(id,followerId):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    new_follower=User.query.get(followerId)
+
+    curr_user.followers.append(new_follower)
+    db.session.commit()
+    return {"message": "Successfully added followers"}
+
+# create followed
+@user_routes.route('/<int:id>/followed/<int:followedId>',methods=['POST'])
+@login_required
+def add_followed(id,followedId):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    new_followed=User.query.get(followedId)
+
+    curr_user.followed.append(new_followed)
+    db.session.commit()
+    return {"message": "Successfully followed user"}
 
 @user_routes.route('/<int:id>/profile-update', methods=['PUT'])
 @login_required
@@ -115,7 +187,31 @@ def update_profile(id):
     #     print('yyyyyyyyyyy',form.errors)
     # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+# remove followers
+@user_routes.route('/<int:id>/followers/<int:followerId>/delete',methods=['DELETE'])
+@login_required
+def remove_followers(id,followerId):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    del_follower=User.query.get(followerId)
 
+    curr_user.followers.remove(del_follower)
+    db.session.commit()
+    return {"message": "Successfully removed followers"}
+
+# remove followed
+@user_routes.route('/<int:id>/followed/<int:followedId>/delete',methods=['DELETE'])
+@login_required
+def remove_followed(id,followedId):
+    curr_user=User.query.get(id)
+    if not curr_user:
+        return {'errors':"User not found"}, 404
+    del_followed=User.query.get(followedId)
+
+    curr_user.followed.remove(del_followed)
+    db.session.commit()
+    return {"message": "Successfully removed followed user"}
 
 # aws
 
