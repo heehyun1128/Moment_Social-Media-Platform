@@ -1,4 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+from app.models.follow import follows
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
@@ -23,6 +24,15 @@ class User(db.Model, UserMixin):
     #relationships
     posts=db.relationship("Post",back_populates="creator")
     comments=db.relationship("Comment",back_populates="user",cascade="all, delete, delete-orphan")
+    like_posts=db.relationship("Post",secondary='likes',back_populates='like_users')
+
+    followers=db.relationship("User",secondary="follows", primaryjoin=follows.columns.followed==id,
+    secondaryjoin=follows.c.follower==id,
+    back_populates="followed")
+
+    followed=db.relationship("User",secondary="follows", primaryjoin=follows.columns.follower==id,
+    secondaryjoin=follows.c.followed==id,
+    back_populates="followers")
 
     @property
     def password(self):

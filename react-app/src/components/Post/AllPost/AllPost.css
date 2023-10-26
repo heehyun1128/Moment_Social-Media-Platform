@@ -8,16 +8,16 @@
   box-sizing: border-box;
   width: 85vw;
   margin: 60px auto 20px;
-  columns: 3;
+  columns: 2;
   column-gap: 5px;
   z-index: -999999 !important;
+  
 }
 
-#all-post-container{
+/* #all-post-container{
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color:  #c69a9a;
-  z-index:-999; */
-}
+  
+} */
 

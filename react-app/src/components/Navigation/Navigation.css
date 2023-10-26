@@ -20,6 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width:80%;
 }
 
 #logout-btn {
@@ -32,6 +33,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  margin-top:15px;
 }
 
 .hidden {
@@ -135,7 +137,7 @@ img#profile-img {
 }
 
 #icon-nav li>* {
-  color: rgb(70, 70, 70);
+  color: rgb(84, 84, 84);
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -242,4 +244,42 @@ img#profile-img {
 
 #signup-login-h4 {
   padding: 0 5px;
+}
+
+#new-profile-pic{
+  border-radius: 50%;
+  width: 100px;
+    height: 100px;
+   
+    outline: none;
+    border: none;
+    box-shadow: 0 0 4px gray;
+}
+
+#update-profile-pic-text{
+  font-size: 10px;
+}
+
+#profile-icon-span{
+  display: flex;
+  align-items: flex-start;
+}
+
+#profile-up-left{
+  border-right: 1px dashed rgb(177, 177, 177);
+  
+}
+
+#profile-up-right{
+  margin-left: 20px;
+}
+
+#edit-comment-img-input-label{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profile-icon-span:hover i{
+  color: #c39c9c;
 }

@@ -128,3 +128,20 @@ height: 80%;
   color:rgb(240, 240, 240);
   background-color: rgba(133, 133, 133,.8);
 }
+
+#follow-btn{
+  height: 30px;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 5px 15px;
+    border: none;
+    box-shadow: 0 0 4px gray;
+    border-radius: 5px;
+    background-color: rgba(243, 242, 242, 0.8);
+}
+
+#follow-btn:hover{
+  cursor: pointer;
+  background-color: #ca9d9d;
+  color:white;
+}

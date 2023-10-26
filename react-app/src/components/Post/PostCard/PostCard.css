@@ -145,3 +145,14 @@ position: absolute;
   padding: 10px;
   text-align: center;
 } */
+
+#liked{
+  color:rgb(178, 129, 137);
+}
+
+#text-like-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:15px;
+}

@@ -17,9 +17,10 @@ function LoginFormModal() {
       if (e.code === "Enter" || e.code === "NumpadEnter") {
         if (!email || !password) {
           alert('Email and password are required for login!')
+          e.preventDefault();
+          return
         }else{
 
-          e.preventDefault();
           handleSubmit(e)
         }
       }
@@ -68,6 +69,9 @@ function LoginFormModal() {
             required
           />
         </label>
+        {errors && errors.email &&
+          <p className="errors">{errors.email}</p>
+        }
         <label>
           Password
           <input
@@ -77,6 +81,9 @@ function LoginFormModal() {
             required
           />
         </label>
+        {errors && errors.password &&
+          <p className="errors">{errors.password}</p>
+        }
         <button className="login-form-submit-btn" onClick={handleDemoUserLogin}>DEMO USER</button>
         <button className="login-form-submit-btn" type="submit">LOG IN</button>
       </form>

@@ -1,7 +1,7 @@
 from flask import Blueprint,jsonify
 from flask_login import login_required
 from app.forms import PostForm,PostImageForm,CommentForm
-from app.models import Post,db,PostImage,Comment,User,CommentImage
+from app.models import Post,db,PostImage,Comment,User,CommentImage,like
 from app.api.auth_routes import validation_errors_to_error_messages
 #aws
 from flask import Blueprint, request
@@ -65,12 +65,21 @@ def get_all_posts():
     images = post.post_images
     creator=post.creator
     comments=post.comments
+    like_users=post.like_users
+    print('1111OOOOOOOOOOOO',like_users)
 
     for img in images:
       if img.preview:
         data['previewImg'] = img.post_image_url
         break
     data['creator']=creator.to_dict()
+
+    data['likeUsers']=[]
+    for user in like_users:
+      print('OOOOOOOOOOOO',user.to_dict())
+      if user:
+        user_data = user.to_dict()
+        data['likeUsers'].append(user_data)
   
     data['comments'] = []
     for comment in comments:
@@ -222,6 +231,18 @@ def post_comment(postId):
     }
     return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+#create likes
+
+@post_routes.route('/<int:postId>/likes',methods=['POST'])
+@login_required
+def create_like(postId):
+  post=Post.query.get(postId)
+  if post in current_user.like_posts:
+    return {"errors": "User already liked the post"}, 400
+  post.like_users.append(current_user)
+  db.session.commit()
+  return {"message": "Successfully liked post"}
 
 
 # EDIT A POST IMAGE

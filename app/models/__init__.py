@@ -5,4 +5,6 @@ from .comment import Comment
 from .post import Post
 from .post_image import PostImage
 from .comment_image import CommentImage
+from .like import likes
+from .follow import follows
 
