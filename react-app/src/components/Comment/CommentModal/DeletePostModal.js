@@ -14,7 +14,10 @@ const DeletePostModal = ({postId}) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     await dispatch(fetchDeletePost(postId))
-    history.push(`/profile/${sessionUser.id}`)
+    if(sessionUser){
+
+      history.push(`/profile/${sessionUser?.id}`)
+    }
     closeModal()
 
   }

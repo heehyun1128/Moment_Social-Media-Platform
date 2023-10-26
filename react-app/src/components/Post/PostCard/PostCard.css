@@ -12,7 +12,7 @@
 } */
 
 #post-card-img-div {
-  width: 95%;
+  width: 100%;
   position: relative;
   background-color: #fff;
   border-radius: 10px;
@@ -155,4 +155,16 @@ position: absolute;
   align-items: center;
   justify-content: space-between;
   padding:15px;
+}
+
+#like-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+min-width: fit-content;
+}
+
+#post-card-div p{
+  padding: 0!important;
+  margin: 0!important;
 }

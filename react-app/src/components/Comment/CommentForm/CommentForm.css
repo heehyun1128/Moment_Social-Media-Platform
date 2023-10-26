@@ -16,19 +16,13 @@
   border:none;
   box-shadow: 0 0 4px gray;
 }
-#edit-comment-form textarea,#create-comment-form textarea {
+/* #edit-comment-form textarea,#create-comment-form textarea {
   transform-origin:  center top;
   transition: height 0.2s;
   
-}
+} */
 
-#edit-comment-form textarea:focus,#create-comment-form textarea:focus {
-  /* transform:translateY(10%); */
-  outline: none;
-  height: 100px;
-  box-shadow: 2px 2px 10px gray;
-  /* transform: scale(1.5); */
-}
+/* */
 
 #create-comment-form textarea:focus #comment-detail-div{
 margin-top:100px;
@@ -43,8 +37,8 @@ align-items: flex-start;
 
 
 #edit-comment-form textarea,#create-comment-form textarea {
-  height: 60px;
-  width: 80%;
+  height: 200px;
+  width: 100%;
   border: 0.5px solid gray;
   border-radius: 10px;
 
@@ -174,4 +168,16 @@ padding: 15px;
 
 #submit-comment-btn{
   height:30px;
+  cursor: pointer;
+}
+
+#submit-comment-div input{
+  display: none;
+}
+
+#submit-comment-div button{
+  height: 30px;
+}
+#submit-comment-div button:hover{
+ cursor: pointer;
 }

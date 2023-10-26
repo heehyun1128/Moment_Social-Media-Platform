@@ -1,13 +1,20 @@
-#profile-img-li {
+ #profile-page-main-div #posts-div #follower-content #profile-img-li {
   display: flex;
   justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
+  align-items: center !important;
+  min-width: 100px !important;
+  height: 100px !important;
   border-radius: 50%;
   overflow: hidden;
-  margin: 5px 15px 20px;
+  /* margin: 5px 15px 20px; */
   background-color: #e5b7b7;
+}
+#profile-img-li i{
+  margin-right: 0 !important;
+}
+
+#new-profile-pic{
+  min-width:100px;
 }
 
 img#profile-img {
@@ -20,8 +27,26 @@ img#profile-img {
   flex-direction: column;
 }
 
+#follower-content div>*{
+  margin-right: 20px;
+}
+
 #follower-content>*{
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  
+}
+#follower-info>* {
+  margin-right: 20px;
+}
+
+#follower{
+  cursor: pointer;
+ 
+}
+
+#follower:hover{
+  color:#c09b9b;
+  font-weight: bold;
 }

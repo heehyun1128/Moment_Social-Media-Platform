@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { fetchRemoveFollower } from '../../../store/user'
 import { useDispatch } from 'react-redux'
+import './Follower.css'
 
 const FollowerCard = ({ follower, sessionUser }) => {
   console.log(follower)
@@ -20,18 +21,18 @@ const FollowerCard = ({ follower, sessionUser }) => {
   useEffect(() => {
     if (follower) {
       setFollowStatus(true)
-    }else{
+    } else {
       setFollowStatus(false)
     }
   }, [follower])
 
   return followStatus ?
-    (<div>
-      <div>
+    (<div >
+     
 
-        {follower?.profileImage ? <img id='new-profile-pic' src={follower?.profileImage} alt="" /> : <div id='profile-img-li'><i class="fa-solid fa-user fa-xl"></i></div>}
-        <h2>{follower.username}</h2>
-      </div>
+      {follower?.profileImage ? <div id='new-profile-pic'><img  src={follower?.profileImage} alt="" /></div> : <div id='profile-img-li'><i class="fa-solid fa-user fa-xl"></i></div>}
+        <p>{follower.username}</p>
+   
       {sessionUser && sessionUser?.id !== follower?.id && <div id="follow-btn" onClick={() => handleRemoveFollowUser(follower)}>
         {followStatus && 'REMOVE FOLLOWER'}
       </div>}

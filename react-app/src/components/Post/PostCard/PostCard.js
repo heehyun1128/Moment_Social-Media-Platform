@@ -25,6 +25,9 @@ const PostCard = ({ post }) => {
   }
 
   const handleLike = async (e) => {
+    if(!sessionUser){
+      alert('Please log in to like a post')
+    }
     e.preventDefault()
     e.stopPropagation()
     if (!isLiked) {
@@ -34,7 +37,7 @@ const PostCard = ({ post }) => {
         setIsLiked(true)
         setTotalLikes(prevLike => prevLike + 1)
       } else {
-        console.log(likedPost.errors)
+        console.log(likedPost?.errors)
       }
     } else {
       const dislikedPost = await dispatch(fetchRemoveLike(post.id))
@@ -51,8 +54,8 @@ const PostCard = ({ post }) => {
   }
 
   useEffect(() => {
-    dispatch(fetchUserLikedPosts(sessionUser.id))
-  }, [dispatch, sessionUser.id])
+    sessionUser && dispatch(fetchUserLikedPosts(sessionUser?.id))
+  }, [dispatch, sessionUser?.id])
 
   useEffect(() => {
     if (userLikedPosts && post && Object.keys(userLikedPosts).includes(post.id + '')) {
@@ -69,9 +72,9 @@ const PostCard = ({ post }) => {
     }
   }, [dispatch, postLikedUsers])
 
-  if (!sessionUser) {
-    return null
-  }
+  // if (!sessionUser) {
+  //   return null
+  // }
   return (
     <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
@@ -88,8 +91,12 @@ const PostCard = ({ post }) => {
             {post && <p>{createdDate}</p>}
           </div>
           <div id="like-box">
-            {post && <i onClick={handleLike} id={isLiked ? 'liked' : ''} class="fa-solid fa-heart fa-lg"></i>}
-            {totalLikes} Likes
+            {post &&
+              <p>
+             <i onClick={handleLike} id={isLiked ? 'liked' : ''} class="fa-solid fa-heart fa-lg"></i>
+                {totalLikes} Likes</p>
+             }
+           
           </div>
          
         </div>

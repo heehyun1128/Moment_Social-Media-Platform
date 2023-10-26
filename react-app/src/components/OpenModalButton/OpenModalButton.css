@@ -1,15 +1,15 @@
 #login-signup-btn {
   margin-top: 20px;
   border: none;
- font-size: 14px !important;
+ font-size: 20px !important;
  
-  font-weight: bold;
-  color: rgb(186, 145, 152);
+  /* font-weight: bold; */
+  color: rgba(0, 0, 0,.8);
   background-color: transparent;
   cursor: pointer;
   margin-right: 20px;
-  box-shadow: 0 0 5px gray;
-  border-radius: 5px;
+  /* box-shadow: 0 0 5px gray; */
+  /* border-radius: 5px; */
   padding: 6px;
   margin: 0;
   margin-right:5px;
@@ -17,10 +17,14 @@
 
 #login-signup-btn:hover{
   cursor: pointer;
-  background-color: #e5b9b9;
-  color: gray;
+  /* background-color: #e5b9b9; */
+  color: white;
   
 }
 .hidden{
   display: none;
+}
+
+#delete-post-btn{
+  height: 30px;
 }

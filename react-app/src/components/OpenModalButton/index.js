@@ -17,7 +17,7 @@ function OpenModalButton({
   };
 
   return (
-    <button id='login-signup-btn' onClick={onClick}>{buttonText}</button>
+    <button id='delete-post-btn' onClick={onClick}>{buttonText}</button>
   );
 }
 

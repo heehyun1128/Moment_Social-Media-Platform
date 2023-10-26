@@ -112,64 +112,76 @@ function ProfileButton({ user }) {
         <i class="fa-solid fa-user"></i>
       </div>
       <ul className={ulClassName} ref={ulRef}>
-        {user ? (
+        {user && (
           <>
             <div id='profile-main'>
               <div id="profile-up-left">
-                {profilePic ? <img src={selImage} id='new-profile-pic' alt='' /> : <div id='profile-img-li'>
+                {profilePic ? <img src={selImage} id='new-profile-pic' alt='' /> : <div id='user-profile-img-li'>
                   {user?.profileImage ? <img id='profile-img' src={user?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-xl"></i>}
+                  <div id="profile-up-right">
+                    <label id='edit-comment-img-input-label'>
+
+                      <input
+                        type="file"
+                        accept="image/*"
+                        // value={profilePic}
+                        onChange={(e) => {
+                          console.log(e.target.files[0])
+                          setProfilePic(e.target.files[0])
+                          displayFile(e)
+                        }}
+
+                      />
+                      <span id='profile-icon-span'>
+                        +
+
+                      </span>
+                      {/* <span id='profile-icon-span'>
+                    +
+                    {!profilePic && <p id='update-profile-pic-text'>Update Profile Image</p>}
+                  </span> */}
+
+                    </label>
+                  </div>
                 </div>}
                 <div>Welcome, {user?.username}</div>
               </div>
-              <div id="profile-up-right">
-                <label id='edit-comment-img-input-label'>
-
-                  <input
-                    type="file"
-                    accept="image/*"
-                    // value={profilePic}
-                    onChange={(e) => {
-                      console.log(e.target.files[0])
-                      setProfilePic(e.target.files[0])
-                      displayFile(e)
-                    }}
-
-                  />
-                  <span id='profile-icon-span'>
-                    <i class="fa-solid fa-gears fa-lg"></i>
-                    {!profilePic && <p id='update-profile-pic-text'>Update Profile Image</p>}
-                  </span>
-                  {profilePic && <button onClick={handleUpdateProfilePic}>Update Profile Image</button>}
-                </label>
-              </div>
+              
             </div>
             {/* edit profile image */}
-            <button id='logout-btn' onClick={handleLogout}>LOG OUT</button>
+           <div id="button-section">
+              {profilePic && <button onClick={handleUpdateProfilePic}>Update Profile Image</button>}
+              <button id='logout-btn' onClick={handleLogout}>LOG OUT</button>
+           </div>
 
           </>
-        ) : (
-          <div id='signup-login-div'>
-            <h4 id='signup-login-h4'>Hi there,please </h4>
-
-            <OpenModalButton
-              id='login-btn'
-              buttonText=" LOG IN"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <h4 id='signup-login-h4'>or </h4>
-            <OpenModalButton
-              id='signup-btn'
-              buttonText=" SIGN UP"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-
-          </div>
-        )}
+        ) 
+     
+        }
       </ul>
     </>
   );
 }
 
 export default ProfileButton;
+
+// {/* (
+//           <div id='signup-login-div'>
+//             <h4 id='signup-login-h4'>Hi there,please </h4>
+
+//             <OpenModalButton
+//               id='login-btn'
+//               buttonText=" LOG IN"
+//               onItemClick={closeMenu}
+//               modalComponent={<LoginFormModal />}
+//             />
+//             <h4 id='signup-login-h4'>or </h4>
+//             <OpenModalButton
+//               id='signup-btn'
+//               buttonText=" SIGN UP"
+//               onItemClick={closeMenu}
+//               modalComponent={<SignupFormModal />}
+//             />
+
+//           </div>
+//         ) */}

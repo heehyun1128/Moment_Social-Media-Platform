@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -7,13 +7,25 @@ import SearchBar from './SearchBar';
 import { useHistory } from 'react-router-dom';
 import { useSearchContext } from '../../context/Search';
 import logo from '../images/logo.JPG'
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from '../LoginFormModal';
 
+
+import { logout } from "../../store/session";
+
+
+import SignupFormModal from "../SignupFormModal";
+import './Navigation.css'
+import { fetchUserProfileImage } from "../../store/user";
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
 
 	const { searchContent, setSearchContent } = useSearchContext()
+
+	const [showMenu, setShowMenu] = useState(false);
+	const ulRef = useRef();
 
 	const handleViewAllPosts = () => {
 		if (!sessionUser) {
@@ -33,31 +45,49 @@ function Navigation({ isLoaded }) {
 		history.push('/posts/new')
 	}
 
-	// const handleUserSettings =e=>{
-	// 	// if (!sessionUser) {
-	// 	// 	alert('')
-	// 	// }
-	// 	e.preventDefault()
-		
-	// }
+	useEffect(() => {
+		if (!showMenu) return;
 
+		const closeMenu = (e) => {
+			if (!ulRef?.current?.contains(e.target)) {
+				setShowMenu(false);
+				
+			}
+		};
+
+		document.addEventListener("click", closeMenu);
+
+		return () => document.removeEventListener("click", closeMenu);
+	}, [showMenu]);
+	const closeMenu = () => setShowMenu(false);
 	return (
 		<div id='nav-container'>
 			<div id='navigation-section'>
 				<div id='search-bar'>
-					{/* <SearchBar
+					<SearchBar
 						searchContent={searchContent}
-						setSearchContent={setSearchContent} /> */}
+						setSearchContent={setSearchContent} />
 				</div>
 				<div id='title-div'>
 					<NavLink exact to="/">MOMENT</NavLink>
 				</div>
 				<div id='nav-right-div'>
-					{/* <div className='one' onClick={handleGoToPostForm}>
-					<i class="fa-solid fa-pen"></i>
-				</div> */}
-					{isLoaded && (
-						<div className='one' id='profile-btn'>
+					{!sessionUser && <>
+						<OpenModalButton
+							id='login-btn'
+							buttonText=" LOG IN"
+							onItemClick={closeMenu}
+							modalComponent={<LoginFormModal />}
+						/>
+						<OpenModalButton
+							id='signup-btn'
+							buttonText=" SIGN UP"
+							onItemClick={closeMenu}
+							modalComponent={<SignupFormModal />}
+						/>
+					</>}
+					{sessionUser && isLoaded && (
+						<div className='one' id='home-profile-btn'>
 							<ProfileButton user={sessionUser} />
 						</div>
 					)}

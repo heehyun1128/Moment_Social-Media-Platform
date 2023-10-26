@@ -68,18 +68,23 @@ input[type=file] {
   width: 100%;
 }
 #post-title-div input, #post-content-div textarea{
-  width: 80%;
+  width: 90%;
   outline: none;
-  border: none;
-  box-shadow: 2px 2px 5px gray;
+  border: 1px solid gray;
+
+  /* box-shadow: 2px 2px 5px gray; */
   border-radius: 10px;
   min-height: 40px;
   padding: 5px;
 }
 
-textarea{
-  height: 80px;
+#post-content-div textarea{
+  height: 200px;
 }
+
+/* textarea{
+  height: 80px;
+} */
 
 #submit-post-btn{
   height:40px;
@@ -108,7 +113,8 @@ textarea{
   min-height: 180px;
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
-  box-shadow: 0 0 6px rgb(207, 207, 207);
+  /* box-shadow: 0 0 6px rgb(207, 207, 207); */
+  border:1px solid gray;
   margin-right: 10px;
   display: flex;
   justify-content: center;
@@ -135,7 +141,7 @@ textarea{
 
 
 #create-post-form{
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -169,7 +175,8 @@ textarea{
 }
 
 .errors{
-  color:red;
+  color:rgb(151, 56, 56);
+  font-size: 14px;
 }
 
 #edit-post-div{
