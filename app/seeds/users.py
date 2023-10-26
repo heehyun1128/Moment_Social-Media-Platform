@@ -15,6 +15,10 @@ def seed_users():
         username='bobbie', email='bobbie@aa.io', 
         first_name='Bobbie', last_name='Bobbie',
         password='password')
+    disney = User(
+        username='disney', email='disney@aa.io', 
+        first_name='Disney', last_name='Disney',
+        password='password')
 
     db.session.add(demo)
     db.session.add(marnie)

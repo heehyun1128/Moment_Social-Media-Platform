@@ -17,11 +17,14 @@ def seed_followers():
 
 def undo_followers():
   demo=User.query.filter_by(id=1).first()
-  demo.followers=[]
+  if demo:
+    demo.followers=[]
   marnie=User.query.filter_by(id=2).first()
-  marnie.followers=[]
+  if marnie:
+    marnie.followers=[]
   bobbie=User.query.filter_by(id=3).first()
-  bobbie.followers=[]
+  if bobbie:
+    bobbie.followers=[]
   db.session.commit()
 
 def seed_followed():
@@ -40,9 +43,12 @@ def seed_followed():
 
 def undo_followed():
   demo=User.query.filter_by(id=1).first()
-  demo.followed=[]
+  if demo:
+    demo.followed=[]
   marnie=User.query.filter_by(id=2).first()
-  marnie.followed=[]
+  if marnie:
+    marnie.followed=[]
   bobbie=User.query.filter_by(id=3).first()
-  bobbie.followed=[]
+  if bobbie:
+    bobbie.followed=[]
   db.session.commit()
