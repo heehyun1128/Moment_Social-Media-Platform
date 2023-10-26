@@ -72,9 +72,10 @@ function SignupFormModal() {
 			<h1>SIGN UP</h1>
 			<form id='signup-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
-				<label >
+				<label id='signup-input-label'>
 					<div>Profile Picture (optional)</div>
 					<input
+					id='select-profile-pic'
 						type="file"
 						accept="image/*"
 						// value={profilePic}
@@ -85,6 +86,7 @@ function SignupFormModal() {
 						}}
 
 					/>
+					<i class="fa-solid fa-image fa-lg"></i>
 					<div id='image-preview-box'>
 						{selImage && <img src={selImage} id='profile-img-preview' alt='' />}
 						{/* {selImage && <div id='deslect-image-btn' onClick={handleDeselectImg}>Deslect Image</div>} */}

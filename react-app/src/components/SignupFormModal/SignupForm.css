@@ -22,21 +22,25 @@
   width:100%;
 }
 
-.label{
+#signup-modal-div .label{
   display: flex;
 width:100%;
+height: 20px !important;
 }
 /* #signup-form  input{
   width: 200px;
   height:32px;
 
 } */
-
+#signup-modal-div .label p{
+  color:#212931 !important;
+}
 #signup-form input{
   width: 100%;
   height: 32px;
   border-radius: 10px;
   padding: 5px;
+  border: 1px solid black;
 }
 
 #required-field{
@@ -72,4 +76,13 @@ width:100%;
 #image-preview-box {
   display: flex;
   align-items: center;
+}
+
+#signup-modal-div #select-profile-pic{
+  height: 60px;
+  width: 60px;
+}
+
+#signup-input-label input{
+ display: none; 
 }

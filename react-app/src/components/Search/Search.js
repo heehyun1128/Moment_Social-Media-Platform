@@ -26,7 +26,7 @@ const Search = () => {
 
   return (
     <div >
-      <div >
+      <div id='search-result-div' >
         <h1 style={{'textAlign':'center'}}>Search Result: {queryTerm}</h1>
       </div>
       {!found ?

@@ -21,13 +21,13 @@ const PostDetail = () => {
   const postCreator = useSelector(state => state.users?.singleUser)
   // comments
   const commentObj = useSelector((state) => (state.comments ? state.comments?.comments : {}))
-  console.log('commentObj', commentObj)
+  // console.log('commentObj', commentObj)
   const commentArr = commentObj && Object.values(commentObj)
-  console.log('commentArr', commentArr)
-  console.log('post?.id', post?.id)
+  // console.log('commentArr', commentArr)
+  // console.log('post?.id', post?.id)
   // get post comments
   const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id))
-  console.log(postComments)
+  // console.log(postComments)
 
   const sessionUser = useSelector(state => state.session?.user)
   const postCreatorFollowers = postCreator && postCreator.followers
@@ -35,6 +35,7 @@ const PostDetail = () => {
   console.log(postCreatorFollowerArr)
 
   const [imageId, setImageId] = useState(null)
+  // css
   const [isActive, setIsActive] = useState(['active', '', '', '', ''])
   const [isHidden, setIsHidden] = useState(['hidden', 'hidden', 'hidden', 'hidden', 'hidden'])
   const [isImageClicked, setIsImageClicked] = useState(['no', 'no', 'no', 'no', 'no'])
@@ -73,7 +74,7 @@ const PostDetail = () => {
   const handleDeletePost = async (e) => {
     e.preventDefault();
     await dispatch(fetchDeletePost(post.id))
-    history.push(`/profile/${sessionUser.id}`)
+    history.push(`/profile/${sessionUser?.id}`)
   }
 
   const handleOpenEditPostForm = (e) => {
@@ -121,7 +122,7 @@ const PostDetail = () => {
     }
 
 
-  }, [dispatch, postCreatorFollowerArr, sessionUser.id])
+  }, [dispatch, postCreatorFollowerArr, sessionUser?.id])
 
   useEffect(() => {
     console.log(post)

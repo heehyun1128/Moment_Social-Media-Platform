@@ -22,9 +22,13 @@ const UserProfile = () => {
   const [isViewFollowed, setIsViewFollowed] = useState(false)
   const [redText, setRedText] = useState(true)
   const [redLike, setRedLike] = useState(false)
+  const [redFollowing, setRedFollowing] = useState(false)
+  const [redFollower, setRedFollower] = useState(false)
 
   const allStyle = { color: redText ? '#c69a9a' : 'black' }
   const likeStyle = { color: redLike ? '#c69a9a' : 'black' }
+  const followingStyle = { color: redFollowing ? '#c69a9a' : 'black' }
+  const followerStyle = { color: redFollower ? '#c69a9a' : 'black' }
 
   const singleUser = useSelector(state => state.users?.singleUser)
   // console.log(singleUser)
@@ -53,6 +57,8 @@ const UserProfile = () => {
     setIsViewFollowed(false)
     setRedText(true)
     setRedLike(false)
+    setRedFollower(false)
+    setRedFollowing(false)
   }
   const handleViewLikedPosts = e => {
     e.preventDefault()
@@ -62,6 +68,8 @@ const UserProfile = () => {
     setIsViewFollowed(false)
     setRedText(false)
     setRedLike(true)
+    setRedFollower(false)
+    setRedFollowing(false)
   }
 
   const handleViewUserFollowers=e=>{
@@ -70,6 +78,10 @@ const UserProfile = () => {
     setIsViewLikedPosts(false)
     setIsViewFollowed(false)
     setIsViewFollowers(true)
+    setRedText(false)
+    setRedLike(false)
+    setRedFollower(true)
+    setRedFollowing(false)
   }
   const handleViewUserFollowed=e=>{
     e.preventDefault()
@@ -77,6 +89,10 @@ const UserProfile = () => {
     setIsViewLikedPosts(false)
     setIsViewFollowers(false)
     setIsViewFollowed(true)
+    setRedText(false)
+    setRedLike(false)
+    setRedFollower(false)
+    setRedFollowing(true)
   }
 
 
@@ -92,19 +108,25 @@ const UserProfile = () => {
           }
         </div>
         <h4>{sessionUser && sessionUser.username}</h4>
-        <div id="follower" onClick={handleViewUserFollowers}>
+        {/* <div id="follower" onClick={handleViewUserFollowers}>
           FOLLOWERS
         </div>
         <div id="follower" onClick={handleViewUserFollowed}>
           FOLLOWING
-        </div>
+        </div> */}
       </div>
       <div id="post-nav">
-        <div id='nav-link-div'>
-          <h2 style={allStyle} onClick={handleViewAllUserPosts}>YOUR POSTS</h2>
+        <div className='nav-link-div'>
+          <p style={allStyle} onClick={handleViewAllUserPosts}>YOUR POSTS</p>
         </div>
         <div className='nav-link-div'>
-          <h2 style={likeStyle} onClick={handleViewLikedPosts}>LIKED POSTS</h2>
+          <p style={likeStyle} onClick={handleViewLikedPosts}>LIKED POSTS</p>
+        </div>
+        <div id="follower" onClick={handleViewUserFollowers}>
+          <p style={followerStyle}>FOLLOWERS</p>
+        </div>
+        <div id="following" onClick={handleViewUserFollowed}>
+          <p style={followingStyle}>FOLLOWING</p>
         </div>
       </div>
       <div id="posts-div">
