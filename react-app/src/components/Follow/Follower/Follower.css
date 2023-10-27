@@ -33,8 +33,10 @@ img#profile-img {
 
 #follower-content>*{
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
+  width:40%;
+  
   
 }
 #follower-info>* {
@@ -49,4 +51,15 @@ img#profile-img {
 #follower:hover{
   color:#c09b9b;
   font-weight: bold;
+}
+
+#follow-user-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#follow-div button{
+  color:gray;
+  outline: gray;
 }

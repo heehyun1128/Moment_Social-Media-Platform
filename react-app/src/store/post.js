@@ -9,6 +9,8 @@ export const GET_POST_IMAGE = 'posts/GET_POST_IMAGE'
 export const REMOVE_POST = 'posts/REMOVE_POST'
 export const SEARCH_POSTS = 'posts/SEARCH_POSTS'
 export const LOAD_POST_LIKES = 'posts/LOAD_POST_LIKES'
+export const ADD_POST_LIKE = 'posts/ADD_POST_LIKE'
+export const DELETE_POST_LIKE = 'posts/DELETE_POST_LIKE'
 
 
 
@@ -76,6 +78,23 @@ export const getLikes = (postId) => {
     postId
   }
 };
+
+export const addPostLikes = (post, user) => {
+  return {
+    type: ADD_POST_LIKE,
+    post,
+    user
+  }
+};
+
+export const delPostLikes = (postId, userId) => {
+  return {
+    type: DELETE_POST_LIKE,
+    postId,
+    userId
+  }
+};
+
 
 /** Thunk Action Creators: */
 // fetch all posts
@@ -183,18 +202,18 @@ export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
   const entriesIterator = formData.entries();
 
   for (const [key, value] of entriesIterator) {
-  // Check if the value is an object
-  if (typeof value === 'object' && value !== null) {
-    console.log(key + ': ' + JSON.stringify(value, null, 2));
-  } else {
-    console.log(key + ': ' + value);
+    // Check if the value is an object
+    if (typeof value === 'object' && value !== null) {
+      console.log(key + ': ' + JSON.stringify(value, null, 2));
+    } else {
+      console.log(key + ': ' + value);
+    }
   }
-}
- 
+
   const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
     method: "PUT",
-    body: formData 
+    body: formData
   })
   console.log(res)
   if (res.ok) {
@@ -209,9 +228,9 @@ export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
 }
 
 // DELETE A POST
-export const fetchDeletePost = (postId)=>async(dispatch)=>{
-  const res = await fetch(`/api/posts/${postId}`,{
-    method:'DELETE'
+export const fetchDeletePost = (postId) => async (dispatch) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: 'DELETE'
   })
   console.log(res)
   if (res.ok) {
@@ -236,7 +255,36 @@ export const fetchSearchedPosts = (searchTerm) => async (dispatch) => {
   }
 }
 
+export const fetchAddPostLike = (post, user) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${post.id}/likes`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(post.id)
+  });
+  if (response.ok) {
+    console.log(response)
+    const data = await response.json()
+    dispatch(addPostLikes(post, user))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
 
+export const fetchRemovePostLike = (postId, userId) => async (dispatch) => {
+  const response = await fetch(`/api/likes/${postId}`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(delPostLikes(postId, userId))
+    return data
+  } else {
+    const errors = await response.json()
+    return errors
+  }
+}
 
 // state
 const initialState = {}
@@ -290,9 +338,41 @@ const postReducer = (state = initialState, action) => {
       }
       console.log(newState)
       return newState
+    case ADD_POST_LIKE:
+      newState = {
+        ...state,
+        posts: {
+          ...state.posts,
+          [action.postId]: {
+            ...state.posts[action.postId],
+            likeUsers: {
+              ...state.likeUsers,
+              [action.user.id]: action.user
+            }
+          }
+        }
+
+      }
+      return newState
+    case DELETE_POST_LIKE:
+      newState = {
+        ...state,
+        posts: {
+          ...state.posts,
+          [action.postId]: {
+            ...state.posts[action.postId],
+            likeUsers: {
+              ...state.likeUsers,
+              [action.user.id]: null
+            }
+          }
+        }
+
+      }
+      return newState
     default:
       return state
-  } 
+  }
 }
 
 export default postReducer

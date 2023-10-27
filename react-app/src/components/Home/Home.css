@@ -74,7 +74,7 @@
 #portfolio-container .card {
   position: relative;
   width: 90%;
-  height: 60vh;
+  height: 70vh;
   /* min-height: fit-content; */
   background-color: rgba(255, 255, 255, .1);
   margin: 15px;
@@ -87,6 +87,7 @@
   border-top: 1px solid rgba(0, 0, 0, .1);
   border-left: 1px solid rgba(0, 0, 0, .1);
   backdrop-filter: blur(5px);
+  cursor: pointer;
 
 }
 
@@ -280,6 +281,26 @@
   background-image: url('../images/demouser.png');
   background-size: cover;
 }
+#niannian-img-div {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/niannian.jpg');
+  background-size: cover;
+}
+#bobbie-img-div {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../images/bobbie.jpg');
+  background-size: cover;
+}
 
 /* #demo-img-div img{
   height:150%;
@@ -302,11 +323,15 @@
 #head-icon-div {
   display: flex;
   justify-content: center;
+  z-index: 1;
+  position: relative;
 }
 
 #head-icon-div>* {
   margin: 20px 40px 0;
-  color:rgba(0, 0, 0,.8);
+  color: rgba(0, 0, 0, .8);
+  font-family: "Merriweather", Georgia, serif;
+  /* font-weight: 700; */
 }
 
 #head-icon-div p {
@@ -322,23 +347,27 @@
   box-shadow: none !important;
   background-color: transparent !important;
   font-size: 22px;
-  font-weight: 400;
-  margin-left: 40px !important;
+  /* font-weight: 700; */
+  margin-left: 45px !important;
   cursor: pointer;
+  color: rgba(0, 0, 0, .8);
   font-family: "Merriweather", Georgia, serif;
 }
-#home-logout{
+
+#home-logout {
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 }
-#home-logout>*{
+
+#home-logout>* {
   margin-right: 20px;
 }
+
 .actions {
   border-radius: 50%;
-  border: 3px dotted rgba(255, 255, 255, 0.5);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -352,34 +381,48 @@
 
 .actions li {
   display: flex;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   padding: 0 !important;
   margin: 0;
 }
 
-.actions li a{
-color: white;
+.actions li a {
+  color: white;
 
 
 }
 
-#discover-at-bottom{
+#discover-at-bottom {
   margin-top: 30px;
   font-size: 20px;
-  
+
 }
-#home #main #discover-at-bottom a:hover{
+
+#discover-at-bottom a {
+  font-family: "Merriweather", Georgia, serif;
+  padding: 15px;
+  border-radius: 15px;
+  font-weight: 700;
+  border: 1px solid gray;
+}
+
+#home #main #discover-at-bottom a:hover {
   cursor: pointer;
   color: #c69a9a !important;
-  
+  border: 1px solid #c69a9a;
 }
 
-#home #main .date{
+#home #main .date {
   font-size: 30px;
+  font-family: "Merriweather", Georgia, serif;
+  /* font-weight: 700; */
+  border: 1px solid gray;
+  padding: 15px;
+
 
 }
 
-#home #intro h2{
+#home #intro h2 {
   font-size: 50px;
 }

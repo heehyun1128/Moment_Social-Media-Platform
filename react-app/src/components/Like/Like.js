@@ -8,15 +8,15 @@ const Like = () => {
   const { userId } = useParams()
   const dispatch = useDispatch()
   const likedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
-  const likedPostArr = likedPosts&&Object.values(likedPosts)
+  const likedPostArr = likedPosts && Object.values(likedPosts)
   console.log(likedPostArr)
   useEffect(() => {
     dispatch(fetchUserLikedPosts(userId))
-  }, [dispatch,userId])
+  }, [dispatch, userId])
 
   return (
     <div id='user-post-div'>
-    {likedPostArr&&likedPostArr.map(post=>(<PostCard post={post}/>))}
+      {likedPostArr && likedPostArr.map(post => (<PostCard post={post} />))}
     </div>
   )
 }

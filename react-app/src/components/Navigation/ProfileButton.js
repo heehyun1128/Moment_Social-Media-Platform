@@ -7,6 +7,9 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -132,6 +135,7 @@ function ProfileButton({ user }) {
                         }}
 
                       />
+                    
                       <span id='profile-icon-span'>
                         +
 
