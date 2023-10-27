@@ -17,7 +17,7 @@ function OpenModalButton({
   };
 
   return (
-    <button id='delete-post-btn' onClick={onClick}>{buttonText}</button>
+    <button onClick={onClick}>{buttonText}</button>
   );
 }
 

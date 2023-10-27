@@ -57,7 +57,7 @@ const CommentCard = ({ comment }) => {
       </div>
       <div>
         {sessionUser && comment?.userId === sessionUser?.id &&
-          <><OpenModalButton
+          <div id='comment-btn-div'><OpenModalButton
             buttonText="EDIT COMMENT"
 
             modalComponent={<EditCommentModal comment={comment} />}
@@ -69,7 +69,7 @@ const CommentCard = ({ comment }) => {
               modalComponent={<DeleteCommentModal commentId={comment?.id} />}
 
             />
-          </>
+          </div>
         }
       </div>
 

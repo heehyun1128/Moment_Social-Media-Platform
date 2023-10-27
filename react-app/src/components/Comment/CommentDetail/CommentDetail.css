@@ -1,4 +1,7 @@
 #no-comments{
   display: flex;
   justify-content: center;
+  min-height: 80px;
+  background-color: rgba(255, 255, 255,.2);
+  margin:20px;
 }

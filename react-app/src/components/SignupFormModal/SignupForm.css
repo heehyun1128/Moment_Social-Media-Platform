@@ -6,6 +6,11 @@
   width:85%;
 }
 
+#signup-modal-div h1{
+  font-size: 40px;
+  margin-top: 10px;
+}
+
 #signup-form{
   display: flex;
     flex-direction: column;
@@ -66,6 +71,7 @@ height: 20px !important;
 
 #signup-btn:hover {
   background-color: #ddaaaa;
+  color: white;
 }
 
 #profile-img-preview{
@@ -81,6 +87,10 @@ height: 20px !important;
 #signup-modal-div #select-profile-pic{
   height: 60px;
   width: 60px;
+}
+#signup-input-label i{
+  
+  cursor: pointer;
 }
 
 #signup-input-label input{

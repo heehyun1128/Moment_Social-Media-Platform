@@ -26,6 +26,7 @@ input[type=file] {
 }
 
 #post-form-div {
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -208,6 +209,7 @@ input[type=file] {
 }
 #edit-post-div h4{
   margin:0;
+  margin-left: 10%;
   margin-bottom: 20px;
   
 }

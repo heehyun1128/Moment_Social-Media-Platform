@@ -133,7 +133,7 @@ const EditCommentModal = ({ comment }) => {
               {errors && errors.content &&
                 <p className="errors">{errors.content}</p>
               }
-              <span className='icon-span'><i class="fa-solid fa-comment fa-lg"></i><p className='icon-text'>Add Comment</p></span>
+              
             </label>
           </div>
           <div id='edit-comment-img-container'>
@@ -151,7 +151,7 @@ const EditCommentModal = ({ comment }) => {
                 }}
 
               />
-              <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Update Image</p></span>
+              <span className='comment-icon-span'>+</span>
             </label>
           </div>
 

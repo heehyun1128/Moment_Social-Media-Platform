@@ -1,0 +1,57 @@
+#permit-error-modal{
+/* transform: translate(0%, 0%); */
+  position: fixed;
+  /* display: block; */
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 99;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#permit-error-modal>div{
+  background-color: rgba(255, 255, 255,.8);
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    width: 30vw;
+    border-radius: 15px;
+}
+
+#permit-error-modal>div button{
+  height: 30px;
+  min-width:80px;
+  cursor: pointer;
+  border-radius: 10px;
+  border-color: gray;
+}
+#permit-error-modal>div button:hover {
+ background-color: #b99898;
+ color: white;
+
+}
+
+#permit-err-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#permit-err-div button{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+#permit-err-div button:hover{
+  background-color: #bb9595;
+  color: white;
+  cursor: pointer
+}

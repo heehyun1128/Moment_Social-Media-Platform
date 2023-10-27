@@ -33,10 +33,10 @@ object-fit:cover;
   padding:20px;
 }
 #comment-img-div{
-  max-width: 260px;
+  max-width: 240px;
   border-radius: 20px;
   overflow: hidden;
-  max-height: 320px;
+  max-height: 240px;
 }
 #comment-img-div img{
   object-fit: cover;
