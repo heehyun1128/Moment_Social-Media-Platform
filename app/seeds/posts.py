@@ -8,6 +8,7 @@ curr_date = datetime.now()
 def seed_posts():
   posts=[
 # 1
+    
     Post(
       title= 'Happy Friday',
       content= "Wishing everyone a great weekend!",
@@ -39,6 +40,8 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    
+    
     # 5
     Post(
       title= 'The history of Yi Fang - a great boba place',
@@ -71,6 +74,7 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    
     # 9
     Post(
       title= 'Kuma says Hi~~',
@@ -87,6 +91,70 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #11
+    Post(
+      title= 'MY BEST FRIEND',
+      content= "Dogs Aren't Just Pets; They're Family. My Furry Companion Is Not Just A Pet But Also My Confidant, Playmate, And Unwavering Source Of Unconditional Love. 🐾",
+      creator_id=1,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #12
+    Post(
+      title= 'Hello Disney',
+      content= "My Visit To Disney Was A Magical Adventure Filled With Enchanting Rides, Beloved Characters, And A Contagious Atmosphere Of Joy.",
+      creator_id=2,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #13
+    Post(
+      title= 'HIKING DAY',
+      content= "Today's Hiking Adventure Was Like Stepping Into A Breathtaking Postcard. With Every Step, We Uncovered Hidden Treasures And Felt A Deep Connection To The Great Outdoors.",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #14
+    Post(
+      title= 'I Love Coffee!',
+      content= "One of the first things that captivates me about coffee is its rich, comforting aroma. That initial whiff of freshly brewed coffee is like a warm embrace, signaling the start of a new day and a fresh burst of energy. The scent of coffee beans is so inviting that it can instantly uplift my mood.",
+      creator_id=2,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #15
+    Post(
+      title= 'See what I got for the Holiday Season',
+      content= "So, I gotta spill the beans on the amazing holiday gift I received – a bottle of Chanel perfume. Yep, you read that right! I'm unwrapping the box, and I see the classic Chanel logo on a stunning bottle. You can't help but feel a bit fancy just holding it. It's like this bottle is a gateway to a world of luxury and allure.",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #16
+    Post(
+      title= 'A week in Paris!',
+      content= "Just spent a week travelling Paris. So, of course, I had to check out all the famous spots. The Eiffel Tower – it's like a giant metal spider that's actually kind of cool.  I also got a lot of good food there, like croissants, pastries, and coffee at every street corner. I mean how can you resist? ",
+      creator_id=1,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #17
+    Post(
+      title= 'Go Bears and Beat Stanford!',
+      content= "Football season's back. As a UC Berkeley Alumni, of course I'm rootin' for Berkeley to bring home the W! Stanford, you better watch out 'cause the Bears are hungry for that victory! ",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #18
+    Post(
+      title= 'Halloween is coming!',
+      content= "Halloween is all about fun and creativity. So, what's your costume this year? Have you decided on something spooky, funny, or entirely unique? Tell me all about it! 😄🎃👻",
+      creator_id=1,
+      created_at=curr_date,
+      updated_at=curr_date
+    )
     
   ]
 
