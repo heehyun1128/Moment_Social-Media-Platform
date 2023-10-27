@@ -101,18 +101,20 @@ const CommentForm = () => {
           }
           <div id='submit-comment-div'>
             {selImage && <img src={selImage} id='comment-img' alt='' />}
-            <button>SELECT IMAGE</button>
-            <input
-              type="file"
-              accept="image/*"
-              // value={profilePic}
-              onChange={(e) => {
-                console.log(e.target.files[0])
-                setImage(e.target.files[0])
-                displayFile(e)
-              }}
+            <label>
+              <button>SELECT IMAGE</button>
+              <input
+                type="file"
+                accept="image/*"
+                // value={profilePic}
+                onChange={(e) => {
+                  console.log(e.target.files[0])
+                  setImage(e.target.files[0])
+                  displayFile(e)
+                }}
 
-            />
+              />
+            </label>
 
             {imageLoading ? (
               <>

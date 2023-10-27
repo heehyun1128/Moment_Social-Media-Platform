@@ -53,10 +53,20 @@ const Home = () => {
     history.push('/')
     closeMenu()
   };
+  const videoRef = useRef(null);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.play();
+    }
+  }, []);
   
   return (
 
-    <div id="home">
+    <div id="home" >
+      <video ref={videoRef} autoplay loop muted >
+        <source  src="https://player.vimeo.com/external/434047992.sd.mp4?s=393d59657829702b1b99f7d71bcc50801ae7c824&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+      </video>
     <div id="head-icon-div">
         {sessionUser ? 
         <div id='home-logout'>
@@ -88,7 +98,7 @@ const Home = () => {
       <div id="intro">
         <h2>SHARE YOUR </h2>
         <h1>MOMENT</h1>
-        <p>Welcome to Moment,
+        <p style={{ color: '#5b5b5b' }}>Welcome to Moment,
           <br />
           where every post is a cherished memory waiting to be shared. <br />Connect with friends and make moments</p>
 
@@ -98,26 +108,21 @@ const Home = () => {
       </div>
 
       <header id="home-header">
-        {/* <NavLink exact to='/posts/all' class="logo">Moment</NavLink> */}
-      </header>
-
-      {/* <nav id="nav">
-        <ul class="links">
-          <li class="active"><p>PEOPLE'S BEST MOMENTS</p></li>
-         
-        </ul>
        
-      </nav> */}
+      
+
 
       <div id="main">
 
       
         <article class="post featured">
           
-            <span class="date">POST GALLERY</span>
+            <span class="date">FEATURED POST</span>
 
           <div id="portfolio-container" className="animate__fadeInUp">
-            <div class="card">
+            <div class="card" onClick={()=>{
+              history.push('/posts/12')
+            }}>
               <img src={img1} alt="" />
              
               <div className="content">
@@ -125,8 +130,8 @@ const Home = () => {
                 <h1>01</h1>
                 <h2>HELLO DISNEY</h2>
                 <div id='home-user-profile' >
-                  <div id='demo-img-div'></div>
-                  <p>Demo</p>
+                  <div id='niannian-img-div'></div>
+                  <p>Nian Nian</p>
                 </div>
                 <h3>My visit to Disney was a magical adventure filled with enchanting rides, beloved characters, and a contagious atmosphere of joy.</h3>
                 <div id='link-div'>
@@ -162,8 +167,8 @@ const Home = () => {
                 <h1>03</h1>
                 <h2>Hiking Day</h2>
                 <div id='home-user-profile' >
-                  <div id='demo-img-div'></div>
-                  <p>Demo</p>
+                  <div id='bobbie-img-div'></div>
+                  <p>Bobbie</p>
                 </div>
                 <h3>Today's hiking adventure was like stepping into a breathtaking postcard. With every step, we uncovered hidden treasures and felt a deep connection to the great outdoors.</h3>
                 <div id='link-div'>
@@ -184,6 +189,7 @@ const Home = () => {
       
 
       </div>
+      </header>
     </div>
 
     // <div id='home-div' >

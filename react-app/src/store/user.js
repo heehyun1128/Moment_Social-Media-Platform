@@ -1,10 +1,12 @@
-const LOAD_USERS='users/LOAD_USERS'
+const LOAD_USERS = 'users/LOAD_USERS'
 const LOAD_SINGLE_USER = 'users/LOAD_SINGLE_USER'
 const LOAD_USER_POST = 'users/LOAD_USER_POST'
 const EDIT_USER_IMAGE = 'users/EDIT_USER_IMAGE'
-const LOAD_USER_LIKE_POST ='users/LOAD_USER_LIKE_POST'
+const LOAD_USER_LIKE_POST = 'users/LOAD_USER_LIKE_POST'
 const ADD_LIKE = 'users/ADD_LIKE'
 const DELETE_LIKE = 'users/DELETE_LIKE'
+const ADD_USER_POST_LIKE = 'users/ADD_USER_POST_LIKE'
+const DELETE_USER_POST_LIKE = 'users/DELETE_USER_POST_LIKE'
 const LOAD_FOLLOWER = 'users/LOAD_FOLLOWER'
 const LOAD_FOLLOWED = 'users/LOAD_FOLLOWED'
 const ADD_FOLLOWER = 'users/ADD_FOLLOWER'
@@ -12,30 +14,43 @@ const ADD_FOLLOWED = 'users/ADD_FOLLOWED'
 const DELETE_FOLLOWER = 'users/DELETE_FOLLOWER'
 const DELETE_FOLLOWED = 'users/DELETE_FOLLOWED'
 
-export const loadUsers = users=>({
-  type:LOAD_USERS,
+export const loadUsers = users => ({
+  type: LOAD_USERS,
   users
 })
-export const getUser = user=>({
+export const getUser = user => ({
   type: LOAD_SINGLE_USER,
   user
 })
-export const loadUserPosts = posts=>({
+export const loadUserPosts = posts => ({
   type: LOAD_USER_POST,
   posts
 })
-export const loadUserLikedPosts = posts=>({
+export const loadUserLikedPosts = posts => ({
   type: LOAD_USER_LIKE_POST,
   posts
 })
 
-export const addLike = postId => ({
+
+export const addLike = (post, user) => ({
   type: ADD_LIKE,
-  postId
+  post,
+  user
 })
-export const delLike = postId => ({
+export const delLike = (postId,userId) => ({
   type: DELETE_LIKE,
-  postId
+  postId,
+  userId
+})
+export const addUserPostLike = (post, user) => ({
+  type: ADD_USER_POST_LIKE,
+  post,
+  user
+})
+export const delUserPostLike = (postId,userId) => ({
+  type: DELETE_USER_POST_LIKE,
+  postId,
+  userId
 })
 
 export const editUserImage = userImage => ({
@@ -126,29 +141,29 @@ export const fetchUserLikedPosts = (userId) => async (dispatch) => {
   }
 }
 
-export const fetchAddLike = postId => async (dispatch) => {
-  const response = await fetch(`/api/posts/${postId}/likes`, {
+export const fetchAddLike = (post, user) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${post.id}/likes`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(postId)
+    body: JSON.stringify(post.id)
   });
   if (response.ok) {
     console.log(response)
     const data = await response.json()
-    dispatch(addLike(postId))
+    dispatch(addLike(post, user))
     return data
   } else {
     const errors = await response.json()
     return errors
   }
 }
-export const fetchRemoveLike = postId => async (dispatch) => {
+export const fetchRemoveLike =( postId,userId)=> async (dispatch) => {
   const response = await fetch(`/api/likes/${postId}`, {
     method: "DELETE"
   });
   if (response.ok) {
     const data = await response.json()
-    dispatch(delLike(postId))
+    dispatch(delLike(postId,userId))
     return data
   } else {
     const errors = await response.json()
@@ -158,7 +173,7 @@ export const fetchRemoveLike = postId => async (dispatch) => {
 
 
 // edit user profile image
-export const fetchUserProfileImage = (userId,formData) => async (dispatch) => {
+export const fetchUserProfileImage = (userId, formData) => async (dispatch) => {
   const res = await fetch(`/api/users/${userId}/profile-update`, {
     method: "PUT",
     body: formData
@@ -205,7 +220,7 @@ export const fetchFollowed = (userId) => async (dispatch) => {
 }
 
 // add follower
-export const fetchAddFollower = (userId,followerId )=> async (dispatch) => {
+export const fetchAddFollower = (userId, followerId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/followers/${followerId}`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
@@ -222,7 +237,7 @@ export const fetchAddFollower = (userId,followerId )=> async (dispatch) => {
   }
 }
 // add followed
-export const fetchAddFollowed = (userId,followedId )=> async (dispatch) => {
+export const fetchAddFollowed = (userId, followedId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/followed/${followedId}`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
@@ -239,7 +254,7 @@ export const fetchAddFollowed = (userId,followedId )=> async (dispatch) => {
   }
 }
 
-export const fetchRemoveFollower = (userId,followerId) => async (dispatch) => {
+export const fetchRemoveFollower = (userId, followerId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/followers/${followerId}/delete`, {
     method: "DELETE"
   });
@@ -252,7 +267,7 @@ export const fetchRemoveFollower = (userId,followerId) => async (dispatch) => {
     return errors
   }
 }
-export const fetchRemoveFollowed = (userId,followedId) => async (dispatch) => {
+export const fetchRemoveFollowed = (userId, followedId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/followed/${followedId}/delete`, {
     method: "DELETE"
   });
@@ -277,7 +292,7 @@ const userReducer = (state = initialState, action) => {
       }
       console.log(newState)
       return newState
-   
+
     case LOAD_SINGLE_USER:
       newState = {
         ...state,
@@ -290,13 +305,13 @@ const userReducer = (state = initialState, action) => {
         ...state,
         singleUser: {
           ...state.singleUser,
-          userPosts:action.posts
+          userPosts: action.posts
         }
       }
       console.log(newState)
       return newState
     case EDIT_USER_IMAGE:
-      newState={
+      newState = {
         ...state,
         singleUser: {
           ...state.singleUser,
@@ -305,27 +320,73 @@ const userReducer = (state = initialState, action) => {
       }
       return newState
     case LOAD_USER_LIKE_POST:
-      newState={
+      newState = {
         ...state,
         singleUser: {
           ...state.singleUser,
-          likedPosts:action.posts
+          likedPosts: action.posts
         }
       }
       return newState
-    case DELETE_LIKE:
+    case ADD_USER_POST_LIKE:
+      console.log(state.singleUser?.userPosts[action.post.id]?.numOfLikes)
+      const currentLikeNum = state.singleUser?.userPosts[action.post.id]?.numOfLikes;
+      const newLikeCount = currentLikeNum + 1;
+      newState= {
+        ...state,
+        singleUser: {
+          ...state.singleUser,
+          likedPosts: {
+            ...state.singleUser.likedPosts,
+            [action.post.id]: action.post
+          },
+          userPosts: {
+            ...state.singleUser.userPosts,
+            [action.post.id]: {
+              ...state.singleUser.userPosts[action.post.id],
+              likeUsers: {
+                ...state.singleUser.userPosts[action.post.id]?.likeUsers,
+                [action.user.id]: action.user
+              },
+              numOfLikes: newLikeCount
+            }
+            
+          }
+        }
+      };
+      console.log('add like',newState)
+      return newState
+
+    case DELETE_USER_POST_LIKE:
+      const currentNumLikes = state.singleUser.userPosts[action.postId].numOfLikes;
+      console.log(currentNumLikes)
+      const newNumLikes = currentNumLikes - 1; 
+      console.log(newNumLikes)
       newState = {
         ...state,
         singleUser: {
           ...state.singleUser,
           likedPosts: {
             ...state.singleUser.likedPosts,
-       
+            [action.postId]: undefined 
+          },
+          userPosts: {
+            ...state.singleUser.userPosts,
+            
+            [action.postId]: {
+              ...state.singleUser.userPosts[action.postId],
+              likeUsers: {
+                ...state.singleUser.userPosts[action.postId]?.likeUsers,
+                [action.userId]: null
+              },
+              numOfLikes: newNumLikes
+            },
+           
           }
-          
+
         }
       }
-      delete newState.singleUser.likedPosts[action.postId]
+     
       return newState
     case LOAD_FOLLOWER:
       newState = {
@@ -343,7 +404,7 @@ const userReducer = (state = initialState, action) => {
           ...state.singleUser,
           followers: {
             ...state.singleUser.followers,
-            [action.user.id]:action.user
+            [action.user.id]: action.user
           }
         }
       }
@@ -377,7 +438,7 @@ const userReducer = (state = initialState, action) => {
           ...state.singleUser,
           followed: {
             ...state.singleUser.followed,
-            [action.user.id]:action.user
+            [action.user.id]: action.user
           }
         }
       }
@@ -391,7 +452,8 @@ const userReducer = (state = initialState, action) => {
             ...state.singleUser.followed
           }
 
-        }
+        },
+
       }
       delete newState.singleUser.followed[action.userId]
       return newState

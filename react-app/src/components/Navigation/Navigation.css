@@ -155,7 +155,8 @@ img#profile-img {
   margin-top: 15px;
 }
 
-#icon-nav li>* , #icon-nav a{
+#icon-nav li>*,
+#icon-nav a {
   color: rgb(84, 84, 84);
   text-decoration: none;
   display: flex;
@@ -233,8 +234,9 @@ img#profile-img {
 #search-text {
   height: 38px;
   background-color: white;
-border-radius: 50%;
+  border-radius: 50%;
 }
+
 #search-btn {
   float: right;
   width: 40px;
@@ -249,14 +251,16 @@ border-radius: 50%;
   cursor: pointer;
   transition: 0.5s;
 }
-#search-btn i{
+
+#search-btn i {
   /* width: fit-content; */
   border-radius: 50%;
 }
+
 #search-box:hover #search-text {
   width: 200px;
   padding: 0 5px;
-  
+
 }
 
 #search-box:hover {
@@ -314,8 +318,13 @@ border-radius: 50%;
 
 #profile-icon-span {
   border-radius: 50%;
+  position: absolute;
+  left: -25px;
+  top: -5px;
   font-size: 40px;
   cursor: pointer;
+  color: black;
+  /* background-color: #b98f8f; */
 
 }
 
@@ -334,23 +343,25 @@ border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
-#profile-icon-span:hover i {
-  color: #c39c9c;
+
+#profile-icon-span:hover {
+  color: #cd6e6e;
 }
 
 #button-section {
   display: flex;
 }
 
-#nav-right-div #delete-post-btn{
-  border:none;
+#nav-right-div #delete-post-btn {
+  border: none;
   background-color: transparent;
   margin-right: 20px;
 }
 
 #navigation-section {
 
-  background-color: #f4dcdc;
+  background-color: rgb(224, 216, 217);
 }

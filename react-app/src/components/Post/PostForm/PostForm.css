@@ -4,8 +4,8 @@ input[type=file] {
 }
 
 #upload-img-preview {
-  max-width: 200px;
-  max-height: 200px;
+  width: 150px;
+  height: 150px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -15,12 +15,14 @@ input[type=file] {
 
 #upload-img-preview img {
   max-width: 150px;
+  min-height:100%;
   /* position: absolute; */
 }
 
 #update-img-display {
   max-width: 200px;
-  max-height: 200px;
+  min-height: 100%;
+  /* max-height: 200px; */
 }
 
 #post-form-div {
@@ -96,6 +98,10 @@ input[type=file] {
   cursor: pointer;
 }
 
+#submit-post-btn:hover{
+  background-color: #ada8a8;
+  color: white;
+}
 #create-post-input-label input, #edit-post-input-label input{
   display: none;
 }
@@ -107,10 +113,15 @@ input[type=file] {
   justify-content: space-between;
   width: fit-content;
 }
+#edit-post-input-label{
+  position: absolute;
+  right: 0;
+  top:0;
+}
 
 #upload-img-preview{
-  width:180px;
-  min-height: 180px;
+  /* width:180px;
+  min-height: 180px; */
   background-color: rgb(247, 247, 247);
   border-radius: 10px;
   /* box-shadow: 0 0 6px rgb(207, 207, 207); */
@@ -119,13 +130,22 @@ input[type=file] {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0;
 }
 
 #icon-span{
  
   width: fit-content;
 }
-
+#plus-icon{
+  font-size: 40px;
+  color: rgb(178, 129, 137);
+ 
+}
+#plus-icon:hover{
+  color: #e8d69d;
+ 
+}
 
 #create-post-input-label:hover{
   cursor:pointer !important;
@@ -161,10 +181,13 @@ input[type=file] {
 #remove-image-div,#deslect-image-div{
   box-shadow: 0 0 4px gray;
   width: fit-content;
-  padding: 5px;
+  /* padding: 5px; */
   border-radius: 8px;
   cursor: pointer;
   background-color: #e8c8c8;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
 }
 
 #edit-post-input-div{

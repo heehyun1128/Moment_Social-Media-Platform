@@ -358,6 +358,7 @@ const PostForm = ({ post, formType }) => {
                   {<div id='upload-img-preview'>
                     {<img id='update-img-display' src={selImageUrls[index]} alt="" />}
                     {<label id='edit-post-input-label'>
+                  
                       <input
                         type="file"
                         accept="image/*"
@@ -371,7 +372,7 @@ const PostForm = ({ post, formType }) => {
                         }}
 
                       />
-                      <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Select Image</p></span>
+                      <div id='plus-icon'>+</div>
                     </label>}
 
                   </div>}
@@ -414,7 +415,7 @@ const PostForm = ({ post, formType }) => {
                         }}
 
                       />
-                      <span className='icon-span'><i class="fa-solid fa-image fa-lg"></i><p className='icon-text'>Add Image</p></span>
+                      <span id='plus-icon'>+</span>
                     </label>}
                   </div>
 
