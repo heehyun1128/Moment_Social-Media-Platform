@@ -50,4 +50,5 @@ cursor: pointer;
 
 .login-form-submit-btn:hover{
   background-color: #ddaaaa;
+  color: white;
 }

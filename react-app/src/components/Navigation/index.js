@@ -17,6 +17,7 @@ import { logout } from "../../store/session";
 import SignupFormModal from "../SignupFormModal";
 import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
+import PermitErrorModal from '../ErrorModal/PermitErrorModal';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
@@ -25,6 +26,7 @@ function Navigation({ isLoaded }) {
 	const { searchContent, setSearchContent } = useSearchContext()
 
 	const [showMenu, setShowMenu] = useState(false);
+	const [isPermitError, setIsPermitError] = useState(false)
 	const ulRef = useRef();
 
 	const handleViewAllPosts = () => {
@@ -39,7 +41,8 @@ function Navigation({ isLoaded }) {
 
 	const handleGoToPostForm = e => {
 		if (!sessionUser) {
-			alert('Please Sign Up or Log In to create a post.')
+			// alert('Please Sign Up or Log In to create a post.')
+			setIsPermitError(true)
 		}
 		e.preventDefault()
 		history.push('/posts/new')
@@ -62,6 +65,7 @@ function Navigation({ isLoaded }) {
 	const closeMenu = () => setShowMenu(false);
 	return (
 		<div id='nav-container'>
+			{isPermitError && <PermitErrorModal />}
 			<div id='navigation-section'>
 				<div id='search-bar'>
 					<SearchBar
@@ -110,16 +114,32 @@ function Navigation({ isLoaded }) {
 								)}
 							</li> */}
 								<li>
-									<div onClick={handleGoToPostForm}>
+									{sessionUser &&<div onClick={handleGoToPostForm}>
 										<i class="fa-solid fa-pen"></i>
 										<span>CREATE A POST</span>
-									</div>
+									</div>}
+									{!sessionUser && <div>
+										<OpenModalButton
+											buttonText={<i class="fa-solid fa-pen fa-xl"></i>}
+
+											modalComponent={<PermitErrorModal />}
+										/>
+										<span>CREATE A POST</span>
+									</div>}
 								</li>
 								<li>
-									<div onClick={handleViewAllPosts}>
+									{sessionUser && <div onClick={handleViewAllPosts}>
 										<i class="fa-solid fa-book-open"></i>
 										<span >MY PAGE</span>
-									</div>
+									</div>}
+									{!sessionUser && <div>
+										<OpenModalButton
+											buttonText={<i class="fa-solid fa-book-open fa-xl"></i>}
+
+											modalComponent={<PermitErrorModal />}
+										/>
+										<span>MY PAGE</span>
+									</div>}
 								</li>
 								{/* <li>
 									<div onClick={handleUserSettings}>

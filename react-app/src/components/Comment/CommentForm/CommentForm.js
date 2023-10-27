@@ -4,6 +4,7 @@ import { fetchCreateComment, fetchCreateCommentImage } from '../../../store/comm
 import { useParams } from 'react-router-dom'
 import './CommentForm.css'
 import Loading from '../../Loading/Loading';
+import PermitErrorModal from '../../ErrorModal/PermitErrorModal';
 
 const CommentForm = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const CommentForm = () => {
   const [selImage, setSelImage] = useState(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [imageLoading, setImageLoading] = useState(false)
+  const [isPermitError, setIsPermitError] = useState(false)
   const [errors, setErrors] = useState({});
 
   const displayFile = e => {
@@ -41,7 +43,8 @@ const CommentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!sessionUser) {
-      alert('Please log in to create a comment.')
+      // alert('Please log in to create a comment.')
+      setIsPermitError(true)
     }
     const comment = {
       content
@@ -82,6 +85,7 @@ const CommentForm = () => {
 
   return (
     <div>
+    {isPermitError &&<PermitErrorModal/>}
       <div id='comment-form-div'>
         <div></div>
         <h4>Add your comment here</h4>
@@ -99,10 +103,10 @@ const CommentForm = () => {
           {errors && errors.content &&
             <p className="errors">{errors.content}</p>
           }
-          <div id='submit-comment-div'>
             {selImage && <img src={selImage} id='comment-img' alt='' />}
+          <div id='submit-comment-div'>
             <label>
-              <button>SELECT IMAGE</button>
+              <div id='select-image'>SELECT IMAGE</div>
               <input
                 type="file"
                 accept="image/*"

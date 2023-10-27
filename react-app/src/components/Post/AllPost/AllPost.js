@@ -29,6 +29,7 @@ const AllPost = () => {
 
 
     <div id='all-post-container'>
+    
         <h1 style={{'textAlign':'center'}}>ALL POSTS</h1>
       <div id='all-post-div' >
 
