@@ -30,8 +30,8 @@ const Search = () => {
         <h1 style={{'textAlign':'center'}}>Search Result: {queryTerm}</h1>
       </div>
       {!found ?
-        <div>
-          <h1 >No products found</h1>
+        <div id='no-post-found'>
+          <h1 >No posts found</h1>
         </div> :
         <div id='search-results-div'>
           {Object?.values(searchedPosts).map((post) => (
