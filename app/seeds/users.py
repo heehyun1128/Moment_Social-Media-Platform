@@ -9,16 +9,17 @@ def seed_users():
         profile_image_url='https://images2.minutemediacdn.com/image/upload/c_crop,w_2764,h_1554,x_0,y_744/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/mentalfloss/01ggaw7dsf4kgxw6y5zc.jpg'
         )
     marnie = User(
-        username='Boba Lover', email='marnie@aa.io', 
-        first_name='Marnie', last_name='Marnie',password='password')
+        username='Nian Nian', email='marnie@aa.io', 
+        first_name='Marnie', last_name='Marnie',password='password',
+        profile_image_url='https://images.pexels.com/photos/11279108/pexels-photo-11279108.jpeg?auto=compress&cs=tinysrgb&w=800'
+    )
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', 
+        username='Bobbie', email='bobbie@aa.io', 
         first_name='Bobbie', last_name='Bobbie',
-        password='password')
-    disney = User(
-        username='disney', email='disney@aa.io', 
-        first_name='Disney', last_name='Disney',
-        password='password')
+        password='password',
+        profile_image_url='https://images.pexels.com/photos/10812162/pexels-photo-10812162.jpeg?auto=compress&cs=tinysrgb&w=800'
+    )
+   
 
     db.session.add(demo)
     db.session.add(marnie)

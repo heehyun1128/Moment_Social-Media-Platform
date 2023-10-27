@@ -32,6 +32,8 @@ def user(id):
         creator=post.creator
         post_likes=post.like_users
         data=post.to_dict()
+        num_likes=len(post_likes)
+        data['numOfLikes'] = num_likes
         data['creator']=creator.to_dict()
         #get post images
         post_images=PostImage.query.filter_by(post_id=post.id).all()
@@ -99,9 +101,10 @@ def get_likes(id):
         
     
         data['likeUsers']=[like.to_dict() for like in liked_post_likes]
+        num_of_likes = len(liked_post_likes)
+        data['numOfLikes']:num_of_likes
 
         like_dict[str(like.id)] = data
-
     return like_dict
 
 @user_routes.route('/<int:id>')

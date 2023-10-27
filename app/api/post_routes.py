@@ -66,6 +66,8 @@ def get_all_posts():
     creator=post.creator
     comments=post.comments
     like_users=post.like_users
+    num_of_likes=len(like_users)
+    data['numOfLikes']=num_of_likes
     print('1111OOOOOOOOOOOO',like_users)
 
     for img in images:
@@ -238,11 +240,15 @@ def post_comment(postId):
 @login_required
 def create_like(postId):
   post=Post.query.get(postId)
-  if post in current_user.like_posts:
-    return {"errors": "User already liked the post"}, 400
+  if not post:
+        return {'errors': "Post not found"}, 404
+  # if post in current_user.like_posts:
+  #   return {"errors": "User already liked the post"}, 400
   post.like_users.append(current_user)
   db.session.commit()
-  return {"message": "Successfully liked post"}
+  post.numOfLikes = len(post.like_users)
+  return post.to_dict()
+  # return {"message": "Successfully liked post"}
 
 
 # EDIT A POST IMAGE

@@ -150,6 +150,14 @@ def seed_comments():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #19
+    Comment(
+      content="Hahaha that's my dog's costume 👻",
+      user_id=2,
+      post_id=18,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
   ]
   db.session.add_all(comments)
   db.session.commit()

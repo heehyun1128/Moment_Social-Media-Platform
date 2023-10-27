@@ -13,7 +13,7 @@ def seed_postimages():
 # post-1
     PostImage(
     preview=True,
-    post_image_url='https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_1280.jpg',
+    post_image_url='	https://images.pexels.com/photos/1907071/pexels-photo-1907071.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=1,
     created_at=curr_date,
     updated_at=curr_date
@@ -28,7 +28,14 @@ def seed_postimages():
     # post-2
     PostImage(
     preview=True,
-    post_image_url='https://t3.ftcdn.net/jpg/05/52/92/66/360_F_552926654_GxwGf2l2mDjnKCA2E0alsGCWQsHmJAtm.webp',
+    post_image_url='https://images.pexels.com/photos/164769/pexels-photo-164769.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=2,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/164936/pexels-photo-164936.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
@@ -57,50 +64,50 @@ def seed_postimages():
     # post-3
     PostImage(
     preview=True,
-    post_image_url='https://cdn.britannica.com/95/94195-050-FCBF777E/Golden-Gate-Bridge-San-Francisco.jpg',
+    post_image_url='https://images.pexels.com/photos/1141853/pexels-photo-1141853.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://www.queenanne.com/resourcefiles/mainimages/golden-gate-bridge-at-san-francisco-top.jpg?version=8082022205612',
+    post_image_url='https://images.pexels.com/photos/3584437/pexels-photo-3584437.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://t3.ftcdn.net/jpg/00/83/52/48/360_F_83524810_OObPtC0QCkWYHxCdY563NOnYbSfZ3wqI.webp',
+    post_image_url='https://images.pexels.com/photos/1119075/pexels-photo-1119075.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://t4.ftcdn.net/jpg/02/43/21/87/240_F_243218764_MumH4UFsZCdcpkhNaRMBCrtOIZbhLpNY.jpg',
+    post_image_url='	https://images.pexels.com/photos/1591382/pexels-photo-1591382.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsaw7AvHxZKrA-6jBm7wQR5IKDoAUtD6-g0Q&usqp=CAU',
+    post_image_url='https://images.pexels.com/photos/2401665/pexels-photo-2401665.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
     ),
     # post-4
     PostImage(
-    preview=True,
-    post_image_url='https://media-cdn.tripadvisor.com/media/photo-w/1a/7c/8b/73/photo1jpg.jpg',
+    preview=False,
+    post_image_url='https://s3-media0.fl.yelpcdn.com/bphoto/92mcXsjz7jBq8afhkI76oA/o.jpg',
     post_id=4,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=False,
-    post_image_url='https://s3-media0.fl.yelpcdn.com/bphoto/92mcXsjz7jBq8afhkI76oA/o.jpg',
+    preview=True,
+    post_image_url='https://media-cdn.tripadvisor.com/media/photo-w/1a/7c/8b/73/photo1jpg.jpg',
     post_id=4,
     created_at=curr_date,
     updated_at=curr_date
@@ -186,6 +193,13 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
+    post_image_url='https://images.pexels.com/photos/4709289/pexels-photo-4709289.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=7,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
     post_image_url='https://images.pexels.com/photos/1181373/pexels-photo-1181373.jpeg',
     post_id=7,
     created_at=curr_date,
@@ -216,7 +230,28 @@ def seed_postimages():
     #9
     PostImage(
     preview=True,
-    post_image_url='https://www.madpaws.com.au/wp-content/uploads/2021/03/Samoyed-768x799.png',
+    post_image_url='https://images.pexels.com/photos/11476525/pexels-photo-11476525.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=9,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/8152008/pexels-photo-8152008.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=9,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/11476522/pexels-photo-11476522.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=9,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/6623995/pexels-photo-6623995.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
     updated_at=curr_date
@@ -224,11 +259,207 @@ def seed_postimages():
     #10
     PostImage(
     preview=True,
+    post_image_url='	https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=10,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/977935/pexels-photo-977935.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=10,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=10,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
     post_image_url='https://catinaflat.blog/wp-content/uploads/2022/05/what-is-a-tabby-cat-copy.jpg',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
     ),
+    #11
+   
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=11,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/662417/pexels-photo-662417.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=11,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/4588435/pexels-photo-4588435.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=11,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/3196887/pexels-photo-3196887.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=11,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/14666143/pexels-photo-14666143.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=11,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    #12
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/2362002/pexels-photo-2362002.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=12,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=12,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/16005384/pexels-p…ia-adventure.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=12,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    #13
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=13,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/6113860/pexels-photo-6113860.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=13,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/1365428/pexels-photo-1365428.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=13,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=13,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/2878712/pexels-photo-2878712.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=14,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/3230010/pexels-photo-3230010.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=14,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/3491211/pexels-photo-3491211.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=14,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=14,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='		https://images.pexels.com/photos/8823444/pexels-photo-8823444.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=15,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/17063197/pexels-p…-de-la-creme.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=15,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/16308667/pexels-p…top-of-a-bed.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=15,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=16,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/13865277/pexels-photo-13865277.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=16,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='		https://images.pexels.com/photos/18757269/pexels-p…e-on-a-table.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=16,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/13811359/pexels-photo-13811359.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=17,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/14043102/pexels-photo-14043102.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=18,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    
    
    
   ]

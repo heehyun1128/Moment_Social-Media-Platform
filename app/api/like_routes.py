@@ -16,4 +16,7 @@ def delete_like(postId):
   post.like_users.remove(current_user)
   db.session.commit()
 
-  return {"message":"Successfully removed like on the post."}
+  post.numOfLikes = len(post.like_users)
+
+  return post.to_dict()
+  # return {"message":"Successfully removed like on the post."}
