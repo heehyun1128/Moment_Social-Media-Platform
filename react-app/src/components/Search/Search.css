@@ -12,5 +12,13 @@
 }
 
 #search-result-div h1{
-  font-size: 28px;
+  font-size: 30px !important;
+}
+
+#no-post-found h1{
+  display: flex;
+  font-size: 26px !important;
+  justify-content: center;
+  font-weight: 400 !important;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
