@@ -7,7 +7,7 @@ import { fetchDeletePostImage } from "../../../store/postImage";
 import Loading from "../../Loading/Loading";
 
 const PostForm = ({ post, formType }) => {
-  console.log(post)
+ 
   const dispatch = useDispatch();
   const history = useHistory();
   const [postPics, setPostPics] = useState(post?.postImages || new Array(5).fill(null))
@@ -26,13 +26,13 @@ const PostForm = ({ post, formType }) => {
   const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
   const [deselectImageCalled, setdeSelectImageCalled] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
-  console.log(isCancelImageUpdate)
+
   // GET INITIAL IMAGE URLS
 
   useEffect(() => {
     const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
-    console.log(initialUrls)
+   
     initialUrls && setSelImageUrls(initialUrls)
   }, [post?.postImages])
 
@@ -45,44 +45,31 @@ const PostForm = ({ post, formType }) => {
     dispatch(fetchDeletePostImage(imageId))
     const isImageDeleted = [...deleteImageCalled]
     isImageDeleted[index] = true
-    console.log(postPics)
+   
 
     setDeleteImageCalled(isImageDeleted)
     const newPics = [...postPics]
-    console.log(newPics)
+    
     newPics[index] = null
-    // newPics.splice(index,1,null)
-
-    // const picsLeft = newPics.filter(pic => pic !== null)
-    // console.log(picsLeft)
-    // const updatedPicArr = []
-    // updatedPicArr.push(...picsLeft)
-    // console.log(updatedPicArr)
-    // if (updatedPicArr.length < 5) {
-    //   const numSpotsToFill = 5 - picsLeft.length
-    //   for (let i = 0; i < numSpotsToFill; i++) {
-    //     updatedPicArr.push(null)
-    //   }
-    // }
-    // console.log(updatedPicArr)
+   
     setPostPics(newPics)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
     setSelImageUrls(prevImageUrls => imageUrls)
-    console.log('after removing existing images when update', 'postPics', postPics)
-    console.log('after removing existing images when update', 'imageUrls', imageUrls)
+   
+  
 
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
     alert('Image successfully deleted!')
   }
 
-  console.log(deleteImageCalled)
+ 
   const handleUndoImageUpdate = (index) => {
-    console.log("undo image change")
+   
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
-    console.log([...isCancelImageUpdate])
+ 
 
     const deselectImage = [...deselectImageCalled]
     deselectImage[index] = true
@@ -90,7 +77,7 @@ const PostForm = ({ post, formType }) => {
 
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
     imgUpdateBtnClicked[index] = true
-    console.log(imgUpdateBtnClicked)
+  
     setIsCancelImageUpdate(imgUpdateBtnClicked)
 
     fileNames[index] = ''
@@ -99,16 +86,14 @@ const PostForm = ({ post, formType }) => {
     // postImageUrl
     imageUrls[index] = ''
     setSelImageUrls(imageUrls)
-    console.log('after deselect on update - imageUrls', imageUrls)
     const newPics = [...postPics]
 
     newPics[index] = post?.postImages[index]
-    console.log('new', newPics)
 
     setPostPics(newPics)
   }
   const handleDeselectImg = (index) => {
-    console.log('first')
+  
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
 
@@ -123,7 +108,6 @@ const PostForm = ({ post, formType }) => {
 
     // setPostPics(newPics.filter(pic => pic !== null))
     setPostPics(newPics)
-    console.log('after deselct', postPics)
   }
 
 
@@ -134,29 +118,24 @@ const PostForm = ({ post, formType }) => {
   }
 
   if (postPics.length < 5) {
-    console.log([...postPics, ...new Array(5 - postPics.length).fill(null)])
+   
     const newArr = [...postPics, ...new Array(5 - postPics.length).fill(null)]
     setPostPics(newArr)
 
   }
   const handleImageChange = (e, index) => {
     e.preventDefault();
-    console.log(imgInputIdList)
-    // const edittedImgId=e.target.id
-    // if(!edittedImgIdList.includes(edittedImgId)){
-    //   setEdittedImgIdList([...edittedImgIdList,edittedImgId])
-    // }
+   
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
     const imageInputIds = [...imgInputIdList]
 
-    console.log(imageInputIds)
     if (e.target.files[0]) {
       const imgUpdateBtnClicked = [...isCancelImageUpdate]
       imgUpdateBtnClicked[index] = true
 
       setIsCancelImageUpdate(imgUpdateBtnClicked)
-      console.log(e.target.files[0].name)
+     
       fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
@@ -164,18 +143,17 @@ const PostForm = ({ post, formType }) => {
       setSelImageUrls(imageUrls)
 
       imageInputIds[index] = Number(e.target.id)
-      console.log(imageInputIds[index])
+    
       setImgInputIdList(imageInputIds)
 
-      console.log(imgInputIdList)
-      console.log(postPics)
+     
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
       setPostPics(newPics)
       // setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
       // setPostPics(postPics.filter(pic => pic !== null))
-      console.log(newPics)
+    
       // setIsCancelImageUpdate(true)
     } else {
 
@@ -210,13 +188,13 @@ const PostForm = ({ post, formType }) => {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
 
-        console.log(postPics.indexOf(postPic))
+       
         if (postPics.indexOf(postPic) === 0) {
           preview = true
         } else {
           preview = false
         }
-        console.log(preview)
+     
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
@@ -238,7 +216,7 @@ const PostForm = ({ post, formType }) => {
 
       }
       if (textData.errors) {
-        console.log(textData.errors)
+       
         setErrors(textData.errors);
         return
 
@@ -261,7 +239,7 @@ const PostForm = ({ post, formType }) => {
 
       const textData = await dispatch(fetchUpdatePost(post));
       if (textData.errors) {
-        console.log(errors)
+    
         setErrors(textData.errors);
         return
       }
@@ -293,9 +271,7 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-          // console.log(edittedImgId)
-          // console.log(postPic)
-          // console.log(edittedImgId)
+         
           if (textData.id) {
 
             if (postPic && postPic.id) {
@@ -337,8 +313,7 @@ const PostForm = ({ post, formType }) => {
 
 
   }
-  console.log(postPics)
-  console.log(selImageUrls)
+
   return (
     <div id='post-form-div'>
       {formType === "createPost" && <h2>Create a post</h2>}
@@ -367,7 +342,7 @@ const PostForm = ({ post, formType }) => {
 
                         onChange={(e) => {
                           handleImageChange(e, index)
-                          console.log(e.target.files[0])
+                          
                           // setPostPic(e.target.files[0])
                         }}
 
@@ -397,7 +372,7 @@ const PostForm = ({ post, formType }) => {
 
             <div id='create-post-main'>
               {postPics && postPics.map((pic, index) => {
-                console.log(index)
+               
                 return <div key={index} id="post-image-div">
                   <div id='upload-img-preview'>
                     <img src={selImageUrls[index]} alt="" />
@@ -410,7 +385,7 @@ const PostForm = ({ post, formType }) => {
                         // value={profilePic}
                         onChange={(e) => {
                           handleImageChange(e, index)
-                          console.log(e.target.files[0])
+                        
                           // setPostPic(e.target.files[0])
                         }}
 
@@ -436,7 +411,7 @@ const PostForm = ({ post, formType }) => {
             value={title}
             onChange={(e) => {
               setTitle(e.target.value)
-              console.log(e.target.value)
+              
             }}
             required
           />
@@ -452,7 +427,7 @@ const PostForm = ({ post, formType }) => {
             value={content}
             placeholder="Add post content here..."
             onChange={(e) => {
-              console.log(e.target.value)
+          
               setContent(e.target.value)
             }}
             required

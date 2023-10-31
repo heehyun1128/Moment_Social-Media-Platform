@@ -5,30 +5,11 @@ import { fetchAllPostComments, fetchSingleCommentImage } from '../../../store/co
 import './CommentDetail.css'
 
 const CommentDetail = ({comments}) => {
-  console.log(comments)
+
   
   const dispatch=useDispatch()
 
-  // console.log(comments)
-  // const postCommentsObj = useSelector(state => state.comments?.comments)
-  
-  // const postComments =postCommentsObj && Object.values(postCommentsObj)
  
-  
-
-  // useEffect(()=>{
-  //   dispatch(fetchAllPostComments(post.id))
-  // }, [dispatch, post.id])
- 
-
-  
-
-  // if (!post ) {
-  //   return null
-  // }
-  // if (!postCommentsObj ||! postComments.length){
-  //   return null
-  // }
   return (
     <div>
       

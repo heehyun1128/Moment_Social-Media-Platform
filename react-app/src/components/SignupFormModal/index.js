@@ -20,7 +20,7 @@ function SignupFormModal() {
 
 
 	const displayFile = e => {
-		console.log('called')
+	
 		e.stopPropagation()
 		const image = e.target.files[0]
 		const imageUrl = URL.createObjectURL(image)
@@ -47,12 +47,12 @@ function SignupFormModal() {
 			formData.append('last_name', lastname)
 			formData.append('email', email)
 			formData.append('password', password)
-			console.log(Object.entries(formData))
+		
 			const data = await dispatch(signUp(formData));
 			// const data = await dispatch(signUp(profilePic, username, firstname, lastname, email, password));
 			if (data) {
 				setErrors(data);
-				console.log(data)
+				
 			} else {
 				setImageLoading(false)
 				closeModal();
@@ -62,9 +62,9 @@ function SignupFormModal() {
 			setErrors({
 				passwordNotMatched: "Confirm Password field must be the same as the Password field"
 			});
-			console.log(errors)
+			
 		}
-		console.log(errors)
+	
 	};
 
 	return (
@@ -80,7 +80,7 @@ function SignupFormModal() {
 						accept="image/*"
 						// value={profilePic}
 						onChange={(e) => {
-							console.log(e.target.files[0])
+							
 							setProfilePic(e.target.files[0])
 							displayFile(e)
 						}}
@@ -127,7 +127,7 @@ function SignupFormModal() {
 						value={firstname}
 						onChange={(e) => {
 							setFirstname(e.target.value)
-							console.log(e.target.value)
+						
 						}}
 						required
 					/>

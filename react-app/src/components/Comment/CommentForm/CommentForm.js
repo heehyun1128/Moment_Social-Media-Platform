@@ -12,7 +12,7 @@ const CommentForm = () => {
   const [image, setImage] = useState(null)
   const [content, setContent] = useState('')
   const { postId } = useParams()
-  console.log('postId', postId)
+  
   const [selImage, setSelImage] = useState(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [imageLoading, setImageLoading] = useState(false)
@@ -20,7 +20,7 @@ const CommentForm = () => {
   const [errors, setErrors] = useState({});
 
   const displayFile = e => {
-    console.log('called')
+   
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -95,7 +95,7 @@ const CommentForm = () => {
             value={content}
             placeholder="Add comment here..."
             onChange={(e) => {
-              console.log(e.target.value)
+             
               setContent(e.target.value)
             }}
             required
@@ -112,7 +112,7 @@ const CommentForm = () => {
                 accept="image/*"
                 // value={profilePic}
                 onChange={(e) => {
-                  console.log(e.target.files[0])
+                
                   setImage(e.target.files[0])
                   displayFile(e)
                 }}

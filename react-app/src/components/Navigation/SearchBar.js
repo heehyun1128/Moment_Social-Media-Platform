@@ -4,23 +4,23 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom/"
 
 const SearchBar = ({ searchContent, setSearchContent }) => {
-  console.log(searchContent)
+
   const history = useHistory()
   const dispatch=useDispatch()
 
   const handleSubmit = async e=>{
     e.preventDefault()
     const data = await dispatch(fetchSearchedPosts(searchContent))
-    console.log('data',data)
+   
 
     history.push(`/search?q=${searchContent}`)
     setSearchContent("")
   }
   const handleSearchInputChange = e=>{
     e.preventDefault()
-    console.log(e.target.value)
+  
     setSearchContent(e.target.value)
-    console.log(searchContent)
+    
   }
 
 

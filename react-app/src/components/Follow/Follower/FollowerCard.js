@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const FollowerCard = ({ follower, sessionUser }) => {
-  console.log(follower)
+
   const dispatch = useDispatch()
   const [followStatus, setFollowStatus] = useState(false)
 

@@ -14,10 +14,9 @@ const EditCommentModal = ({ comment }) => {
   const [content, setContent] = useState(comment?.content)
   const { postId } = useParams()
   const history = useHistory()
-  // console.log(comment?.commentImages?.length)
   const { closeModal } = useModal();
   const commentImageId = comment?.commentImages[0]?.id
-  // console.log(commentImageId)
+
   const [selImage, setSelImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
   const [initialUrl,setInitialUrl] = useState(null)
@@ -26,7 +25,7 @@ const EditCommentModal = ({ comment }) => {
 
   useEffect(() => {
     const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
-    console.log(initialImgUrl)
+   
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     
     initialImgUrl && setSelImage(initialImgUrl)
@@ -34,7 +33,7 @@ const EditCommentModal = ({ comment }) => {
   }, [comment?.commentImages])
 
   const displayFile = e => {
-    console.log('called')
+   
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -65,16 +64,7 @@ const EditCommentModal = ({ comment }) => {
       'id': comment.id,
       content
     }
-    // console.log(comment)
-    // const textData = await dispatch(fetchUpdateComment(comment));
-
-    // if (textData && textData.errors) {
-    //   setErrors(textData.errors)
-    //   return
-    // }
-
-    // const formData = new FormData()
-    // formData.append('comment_id', textData?.id)
+   
     if (image && !isImageValid(image)) {
       alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
       return
@@ -100,18 +90,11 @@ const EditCommentModal = ({ comment }) => {
         }
       }
     }
-    // console.log(comment?.commentImages)
-    // if (comment?.commentImages?.length) {
-
-    // } else {
-    //   await dispatch(fetchCreateCommentImage(formData))
-    //   setImageLoading(true)
-    // }
-    // CALL FETCH CREATE COMMENT IMAGE IF NO EXISTING COMMENT IMAGE
+    
 
     resetForm()
     closeModal();
-    // setImageLoading(false)
+  
   }
   return (
     <div id='edit-comment-modal'>
@@ -125,7 +108,7 @@ const EditCommentModal = ({ comment }) => {
                 value={content}
                 placeholder="Update comment here..."
                 onChange={(e) => {
-                  console.log(e.target.value)
+                 
                   setContent(e.target.value)
                 }}
                 required
@@ -145,7 +128,7 @@ const EditCommentModal = ({ comment }) => {
                 accept="image/*"
                 // value={profilePic}
                 onChange={(e) => {
-                  console.log(e.target.files[0])
+               
                   setImage(e.target.files[0])
                   displayFile(e)
                 }}

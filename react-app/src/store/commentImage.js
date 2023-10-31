@@ -10,11 +10,11 @@ export const deleteCommentImage = commentImageId => ({
 // DELETE A comment IMAGE
 export const fetchDeleteCommentImage = (imageId) => async (dispatch) => {
 
-  console.log(imageId)
+ 
   const res = await fetch(`/api/commentimages/${imageId}`, {
     method: 'DELETE'
   })
-  console.log(res)
+
   if (res.ok) {
 
     dispatch(deleteCommentImage(imageId))

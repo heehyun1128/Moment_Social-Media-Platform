@@ -21,6 +21,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const history = useHistory()
   const sessionUser = useSelector(state => state.session?.user)
+  const [renderUpdateBtn, setRenderUpdateBtn] = useState(false)
 
   // const handleViewAllPosts = () => {
   //   history.push(`/profile/${sessionUser.id}`)
@@ -59,7 +60,7 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   const displayFile = e => {
-    console.log('called')
+   
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -79,7 +80,7 @@ function ProfileButton({ user }) {
   const handleUpdateProfilePic = async e => {
     e.preventDefault();
     const formData = new FormData()
-    console.log(profilePic)
+   
     if (!isImageValid(profilePic)) {
       // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
       alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
@@ -100,13 +101,14 @@ function ProfileButton({ user }) {
 
       setImageLoading(false)
       closeMenu()
-      
+      setRenderUpdateBtn(false)
 
 
 
     }
 
   }
+
 
   return (
     <>
@@ -121,46 +123,38 @@ function ProfileButton({ user }) {
               <div id="profile-up-left">
                 {profilePic ? <img src={selImage} id='new-profile-pic' alt='' /> : <div id='user-profile-img-li'>
                   {user?.profileImage ? <img id='profile-img' src={user?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-xl"></i>}
+                </div>}
                   <div id="profile-up-right">
                     <label id='edit-comment-img-input-label'>
-
                       <input
                         type="file"
                         accept="image/*"
                         // value={profilePic}
                         onChange={(e) => {
-                          console.log(e.target.files[0])
+                        
                           setProfilePic(e.target.files[0])
                           displayFile(e)
+                          setRenderUpdateBtn(true)
                         }}
-
                       />
-                    
                       <span id='profile-icon-span'>
                         +
-
                       </span>
-                      {/* <span id='profile-icon-span'>
-                    +
-                    {!profilePic && <p id='update-profile-pic-text'>Update Profile Image</p>}
-                  </span> */}
-
                     </label>
                   </div>
-                </div>}
                 <div>Welcome, {user?.username}</div>
               </div>
-              
+
             </div>
             {/* edit profile image */}
-           <div id="button-section">
-              {profilePic && <button onClick={handleUpdateProfilePic}>Update Profile Image</button>}
+            <div id="button-section">
+              {renderUpdateBtn && <button onClick={handleUpdateProfilePic}>Update Profile Image</button>}
               <button id='logout-btn' onClick={handleLogout}>LOG OUT</button>
-           </div>
+            </div>
 
           </>
-        ) 
-     
+        )
+
         }
       </ul>
     </>

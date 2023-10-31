@@ -11,7 +11,7 @@ const AllPost = () => {
   const location = useLocation()
   const currentPath = location.pathname
   const allPostsObj = useSelector(state => state.posts?.Posts)
-  console.log(allPostsObj)
+
 
   useEffect(() => {
     dispatch(fetchAllPosts())
@@ -22,7 +22,7 @@ const AllPost = () => {
     return null
   }
   const allPosts = allPostsObj && Object.values(allPostsObj)
-  console.log(allPosts)
+ 
 
 
   return (
@@ -34,7 +34,7 @@ const AllPost = () => {
       <div id='all-post-div' >
 
         {allPosts && allPosts.map(post => {
-          console.log(post)
+         
           return <PostCard post={post} />
         })}
       </div>

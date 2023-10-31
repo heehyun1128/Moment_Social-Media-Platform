@@ -12,7 +12,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const queryTerm = new URLSearchParams(location.search).get('q');
-  console.log(queryTerm)
+  
 
   // const allPostsObj = useSelector(state => state.posts.Posts)
   const searchedPosts = useSelector(state => state.posts.searchPosts)
