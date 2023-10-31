@@ -30,6 +30,18 @@ def seed_commentimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
+    CommentImage(
+    comment_image_url='https://images.pexels.com/photos/6717786/pexels-photo-6717786.jpeg?auto=compress&cs=tinysrgb&w=800',
+    comment_id=21,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    CommentImage(
+    comment_image_url='https://images.pexels.com/photos/2531546/pexels-photo-2531546.jpeg?auto=compress&cs=tinysrgb&w=800',
+    comment_id=22,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
   ]
   db.session.add_all(comment_images)
   db.session.commit()

@@ -171,6 +171,14 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #21
+    Post(
+      title= 'I want this birthday cake for my birthday',
+      content= "Found a cake online that I really like. Think that I should get this one for my birthday? Any ideas or suggestions? What's your birthday cake like?",
+      creator_id=5,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
     
   ]
 

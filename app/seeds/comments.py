@@ -166,6 +166,22 @@ def seed_comments():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #21
+    Comment(
+      content="I made this cake for my friend.",
+      user_id=3,
+      post_id=21,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #22
+    Comment(
+      content="Happy birthday! I got a similar cake",
+      user_id=4,
+      post_id=21,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
   ]
   db.session.add_all(comments)
   db.session.commit()

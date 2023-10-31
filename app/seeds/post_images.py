@@ -473,6 +473,14 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/10577002/pexels-photo-10577002.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=21,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    
     
    
    
