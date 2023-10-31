@@ -334,12 +334,41 @@ const postReducer = (state = initialState, action) => {
     case ADD_POST_LIKE:
       newState = {
         ...state,
+        posts: {
+          ...state.posts,
 
-        [action.post.id]: {
-          ...state.Posts[action.post.id],
-          likeUsers: {
-            ...state.Posts[action.post.id].likeUsers,
-            [action.user.id]: action.user
+          Posts:{
+            ...state.posts?.Posts,
+  
+            [action.post.id]: {
+              ...state.posts?.Posts[action.post.id],
+              likeUsers: {
+                ...state.posts?.Posts[action.post.id]?.likeUsers,
+                [action.user.id]: action.user
+              }
+            }
+          },
+        },
+        users:{
+          ...state.users,
+          singleUser: {
+            ...state.users?.singleUser,
+            likedPosts: {
+              ...state.users?.singleUser?.likedPosts,
+              [action.post.id]: action.post
+            },
+            userPosts: {
+              ...state.users?.singleUser?.userPosts,
+              [action.post.id]: {
+                ...state.users?.singleUser?.userPosts[action.post.id],
+                likeUsers: {
+                  ...state.users?.singleUser?.userPosts[action.post.id]?.likeUsers,
+                  [action.user.id]: action.user
+                },
+               
+              }
+
+            }
           }
         }
 
@@ -352,14 +381,45 @@ const postReducer = (state = initialState, action) => {
       }
       newState = {
         ...state,
-        [action.postId]: {
-          ...state.Posts[action.postId],
-          likeUsers: {
-            ...state.Posts[action.postId].likeUsers,
+        posts: {
+          ...state.posts,
+          Posts:{
+            ...state.Posts,
+            [action.postId]: {
+              ...state.Posts[action.postId],
+              likeUsers: {
+                ...state.Posts[action.postId]?.likeUsers,
+              }
+            }
+          }
+        },
+        users: {
+          ...state.users,
+          singleUser: {
+            ...state.users?.singleUser,
+            likedPosts: {
+              ...state.users?.singleUser?.likedPosts,
+           
+            },
+            userPosts: {
+              ...state.users?.singleUser?.userPosts,
+              [action.postId]: {
+                ...state.users?.singleUser?.userPosts[action.postId],
+                likeUsers: {
+                  ...state.users?.singleUser?.userPosts[action.postId]?.likeUsers,
+                 
+                },
+
+              }
+
+            }
           }
         }
       }
-      delete newState[action.postId].likeUsers[action.userId]
+      delete newState.posts.Posts[action.postId].likeUsers[action.userId]
+      delete newState.users?.singleUser?.likedPosts[action.postId]
+      delete newState.users?.singleUser?.userPosts[action.postId]?.likeUsers[action.userId]
+      console.log(newState)
       return newState
     default:
       return state

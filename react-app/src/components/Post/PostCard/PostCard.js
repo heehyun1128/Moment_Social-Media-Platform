@@ -30,35 +30,45 @@ const PostCard = ({ post }) => {
     }
     e.preventDefault()
     e.stopPropagation()
+    console.log('original',isLiked)
     if (!isLiked) {
       const likedPost = sessionUser && post && await dispatch(fetchAddPostLike(post, sessionUser))
-      if (!likedPost.errors) {
+      
+     if(likedPost && Object.values(likedPost)){
 
-        setIsLiked(true)
-        setTotalLikes(prevLike => {
-          prevLike=Number(prevLike) 
-            prevLike+= 1
-          return prevLike
-        });
+     setIsLiked(true)
+     
+     console.log('ADD',isLiked)
+     setTotalLikes(prevLike => {
+       prevLike=Number(prevLike) 
+         prevLike+= 1
+       return prevLike
+     });
+     }
 
-      } 
+
+    
       // else {
       //   console.log(likedPost?.errors)
       // }
     } else {
       const dislikedPost = sessionUser && post && sessionUser.id && post.id && await dispatch(fetchRemovePostLike(post?.id, sessionUser?.id))
-     
-      if (!dislikedPost.errors) {
+     console.log(dislikedPost)
+      if(dislikedPost &&Object.values(dislikedPost)){
 
         setIsLiked(false)
+        console.log('DELETE',isLiked)
         // setTotalLikes(prevLike => Number(prevLike) - 1)
         setTotalLikes(prevLike => {
           prevLike = Number(prevLike)
           prevLike -= 1
           return prevLike
         });
+      }
+      dispatch(fetchUserLikedPosts(sessionUser?.id))
+
         // await dispatch(fetchUserPosts(sessionUser?.id))
-      } 
+    
       // else {
       //   console.log(dislikedPost.errors)
       // }
@@ -74,12 +84,13 @@ const PostCard = ({ post }) => {
   }, [dispatch, sessionUser?.id])
 
   useEffect(() => {
-    
+    console.log(userLikedPosts)
     if (userLikedPosts && post && Object.keys(userLikedPosts).includes(post.id + '')) {
       setIsLiked(true)
     } else { 
       setIsLiked(false)
     }
+
   }, [userLikedPosts, post])
 
   useEffect(() => {
