@@ -11,10 +11,10 @@ def search():
   q = request.args.get("q")
   if q:
 
-    
+
     result = (Post.query
-              .join(Comment,Comment.post_id==Post.id)
-              .join(User,User.id==Post.creator_id)
+              .outerjoin(Comment,Comment.post_id==Post.id)
+              .outerjoin(User,User.id==Post.creator_id)
               .filter(or_(Post.title.ilike(f'%{q}%'), Post.content.ilike(f'%{q}%'), User.username.ilike(f'%{q}%'), Comment.content.ilike(f'%{q}%')))).limit(100).all()
 
     search_dict={}
@@ -40,7 +40,6 @@ def search():
             data['comments'].append(comment_data)
         
         search_dict[str(post.id)]=data
-
     return search_dict
 
   else:
