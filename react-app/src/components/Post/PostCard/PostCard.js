@@ -53,11 +53,11 @@ const PostCard = ({ post }) => {
       // }
     } else {
       const dislikedPost = sessionUser && post && sessionUser.id && post.id && await dispatch(fetchRemovePostLike(post?.id, sessionUser?.id))
-     console.log(dislikedPost)
+    
       if(dislikedPost &&Object.values(dislikedPost)){
 
         setIsLiked(false)
-        console.log('DELETE',isLiked)
+       
         // setTotalLikes(prevLike => Number(prevLike) - 1)
         setTotalLikes(prevLike => {
           prevLike = Number(prevLike)
