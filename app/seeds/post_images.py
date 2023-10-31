@@ -480,6 +480,20 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/7842693/pexels-photo-7842693.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=22,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/7842693/pexels-photo-7842693.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=23,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
     
     
    

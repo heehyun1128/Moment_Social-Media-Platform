@@ -179,6 +179,22 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #22
+    Post(
+      title= 'I am announcing that I have completed a 24-week Software Engineering Bootcamp!',
+      content= "The past 6 months have been challenging yet rewarding. I went from someone with limited programming skills to a full stack engineer. I made lots of friends in this bootcamp too and I appreciate their support a lot!",
+      creator_id=5,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #23
+    Post(
+      title= 'I miss the time when I went to the beach',
+      content= "Haven't gone to the beach for a while and I miss the old times when I used to go to the beach.",
+      creator_id=4,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
     
   ]
 
