@@ -235,6 +235,22 @@ def seed_posts():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #29
+    Post(
+      title= "Seattle, the city of coffee addicts, tech wizards, and endless drizzles! 🌧️",
+      content= "Seattle: where coffee flows like rain, and tech geeks coexist with nature enthusiasts. It's a city where the Space Needle is the ultimate selfie backdrop, and rain is just an excuse to indulge in cozy bookshops and craft beer. Embrace the drizzle, soak in the innovation, and savor every drop of this vibrant, caffeinated wonderland. ☕🌧️📚 #trip #vacation #travel",
+      creator_id=2,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #30
+    Post(
+      title= "Concrete Jungle Dreams: Exploring the Buzz of New York City",
+      content= "New York City, where the streets have more stories than you can count, and the yellow cabs play hopscotch with skyscrapers. It's the city that never sleeps, and you'll quickly find out why, with late-night pizza joints and 24/7 adventures. From Central Park picnics to Broadway dreams, NYC's got a slice of life for everyone. 🏙️🍕🌃",
+      creator_id=3,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
     
   ]
 
