@@ -494,6 +494,48 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/566566/pexels-photo-566566.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=24,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/4099234/pexels-photo-4099234.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=25,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
+    post_image_url='https://images.pexels.com/photos/3622478/pexels-photo-3622478.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=25,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='		https://images.pexels.com/photos/674577/pexels-photo-674577.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=26,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='	https://images.pexels.com/photos/3368816/pexels-photo-3368816.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=27,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/10846213/pexels-photo-10846213.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=28,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
     
     
    

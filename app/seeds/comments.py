@@ -198,6 +198,14 @@ def seed_comments():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #25
+    Comment(
+      content="Yummyyy",
+      user_id=4,
+      post_id=22,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
   ]
   db.session.add_all(comments)
   db.session.commit()
