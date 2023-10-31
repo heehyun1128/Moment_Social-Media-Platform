@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import './PostCard.css'
-import { fetchAddLike, fetchRemoveLike, fetchUserLikedPosts, fetchUserPosts } from "../../../store/user";
+import { fetchUserLikedPosts, fetchUserPosts } from "../../../store/user";
+import { fetchAddPostLike, fetchRemovePostLike } from "../../../store/post";
 
 
 
 const PostCard = ({ post }) => {
-  console.log(post)
+ 
   const history = useHistory()
   const dispatch = useDispatch()
   const createdDate = post?.createdAt?.slice(0, 16)
@@ -17,7 +18,6 @@ const PostCard = ({ post }) => {
   const sessionUser = useSelector(state => state.session?.user)
   const userLikedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
   const postLikedUsers = post && post.likeUsers
-  // console.log(Object.keys(userLikedPosts).includes(post.id+''))
 
   const handleClickPostCard = (e) => {
     e.preventDefault()
@@ -31,40 +31,37 @@ const PostCard = ({ post }) => {
     e.preventDefault()
     e.stopPropagation()
     if (!isLiked) {
-      const likedPost = sessionUser && post && await dispatch(fetchAddLike(post, sessionUser))
-      console.log('Liked Post:', likedPost);
+      const likedPost = sessionUser && post && await dispatch(fetchAddPostLike(post, sessionUser))
       if (!likedPost.errors) {
 
         setIsLiked(true)
         setTotalLikes(prevLike => {
-          console.log('prevLike:', prevLike);
           prevLike=Number(prevLike) 
             prevLike+= 1
-          console.log(prevLike)
           return prevLike
         });
 
-      } else {
-        console.log(likedPost?.errors)
-      }
+      } 
+      // else {
+      //   console.log(likedPost?.errors)
+      // }
     } else {
-      const dislikedPost = sessionUser && post && sessionUser.id && post.id && await dispatch(fetchRemoveLike(post?.id, sessionUser?.id))
+      const dislikedPost = sessionUser && post && sessionUser.id && post.id && await dispatch(fetchRemovePostLike(post?.id, sessionUser?.id))
      
       if (!dislikedPost.errors) {
 
         setIsLiked(false)
         // setTotalLikes(prevLike => Number(prevLike) - 1)
         setTotalLikes(prevLike => {
-          console.log('prevLike:', prevLike);
           prevLike = Number(prevLike)
           prevLike -= 1
-          console.log(prevLike)
           return prevLike
         });
         // await dispatch(fetchUserPosts(sessionUser?.id))
-      } else {
-        console.log(dislikedPost.errors)
-      }
+      } 
+      // else {
+      //   console.log(dislikedPost.errors)
+      // }
 
       // history.push(`/profile/${sessionUser?.id}`)
       
@@ -77,8 +74,7 @@ const PostCard = ({ post }) => {
   }, [dispatch, sessionUser?.id])
 
   useEffect(() => {
-    console.log(userLikedPosts&&Object.keys(userLikedPosts))
-    console.log(post&&post.id)
+    
     if (userLikedPosts && post && Object.keys(userLikedPosts).includes(post.id + '')) {
       setIsLiked(true)
     } else { 
@@ -89,7 +85,7 @@ const PostCard = ({ post }) => {
   useEffect(() => {
     if (postLikedUsers && postLikedUsers.length) {
       const totalNumLike = Number(postLikedUsers.length)
-      console.log('length', postLikedUsers.length)
+      
       setTotalLikes(totalNumLike)
     }
   }, [dispatch, postLikedUsers])
@@ -98,7 +94,7 @@ const PostCard = ({ post }) => {
   //   return null
   // }
   return (
-    <div id='post-card-div' onClick={handleClickPostCard}>
+   post && <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
         <div id='img-box'>
           {post && <img src={post && post?.previewImg} alt="" />}

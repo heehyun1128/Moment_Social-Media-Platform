@@ -54,7 +54,7 @@ export const fetchAllPostComments = (postId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(loadComments(data))
-    console.log(data)
+   
     return data
   } else {
     const errors = await res.json()
@@ -65,11 +65,11 @@ export const fetchAllPostComments = (postId) => async (dispatch) => {
 // fetch single comment
 export const fetchSingleComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`)
-console.log(res)
+
   if (res.ok) {
     const data = await res.json()
     dispatch(getComment(data))
-    console.log(data)
+  
     return data
   } else {
     const errors = await res.json()
@@ -83,7 +83,7 @@ export const fetchSingleCommentImage = (commentId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(getCommentImage(commentId,data))
-    console.log(data)
+   
     return data
   } else {
     const errors = await res.json()
@@ -93,8 +93,7 @@ export const fetchSingleCommentImage = (commentId) => async (dispatch) => {
 
 // create a comment
 export const fetchCreateComment = (postId, comment) => async (dispatch) => {
-  console.log(comment)
-  console.log(postId)
+  
   const res = await fetch(`/api/posts/${postId}/comments/new`, {
     method: "POST",
     headers: { 'Content-Type': 'application/json' },
@@ -103,7 +102,7 @@ export const fetchCreateComment = (postId, comment) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(getComment(data))
-    console.log(data)
+   
     return data
   } else {
     const errors = await res.json()
@@ -113,7 +112,7 @@ export const fetchCreateComment = (postId, comment) => async (dispatch) => {
 
 // UPDATE a comment
 export const fetchUpdateComment = (comment) => async (dispatch) => {
-  console.log(comment)
+  
   const res = await fetch(`/api/comments/${comment.id}/edit`, {
     method: "PUT",
     headers: { 'Content-Type': 'application/json' },
@@ -122,7 +121,7 @@ export const fetchUpdateComment = (comment) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(editComment(data))
-    console.log(data)
+   
     return data
   } else {
     const errors = await res.json()
@@ -135,7 +134,7 @@ export const fetchDeleteComment = (commentId) => async (dispatch) => {
   const res = await fetch(`/api/comments/${commentId}`, {
     method: 'DELETE'
   })
-  console.log(res)
+ 
   if (res.ok) {
 
     dispatch(removeComment(commentId))
@@ -148,18 +147,18 @@ export const fetchDeleteComment = (commentId) => async (dispatch) => {
 
 // create a comment image
 export const fetchCreateCommentImage = (formData) => async (dispatch) => {
-  console.log(formData.get('comment_id'))
+  
   const commentId = formData.get('comment_id')
   const res = await fetch(`/api/comments/${commentId}/images`, {
     method: "POST",
     body: formData
   })
-  console.log(res)
+ 
   if (res.ok) {
     const data = await res.json()
-    console.log('data',data)
+  
     dispatch(getCommentImage(commentId,data))
-    console.log(data)
+    
     return data
   } else {
     const errors = await res.json()
@@ -169,30 +168,29 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
 
 // UPDATE a comment image
 export const fetchUpdateCommentImage = (formData, imageId) => async (dispatch) => {
-  console.log(formData)
-  console.log(imageId)
+ 
   // Access all keys using an iterator
   const entriesIterator = formData.entries();
 
-  for (const [key, value] of entriesIterator) {
-    // Check if the value is an object
-    if (typeof value === 'object' && value !== null) {
-      console.log(key + ': ' + JSON.stringify(value, null, 2));
-    } else {
-      console.log(key + ': ' + value);
-    }
-  }
+  // for (const [key, value] of entriesIterator) {
+  //   // Check if the value is an object
+  //   if (typeof value === 'object' && value !== null) {
+  //     console.log(key + ': ' + JSON.stringify(value, null, 2));
+  //   } else {
+  //     console.log(key + ': ' + value);
+  //   }
+  // }
 
   const commentId = formData.get('comment_id')
   const res = await fetch(`/api/comments/${commentId}/images/${imageId}/edit`, {
     method: "PUT",
     body: formData
   })
-  console.log(res)
+ 
   if (res.ok) {
     const data = await res.json()
     dispatch(editCommentImage(commentId,data))
-    console.log(data)
+    
     return data
   } else {
     const errors = await res.json()
@@ -217,7 +215,7 @@ const commentReducer = (state = initialState, action) => {
       action.comments.Comments.forEach(comment => {
         newState.comments[comment.id] = comment
       })
-      console.log(newState)
+    
       return newState
 
     case GET_COMMENT:
@@ -230,7 +228,7 @@ const commentReducer = (state = initialState, action) => {
         },
         singleComment: action.comment
       }
-      console.log(newState)
+     
       return newState
     case GET_COMMENT_IMAGE:
     case EDIT_COMMENT_IMAGE:
@@ -253,7 +251,7 @@ const commentReducer = (state = initialState, action) => {
         }
         
       }
-      console.log(newState)
+     
       return newState
 
     case LOAD_COMMENT_IMAGES:
@@ -266,7 +264,7 @@ const commentReducer = (state = initialState, action) => {
       }
       return newState
     case REMOVE_COMMENT:
-      console.log(action.commentId)
+     
       const commentObj = {...state.comments}
       delete commentObj[action.commentId]
       newState = {
@@ -274,7 +272,7 @@ const commentReducer = (state = initialState, action) => {
         comments: commentObj,
         singleComment:null
       }
-      console.log('newState',newState)
+    
       return newState
 
     default:

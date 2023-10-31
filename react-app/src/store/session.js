@@ -68,7 +68,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signUp = (formData) => async (dispatch) => {
-	console.log(formData)
+	
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		body: formData
@@ -87,7 +87,7 @@ export const signUp = (formData) => async (dispatch) => {
 
 	if (response.ok) {
 		const data = await response.json();
-		console.log(data)
+	
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {

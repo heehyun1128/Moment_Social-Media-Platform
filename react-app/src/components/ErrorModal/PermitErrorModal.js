@@ -11,7 +11,6 @@ const PermitErrorModal = () => {
 
   const closePermitErrModal = e => {
     e.preventDefault();
-    console.log('closePermitErrModal is called');
     closeModal()
 
   }

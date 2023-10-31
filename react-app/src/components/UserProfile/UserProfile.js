@@ -8,6 +8,7 @@ import UserPost from "../Post/UserPost/UserPost";
 import Like from "../Like/Like";
 import Follower from "../Follow/Follower/Follower";
 import Followed from "../Follow/Followed/Followed";
+import { fetchAllPosts } from "../../store/post";
 
 const UserProfile = () => {
   const { userId } = useParams()
@@ -36,16 +37,24 @@ const UserProfile = () => {
     history.push('/')
   }
 
-  const userPosts = useSelector(state => state.users?.singleUser?.userPosts)
+  // const userPosts = useSelector(state => state.users?.singleUser?.userPosts)
+  const allPostsObj = useSelector(state => state.posts?.Posts)
+  useEffect(() => {
+    dispatch(fetchAllPosts())
+  }, [dispatch])
+  const allPosts = allPostsObj && Object.values(allPostsObj)
+  const userPosts = allPosts&&allPosts.filter(post=>post?.creatorId===sessionUser?.id)
   useEffect(() => {
     dispatch(fetchSingleUser(userId))
   }, [dispatch, userId])
   useEffect(() => {
-    dispatch(fetchUserPosts(sessionUser.id))
-  }, [dispatch, sessionUser.id])
+    dispatch(fetchUserPosts(sessionUser?.id))
+  }, [dispatch, sessionUser?.id])
 
-  console.log(userPosts)
-  if (!userPosts) { return null }
+  
+  if (!allPostsObj || Object.values(allPostsObj).length === 0) {
+    return null
+  }
   const userPostArr = Object.values(userPosts)
 
   const handleViewAllUserPosts = e => {

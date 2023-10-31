@@ -40,8 +40,8 @@ const UserPost = ({userPostArr}) => {
       {/* <h2>YOUR POSTS</h2> */}
       <div id='user-post-div' >
         {userPostArr && userPostArr.map(post => {
-          console.log(post)
-          return <PostCard post={post} />
+       
+          return post && <PostCard post={post} />
         })}
       </div>
       {!userPostArr?.length && <p>No Posts here</p>}

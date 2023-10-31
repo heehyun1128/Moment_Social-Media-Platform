@@ -104,7 +104,7 @@ export const fetchAllPosts = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(loadPosts(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -129,11 +129,11 @@ export const fetchAllPosts = () => async (dispatch) => {
 // fetch single post
 export const fetchSinglePost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`)
-  console.log(res)
+
   if (res.ok) {
     const data = await res.json()
     dispatch(getPost(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -151,7 +151,7 @@ export const fetchCreatePost = (post) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(getPost(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -160,17 +160,17 @@ export const fetchCreatePost = (post) => async (dispatch) => {
 }
 // create a post image
 export const fetchCreatePostImage = (formData) => async (dispatch) => {
-  console.log(formData.get('post_id'))
+
   const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images`, {
     method: "POST",
     body: formData
   })
-  console.log(res)
+
   if (res.ok) {
     const data = await res.json()
     dispatch(getPostImage(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -188,7 +188,7 @@ export const fetchUpdatePost = (post) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json()
     dispatch(editPost(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -197,29 +197,22 @@ export const fetchUpdatePost = (post) => async (dispatch) => {
 }
 // UPDATE a post image
 export const fetchUpdatePostImage = (formData, imageId) => async (dispatch) => {
-  console.log(formData.keys(), imageId)
+
   // Access all keys using an iterator
   const entriesIterator = formData.entries();
 
-  for (const [key, value] of entriesIterator) {
-    // Check if the value is an object
-    if (typeof value === 'object' && value !== null) {
-      console.log(key + ': ' + JSON.stringify(value, null, 2));
-    } else {
-      console.log(key + ': ' + value);
-    }
-  }
+
 
   const postId = formData.get('post_id')
   const res = await fetch(`/api/posts/${postId}/images/${imageId}/edit`, {
     method: "PUT",
     body: formData
   })
-  console.log(res)
+
   if (res.ok) {
     const data = await res.json()
     dispatch(editPostImage(data))
-    console.log(data)
+
     return data
   } else {
     const errors = await res.json()
@@ -232,7 +225,7 @@ export const fetchDeletePost = (postId) => async (dispatch) => {
   const res = await fetch(`/api/posts/${postId}`, {
     method: 'DELETE'
   })
-  console.log(res)
+
   if (res.ok) {
 
     dispatch(removePost(postId))
@@ -262,7 +255,7 @@ export const fetchAddPostLike = (post, user) => async (dispatch) => {
     body: JSON.stringify(post.id)
   });
   if (response.ok) {
-    console.log(response)
+
     const data = await response.json()
     dispatch(addPostLikes(post, user))
     return data
@@ -296,7 +289,7 @@ const postReducer = (state = initialState, action) => {
         ...state,
         ...action.posts
       }
-      console.log(newState)
+
       return newState
     case LOAD_USER_POSTS:
       newState = {
@@ -310,7 +303,7 @@ const postReducer = (state = initialState, action) => {
         ...state,
         singlePost: action.post
       }
-      console.log(newState)
+
       return newState
     case GET_POST_IMAGE:
     case EDIT_POST_IMAGE:
@@ -336,39 +329,37 @@ const postReducer = (state = initialState, action) => {
           ...action.posts
         }
       }
-      console.log(newState)
+
       return newState
     case ADD_POST_LIKE:
       newState = {
         ...state,
-        posts: {
-          ...state.posts,
-          [action.postId]: {
-            ...state.posts[action.postId],
-            likeUsers: {
-              ...state.likeUsers,
-              [action.user.id]: action.user
-            }
+
+        [action.post.id]: {
+          ...state.Posts[action.post.id],
+          likeUsers: {
+            ...state.Posts[action.post.id].likeUsers,
+            [action.user.id]: action.user
           }
         }
+
 
       }
       return newState
     case DELETE_POST_LIKE:
+      if (!state.Posts || !state.Posts[action.postId]) {
+        return state;
+      }
       newState = {
         ...state,
-        posts: {
-          ...state.posts,
-          [action.postId]: {
-            ...state.posts[action.postId],
-            likeUsers: {
-              ...state.likeUsers,
-              [action.user.id]: null
-            }
+        [action.postId]: {
+          ...state.Posts[action.postId],
+          likeUsers: {
+            ...state.Posts[action.postId].likeUsers,
           }
         }
-
       }
+      delete newState[action.postId].likeUsers[action.userId]
       return newState
     default:
       return state

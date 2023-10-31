@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   const displayFile = e => {
-    console.log('called')
+   
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -80,7 +80,7 @@ function ProfileButton({ user }) {
   const handleUpdateProfilePic = async e => {
     e.preventDefault();
     const formData = new FormData()
-    console.log(profilePic)
+   
     if (!isImageValid(profilePic)) {
       // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
       alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
@@ -109,7 +109,7 @@ function ProfileButton({ user }) {
 
   }
 
-  console.log(renderUpdateBtn)
+
   return (
     <>
 
@@ -131,7 +131,7 @@ function ProfileButton({ user }) {
                         accept="image/*"
                         // value={profilePic}
                         onChange={(e) => {
-                          console.log(e.target.files[0])
+                        
                           setProfilePic(e.target.files[0])
                           displayFile(e)
                           setRenderUpdateBtn(true)

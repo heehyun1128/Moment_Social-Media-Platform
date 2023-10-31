@@ -10,11 +10,11 @@ export const deletePostImage = postImageId => ({
 // DELETE A POST IMAGE
 export const fetchDeletePostImage = (imageId) => async (dispatch) => {
 
-  console.log(imageId)
+ 
   const res = await fetch(`/api/postimages/${imageId}`, {
     method: 'DELETE'
   })
-  console.log(res)
+
   if (res.ok) {
 
     dispatch(deletePostImage(imageId))

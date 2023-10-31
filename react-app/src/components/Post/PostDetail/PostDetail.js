@@ -21,18 +21,16 @@ const PostDetail = () => {
   const postCreator = useSelector(state => state.users?.singleUser)
   // comments
   const commentObj = useSelector((state) => (state.comments ? state.comments?.comments : {}))
-  // console.log('commentObj', commentObj)
   const commentArr = commentObj && Object.values(commentObj)
-  // console.log('commentArr', commentArr)
-  // console.log('post?.id', post?.id)
+  
   // get post comments
   const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id))
-  // console.log(postComments)
+
 
   const sessionUser = useSelector(state => state.session?.user)
   const postCreatorFollowers = postCreator && postCreator.followers
   const postCreatorFollowerArr = postCreatorFollowers && Object.values(postCreatorFollowers)
-  console.log(postCreatorFollowerArr)
+ 
 
   const [imageId, setImageId] = useState(null)
   // css
@@ -51,7 +49,7 @@ const PostDetail = () => {
       activeDivs[i] = ''
     }
     activeDivs[index] = 'active'
-    console.log(isActive)
+   
     setIsActive(activeDivs)
   }
   const handleImageClick = (index) => {
@@ -125,7 +123,7 @@ const PostDetail = () => {
   }, [dispatch, postCreatorFollowerArr, sessionUser?.id])
 
   useEffect(() => {
-    console.log(post)
+  
     post && post.creatorId && dispatch(fetchSingleUser(post?.creatorId))
 
   }, [dispatch, post, post?.creatorId])
