@@ -84,7 +84,7 @@ const PostCard = ({ post }) => {
   }, [dispatch, sessionUser?.id])
 
   useEffect(() => {
-    console.log(userLikedPosts)
+ 
     if (userLikedPosts && post && Object.keys(userLikedPosts).includes(post.id + '')) {
       setIsLiked(true)
     } else { 

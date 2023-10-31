@@ -419,7 +419,7 @@ const postReducer = (state = initialState, action) => {
       delete newState.posts.Posts[action.postId].likeUsers[action.userId]
       delete newState.users?.singleUser?.likedPosts[action.postId]
       delete newState.users?.singleUser?.userPosts[action.postId]?.likeUsers[action.userId]
-      console.log(newState)
+     
       return newState
     default:
       return state
