@@ -30,7 +30,7 @@ const PostCard = ({ post }) => {
     }
     e.preventDefault()
     e.stopPropagation()
-    console.log('original',isLiked)
+   
     if (!isLiked) {
       const likedPost = sessionUser && post && await dispatch(fetchAddPostLike(post, sessionUser))
       
@@ -38,7 +38,7 @@ const PostCard = ({ post }) => {
 
      setIsLiked(true)
      
-     console.log('ADD',isLiked)
+    
      setTotalLikes(prevLike => {
        prevLike=Number(prevLike) 
          prevLike+= 1
