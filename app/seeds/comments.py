@@ -202,7 +202,7 @@ def seed_comments():
     Comment(
       content="Yummyyy",
       user_id=4,
-      post_id=22,
+      post_id=24,
       created_at=curr_date,
       updated_at=curr_date
     ),
