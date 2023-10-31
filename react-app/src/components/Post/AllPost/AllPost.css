@@ -18,3 +18,15 @@
   font-size: 40px;
 }
 
+@media screen and (max-width: 1200px) {
+  #all-post-div {
+    columns: 2;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #all-post-div {
+
+    columns: 1;
+  }
+}

@@ -117,7 +117,7 @@ const Home = () => {
       
         <article class="post featured">
           
-            <span class="date">FEATURED POST</span>
+            <span class="date">FEATURED POSTS</span>
 
           <div id="portfolio-container" className="animate__fadeInUp">
             <div class="card" onClick={()=>{
@@ -134,9 +134,7 @@ const Home = () => {
                   <p>Nian Nian</p>
                 </div>
                 <h3>My visit to Disney was a magical adventure filled with enchanting rides, beloved characters, and a contagious atmosphere of joy.</h3>
-                <div id='link-div'>
-
-                </div>
+               
               </div>
 
             </div>
@@ -153,9 +151,7 @@ const Home = () => {
                   <p>Demo</p>
                 </div>
                 <h3>Dogs aren't just pets; they're family. My furry companion is not just a pet but also my confidant, playmate, and unwavering source of unconditional love. 🐾 </h3>
-                <div id='link-div'>
-
-                </div>
+                
               </div>
 
             </div>
@@ -171,9 +167,7 @@ const Home = () => {
                   <p>Bobbie</p>
                 </div>
                 <h3>Today's hiking adventure was like stepping into a breathtaking postcard. With every step, we uncovered hidden treasures and felt a deep connection to the great outdoors.</h3>
-                <div id='link-div'>
-
-                </div>
+                
               </div>
 
             </div>

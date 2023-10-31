@@ -14,6 +14,7 @@ import PageNotFound from './components/PageNotFound/PageNotFound'
 import Search from "./components/Search/Search";
 import AllPost from "./components/Post/AllPost/AllPost";
 import { useLocation } from 'react-router-dom';
+import Footer from "./components/Footer/Footer";
 // import UserPost from "./components/Post/UserPost/UserPost";
 // import Like from "./components/Like/Like";
 
@@ -71,6 +72,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      {isLoaded && <Footer />}
     </>
   );
 }

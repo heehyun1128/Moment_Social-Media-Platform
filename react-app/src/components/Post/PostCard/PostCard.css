@@ -169,3 +169,19 @@ min-width: fit-content;
   padding: 0!important;
   margin: 0!important;
 }
+
+@media screen and (max-width: 1400px) {
+  #view-more{
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #view-more{
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #view-more{
+    font-size: 24px;
+  }
+}
