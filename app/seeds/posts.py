@@ -154,7 +154,23 @@ def seed_posts():
       creator_id=1,
       created_at=curr_date,
       updated_at=curr_date
-    )
+    ),
+    #19
+    Post(
+      title= 'What is your favorite K-pop star?',
+      content= "My favorite k-POP group is Super Junior. I also like the songs from BTS. I think members of both groups are hard-working and sincere and that's why I like them. What is your favorite K-pop star? Share in the comment below.",
+      creator_id=4,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #20
+    Post(
+      title= 'I made dumplings today!',
+      content= "First time making spinach dumplings for my family",
+      creator_id=4,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
     
   ]
 

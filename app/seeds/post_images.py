@@ -236,21 +236,21 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/8152008/pexels-photo-8152008.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/11476522/pexels-photo-11476522.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/6623995/pexels-photo-6623995.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
@@ -265,21 +265,21 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/977935/pexels-photo-977935.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://catinaflat.blog/wp-content/uploads/2022/05/what-is-a-tabby-cat-copy.jpg',
     post_id=10,
     created_at=curr_date,
@@ -295,28 +295,28 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/662417/pexels-photo-662417.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/4588435/pexels-photo-4588435.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/3196887/pexels-photo-3196887.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/14666143/pexels-photo-14666143.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
@@ -331,14 +331,14 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/16005384/pexels-p…ia-adventure.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
@@ -353,21 +353,21 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/6113860/pexels-photo-6113860.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/1365428/pexels-photo-1365428.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/1194235/pexels-photo-1194235.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
@@ -381,21 +381,21 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/3230010/pexels-photo-3230010.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=14,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/3491211/pexels-photo-3491211.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=14,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=14,
     created_at=curr_date,
@@ -410,7 +410,7 @@ def seed_postimages():
     ),
     
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='https://images.pexels.com/photos/17063197/pexels-p…-de-la-creme.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=15,
     created_at=curr_date,
@@ -418,7 +418,7 @@ def seed_postimages():
     ),
     
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/16308667/pexels-p…top-of-a-bed.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=15,
     created_at=curr_date,
@@ -432,14 +432,14 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/13865277/pexels-photo-13865277.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=16,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='		https://images.pexels.com/photos/18757269/pexels-p…e-on-a-table.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=16,
     created_at=curr_date,
@@ -456,6 +456,20 @@ def seed_postimages():
     preview=True,
     post_image_url='https://images.pexels.com/photos/14043102/pexels-photo-14043102.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=18,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/2147029/pexels-photo-2147029.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=19,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=True,
+    post_image_url='https://images.pexels.com/photos/4281747/pexels-photo-4281747.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=20,
     created_at=curr_date,
     updated_at=curr_date
     ),
