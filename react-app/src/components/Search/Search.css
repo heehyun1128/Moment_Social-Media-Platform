@@ -22,3 +22,16 @@
   font-weight: 400 !important;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
+
+@media screen and (max-width: 800px) {
+  #search-results-div {
+
+    columns: 2;
+  }
+}
+@media screen and (max-width: 600px) {
+  #search-results-div {
+
+    columns: 1;
+  }
+}

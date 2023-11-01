@@ -324,7 +324,7 @@ const PostForm = ({ post, formType }) => {
   return (
     <div id='post-form-div'>
     <div id="post-form-header">
-        <p onClick={()=>{history.push('/posts/all')}}>{`<- ALL POSTS `}</p>
+        <h3 id='back-to-all-posts'  onClick={()=>{history.push('/posts/all')}}>{`<- ALL POSTS `}</h3>
     </div>
         {formType === "createPost" && <h2>Create a post</h2>}
         {formType === "updatePost" && <h2>Update your post</h2>}
