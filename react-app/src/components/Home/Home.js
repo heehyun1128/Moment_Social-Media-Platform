@@ -140,7 +140,9 @@ const Home = () => {
             </div>
 
 
-            <div class="card">
+              <div class="card" onClick={() => {
+                history.push('/posts/11')
+              }}>
               <img src={img2} alt="" />
               <div className="content">
 
@@ -156,7 +158,9 @@ const Home = () => {
 
             </div>
 
-            <div class="card">
+              <div class="card" onClick={() => {
+                history.push('/posts/13')
+              }}>
               <img src={img3} alt="" />
               <div className="content">
 
