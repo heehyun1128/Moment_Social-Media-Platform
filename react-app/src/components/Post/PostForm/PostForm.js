@@ -5,9 +5,12 @@ import { useHistory } from "react-router-dom";
 import './PostForm.css'
 import { fetchDeletePostImage } from "../../../store/postImage";
 import Loading from "../../Loading/Loading";
+import { useModal } from "../../../context/Modal";
+import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
+import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
 
 const PostForm = ({ post, formType }) => {
- 
+
   const dispatch = useDispatch();
   const history = useHistory();
   const [postPics, setPostPics] = useState(post?.postImages || new Array(5).fill(null))
@@ -20,6 +23,7 @@ const PostForm = ({ post, formType }) => {
   const [selFileNames, setSelFileNames] = useState([])
   const [selImageUrls, setSelImageUrls] = useState([])
   const [backgroundImg, setBackgroundImg] = useState('')
+  const { setModalContent, setOnModalClose } = useModal();
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
@@ -32,7 +36,7 @@ const PostForm = ({ post, formType }) => {
   useEffect(() => {
     const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
-   
+
     initialUrls && setSelImageUrls(initialUrls)
   }, [post?.postImages])
 
@@ -45,31 +49,32 @@ const PostForm = ({ post, formType }) => {
     dispatch(fetchDeletePostImage(imageId))
     const isImageDeleted = [...deleteImageCalled]
     isImageDeleted[index] = true
-   
+
 
     setDeleteImageCalled(isImageDeleted)
     const newPics = [...postPics]
-    
+
     newPics[index] = null
-   
+
     setPostPics(newPics)
     const imageUrls = [...selImageUrls]
     imageUrls[index] = null
     setSelImageUrls(prevImageUrls => imageUrls)
-   
-  
+
+
 
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
-    alert('Image successfully deleted!')
+    // alert('Image successfully deleted!')
+    setModalContent(<ImageDeleteModal/>)
   }
 
- 
+
   const handleUndoImageUpdate = (index) => {
-   
+
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
- 
+
 
     const deselectImage = [...deselectImageCalled]
     deselectImage[index] = true
@@ -77,7 +82,7 @@ const PostForm = ({ post, formType }) => {
 
     const imgUpdateBtnClicked = [...isCancelImageUpdate] //[]
     imgUpdateBtnClicked[index] = true
-  
+
     setIsCancelImageUpdate(imgUpdateBtnClicked)
 
     fileNames[index] = ''
@@ -93,7 +98,7 @@ const PostForm = ({ post, formType }) => {
     setPostPics(newPics)
   }
   const handleDeselectImg = (index) => {
-  
+
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
 
@@ -118,14 +123,14 @@ const PostForm = ({ post, formType }) => {
   }
 
   if (postPics.length < 5) {
-   
+
     const newArr = [...postPics, ...new Array(5 - postPics.length).fill(null)]
     setPostPics(newArr)
 
   }
   const handleImageChange = (e, index) => {
     e.preventDefault();
-   
+
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
     const imageInputIds = [...imgInputIdList]
@@ -135,7 +140,7 @@ const PostForm = ({ post, formType }) => {
       imgUpdateBtnClicked[index] = true
 
       setIsCancelImageUpdate(imgUpdateBtnClicked)
-     
+
       fileNames[index] = e.target.files[0].name
       setSelFileNames(fileNames)
       // get selected image URL
@@ -143,17 +148,17 @@ const PostForm = ({ post, formType }) => {
       setSelImageUrls(imageUrls)
 
       imageInputIds[index] = Number(e.target.id)
-    
+
       setImgInputIdList(imageInputIds)
 
-     
+
       const newPics = [...postPics]
       newPics[index] = null
       newPics[index] = e.target.files[0]
       setPostPics(newPics)
       // setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
       // setPostPics(postPics.filter(pic => pic !== null))
-    
+
       // setIsCancelImageUpdate(true)
     } else {
 
@@ -188,16 +193,17 @@ const PostForm = ({ post, formType }) => {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
 
-       
+
         if (postPics.indexOf(postPic) === 0) {
           preview = true
         } else {
           preview = false
         }
-     
+
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+          // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+          setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
         } else {
@@ -216,7 +222,7 @@ const PostForm = ({ post, formType }) => {
 
       }
       if (textData.errors) {
-       
+
         setErrors(textData.errors);
         return
 
@@ -239,7 +245,7 @@ const PostForm = ({ post, formType }) => {
 
       const textData = await dispatch(fetchUpdatePost(post));
       if (textData.errors) {
-    
+
         setErrors(textData.errors);
         return
       }
@@ -263,7 +269,8 @@ const PostForm = ({ post, formType }) => {
 
         if (!isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
         } else {
@@ -271,7 +278,7 @@ const PostForm = ({ post, formType }) => {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-         
+
           if (textData.id) {
 
             if (postPic && postPic.id) {
@@ -316,8 +323,11 @@ const PostForm = ({ post, formType }) => {
 
   return (
     <div id='post-form-div'>
-      {formType === "createPost" && <h2>Create a post</h2>}
-      {formType === "updatePost" && <h2>Update your post</h2>}
+    <div id="post-form-header">
+        <p onClick={()=>{history.push('/posts/all')}}>{`<- ALL POSTS `}</p>
+    </div>
+        {formType === "createPost" && <h2>Create a post</h2>}
+        {formType === "updatePost" && <h2>Update your post</h2>}
       <form form id='create-post-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
         {formType === "updatePost" &&
@@ -333,7 +343,7 @@ const PostForm = ({ post, formType }) => {
                   {<div id='upload-img-preview'>
                     {<img id='update-img-display' src={selImageUrls[index]} alt="" />}
                     {<label id='edit-post-input-label'>
-                  
+
                       <input
                         type="file"
                         accept="image/*"
@@ -342,7 +352,7 @@ const PostForm = ({ post, formType }) => {
 
                         onChange={(e) => {
                           handleImageChange(e, index)
-                          
+
                           // setPostPic(e.target.files[0])
                         }}
 
@@ -372,7 +382,7 @@ const PostForm = ({ post, formType }) => {
 
             <div id='create-post-main'>
               {postPics && postPics.map((pic, index) => {
-               
+
                 return <div key={index} id="post-image-div">
                   <div id='upload-img-preview'>
                     <img src={selImageUrls[index]} alt="" />
@@ -385,7 +395,7 @@ const PostForm = ({ post, formType }) => {
                         // value={profilePic}
                         onChange={(e) => {
                           handleImageChange(e, index)
-                        
+
                           // setPostPic(e.target.files[0])
                         }}
 
@@ -411,7 +421,7 @@ const PostForm = ({ post, formType }) => {
             value={title}
             onChange={(e) => {
               setTitle(e.target.value)
-              
+
             }}
             required
           />
@@ -427,7 +437,7 @@ const PostForm = ({ post, formType }) => {
             value={content}
             placeholder="Add post content here..."
             onChange={(e) => {
-          
+
               setContent(e.target.value)
             }}
             required
@@ -437,7 +447,7 @@ const PostForm = ({ post, formType }) => {
           }
         </div>
         {imageLoading ? <>
-        <Loading />
+          <Loading />
           <p>Submitting...</p>
         </> : <button id='submit-post-btn' type="submit">POST</button>}
       </form>

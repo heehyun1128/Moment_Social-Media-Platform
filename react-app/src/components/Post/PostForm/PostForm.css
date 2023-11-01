@@ -179,6 +179,18 @@ input[type=file] {
   margin-left:80px;
 }
 
+#post-form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 80vw;
+  cursor: pointer;
+}
+
+#post-form-header p:hover{
+  color: #ae7a7a;
+}
+
 #remove-image-div,#deslect-image-div{
   box-shadow: 0 0 4px gray;
   width: fit-content;

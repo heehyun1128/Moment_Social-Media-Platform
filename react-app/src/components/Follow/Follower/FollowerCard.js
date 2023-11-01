@@ -4,17 +4,21 @@ import { useDispatch } from 'react-redux'
 import './Follower.css'
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useModal } from '../../../context/Modal';
+import FollowModal from '../../Modal/FollowModal/FollowModal';
 
 const FollowerCard = ({ follower, sessionUser }) => {
 
   const dispatch = useDispatch()
   const [followStatus, setFollowStatus] = useState(false)
+  const { setModalContent, setOnModalClose } = useModal()
 
   const handleRemoveFollowUser = async (follower, index) => {
 
     // unfollow
     await dispatch(fetchRemoveFollower(sessionUser?.id, follower?.id))
-    alert("Successfully unfollowed user!")
+    // alert("Successfully unfollowed user!")
+    setModalContent(<FollowModal type='unfollow' />)
 
     setFollowStatus(false)
   }

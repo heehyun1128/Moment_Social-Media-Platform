@@ -19,11 +19,26 @@ def seed_users():
         password='password',
         profile_image_url='https://images.pexels.com/photos/10812162/pexels-photo-10812162.jpeg?auto=compress&cs=tinysrgb&w=800'
     )
+    heehyun = User(
+        username='Heehyun', email='heehyun@aa.io', 
+        first_name='Heehyun', last_name='C',
+        password='password',
+        profile_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG1ZPDsSXGmT6nuCQ8XM-Fq3KvVbFYP7br7A&usqp=CAU'
+    )
+   
+    ychen = User(
+        username='ychen', email='ychen@aa.io', 
+        first_name='Ychen', last_name='C.',
+        password='password',
+        profile_image_url='	https://heehyun1128.github.io/static/media/bgc.cfd103812788403429de.jpg'
+    )
    
 
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(heehyun)
+    db.session.add(ychen)
     db.session.commit()
 
 

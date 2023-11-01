@@ -158,6 +158,54 @@ def seed_comments():
       created_at=curr_date,
       updated_at=curr_date
     ),
+    #20
+    Comment(
+      content="I made dumplings today too!",
+      user_id=2,
+      post_id=20,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #21
+    Comment(
+      content="I made this cake for my friend.",
+      user_id=3,
+      post_id=21,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #22
+    Comment(
+      content="Happy birthday! I got a similar cake",
+      user_id=4,
+      post_id=21,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #23
+    Comment(
+      content="Congradulations!!",
+      user_id=2,
+      post_id=22,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #24
+    Comment(
+      content="Congradulations! You did it!",
+      user_id=4,
+      post_id=22,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
+    #25
+    Comment(
+      content="Yummyyy",
+      user_id=4,
+      post_id=24,
+      created_at=curr_date,
+      updated_at=curr_date
+    ),
   ]
   db.session.add_all(comments)
   db.session.commit()

@@ -10,6 +10,8 @@ import { fetchAllPostComments } from "../../../store/comment";
 import OpenModalButton from "../../OpenModalButton";
 import DeleteCommentModal from "../../Comment/CommentModal/DeleteCommentModal";
 import DeletePostModal from "../../Comment/CommentModal/DeletePostModal";
+import { useModal } from "../../../context/Modal";
+import FollowModal from "../../Modal/FollowModal/FollowModal";
 
 
 const PostDetail = () => {
@@ -38,6 +40,7 @@ const PostDetail = () => {
   const [isHidden, setIsHidden] = useState(['hidden', 'hidden', 'hidden', 'hidden', 'hidden'])
   const [isImageClicked, setIsImageClicked] = useState(['no', 'no', 'no', 'no', 'no'])
   const [isFollowed, setIsFollowed] = useState(false)
+  const { setModalContent, setOnModalClose } = useModal()
   const images = post?.postImages
 
   const numOfComments = commentArr?.length
@@ -94,7 +97,8 @@ const PostDetail = () => {
     } else {
       // unfollow
       await dispatch(fetchRemoveFollower(postCreator?.id, sessionUser?.id))
-      alert("Successfully unfollowed user!")
+      // alert("Successfully unfollowed user!")
+      setModalContent(<FollowModal type='unfollow' />)
       // await dispatch(fetchRemoveFollowed(sessionUser?.id, postCreator?.id))
       setIsFollowed(false)
     }

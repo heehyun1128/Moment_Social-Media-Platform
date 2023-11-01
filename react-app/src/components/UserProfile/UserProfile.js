@@ -109,6 +109,9 @@ const UserProfile = () => {
   // console.log(userPostArr)
   return (
     <div id='profile-page-main-div'>
+      <div id="post-form-header">
+        <p onClick={() => { history.push('/posts/all') }}>{`<- ALL POSTS `}</p>
+      </div>
       <div id='profile-info-div'>
         <div id='profile-info-img-div'>
           {singleUser?.profileImage ? <img src={singleUser.profileImage} alt="" /> :

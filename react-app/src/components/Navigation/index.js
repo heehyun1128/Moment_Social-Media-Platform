@@ -18,6 +18,7 @@ import SignupFormModal from "../SignupFormModal";
 import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
 import PermitErrorModal from '../ErrorModal/PermitErrorModal';
+import { useModal } from '../../context/Modal';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
@@ -28,10 +29,12 @@ function Navigation({ isLoaded }) {
 	const [showMenu, setShowMenu] = useState(false);
 	const [isPermitError, setIsPermitError] = useState(false)
 	const ulRef = useRef();
+	const { setModalContent, setOnModalClose } = useModal()
 
 	const handleViewAllPosts = () => {
 		if (!sessionUser) {
-			alert('Please Sign Up or Log In to view your posts.')
+			// alert('Please Sign Up or Log In to view your posts.')
+			setModalContent(<PermitErrorModal />);
 		}else{
 
 		history.push(`/profile/${sessionUser.id}`)

@@ -9,6 +9,8 @@ import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import { useModal } from "../../context/Modal";
+import ImageValidationModal from "../Modal/ImageModal/ImageValidationModal";
 
 
 function ProfileButton({ user }) {
@@ -22,7 +24,7 @@ function ProfileButton({ user }) {
   const history = useHistory()
   const sessionUser = useSelector(state => state.session?.user)
   const [renderUpdateBtn, setRenderUpdateBtn] = useState(false)
-
+  const { setModalContent, setOnModalClose } = useModal();
   // const handleViewAllPosts = () => {
   //   history.push(`/profile/${sessionUser.id}`)
   //   closeMenu()
@@ -83,7 +85,8 @@ function ProfileButton({ user }) {
    
     if (!isImageValid(profilePic)) {
       // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-      alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      setModalContent(<ImageValidationModal />);
       setImageLoading(false)
       return
     } else {

@@ -1,10 +1,11 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCreateCommentImage, fetchUpdateComment, fetchUpdateCommentImage } from '../../../store/comment';
 import { useParams, useHistory } from 'react-router-dom'
 import { useModal } from '../../../context/Modal';
 import '../CommentForm/CommentForm.css'
 import Loading from '../../Loading/Loading';
+import ImageValidationModal from '../../Modal/ImageModal/ImageValidationModal';
 
 
 const EditCommentModal = ({ comment }) => {
@@ -19,21 +20,22 @@ const EditCommentModal = ({ comment }) => {
 
   const [selImage, setSelImage] = useState(null)
   const [imageLoading, setImageLoading] = useState(false)
-  const [initialUrl,setInitialUrl] = useState(null)
+  const [initialUrl, setInitialUrl] = useState(null)
   const [errors, setErrors] = useState({});
+  const { setModalContent, setOnModalClose } = useModal();
 
 
   useEffect(() => {
     const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
-   
+
     // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
-    
+
     initialImgUrl && setSelImage(initialImgUrl)
     initialImgUrl && setInitialUrl(initialImgUrl)
   }, [comment?.commentImages])
 
   const displayFile = e => {
-   
+
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -64,11 +66,12 @@ const EditCommentModal = ({ comment }) => {
       'id': comment.id,
       content
     }
-   
+
     if (image && !isImageValid(image)) {
-      alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      setModalContent(<ImageValidationModal />)
       return
-    }else{
+    } else {
       const textData = await dispatch(fetchUpdateComment(comment));
 
       if (textData && textData.errors) {
@@ -78,23 +81,23 @@ const EditCommentModal = ({ comment }) => {
 
       const formData = new FormData()
       formData.append('comment_id', textData?.id)
-      if (textData?.id && image){
-  
+      if (textData?.id && image) {
+
         formData.append('comment_image_url', image)
         setImageLoading(true)
-        if (initialUrl){
-  
+        if (initialUrl) {
+
           const data = await dispatch(fetchUpdateCommentImage(formData, commentImageId))
-        }else{
+        } else {
           await dispatch(fetchCreateCommentImage(formData))
         }
       }
     }
-    
+
 
     resetForm()
     closeModal();
-  
+
   }
   return (
     <div id='edit-comment-modal'>
@@ -108,7 +111,7 @@ const EditCommentModal = ({ comment }) => {
                 value={content}
                 placeholder="Update comment here..."
                 onChange={(e) => {
-                 
+
                   setContent(e.target.value)
                 }}
                 required
@@ -116,7 +119,7 @@ const EditCommentModal = ({ comment }) => {
               {errors && errors.content &&
                 <p className="errors">{errors.content}</p>
               }
-              
+
             </label>
           </div>
           <div id='edit-comment-img-container'>
@@ -128,7 +131,7 @@ const EditCommentModal = ({ comment }) => {
                 accept="image/*"
                 // value={profilePic}
                 onChange={(e) => {
-               
+
                   setImage(e.target.files[0])
                   displayFile(e)
                 }}
@@ -138,12 +141,12 @@ const EditCommentModal = ({ comment }) => {
             </label>
           </div>
 
-          {imageLoading ? 
-           <>
+          {imageLoading ?
+            <>
               <Loading />
               <p>Submitting...</p>
-           </>
-           : <button id='edit-comment-btn'>Submit</button>}
+            </>
+            : <button id='edit-comment-btn'>Submit</button>}
         </form>
       </div>
     </div>

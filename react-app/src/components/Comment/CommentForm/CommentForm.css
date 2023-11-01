@@ -226,3 +226,9 @@ padding: 15px;
 #comment-btn-div button{
   margin-right: 20px;
 }
+
+.modal-style{
+  position:relative;
+  background-color: #fff;
+  width: 40vw;
+}
