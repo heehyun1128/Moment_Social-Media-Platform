@@ -184,7 +184,7 @@ input[type=file] {
   flex-direction: column;
   align-items: flex-start;
   width: 80vw;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 #post-form-header p:hover{
@@ -224,4 +224,11 @@ input[type=file] {
   margin-left: 10%;
   margin-bottom: 20px;
   
+}
+#back-to-all-posts{
+  color: #ae7a7a;
+}
+#back-to-all-posts:hover{
+  cursor: pointer;
+  color: rgb(59, 58, 58);
 }

@@ -153,7 +153,13 @@ function Navigation({ isLoaded }) {
 							</ul>
 						</div>
 					</div>
+					
 				</div>
+			</div>
+			<div id='search-bar-hidden'>
+				<SearchBar
+					searchContent={searchContent}
+					setSearchContent={setSearchContent} />
 			</div>
 		</div>
 	);

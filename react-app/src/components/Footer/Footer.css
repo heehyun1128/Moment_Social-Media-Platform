@@ -7,6 +7,11 @@
   width: 30vw;
 }
 
+#about-btn:hover {
+cursor: pointer;
+  color: rgb(172, 119, 119);
+}
+
 #footer-main{
   width: 100vw;
   display: flex;

@@ -1,7 +1,10 @@
 import React from 'react'
 import './Footer.css'
+import { useModal } from '../../context/Modal'
+import AboutModal from '../Modal/AboutModal/AboutModal'
 
 const Footer = () => {
+  const { setModalContent, setOnModalClose } = useModal()
   const handleGoLinkedin = e=>{
     e.preventDefault()
     window.open('https://www.linkedin.com/in/yi-c-452811132/')
@@ -14,10 +17,13 @@ const Footer = () => {
     e.preventDefault()
     window.open('https://heehyun1128.github.io/')
   }
+  const handleViewAbout = ()=>{
+    setModalContent(<AboutModal />)
+  }
   return (
     <div id='footer-main'>
       <div id='footer-sub-divs'>
-        <h4>Moment@2023</h4>
+        <h4 id='about-btn' onClick={handleViewAbout}>Moment@2023 | ABOUT</h4>
       </div>
       <div id='footer-sub-divs'>
         <h4>CONTACT DEVELOPER</h4>
