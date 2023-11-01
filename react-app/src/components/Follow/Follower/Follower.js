@@ -25,17 +25,19 @@ const Follower = () => {
 
     dispatch(fetchFollowers(sessionUser.id))
   }, [dispatch, sessionUser.id])
-  if (!followers || !Object.values(followers).length) {
-    return null
-  }
+ 
 
 
 
   return (
     <div>
+      {followerArr&&followerArr.length?
       <div id='follower-content'>
         {followerArr.map((follower) => <FollowerCard follower={follower} sessionUser={sessionUser}/>)}
       </div>
+      :
+      <p>No Followers</p>
+      }
     </div>
   )
 }

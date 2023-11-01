@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import './CommentForm.css'
 import Loading from '../../Loading/Loading';
 import PermitErrorModal from '../../ErrorModal/PermitErrorModal';
+import { useModal } from '../../../context/Modal';
+import ImageValidationModal from '../../Modal/ImageModal/ImageValidationModal';
 
 const CommentForm = () => {
   const dispatch = useDispatch()
@@ -12,15 +14,16 @@ const CommentForm = () => {
   const [image, setImage] = useState(null)
   const [content, setContent] = useState('')
   const { postId } = useParams()
-  
+
   const [selImage, setSelImage] = useState(null)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [imageLoading, setImageLoading] = useState(false)
   const [isPermitError, setIsPermitError] = useState(false)
   const [errors, setErrors] = useState({});
+  const { setModalContent, setOnModalClose } = useModal();
 
   const displayFile = e => {
-   
+
     e.stopPropagation()
     const image = e.target.files[0]
     const imageUrl = image && URL.createObjectURL(image)
@@ -44,7 +47,8 @@ const CommentForm = () => {
     e.preventDefault()
     if (!sessionUser) {
       // alert('Please log in to create a comment.')
-      setIsPermitError(true)
+      // setIsPermitError(true)
+      setModalContent(<PermitErrorModal />);
     }
     const comment = {
       content
@@ -56,7 +60,8 @@ const CommentForm = () => {
     // }
     const formData = new FormData()
     if (image && !isImageValid(image)) {
-      alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+      setModalContent(<ImageValidationModal />);
       return
     } else {
       const textData = await dispatch(fetchCreateComment(postId, comment));
@@ -85,7 +90,7 @@ const CommentForm = () => {
 
   return (
     <div>
-    {isPermitError &&<PermitErrorModal/>}
+
       <div id='comment-form-div'>
         <div></div>
         <h4>Add your comment here</h4>
@@ -95,7 +100,7 @@ const CommentForm = () => {
             value={content}
             placeholder="Add comment here..."
             onChange={(e) => {
-             
+
               setContent(e.target.value)
             }}
             required
@@ -103,7 +108,7 @@ const CommentForm = () => {
           {errors && errors.content &&
             <p className="errors">{errors.content}</p>
           }
-            {selImage && <img src={selImage} id='comment-img' alt='' />}
+          {selImage && <img src={selImage} id='comment-img' alt='' />}
           <div id='submit-comment-div'>
             <label>
               <div id='select-image'>SELECT IMAGE</div>
@@ -112,7 +117,7 @@ const CommentForm = () => {
                 accept="image/*"
                 // value={profilePic}
                 onChange={(e) => {
-                
+
                   setImage(e.target.files[0])
                   displayFile(e)
                 }}
@@ -125,7 +130,7 @@ const CommentForm = () => {
                 <Loading />
                 <p>Submitting...</p>
               </>
-              ) : (<button id='submit-comment-btn'>SUBMIT COMMENT</button>)}
+            ) : (<button id='submit-comment-btn'>SUBMIT COMMENT</button>)}
           </div>
         </form>
       </div>

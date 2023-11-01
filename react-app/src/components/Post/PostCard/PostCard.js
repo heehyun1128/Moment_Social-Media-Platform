@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import './PostCard.css'
 import { fetchUserLikedPosts, fetchUserPosts } from "../../../store/user";
 import { fetchAddPostLike, fetchRemovePostLike } from "../../../store/post";
+import { useModal } from "../../../context/Modal";
+import PermitErrorModal from "../../ErrorModal/PermitErrorModal";
 
 
 
@@ -14,6 +16,7 @@ const PostCard = ({ post }) => {
   const createdDate = post?.createdAt?.slice(0, 16)
   const [isLiked, setIsLiked] = useState(false)
   const [totalLikes, setTotalLikes] = useState(0)
+  const { setModalContent, setOnModalClose } = useModal();
 
   const sessionUser = useSelector(state => state.session?.user)
   const userLikedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
@@ -26,7 +29,8 @@ const PostCard = ({ post }) => {
 
   const handleLike = async (e) => {
     if (!sessionUser) {
-      alert('Please log in to like a post')
+      // alert('Please log in to like a post')
+      setModalContent(<PermitErrorModal />);
     }
     e.preventDefault()
     e.stopPropagation()
