@@ -18,7 +18,7 @@ const FollowerCard = ({ follower, sessionUser }) => {
     // unfollow
     await dispatch(fetchRemoveFollower(sessionUser?.id, follower?.id))
     // alert("Successfully unfollowed user!")
-    setModalContent(<FollowModal type='unfollow' />)
+    setModalContent(<FollowModal type='removefollower' />)
 
     setFollowStatus(false)
   }
