@@ -1,148 +1,314 @@
-# Flask React Project
+# MeetFriends
 
-This is the starter for the Flask React project.
 
-## Getting started
-1. Clone this repository (only this branch)
+## Project Summary
+This project aims to create a social media platform that allows people to establish connections with others and showcase their most cherished life experiences and moments within the community.
 
-2. Install dependencies
+## Wiki Link
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+## Link to Live Site
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+https://moment-2igd.onrender.com/
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
+## Contact the Project Owner
+linkedin.com/in/yi-c-452811132
+## Technologies Used
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+Frameworks, Platforms, and Libraries
+> React
 
-   ```bash
+> Redux/Redux-thunk
+
+> HTML 5
+
+> CSS
+
+> Javascript
+
+> JSX
+
+> Flask
+
+> SQLAlchemy
+
+Database
+> Development: SQLite3
+
+> Production: PostgreSQL
+
+Hosting:
+> Render.com
+
+
+
+
+
+## Table of Contents
+- Getting Started
+
+- Project Demo
+  - Project Features
+
+      >Landing Page
+
+      >Sign Up/ Log In/ Log Out
+
+      >Posts
+
+            1.See All Posts and post details
+            2.See A User's Posts
+            3.Create A New Post with Image Upload via AWS S3 Bucket 
+            4.Update A Post with Image Update via AWS S3 Bucket 
+            5.Delete A Post
+
+      >Comments
+            
+            1.See All Post Comments
+            2.Create A New Comment on A Post with Image Upload via AWS S3 Bucket
+            3.Update A Comment on A Post with Image Update via AWS S3 Bucket 
+            4.Delete A Comment
+
+      >Search
+
+            Search For A Post By Username, Post Content, and Comment
+
+      >Liking
+            
+            1.Like A Post
+            2.Remove Like On A Post
+            3.View All Posts Liked By User
+            4.View Total Likes Of A Post
+
+      >Following
+            
+            1.Follow A User
+            2.Remove Followed Users
+            3.Remove Followers
+            4.View Followed Users
+            5.View Followers
+
+
+- Upcoming Features
+   >Google Map
+
+   >Recommendations
+
+   >Hash Tags
+      
+- Frontend Redux Store Shape
+   ````bash
+      {
+         users:{
+            singleUser: {
+               ...state.singleUser,
+               likedPosts: {
+                  ...state.singleUser.likedPosts,
+                  [action.postId]: null
+               },
+               userPosts: {
+                  ...state.singleUser.userPosts,
+                  
+                  [action.postId]: {
+                  ...state.singleUser.userPosts[action.postId],
+                  likeUsers: {
+                     ...state.singleUser.userPosts[action.postId]?.likeUsers,
+                     [action.userId]: null
+                  },
+               
+                  },
+               
+               }
+
+            }
+         },
+         comments:{
+            comments: {
+               ...state.comments,
+               [action.commentId]: {
+                  ...state.comments[action.commentId],
+                  commentImages:[action.commentImage]
+               }
+            },
+            singleComment: {
+               ...state.singleComment,
+               commentImages:action.commentImages
+            }
+         }
+      }
+
+
+
+
+## Getting Started
+
+
+* Start the project locally
+
+  - Clone github repo to you local directory
+    - git clone https://github.com/heehyun1128/API-project.git
+
+*  Install dependencies
+
+      >pipenv install -r requirements.txt
+
+*  Create a .env file based on the example with proper settings for your development environment
+
+*  Make sure the SQLite3 database connection URL is in the .env file
+*  Get into your pipenv, migrate your database, seed your database, and run your Flask app
+
+   ````bash
+   cd app
    pipenv shell
-   ```
-
-   ```bash
    flask db upgrade
-   ```
-
-   ```bash
    flask seed all
-   ```
-
-   ```bash
    flask run
-   ```
-
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
 
-## Deployment through Render.com
+*  Start the project frontend
+    - cd to frontend directory and run npm start
+      ````bash
+      cd react-app
+      npm start
+    - the project will be running locally at http://localhost:3000/
+      
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+## Features
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+* Landing Page
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+Before a user is signed up/logged in, the user can only view all posts, all comments, and total likes of a post. The Create A Post button, My Page button and Like button are disabled for users not signed up or logged in.
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+After a user is signed up and logged in, the user can create a post, update a post, delete a post, create comments on a post, update a comment, and delete a comment they created. A user can also like and unlike a post and follow and unfollow a user.
 
-### Part A: Configure the Start and Build Commands
+![home-page](./images/home1.png)
+![home-page](./images/home2.png)
 
-Start by giving your application a name.
+* Sign Up/ Log In/ Log Out
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
+Click on the Sign Up button on the Landing Page or the All Posts Page to create a user. A Demo User is created for testing purposes.
 
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
+![signup-page](./images/signup.png)
 
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
+![login-page](./images/login.png)
 
-For your Flask project, enter the following command into the Build field, all in
-one line:
+* View All Posts
 
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
+The user can view all posts by clicking on the VIEW ALL POSTS button in the top right dropdown menu.
 
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
 
-Now, add your start command in the Start field:
+![home-group-btn](./images/allposts.png)
 
-```shell
-# start script
-gunicorn app:app
-```
+* View Post Details
 
-_If you are using websockets, use the following start command instead for increased performance:_
+The user can view details of a post by clicking on the post in the all posts page.
 
-`gunicorn --worker-class eventlet -w 1 app:app`
+![post-detail](./images/postdetail1.png)
 
-### Part B: Add the Environment Variables
+![post-detail](./images/postdetail.png)
 
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
+* View All Comments
 
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
+![comment-list](./images/comment.png)
 
-Add the following keys and values in the Render GUI form:
+* Create A Post
 
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
+A user can click on the CREATE A POST button in the dropdown menu in the navigation bar to navigate to the create post form page. A user will be able to upload images for their post.
 
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
+![start-post-btn](./images/createpost.png)
 
-Add the following keys and values:
+Create Post Form Page
 
-- DATABASE_URL (copy value from Internal Database URL field)
+![post-form-1](./images/postform.png)
 
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
 
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
+* Update A Post
 
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
+Click on the EDIT POST button on the post detail page to update a post.
 
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
+A user who is logged-in but does not own the group OR is not logged-in will not be albe to update the group. A user will be able to update images for their post.
 
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/
+![edit-post-btn-1](./images/editpostbtn.png)
+
+
+![post-update-2](./images/editpostform.png)
+
+
+* Delete a Post
+
+Clicking the Delete button on a group's details page will open a confirmation modal popup window that ask the user to confirm removing or keeping the group.
+
+![post-delete-2](./images/deletepostbtn.png)
+
+
+* Create a Comment
+
+A user who's logged in and is the post creator will be able to create a comment for the post. A user who's not logged in or is not the post creator will not be able to create a comment and will be prompt to log in. A user will be able to upload an image for their comment.
+
+![comment-form-1](./images/createcomment.png)
+
+
+* Update a Comment
+
+A user can update a comment including comment image they created.
+
+![comment-detail](./images/editcommentbtn.png)
+![comment-detail](./images/editcommentform.png)
+
+
+* Delete a Comment
+
+A user who is the post creator can delete a comment for a post.
+
+![comment-delete-1](./images/delcommentbtn.png)
+![comment-delete-2](./images/delcommentmodal.png)
+
+* Search for a Post
+
+A user can search for a particular post using the search bar and view the search result.
+
+![search](./images/searchbar.png)
+![search-result](./images/searchresult.png)
+
+* Liking
+
+A user can like or unlike a post by clicking on the heart icon.
+
+![like-delete-2](./images/like.png)
+
+A user can like their own posts on the user posts page on My Page.
+
+![like-delete-2](./images/like2.png)
+
+A user can also view all their liked posts on My Page.
+
+![like-delete-2](./images/like3.png)
+
+* Following
+
+A user can follow or unfollow a user by clicking on the FOLLOW or FOLLOWING buttons on the post detail page. A user can also do so by clicking the REMOVE FOLLOWER or UNFOLLOW buttons on My Page under FOLLOWERS and FOLLOWING tabs.
+
+![follow](./images/followbtn.png)
+
+
+![unfollow-1](./images/unfollowbtn.png)
+
+![unfollow-2](./images/unfollowmodal.png)
+![unfollow-2](./images/removefollower.png)
+
+A user can also view their followers and followed users on My Page by clicking on the FOLLOWERS and FOLLOWING tabs.
+
+![follower](./images/followers.png)
+![following](./images/following.png)
+
+
+## Upcoming Features
+
+
+
+* Google Map
+* Recommendations
+* Hash Tags
+
+
+

@@ -19,6 +19,7 @@ const FollowModal = ({type}) => {
     <div id='permit-err-div'>
 
       {type==='unfollow' &&<h4>"Successfully unfollowed user!"</h4>}
+      {type==='removefollower' &&<h4>"Successfully removed follower!"</h4>}
       <button onClick={closeCurrModal} >{`CONFIRM`}</button>
     </div>
 
