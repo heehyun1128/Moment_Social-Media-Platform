@@ -324,14 +324,14 @@ def seed_postimages():
     ),
     #12
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/2362002/pexels-photo-2362002.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
-    preview=False,
+    preview=True,
     post_image_url='	https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
