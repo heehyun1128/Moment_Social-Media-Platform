@@ -106,9 +106,9 @@ const PostDetail = () => {
     }
   }
   useEffect(() => {
-    console.log('Loading started');
+    // console.log('Loading started');
     dispatch(fetchSinglePost(postId)).then(()=>setIsLoading(false))
-    console.log('Loading completed');
+    // console.log('Loading completed');
   }, [dispatch, postId])
 
   // set follow status
