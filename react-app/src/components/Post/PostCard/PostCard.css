@@ -143,13 +143,18 @@ position: absolute;
 
 #text-box{
   overflow-wrap: ellipsis;
-  max-width:100%;
+  max-width:80%;
 }
 #text-box>*{
-  overflow-wrap: ellipsis;
+  /* overflow-wrap: ellipsis; */
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
   display: block;
   max-width:100%;
 }
+
+
 
 #liked{
   color:rgb(178, 129, 137);
@@ -157,6 +162,7 @@ position: absolute;
 
 #text-like-box{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding:15px;
@@ -166,6 +172,7 @@ position: absolute;
 
 #like-box{
   display: flex;
+  
   justify-content: center;
   align-items: center;
 min-width: fit-content;
