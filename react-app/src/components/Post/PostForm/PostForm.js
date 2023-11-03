@@ -8,6 +8,7 @@ import Loading from "../../Loading/Loading";
 import { useModal } from "../../../context/Modal";
 import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
 import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
+import ImageNotEmptyModal from "../../Modal/ImageModal/ImageNotEmptyModal";
 
 const PostForm = ({ post, formType }) => {
 
@@ -28,7 +29,7 @@ const PostForm = ({ post, formType }) => {
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
   const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
-  const [deselectImageCalled, setdeSelectImageCalled] = useState(new Array(5).fill(false))
+  const [deselectImageCalled, setDeSelectImageCalled] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
 
   // GET INITIAL IMAGE URLS
@@ -66,7 +67,7 @@ const PostForm = ({ post, formType }) => {
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
     // alert('Image successfully deleted!')
-    setModalContent(<ImageDeleteModal/>)
+    setModalContent(<ImageDeleteModal />)
   }
 
 
@@ -181,18 +182,18 @@ const PostForm = ({ post, formType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (postPics?.every(item => item === null)) {
+      setModalContent(<ImageNotEmptyModal />);
+      return
+    }
     if (formType === 'createPost') {
       post = {
         title,
         content
       }
-   
+      const textData = await dispatch(fetchCreatePost(post));
+      // postPics?.map(async postPic => {
       let preview = false
-      console.log(!postPics?.every(item => item === null))
-      if(postPics?.every(item=>item===null)){
-        setModalContent(<ImageValidationModal />);
-        return
-      }
       for (const postPic of postPics) {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
@@ -205,25 +206,15 @@ const PostForm = ({ post, formType }) => {
         }
 
         if (!isImageValid(postPic)) {
-         
+          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
+          // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
         } else {
-          const textData = await dispatch(fetchCreatePost(post));
-          if (textData.errors) {
-
-            setErrors(textData.errors);
-            return
-
-          }
-
-          history.push(`/posts/${textData.id}`)
-
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
-
           if (textData && textData.id) {
 
 
@@ -235,14 +226,17 @@ const PostForm = ({ post, formType }) => {
         }
 
       }
-      // if (textData.errors) {
+      if (textData.errors) {
 
-      //   setErrors(textData.errors);
-      //   return
+        setErrors(textData.errors);
+        return
 
+      }
+      // else{
+      //   setImageLoading(true)
       // }
 
-      // history.push(`/posts/${textData.id}`)
+      history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
 
@@ -254,12 +248,12 @@ const PostForm = ({ post, formType }) => {
 
       }
 
-      // const textData = await dispatch(fetchUpdatePost(post));
-      // if (textData.errors) {
+      const textData = await dispatch(fetchUpdatePost(post));
+      if (textData.errors) {
 
-      //   setErrors(textData.errors);
-      //   return
-      // }
+        setErrors(textData.errors);
+        return
+      }
 
       let preview = false
 
@@ -279,18 +273,12 @@ const PostForm = ({ post, formType }) => {
 
 
         if (!isImageValid(postPic)) {
-          
+          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
+          // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
         } else {
-          const textData = await dispatch(fetchUpdatePost(post));
-          if (textData.errors) {
-
-            setErrors(textData.errors);
-            return
-          }
-          history.push(`/posts/${textData.id}`)
 
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
@@ -323,7 +311,7 @@ const PostForm = ({ post, formType }) => {
       //   setImageLoading(true)
 
       // }
-      // history.push(`/posts/${textData.id}`)
+      history.push(`/posts/${textData.id}`)
       // resetForm()
     }
 
@@ -340,11 +328,11 @@ const PostForm = ({ post, formType }) => {
 
   return (
     <div id='post-form-div'>
-    <div id="post-form-header">
-        <h3 id='back-to-all-posts'  onClick={()=>{history.push('/posts/all')}}>{`<- ALL POSTS `}</h3>
-    </div>
-        {formType === "createPost" && <h2>Create a post</h2>}
-        {formType === "updatePost" && <h2>Update your post</h2>}
+      <div id="post-form-header">
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}>{`<- ALL POSTS `}</h3>
+      </div>
+      {formType === "createPost" && <h2>Create a post</h2>}
+      {formType === "updatePost" && <h2>Update your post</h2>}
       <form form id='create-post-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
         {formType === "updatePost" &&
