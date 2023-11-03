@@ -37,8 +37,8 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired()])
 
     def validate_password(form,field):
-        if len(field.data)<4:
-            raise ValidationError('Password cannot be shorter than 4 characters.')
+        if len(field.data)<6:
+            raise ValidationError('Password cannot be shorter than 6 characters.')
         if not any(char.isalpha() for char in field.data):
             raise ValidationError('Password must contain at least one letter.')
         if not any(char.isupper() for char in field.data):

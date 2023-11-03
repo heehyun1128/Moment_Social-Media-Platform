@@ -186,9 +186,13 @@ const PostForm = ({ post, formType }) => {
         title,
         content
       }
-      // const textData = await dispatch(fetchCreatePost(post));
-      // postPics?.map(async postPic => {
+   
       let preview = false
+      console.log(!postPics?.every(item => item === null))
+      if(postPics?.every(item=>item===null)){
+        setModalContent(<ImageValidationModal />);
+        return
+      }
       for (const postPic of postPics) {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
@@ -201,8 +205,7 @@ const PostForm = ({ post, formType }) => {
         }
 
         if (!isImageValid(postPic)) {
-          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
+         
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
@@ -288,7 +291,7 @@ const PostForm = ({ post, formType }) => {
             return
           }
           history.push(`/posts/${textData.id}`)
-          
+
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)

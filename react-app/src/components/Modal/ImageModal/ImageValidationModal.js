@@ -17,8 +17,8 @@ const ImageValidationModal = () => {
   return (
 
     <div id='permit-err-div'>
-
-      <h4>'Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" '</h4>
+      <h4>You must add at least one Picture</h4>
+      <h4> Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" </h4>
       <button onClick={closeCurrModal} >{`CONFIRM`}</button>
     </div>
 

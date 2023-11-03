@@ -140,12 +140,16 @@ position: absolute;
   overflow: hidden;
 }
 
-/* #text-box{
-  position:relative;
-  margin-top: -50px;
-  padding: 10px;
-  text-align: center;
-} */
+
+#text-box{
+  overflow-wrap: ellipsis;
+  max-width:100%;
+}
+#text-box>*{
+  overflow-wrap: ellipsis;
+  display: block;
+  max-width:100%;
+}
 
 #liked{
   color:rgb(178, 129, 137);
@@ -156,6 +160,8 @@ position: absolute;
   align-items: center;
   justify-content: space-between;
   padding:15px;
+  overflow-wrap: ellipsis;
+    max-width: 100%;
 }
 
 #like-box{
