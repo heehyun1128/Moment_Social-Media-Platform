@@ -160,6 +160,7 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
+				{errors && errors.password && <p className="errors">{errors.password}</p>}
 				<label>
 					<div className="label"> <p >Confirm Password</p> <p id='required-field'>*</p></div>
 					<input

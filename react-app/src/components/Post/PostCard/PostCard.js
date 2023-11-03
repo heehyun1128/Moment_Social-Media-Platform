@@ -17,6 +17,7 @@ const PostCard = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false)
   const [totalLikes, setTotalLikes] = useState(0)
   const { setModalContent, setOnModalClose } = useModal();
+  const [isBtnClicked, setIsBtnClicked]=useState(false)
 
   const sessionUser = useSelector(state => state.session?.user)
   const userLikedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
@@ -31,10 +32,16 @@ const PostCard = ({ post }) => {
     if (!sessionUser) {
       // alert('Please log in to like a post')
       setModalContent(<PermitErrorModal />);
+      
     }
     e.preventDefault()
     e.stopPropagation()
-   
+
+    if(isBtnClicked) {
+      return
+    }
+    setIsBtnClicked(true)
+
     if (!isLiked) {
       const likedPost = sessionUser && post && await dispatch(fetchAddPostLike(post, sessionUser))
       
@@ -50,7 +57,9 @@ const PostCard = ({ post }) => {
      });
      }
 
-
+    //  setTimeout(()=>{
+    //   setIsBtnClicked(false)
+    //  },1500)
     
       // else {
       //   console.log(likedPost?.errors)
@@ -71,15 +80,10 @@ const PostCard = ({ post }) => {
       }
       dispatch(fetchUserLikedPosts(sessionUser?.id))
 
-        // await dispatch(fetchUserPosts(sessionUser?.id))
-    
-      // else {
-      //   console.log(dislikedPost.errors)
-      // }
-
-      // history.push(`/profile/${sessionUser?.id}`)
+      
       
     }
+    setIsBtnClicked(false)
 
   }
 
@@ -126,7 +130,7 @@ const PostCard = ({ post }) => {
           <div id="like-box">
             {post &&
               <p>
-                <i onClick={handleLike} id={isLiked ? 'liked' : ''} class="fa-solid fa-heart fa-lg"></i>
+                <button id='like-btn' onClick={handleLike} disabled={isBtnClicked}><i  id={isLiked ? 'liked' : ''} class="fa-solid fa-heart fa-lg"></i></button>
                 {totalLikes} Likes</p>
             }
 

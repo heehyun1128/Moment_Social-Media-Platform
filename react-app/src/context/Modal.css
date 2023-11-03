@@ -22,7 +22,7 @@
 #modal #modal-content {
   
   position: absolute;
-  background-color:rgba(255, 255, 255,.3);
+  background-color:rgba(255, 255, 255,.8);
   backdrop-filter: blur(2px);
   border-radius: 20px;
   min-width:28vw;

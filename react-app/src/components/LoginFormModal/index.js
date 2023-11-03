@@ -47,7 +47,7 @@ function LoginFormModal() {
   const handleDemoUserLogin = (e) => {
     e.preventDefault()
     setErrors({});
-    return dispatch(login('demo@aa.io', 'password'))
+    return dispatch(login('demo@aa.io', 'Password123'))
       .then(closeModal)
 
   }

@@ -170,6 +170,10 @@ min-width: fit-content;
   margin: 0!important;
 }
 
+#like-btn{
+  border: none;
+  margin-right: 5px;
+}
 @media screen and (max-width: 1400px) {
   #view-more{
     font-size: 20px;

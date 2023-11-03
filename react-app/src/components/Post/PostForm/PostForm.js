@@ -186,7 +186,7 @@ const PostForm = ({ post, formType }) => {
         title,
         content
       }
-      const textData = await dispatch(fetchCreatePost(post));
+      // const textData = await dispatch(fetchCreatePost(post));
       // postPics?.map(async postPic => {
       let preview = false
       for (const postPic of postPics) {
@@ -207,9 +207,20 @@ const PostForm = ({ post, formType }) => {
           setImageLoading(false)
           return
         } else {
+          const textData = await dispatch(fetchCreatePost(post));
+          if (textData.errors) {
+
+            setErrors(textData.errors);
+            return
+
+          }
+
+          history.push(`/posts/${textData.id}`)
+
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
+
           if (textData && textData.id) {
 
 
@@ -221,17 +232,14 @@ const PostForm = ({ post, formType }) => {
         }
 
       }
-      if (textData.errors) {
+      // if (textData.errors) {
 
-        setErrors(textData.errors);
-        return
+      //   setErrors(textData.errors);
+      //   return
 
-      }
-      // else{
-      //   setImageLoading(true)
       // }
 
-      history.push(`/posts/${textData.id}`)
+      // history.push(`/posts/${textData.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
 
@@ -243,12 +251,12 @@ const PostForm = ({ post, formType }) => {
 
       }
 
-      const textData = await dispatch(fetchUpdatePost(post));
-      if (textData.errors) {
+      // const textData = await dispatch(fetchUpdatePost(post));
+      // if (textData.errors) {
 
-        setErrors(textData.errors);
-        return
-      }
+      //   setErrors(textData.errors);
+      //   return
+      // }
 
       let preview = false
 
@@ -268,13 +276,19 @@ const PostForm = ({ post, formType }) => {
 
 
         if (!isImageValid(postPic)) {
-          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
           return
         } else {
+          const textData = await dispatch(fetchUpdatePost(post));
+          if (textData.errors) {
 
+            setErrors(textData.errors);
+            return
+          }
+          history.push(`/posts/${textData.id}`)
+          
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
           formData.append('post_id', textData.id)
@@ -306,7 +320,7 @@ const PostForm = ({ post, formType }) => {
       //   setImageLoading(true)
 
       // }
-      history.push(`/posts/${textData.id}`)
+      // history.push(`/posts/${textData.id}`)
       // resetForm()
     }
 
