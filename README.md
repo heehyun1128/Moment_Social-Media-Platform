@@ -41,14 +41,6 @@ Hosting:
 > Render.com
 
 
-- Upcoming Features
-   >Google Map
-
-   >Recommendations
-
-   >Hash Tags
-      
-
 
 ## Getting Started
 
