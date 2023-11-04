@@ -251,7 +251,7 @@ def seed_postimages():
     ),
     #10
     PostImage(
-    preview=True,
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
@@ -265,19 +265,13 @@ def seed_postimages():
     updated_at=curr_date
     ),
     PostImage(
-    preview=False,
+    preview=True,
     post_image_url='	https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
     ),
-    PostImage(
-    preview=False,
-    post_image_url='https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=10,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
+    
     #11
    
     PostImage(
@@ -330,13 +324,7 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
-    PostImage(
-    preview=False,
-    post_image_url='	https://images.pexels.com/photos/16005384/pexels-p…ia-adventure.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=12,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
+    
     #13
     PostImage(
     preview=True,
@@ -401,22 +389,7 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
-    
-    PostImage(
-    preview=False,
-    post_image_url='https://images.pexels.com/photos/17063197/pexels-p…-de-la-creme.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=15,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
-    
-    PostImage(
-    preview=False,
-    post_image_url='	https://images.pexels.com/photos/16308667/pexels-p…top-of-a-bed.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=15,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
+   
     PostImage(
     preview=True,
     post_image_url='	https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -431,13 +404,7 @@ def seed_postimages():
     created_at=curr_date,
     updated_at=curr_date
     ),
-    PostImage(
-    preview=False,
-    post_image_url='		https://images.pexels.com/photos/18757269/pexels-p…e-on-a-table.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=16,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
+    
     PostImage(
     preview=True,
     post_image_url='	https://images.pexels.com/photos/13811359/pexels-photo-13811359.jpeg?auto=compress&cs=tinysrgb&w=800',

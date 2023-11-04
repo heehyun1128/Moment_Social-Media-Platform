@@ -20,9 +20,9 @@
     column-gap: 5px;
     z-index: -999999 !important;
     min-height: 20vh;
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
 }
 #user-post-div p{
   z-index: 999;
@@ -81,7 +81,7 @@
 #posts-div p{
   /* width: 100vw; */
   padding: 10px 40px;
-  min-height: 20vh;
+  /* min-height: 20vh; */
   display: flex;
   justify-content: center;
   align-items: center;
