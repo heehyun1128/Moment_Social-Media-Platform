@@ -329,10 +329,10 @@ const PostForm = ({ post, formType }) => {
   return (
     <div id='post-form-div'>
       <div id="post-form-header">
-        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}>{`<- ALL POSTS `}</h3>
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
       </div>
-      {formType === "createPost" && <h2>Create a post</h2>}
-      {formType === "updatePost" && <h2>Update your post</h2>}
+      {formType === "createPost" && <h2>Create a post <i class="fa-solid fa-pen-to-square"></i></h2>}
+      {formType === "updatePost" && <h2>Update your post <i class="fa-solid fa-pen-to-square"></i></h2>}
       <form form id='create-post-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
         {formType === "updatePost" &&

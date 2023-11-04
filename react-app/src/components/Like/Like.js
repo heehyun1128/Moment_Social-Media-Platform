@@ -18,7 +18,10 @@ const Like = () => {
     <div id='user-post-div'>
       {likedPostArr&&likedPostArr.length ? likedPostArr.map(post => (<PostCard key={post.id}  post={post} />))
       :
+        <div id='no-liked-post'>
+
       <p>No Liked Posts</p>
+      </div>
       }
     </div>
   )

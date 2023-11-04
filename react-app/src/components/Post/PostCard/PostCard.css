@@ -154,6 +154,9 @@ position: absolute;
   max-width:100%;
 }
 
+#text-box p{
+  justify-content: flex-start !important;
+}
 
 
 #liked{
