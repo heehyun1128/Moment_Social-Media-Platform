@@ -20,13 +20,11 @@
     column-gap: 5px;
     z-index: -999999 !important;
     min-height: 20vh;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+    
 }
 #user-post-div p{
   z-index: 999;
-  width: 100%;
+  width: 100% !important;
   padding: 0 !important;
   margin: 0;
 }
