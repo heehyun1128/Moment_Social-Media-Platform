@@ -1,0 +1,13 @@
+#div-404{
+  width: 100vw;
+  height: 65vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vw;
+  flex-direction: column;
+}
+#div-404>*{
+  color: rgb(110, 110, 109);
+
+}

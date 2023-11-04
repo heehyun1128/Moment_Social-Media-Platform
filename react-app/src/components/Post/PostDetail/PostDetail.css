@@ -182,9 +182,11 @@
 }
 
 #loader{
-  display: fixed;
-  top:50%;
-  left:50%;
+  display: flex;
+  width: 100vw;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
 
 }
 

@@ -42,21 +42,21 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWyegnZASn8QiNSuJZsCYtf8fGLdnewj5cRQ&usqp=CAU',
+    post_image_url='https://images.pexels.com/photos/2179373/pexels-photo-2179373.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://t4.ftcdn.net/jpg/06/20/14/25/240_F_620142554_R1xbcjpihHeX33sdF1Bhhz8GONMAyrMR.jpg',
+    post_image_url='https://images.pexels.com/photos/3660866/pexels-photo-3660866.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://t3.ftcdn.net/jpg/05/69/36/82/240_F_569368264_EfL3uEgVfamQR0MNh0MNlEhjE9N02nSZ.jpg',
+    post_image_url='https://images.pexels.com/photos/9002854/pexels-photo-9002854.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=2,
     created_at=curr_date,
     updated_at=curr_date
@@ -207,13 +207,6 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIUiy9Xpk28t1Ic4UkQrrtDXvbpewePN153Q&usqp=CAU',
-    post_id=7,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
-    PostImage(
-    preview=False,
     post_image_url='https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg',
     post_id=7,
     created_at=curr_date,
@@ -280,7 +273,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='https://catinaflat.blog/wp-content/uploads/2022/05/what-is-a-tabby-cat-copy.jpg',
+    post_image_url='https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date

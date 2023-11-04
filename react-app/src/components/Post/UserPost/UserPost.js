@@ -43,8 +43,8 @@ const UserPost = ({userPostArr}) => {
        
           return post && <PostCard post={post} />
         })}
-      </div>
       {!userPostArr?.length && <p>No Posts here</p>}
+      </div>
     </div>
   )
 }
