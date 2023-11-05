@@ -13,6 +13,7 @@ import DeletePostModal from "../../Comment/CommentModal/DeletePostModal";
 import { useModal } from "../../../context/Modal";
 import FollowModal from "../../Modal/FollowModal/FollowModal";
 import Loading from "../../Loading/Loading";
+import PageLoader from "../../PageLoader/PageLoader";
 
 
 const PostDetail = () => {
@@ -142,6 +143,7 @@ const PostDetail = () => {
 
 
   if (!post || !postCreator) {
+    // history.push('/404')
     return null
   }
   if (!commentObj) {
@@ -150,7 +152,7 @@ const PostDetail = () => {
 
   return (
     <div id='post-detail-container'>
-      {isLoading ? (<div id='loader'>Loading...</div>):(<>
+      {isLoading ? (<div id='loader'><PageLoader/></div>):(<>
         <div id="post-detail-div">
           <div id="post-img-container">
             {images?.map((image, index) => (

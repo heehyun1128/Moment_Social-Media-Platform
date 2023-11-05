@@ -182,7 +182,15 @@ def post_image(postId):
 
     db.session.add(new_image)
     db.session.commit()
-    return jsonify({'message': 'Form submitted successfully'})
+    print('0000000000',new_image)
+    return jsonify({
+            'id': new_image.id,
+            'preview': new_image.preview,
+            'postImageUrl': new_image.post_image_url,
+            'postId': new_image.post_id,
+            'createdAt':new_image.created_at,
+            'updatedAt':new_image.updated_at
+        })
 
   if form.errors:
         return {'errors':form.errors}

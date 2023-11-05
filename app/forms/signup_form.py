@@ -23,7 +23,7 @@ def username_exists(form, field):
     user = User.query.filter(User.username == username).first()
     if user:
         raise ValidationError('Username is already in use.')
-    
+
 
 
 
@@ -36,18 +36,15 @@ class SignUpForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(), Email(),user_exists])
     password = StringField('password', validators=[DataRequired()])
 
-    # def validate_username(form,field):
-    #     if not field.data:
-    #         raise ValidationError('Username is required.')
-    # def validate_first_name(form,field):
-    #     if not field.data:
-    #         raise ValidationError('First name is required.')
-    # def validate_last_name(form,field):
-    #     if not field.data:
-    #         raise ValidationError('Last name is required.')
-    # def validate_email(form,field):
-    #     if not field.data:
-    #         raise ValidationError('Email is required.')
-    # def validate_password(form,field):
-    #     if not field.data:
-    #         raise ValidationError('Password is required.')
+    def validate_password(form,field):
+        if len(field.data)<6:
+            raise ValidationError('Password cannot be shorter than 6 characters.')
+        if not any(char.isalpha() for char in field.data):
+            raise ValidationError('Password must contain at least one letter.')
+        if not any(char.isupper() for char in field.data):
+            raise ValidationError('Password must contain at least one uppercase character.')
+        if not any(char.isdigit() for char in field.data):
+            raise ValidationError(('Password must contain at least one number.'))
+    def validate_username(form,field):
+        if len(field.data)<4:
+            raise ValidationError('Username cannot be shorter than 4 characters.')

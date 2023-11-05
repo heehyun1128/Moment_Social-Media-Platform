@@ -1,66 +1,80 @@
  #profile-page-main-div #posts-div #follower-content #profile-img-li {
-  display: flex;
-  justify-content: center;
-  align-items: center !important;
-  min-width: 100px !important;
-  height: 100px !important;
-  border-radius: 50%;
-  overflow: hidden;
-  /* margin: 5px 15px 20px; */
-  background-color: #e5b7b7;
-}
-#profile-img-li i{
-  margin-right: 0 !important;
+   display: flex;
+   justify-content: center;
+   align-items: center !important;
+   min-width: 100px !important;
+   height: 100px !important;
+   border-radius: 50%;
+   overflow: hidden;
+   /* margin: 5px 15px 20px; */
+   background-color: #e5b7b7;
+ }
+
+ #profile-img-li i {
+   margin-right: 0 !important;
+ }
+
+ #new-profile-pic {
+   min-width: 100px;
+ }
+
+ img#profile-img {
+   width: 200px;
+   /* height: 150px; */
+ }
+
+ #follower-content {
+   display: flex;
+   flex-direction: column;
+   min-height: 60vh;
+   width: 30vw;
+ }
+
+ #follower-content div>* {
+   margin-right: 20px;
+ }
+
+ #follower-content>* {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   padding: 15px 10px;
+   border-bottom: 1px dotted white;
+
+
+ }
+
+#follow-user-div #new-profile-pic p{
+  margin: 0;
+  padding: 0;
+  height: fit-content;
 }
 
-#new-profile-pic{
-  min-width:100px;
-}
+ #follower-info>* {
+   margin-right: 20px;
+ }
 
-img#profile-img {
-  width: 200px;
-  /* height: 150px; */
-}
+ #follower {
+   cursor: pointer;
 
-#follower-content{
-  display: flex;
-  flex-direction: column;
-  min-height: 60vh;
-}
+ }
 
-#follower-content div>*{
-  margin-right: 20px;
-}
+ #follower:hover {
+   color: #c09b9b;
+   font-weight: bold;
+ }
 
-#follower-content>*{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width:40%;
-  
-  
-}
-#follower-info>* {
-  margin-right: 20px;
-}
+ #follow-user-div {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
 
-#follower{
-  cursor: pointer;
- 
-}
-
-#follower:hover{
-  color:#c09b9b;
-  font-weight: bold;
-}
-
-#follow-user-div{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#follow-div button{
-  color:gray;
-  outline: gray;
-}
+ #follow-div{
+  width:30vw;
+ }
+ #follow-div button {
+   color: gray;
+   outline: gray;
+ }

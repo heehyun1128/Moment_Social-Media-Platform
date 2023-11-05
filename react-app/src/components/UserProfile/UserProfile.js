@@ -110,7 +110,7 @@ const UserProfile = () => {
   return (
     <div id='profile-page-main-div'>
       <div id="post-form-header">
-        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}>{`<- ALL POSTS `}</h3>
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
       </div>
       <div id='profile-info-div'>
         <div id='profile-info-img-div'>

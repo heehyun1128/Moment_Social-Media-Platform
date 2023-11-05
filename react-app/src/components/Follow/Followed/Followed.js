@@ -33,7 +33,7 @@ const Followed = () => {
     <div>
       {followedUserArr&&followedUserArr.length?
       <div id='follower-content'>
-        {followedUserArr.map((followed) => <FollowedCard followed={followed} sessionUser={sessionUser} />)}
+        {followedUserArr.map((followed) => <FollowedCard id='follow-div' followed={followed} sessionUser={sessionUser} />)}
       </div>
       :
       <p>No Followed Users</p>}

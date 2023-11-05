@@ -16,6 +16,8 @@ import AllPost from "./components/Post/AllPost/AllPost";
 import { useLocation } from 'react-router-dom';
 import Footer from "./components/Footer/Footer";
 import Loading from "./components/Loading/Loading";
+import { LineWave } from "react-loader-spinner";
+import PageLoader from "./components/PageLoader/PageLoader";
 // import UserPost from "./components/Post/UserPost/UserPost";
 // import Like from "./components/Like/Like";
 
@@ -27,6 +29,9 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  if(!isLoaded){
+    return <PageLoader/>
+  }
   return (
     <>
       {location.pathname !== '/' && <Navigation isLoaded={isLoaded} />}

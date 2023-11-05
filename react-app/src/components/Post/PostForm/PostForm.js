@@ -8,6 +8,7 @@ import Loading from "../../Loading/Loading";
 import { useModal } from "../../../context/Modal";
 import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
 import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
+import ImageNotEmptyModal from "../../Modal/ImageModal/ImageNotEmptyModal";
 
 const PostForm = ({ post, formType }) => {
 
@@ -28,7 +29,7 @@ const PostForm = ({ post, formType }) => {
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
   const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
-  const [deselectImageCalled, setdeSelectImageCalled] = useState(new Array(5).fill(false))
+  const [deselectImageCalled, setDeSelectImageCalled] = useState(new Array(5).fill(false))
   // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
 
   // GET INITIAL IMAGE URLS
@@ -66,7 +67,7 @@ const PostForm = ({ post, formType }) => {
     // setPostPics(newPics.filter(pic => pic !== null))
     // dispatch(fetchDeletePostImage(imageId))
     // alert('Image successfully deleted!')
-    setModalContent(<ImageDeleteModal/>)
+    setModalContent(<ImageDeleteModal />)
   }
 
 
@@ -181,6 +182,10 @@ const PostForm = ({ post, formType }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (postPics?.every(item => item === null)) {
+      setModalContent(<ImageNotEmptyModal />);
+      return
+    }
     if (formType === 'createPost') {
       post = {
         title,
@@ -323,11 +328,11 @@ const PostForm = ({ post, formType }) => {
 
   return (
     <div id='post-form-div'>
-    <div id="post-form-header">
-        <h3 id='back-to-all-posts'  onClick={()=>{history.push('/posts/all')}}>{`<- ALL POSTS `}</h3>
-    </div>
-        {formType === "createPost" && <h2>Create a post</h2>}
-        {formType === "updatePost" && <h2>Update your post</h2>}
+      <div id="post-form-header">
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
+      </div>
+      {formType === "createPost" && <h2>Create a post <i class="fa-solid fa-pen-to-square"></i></h2>}
+      {formType === "updatePost" && <h2>Update your post <i class="fa-solid fa-pen-to-square"></i></h2>}
       <form form id='create-post-form' onSubmit={handleSubmit} encType="multipart/form-data">
 
         {formType === "updatePost" &&

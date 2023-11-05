@@ -1,0 +1,6 @@
+#no-post,#no-liked-post{
+  text-align: center !important;
+  width: 85vw !important;
+  display: flex;
+  justify-content: center;
+}

@@ -140,12 +140,24 @@ position: absolute;
   overflow: hidden;
 }
 
-/* #text-box{
-  position:relative;
-  margin-top: -50px;
-  padding: 10px;
-  text-align: center;
-} */
+
+#text-box{
+  overflow-wrap: ellipsis;
+  max-width:80%;
+}
+#text-box>*{
+  /* overflow-wrap: ellipsis; */
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  display: block;
+  max-width:100%;
+}
+
+#text-box p{
+  justify-content: flex-start !important;
+}
+
 
 #liked{
   color:rgb(178, 129, 137);
@@ -153,13 +165,17 @@ position: absolute;
 
 #text-like-box{
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding:15px;
+  overflow-wrap: ellipsis;
+    max-width: 100%;
 }
 
 #like-box{
   display: flex;
+  
   justify-content: center;
   align-items: center;
 min-width: fit-content;
@@ -170,6 +186,10 @@ min-width: fit-content;
   margin: 0!important;
 }
 
+#like-btn{
+  border: none;
+  margin-right: 5px;
+}
 @media screen and (max-width: 1400px) {
   #view-more{
     font-size: 20px;

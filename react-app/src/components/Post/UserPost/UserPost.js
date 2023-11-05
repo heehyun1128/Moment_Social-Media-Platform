@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PostCard from '../PostCard/PostCard'
 import { useParams, useHistory, useLocation, NavLink } from "react-router-dom";
 import { fetchSingleUser, fetchUserPosts } from "../../../store/user";
-
+import './UserPost.css'
 const UserPost = ({userPostArr}) => {
   const { userId } = useParams()
   const dispatch = useDispatch()
@@ -43,8 +43,8 @@ const UserPost = ({userPostArr}) => {
        
           return post && <PostCard post={post} />
         })}
+        {!userPostArr?.length && <div id='no-post'><p >No Posts here</p></div>}
       </div>
-      {!userPostArr?.length && <p>No Posts here</p>}
     </div>
   )
 }
