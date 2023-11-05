@@ -16,9 +16,9 @@ const PageLoader = () => {
         wrapperStyle={{}}
         wrapperClass=""
         visible={true}
-        firstLineColor="gray"
+        firstLineColor="pink"
         middleLineColor="pink"
-        lastLineColor="gray"
+        lastLineColor="pink"
       />
       {/* <Loading/> */}
       </div>

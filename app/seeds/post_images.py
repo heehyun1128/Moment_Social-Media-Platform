@@ -274,37 +274,31 @@ def seed_postimages():
     
     #11
    
+    
     PostImage(
     preview=True,
-    post_image_url='https://images.pexels.com/photos/3687770/pexels-photo-3687770.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='	https://images.pexels.com/photos/12173273/pexels-photo-12173273.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/662417/pexels-photo-662417.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/7643261/pexels-photo-7643261.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/4588435/pexels-photo-4588435.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='	https://images.pexels.com/photos/4130054/pexels-photo-4130054.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='https://images.pexels.com/photos/3196887/pexels-photo-3196887.jpeg?auto=compress&cs=tinysrgb&w=800',
-    post_id=11,
-    created_at=curr_date,
-    updated_at=curr_date
-    ),
-    PostImage(
-    preview=False,
-    post_image_url='https://images.pexels.com/photos/14666143/pexels-photo-14666143.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/4107259/pexels-photo-4107259.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
@@ -328,6 +322,13 @@ def seed_postimages():
     #13
     PostImage(
     preview=True,
+    post_image_url='	https://images.pexels.com/photos/1047051/pexels-photo-1047051.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_id=13,
+    created_at=curr_date,
+    updated_at=curr_date
+    ),
+    PostImage(
+    preview=False,
     post_image_url='	https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
