@@ -13,7 +13,7 @@ def seed_postimages():
 # post-1
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/1907071/pexels-photo-1907071.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1907071/pexels-photo-1907071.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=1,
     created_at=curr_date,
     updated_at=curr_date
@@ -85,7 +85,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/1591382/pexels-photo-1591382.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1591382/pexels-photo-1591382.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=3,
     created_at=curr_date,
     updated_at=curr_date
@@ -128,7 +128,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://media-cdn.tripadvisor.com/media/photo-w/14/ae/9d/c3/menu.jpg',
+    post_image_url='https://media-cdn.tripadvisor.com/media/photo-w/14/ae/9d/c3/menu.jpg',
     post_id=4,
     created_at=curr_date,
     updated_at=curr_date
@@ -230,7 +230,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/8152008/pexels-photo-8152008.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/8152008/pexels-photo-8152008.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
     updated_at=curr_date
@@ -244,7 +244,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/6623995/pexels-photo-6623995.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/6623995/pexels-photo-6623995.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=9,
     created_at=curr_date,
     updated_at=curr_date
@@ -252,7 +252,7 @@ def seed_postimages():
     #10
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1835008/pexels-photo-1835008.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
@@ -266,7 +266,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/3643714/pexels-photo-3643714.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=10,
     created_at=curr_date,
     updated_at=curr_date
@@ -277,7 +277,7 @@ def seed_postimages():
     
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/12173273/pexels-photo-12173273.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/12173273/pexels-photo-12173273.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
@@ -291,7 +291,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/4130054/pexels-photo-4130054.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/4130054/pexels-photo-4130054.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=11,
     created_at=curr_date,
     updated_at=curr_date
@@ -306,14 +306,14 @@ def seed_postimages():
     #12
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/2362002/pexels-photo-2362002.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/2362002/pexels-photo-2362002.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/3411135/pexels-photo-3411135.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=12,
     created_at=curr_date,
     updated_at=curr_date
@@ -322,14 +322,14 @@ def seed_postimages():
     #13
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/1047051/pexels-photo-1047051.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1047051/pexels-photo-1047051.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/925263/pexels-photo-925263.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=13,
     created_at=curr_date,
     updated_at=curr_date
@@ -371,21 +371,21 @@ def seed_postimages():
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/3491211/pexels-photo-3491211.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/3491211/pexels-photo-3491211.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=14,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1235706/pexels-photo-1235706.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=14,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=True,
-    post_image_url='		https://images.pexels.com/photos/8823444/pexels-photo-8823444.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/8823444/pexels-photo-8823444.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=15,
     created_at=curr_date,
     updated_at=curr_date
@@ -393,14 +393,14 @@ def seed_postimages():
    
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1308940/pexels-photo-1308940.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=16,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=False,
-    post_image_url='	https://images.pexels.com/photos/13865277/pexels-photo-13865277.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/13865277/pexels-photo-13865277.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=16,
     created_at=curr_date,
     updated_at=curr_date
@@ -408,7 +408,7 @@ def seed_postimages():
     
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/13811359/pexels-photo-13811359.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/13811359/pexels-photo-13811359.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=17,
     created_at=curr_date,
     updated_at=curr_date
@@ -450,7 +450,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/1710795/pexels-photo-1710795.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/1710795/pexels-photo-1710795.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=23,
     created_at=curr_date,
     updated_at=curr_date
@@ -464,7 +464,7 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/4099234/pexels-photo-4099234.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/4099234/pexels-photo-4099234.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=25,
     created_at=curr_date,
     updated_at=curr_date
@@ -478,14 +478,14 @@ def seed_postimages():
     ),
     PostImage(
     preview=True,
-    post_image_url='		https://images.pexels.com/photos/674577/pexels-photo-674577.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/674577/pexels-photo-674577.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=26,
     created_at=curr_date,
     updated_at=curr_date
     ),
     PostImage(
     preview=True,
-    post_image_url='	https://images.pexels.com/photos/3368816/pexels-photo-3368816.jpeg?auto=compress&cs=tinysrgb&w=800',
+    post_image_url='https://images.pexels.com/photos/3368816/pexels-photo-3368816.jpeg?auto=compress&cs=tinysrgb&w=800',
     post_id=27,
     created_at=curr_date,
     updated_at=curr_date
