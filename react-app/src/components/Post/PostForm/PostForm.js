@@ -114,6 +114,11 @@ const PostForm = ({ post, formType }) => {
 
     // setPostPics(newPics.filter(pic => pic !== null))
     setPostPics(newPics)
+
+    const redBd = [...redBorderClass]
+    // const index = postPics.indexOf(postPic)
+    redBd[index] = ''
+    setRedBorderClass(redBd)
   }
 
 
