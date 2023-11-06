@@ -242,9 +242,7 @@ const PostForm = ({ post, formType }) => {
         return
 
       }
-      // else{
-      //   setImageLoading(true)
-      // }
+      
 
       textData && history.push(`/posts/${textData?.id}`)
       resetForm()
