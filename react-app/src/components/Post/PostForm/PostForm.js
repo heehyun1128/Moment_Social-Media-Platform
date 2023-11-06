@@ -30,7 +30,7 @@ const PostForm = ({ post, formType }) => {
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
   const [deleteImageCalled, setDeleteImageCalled] = useState(new Array(5).fill(false))
   const [deselectImageCalled, setDeSelectImageCalled] = useState(new Array(5).fill(false))
-  // const [chooseFileBtnClicked, setchooseFileBtnClicked] = useState(false)
+  const [redBorderClass, setRedBorderClass] = useState(new Array(5).fill(''))
 
   // GET INITIAL IMAGE URLS
 
@@ -173,6 +173,7 @@ const PostForm = ({ post, formType }) => {
     const imageExtensions = ["png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF"]
     if (!imageExtensions?.some(extension => postPic?.postImageUrl?.endsWith(extension) ||
       postPic?.name?.endsWith(extension))) {
+
       return false
     } else {
       return true
@@ -191,7 +192,11 @@ const PostForm = ({ post, formType }) => {
         title,
         content
       }
-      const textData = await dispatch(fetchCreatePost(post));
+      let textData
+      if (postPics?.every(item => (isImageValid(item)||item===null))) {
+
+        textData = await dispatch(fetchCreatePost(post));
+      }
       // postPics?.map(async postPic => {
       let preview = false
       for (const postPic of postPics) {
@@ -210,11 +215,16 @@ const PostForm = ({ post, formType }) => {
           // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
+          const redBd = [...redBorderClass]
+          const index = postPics.indexOf(postPic)
+          redBd[index] = 'red-bd-class'
+          setRedBorderClass(redBd)
+
           return
         } else {
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
-          formData.append('post_id', textData.id)
+          textData && formData.append('post_id', textData?.id)
           if (textData && textData.id) {
 
 
@@ -226,17 +236,15 @@ const PostForm = ({ post, formType }) => {
         }
 
       }
-      if (textData.errors) {
+      if (textData && textData.errors) {
 
         setErrors(textData.errors);
         return
 
       }
-      // else{
-      //   setImageLoading(true)
-      // }
+      
 
-      history.push(`/posts/${textData.id}`)
+      textData && history.push(`/posts/${textData?.id}`)
       resetForm()
     } else if (formType === 'updatePost') {
 
@@ -248,8 +256,14 @@ const PostForm = ({ post, formType }) => {
 
       }
 
-      const textData = await dispatch(fetchUpdatePost(post));
-      if (textData.errors) {
+      const notNullPostsArr=postPics.filter(pic=>pic!==null)
+
+      let textData
+      if(notNullPostsArr.every(pic=>(pic?.postImageUrl?.startsWith('http')) || isImageValid(pic))){
+
+        textData = await dispatch(fetchUpdatePost(post));
+      }
+      if (textData&&textData.errors) {
 
         setErrors(textData.errors);
         return
@@ -271,20 +285,24 @@ const PostForm = ({ post, formType }) => {
           preview = false
         }
 
-
-        if (!isImageValid(postPic)) {
+        console.log(postPic !== null)
+        if (postPic!==null && !postPic?.postImageUrl?.startsWith('http') && !isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false)
+          const redBd = [...redBorderClass]
+          const index = postPics.indexOf(postPic)
+          redBd[index] = 'red-bd-class'
+          setRedBorderClass(redBd)
           return
         } else {
 
           formData.append('post_image_url', postPic)
           formData.append('preview', preview)
-          formData.append('post_id', textData.id)
+          textData&&formData.append('post_id', textData.id)
 
-          if (textData.id) {
+          if (textData&&textData.id) {
 
             if (postPic && postPic.id) {
               const imageData = await dispatch(fetchUpdatePostImage(formData, postPic.id));
@@ -303,6 +321,7 @@ const PostForm = ({ post, formType }) => {
 
 
 
+
       // if (textData.errors) {
       //   console.log(errors)
       //   setErrors(textData.errors);
@@ -311,7 +330,7 @@ const PostForm = ({ post, formType }) => {
       //   setImageLoading(true)
 
       // }
-      history.push(`/posts/${textData.id}`)
+      textData && history.push(`/posts/${textData?.id}`)
       // resetForm()
     }
 
@@ -345,8 +364,8 @@ const PostForm = ({ post, formType }) => {
                 <div id='edit-post-input-div' key={index}>
 
 
-                  {<div id='upload-img-preview'>
-                    {<img id='update-img-display' src={selImageUrls[index]} alt="" />}
+                  {<div id='upload-img-preview' >
+                    {<img id='update-img-display' className={redBorderClass[index]} src={selImageUrls[index]} alt="" />}
                     {<label id='edit-post-input-label'>
 
                       <input
@@ -390,7 +409,7 @@ const PostForm = ({ post, formType }) => {
 
                 return <div key={index} id="post-image-div">
                   <div id='upload-img-preview'>
-                    <img src={selImageUrls[index]} alt="" />
+                    <img src={selImageUrls[index]} className={redBorderClass[index]} alt="" />
                     {selImageUrls[index] && <div id='deslect-image-btn' onClick={() => handleDeselectImg(index)}>x</div>}
 
                     {!selImageUrls[index] && <label id='create-post-input-label'>

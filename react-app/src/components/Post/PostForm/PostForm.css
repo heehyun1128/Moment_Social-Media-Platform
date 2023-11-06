@@ -232,3 +232,8 @@ input[type=file] {
   cursor: pointer;
   color: rgb(59, 58, 58);
 }
+
+.red-bd-class{
+  border:5px solid rgb(224, 188, 56);
+  
+}
