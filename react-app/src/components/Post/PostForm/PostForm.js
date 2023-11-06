@@ -43,32 +43,7 @@ const PostForm = ({ post, formType }) => {
   }, [post?.postImages])
 
   const handleRemoveImg = (index) => {
-    // const imgInputLi = [...imgInputIdList]
-    // imgInputLi[index] = null
-    // setImgInputIdList(imgInputLi)
-
-    // const imageId = postPics[index].id
-    // dispatch(fetchDeletePostImage(imageId))
-    // const isImageDeleted = [...deleteImageCalled]
-    // isImageDeleted[index] = true
-
-
-    // setDeleteImageCalled(isImageDeleted)
-    // const newPics = [...postPics]
-
-    // newPics[index] = null
-
-    // setPostPics(newPics)
-    // const imageUrls = [...selImageUrls]
-    // imageUrls[index] = null
-    // setSelImageUrls(prevImageUrls => imageUrls)
-
-
-
-    // setPostPics(newPics.filter(pic => pic !== null))
-    // dispatch(fetchDeletePostImage(imageId))
-    // alert('Image successfully deleted!')
-    // setModalContent(<ImageDeleteModal />)
+  
     setModalContent(<ImageCantUndoneModal imgInputIdList={imgInputIdList} setImgInputIdList={setImgInputIdList} index={index} postPics={postPics} deleteImageCalled={deleteImageCalled} setDeleteImageCalled={setDeleteImageCalled} setPostPics={setPostPics} selImageUrls={selImageUrls} setSelImageUrls={setSelImageUrls} />)
   }
 
