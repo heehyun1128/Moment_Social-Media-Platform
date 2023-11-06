@@ -118,7 +118,7 @@ const PostForm = ({ post, formType }) => {
     const imageUrls = [...selImageUrls]
     const imageInputIds = [...imgInputIdList]
     const redBd = [...redBorderClass]
-    console.log(redBd)
+    // console.log(redBd)
     redBd[index] = ''
     setRedBorderClass(redBd)
     if (e.target.files[0]) {
@@ -269,7 +269,7 @@ const PostForm = ({ post, formType }) => {
           preview = false
         }
 
-        console.log(postPic !== null)
+        // console.log(postPic !== null)
         if (postPic!==null && !postPic?.postImageUrl?.startsWith('http') && !isImageValid(postPic)) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
           // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
