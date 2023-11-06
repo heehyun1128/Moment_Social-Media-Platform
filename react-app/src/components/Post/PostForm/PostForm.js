@@ -140,7 +140,10 @@ const PostForm = ({ post, formType }) => {
     const fileNames = [...selFileNames]
     const imageUrls = [...selImageUrls]
     const imageInputIds = [...imgInputIdList]
-
+    const redBd = [...redBorderClass]
+    console.log(redBd)
+    redBd[index] = ''
+    setRedBorderClass(redBd)
     if (e.target.files[0]) {
       const imgUpdateBtnClicked = [...isCancelImageUpdate]
       imgUpdateBtnClicked[index] = true
@@ -162,10 +165,9 @@ const PostForm = ({ post, formType }) => {
       newPics[index] = null
       newPics[index] = e.target.files[0]
       setPostPics(newPics)
-      // setPostPics(newPics.filter(pic => pic !== null && pic !== undefined))
-      // setPostPics(postPics.filter(pic => pic !== null))
 
-      // setIsCancelImageUpdate(true)
+     
+      
     } else {
 
       fileNames[index] = fileNames[index] || 'No File Chosen'
