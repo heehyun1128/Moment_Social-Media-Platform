@@ -143,8 +143,11 @@ const PostDetail = () => {
   }, [dispatch, postId])
 
 
+  if(!isLoading&&!post){
+
+  history.push('/404')
+  }
   if (!post || !postCreator) {
-    // history.push('/404')
     return null
   }
   if (!commentObj) {
