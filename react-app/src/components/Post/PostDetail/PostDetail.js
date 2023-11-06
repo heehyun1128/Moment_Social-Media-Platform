@@ -109,6 +109,7 @@ const PostDetail = () => {
   useEffect(() => {
     // console.log('Loading started');
     dispatch(fetchSinglePost(postId)).then(()=>setIsLoading(false))
+    window.scrollTo(0, 0)
     // console.log('Loading completed');
   }, [dispatch, postId])
 
