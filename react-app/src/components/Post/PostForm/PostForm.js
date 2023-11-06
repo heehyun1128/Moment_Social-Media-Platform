@@ -9,6 +9,7 @@ import { useModal } from "../../../context/Modal";
 import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
 import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
 import ImageNotEmptyModal from "../../Modal/ImageModal/ImageNotEmptyModal";
+import ImageCantUndoneModal from "../../Modal/ImageModal/ImageCantUndoneModal";
 
 const PostForm = ({ post, formType }) => {
 
@@ -24,7 +25,7 @@ const PostForm = ({ post, formType }) => {
   const [selFileNames, setSelFileNames] = useState([])
   const [selImageUrls, setSelImageUrls] = useState([])
   const [backgroundImg, setBackgroundImg] = useState('')
-  const { setModalContent, setOnModalClose } = useModal();
+  const { setModalContent, setOnModalClose } = useModal()
   // const [edittedImgIdList, setEdittedImgIdList] = useState([])
   const [imgInputIdList, setImgInputIdList] = useState(postPics.map(pic => pic?.id))
   const [isCancelImageUpdate, setIsCancelImageUpdate] = useState(new Array(5).fill(false))
@@ -42,32 +43,8 @@ const PostForm = ({ post, formType }) => {
   }, [post?.postImages])
 
   const handleRemoveImg = (index) => {
-    const imgInputLi = [...imgInputIdList]
-    imgInputLi[index] = null
-    setImgInputIdList(imgInputLi)
-
-    const imageId = postPics[index].id
-    dispatch(fetchDeletePostImage(imageId))
-    const isImageDeleted = [...deleteImageCalled]
-    isImageDeleted[index] = true
-
-
-    setDeleteImageCalled(isImageDeleted)
-    const newPics = [...postPics]
-
-    newPics[index] = null
-
-    setPostPics(newPics)
-    const imageUrls = [...selImageUrls]
-    imageUrls[index] = null
-    setSelImageUrls(prevImageUrls => imageUrls)
-
-
-
-    // setPostPics(newPics.filter(pic => pic !== null))
-    // dispatch(fetchDeletePostImage(imageId))
-    // alert('Image successfully deleted!')
-    setModalContent(<ImageDeleteModal />)
+  
+    setModalContent(<ImageCantUndoneModal imgInputIdList={imgInputIdList} setImgInputIdList={setImgInputIdList} index={index} postPics={postPics} deleteImageCalled={deleteImageCalled} setDeleteImageCalled={setDeleteImageCalled} setPostPics={setPostPics} selImageUrls={selImageUrls} setSelImageUrls={setSelImageUrls} />)
   }
 
 
