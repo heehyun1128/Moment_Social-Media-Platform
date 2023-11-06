@@ -208,8 +208,8 @@ const PostForm = ({ post, formType }) => {
         if (postPic === null || postPic === undefined) continue
         const formData = new FormData();
 
-
-        if (postPics.indexOf(postPic) === 0) {
+        const notNullPostsArr = postPics.filter(pic => pic !== null)
+        if (notNullPostsArr.indexOf(postPic) === 0 ) {
           preview = true
         } else {
           preview = false
@@ -284,7 +284,7 @@ const PostForm = ({ post, formType }) => {
         const edittedImgId = imgInputIdList[i]
 
 
-        if (postPics.indexOf(postPic) === 0) {
+        if (notNullPostsArr.indexOf(postPic) === 0) {
           preview = true
         } else {
           preview = false
