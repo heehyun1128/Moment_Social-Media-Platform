@@ -11,7 +11,12 @@
   columns: 3;
   column-gap: 5px;
   z-index: -999999 !important;
+  min-height: 100vh;
   
+}
+
+#all-post-container{
+  min-height: 100vh;
 }
 
 #all-post-container h1{
