@@ -166,7 +166,7 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
   }
 }
 
-// UPDATE a comment image
+// UPDATE a comment image 
 export const fetchUpdateCommentImage = (formData, imageId) => async (dispatch) => {
  
   // Access all keys using an iterator
