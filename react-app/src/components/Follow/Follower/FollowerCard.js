@@ -38,7 +38,7 @@ const FollowerCard = ({ follower, sessionUser }) => {
 
       <div id='follow-user-div'>
         {follower?.profileImage ? <div id='new-profile-pic'><img src={follower?.profileImage} alt="" /></div> : <div id='profile-img-li'><i class="fa-solid fa-user fa-xl"></i></div>}
-        <p>{follower.username}</p>
+        <p>{follower?.username}</p>
       </div>
 {/*    
       {sessionUser && sessionUser?.id !== follower?.id && <div id="follow-btn" onClick={() => handleRemoveFollowUser(follower)}>

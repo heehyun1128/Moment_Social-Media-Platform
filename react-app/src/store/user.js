@@ -416,12 +416,13 @@ const userReducer = (state = initialState, action) => {
         singleUser: {
           ...state.singleUser,
           followers: {
-            ...state.singleUser.followers
+            ...state.singleUser.followers,
+            [action.userId]:null
           }
 
         }
       }
-      delete newState.singleUser.followers[action.userId]
+      // delete newState.singleUser.followers[action.userId]
       return newState
     case LOAD_FOLLOWED:
       newState = {
