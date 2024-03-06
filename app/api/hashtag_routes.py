@@ -9,19 +9,19 @@ hashtag_routes = Blueprint("hashtags", __name__)
 @hashtag_routes.route('/')
 def get_hashtags():
     '''
-    get all hashtags
+        get all hashtags
     '''
     all_hashtags=Hashtag.query.all()
     hashtag_dict={}
     for hashtag in all_hashtags:
         data=hashtag.to_dict()
         hashtag_dict[str(hashtag.id)]=data
-    return {"hashtags":hashtag_dict}
+    return {"hashtags": hashtag_dict}
 
 @hashtag_routes.route('/', methods=["POST"])
 def add_hashtag():
     '''
-    add a tag
+        add a tag
     '''
     form = HashtagForm()
     form['csrf_token'].data = request.cookies['csrf_token']
