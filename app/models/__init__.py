@@ -7,4 +7,4 @@ from .post_image import PostImage
 from .comment_image import CommentImage
 from .like import likes
 from .follow import follows
-
+from .hashtag import Hashtag
