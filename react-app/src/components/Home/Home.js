@@ -65,7 +65,7 @@ const Home = () => {
 
     <div id="home" >
       <video ref={videoRef} autoplay loop muted >
-        <source  src="https://player.vimeo.com/external/434047992.sd.mp4?s=393d59657829702b1b99f7d71bcc50801ae7c824&profile_id=164&oauth2_token_id=57447761" type="video/mp4" />
+        <source  src="https://videos.pexels.com/video-files/4763786/4763786-uhd_4096_2160_24fps.mp4" type="video/mp4" />
       </video>
     <div id="head-icon-div">
         {sessionUser ? 
@@ -98,7 +98,7 @@ const Home = () => {
       <div id="intro">
         <h2>SHARE YOUR </h2>
         <h1>MOMENT</h1>
-        <p style={{ color: '#5b5b5b' }}>Welcome to Moment,
+        <p style={{ color: '#c1cad9' }}>Welcome to Moment,
           <br />
           where every post is a cherished memory waiting to be shared. <br />Connect with friends and make moments</p>
 
