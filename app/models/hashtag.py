@@ -1,4 +1,5 @@
 from .db import db,environment,SCHEMA
+from .post_hashtags import post_hashtags
 
 class Hashtag(db.Model):
     __tablename__="hashtags"
@@ -9,7 +10,7 @@ class Hashtag(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     detail=db.Column(db.String(255))
     
-    posts=db.relationship("Post",secondary="post_hashtags", back_populates="all_hashtags")
+    posts=db.relationship("Post",secondary=post_hashtags, back_populates="all_hashtags")
     
     def to_dict(self):
         return {
