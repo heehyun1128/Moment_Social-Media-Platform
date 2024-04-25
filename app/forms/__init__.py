@@ -4,3 +4,4 @@ from .comment_form import CommentForm
 from .post_form import PostForm
 from .post_image_form import PostImageForm
 from .comment_image_form import CommentImageForm
+from .hashtag_form import HashtagForm

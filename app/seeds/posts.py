@@ -256,6 +256,7 @@ def seed_posts():
 
   db.session.add_all(posts)
   db.session.commit()
+  return posts
 
 def undo_posts():
   if environment == 'production':

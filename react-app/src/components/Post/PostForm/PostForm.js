@@ -450,9 +450,14 @@ const PostForm = ({ post, formType }) => {
             }}
             required
           />
+
           {errors && errors.content &&
             <p className="errors">{errors.content}</p>
           }
+        </div>
+        <div>
+          {/* <h4>Hashtags</h4> */}
+
         </div>
         {imageLoading ? <>
           <Loading />
