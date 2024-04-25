@@ -3,7 +3,7 @@ from app.models import Hashtag, db
 from flask_login import login_required
 from ..forms.hashtag_form import HashtagForm
 from .auth_routes import validation_errors_to_error_messages
-
+from flask_login import login_required
 hashtag_routes = Blueprint("hashtags", __name__)
 
 @hashtag_routes.route('/')
@@ -19,6 +19,7 @@ def get_hashtags():
     return {"hashtags": hashtag_dict}
 
 @hashtag_routes.route('/', methods=["POST"])
+@login_required
 def add_hashtag():
     '''
         add a tag
@@ -27,7 +28,7 @@ def add_hashtag():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         hashtag = Hashtag(
-            name = form.data["name"]
+            detail = form.data["detail"]
         )
         db.session.add(hashtag)
         db.session.commit()

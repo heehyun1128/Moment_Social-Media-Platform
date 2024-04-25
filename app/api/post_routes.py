@@ -1,7 +1,7 @@
 from flask import Blueprint,jsonify
-from flask_login import login_required
-from app.forms import PostForm,PostImageForm,CommentForm
-from app.models import Post,db,PostImage,Comment,User,CommentImage,like
+# from flask_login import login_required
+from app.forms import PostForm,PostImageForm,CommentForm, HashtagForm
+from app.models import Post,db,PostImage,Comment,User,CommentImage,like, Hashtag,post_hashtags
 from app.api.auth_routes import validation_errors_to_error_messages
 #aws
 from flask import Blueprint, request
@@ -335,4 +335,81 @@ def delete_post(postId):
   db.session.commit()
   return {'message':'Post successfully deleted!'},200
 
+
+@post_routes.route("/<int:postId>/hashtags", methods=['POST'])
+@login_required
+def post_hashtags(postId):
+    """
+    Add hashtags to a post
+    """
+    post = Post.query.get(postId)
+    
+    if not post:
+        return {"errors": "Post not found"}, 404
+
+    new_hashtags = request.get_json()['detail']
+
+    hashtag_obj_list = [Hashtag.query.get(int(hashtag_id)) for hashtag_id in new_hashtags]
+
+    post.all_hashtags = hashtag_obj_list
+    db.session.commit()
+
+    hashtag_object =  dict(zip(new_hashtags, [hashtag.to_dict() for hashtag in hashtag_obj_list]))
+    return hashtag_object
+
+
+@post_routes.route("/<int:postId>/hashtags/add", methods=["PUT"])
+def add_one_hashtag(postId):
+    """
+    Add one hashtag to a post
+    """
+    post = Post.query.get(postId)
+
+    if not post:
+        return {"errors": "Post not found"}, 404
+
+    hashtag_detail = request.get_json()["detail"]
+    hashtag_list = Hashtag.query.all()
+    hashtag_details = [hashtag.detail for hashtag in hashtag_list]
+    print(hashtag_details)
+
+    if hashtag_detail in hashtag_details:
+        existing_hashtag = Hashtag.query.filter_by(detail = hashtag_detail).first()
+        post.all_hashtags.append(existing_hashtag)
+        db.session.commit()
+        return existing_hashtag.to_dict()
+    else:
+        form = HashtagForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        if form.validate_on_submit():
+            hashtag = Hashtag(
+                detail = form.data["detail"]
+            )
+            post.all_hashtags.append(hashtag)
+            db.session.add(hashtag)
+            db.session.commit()
+            return hashtag.to_dict()
+        return {"errors": validation_errors_to_error_messages(form.errors)}, 400
+
+
+
+@post_routes.route("/<int:postId>/hashtags/remove", methods=["PUT"])
+def remove_hashtag(postId):
+    """
+    Removes a hashtag from a post
+    """
+    post = Post.query.get(postId)
+    if not post:
+        return {'errors': {"Post": "Post not found"}}, 404
+
+    hashtag_id = request.get_json()["hashtagId"]
+    hashtag = Hashtag.query.get(hashtag_id)
+
+    if hashtag:
+        post.all_hashtags.remove(hashtag)
+        db.session.commit()
+    else:
+        return {"errors": {"hashtag": "Hashtag not found"}}, 404
+
+    return { "message": "Successfully removed hashtag from post."}
 
