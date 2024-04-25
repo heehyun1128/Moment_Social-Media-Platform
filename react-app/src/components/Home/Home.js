@@ -93,7 +93,7 @@ const Home = () => {
         
         
         }
-        <NavLink exact to='/posts/all' class="button large">DISCOVER</NavLink>
+        <NavLink exact to='/posts/all' class="button " style={{fontSize:"22px", paddingTop:"0px !important"}}>DISCOVER</NavLink>
     </div>
       <div id="intro">
         <h2>SHARE YOUR </h2>

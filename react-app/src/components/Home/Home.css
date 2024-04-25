@@ -330,8 +330,10 @@
 #head-icon-div {
   display: flex;
   justify-content: center;
+  align-items: center;
   z-index: 1;
   position: relative;
+  height: 75px;
 }
 
 #head-icon-div>* {
@@ -345,10 +347,17 @@
   color: rgba(0, 0, 0, .6);
 }
 
+
+#home #head-icon-div #home-login-signup{
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  height: 100% !important;
+}
 #home #head-icon-div #home-login-signup button {
   padding: 0 !important;
   margin: 0 !important;
-  height: fit-content !important;
+  height:  fit-content !important;
   width: fit-content !important;
   border: none !important;
   box-shadow: none !important;
@@ -366,6 +375,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 22px;
 }
 
 #home-logout>* {
@@ -409,7 +419,7 @@
 #discover-at-bottom a {
   font-family: "Merriweather", Georgia, serif;
   padding: 15px;
-  border-radius: 15px;
+  /* border-radius: 15px; */
   font-weight: 700;
   border: 1px solid gray;
 }
@@ -424,7 +434,7 @@
   font-size: 30px;
   font-family: "Merriweather", Georgia, serif;
   /* font-weight: 700; */
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   padding: 15px;
 
 
