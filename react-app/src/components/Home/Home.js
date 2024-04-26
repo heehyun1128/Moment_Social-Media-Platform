@@ -65,7 +65,7 @@ const Home = () => {
 
     <div id="home" >
       <video ref={videoRef} autoplay loop muted >
-        <source  src="https://videos.pexels.com/video-files/4763786/4763786-uhd_4096_2160_24fps.mp4" type="video/mp4" />
+        <source  src="https://aamomentbucket.s3.us-west-1.amazonaws.com/4763786-uhd_4096_2160_24fps.mp4" type="video/mp4" />
       </video>
     <div id="head-icon-div">
         {sessionUser ? 
