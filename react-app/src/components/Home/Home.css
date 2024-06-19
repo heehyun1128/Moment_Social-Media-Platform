@@ -101,7 +101,7 @@
 
 #portfolio-container .card .content {
   padding: 20px;
-  /* text-align: center; */
+  text-align: center;
   transform: translateY(40vw);
   opacity: 0;
   transition: 0.5s;
@@ -436,7 +436,7 @@
 }
 
 #home #main .date {
-  font-size: 3px;
+  font-size: 30px;
   font-family: "Montserrat", Georgia, serif;
   /* font-weight: 700; */
   /* border: 1px solid gray; */
