@@ -421,7 +421,9 @@
   padding: 15px;
   /* border-radius: 15px; */
   font-weight: 700;
-  border: 1px solid gray;
+  border: 2px solid gray;
+  border-radius:1rem;
+  box-shadow: 0 0 2px gray;
 }
 
 #home #main #discover-at-bottom a:hover {
@@ -431,11 +433,12 @@
 }
 
 #home #main .date {
-  font-size: 30px;
-  font-family: "Merriweather", Georgia, serif;
+  font-size: 35px;
+  font-family: "Montserrat", Georgia, serif;
   /* font-weight: 700; */
   /* border: 1px solid gray; */
   padding: 15px;
+  font-weight: 700;
 
 
 }
