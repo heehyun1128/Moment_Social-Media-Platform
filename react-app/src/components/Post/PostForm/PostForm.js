@@ -10,6 +10,7 @@ import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
 import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
 import ImageNotEmptyModal from "../../Modal/ImageModal/ImageNotEmptyModal";
 import ImageCantUndoneModal from "../../Modal/ImageModal/ImageCantUndoneModal";
+import { Tooltip } from '@mui/material';
 
 const PostForm = ({ post, formType }) => {
 
@@ -365,7 +366,7 @@ const PostForm = ({ post, formType }) => {
                         }}
 
                       />
-                      <div id='plus-icon'>+</div>
+                      <Tooltip title="Add Image"><div id='plus-icon'>+</div></Tooltip>
                     </label>}
 
                   </div>}
@@ -386,9 +387,9 @@ const PostForm = ({ post, formType }) => {
 
         {formType === "createPost" &&
           <>
-            <h4>Add an image to start</h4>
 
             <div id='create-post-main'>
+            {/* <h4>Select an image</h4> */}
               {postPics && postPics.map((pic, index) => {
 
                 return <div key={index} id="post-image-div">
@@ -408,7 +409,7 @@ const PostForm = ({ post, formType }) => {
                         }}
 
                       />
-                      <span id='plus-icon'>+</span>
+                       <Tooltip title="Add Image"><div id='plus-icon'>+</div></Tooltip>
                     </label>}
                   </div>
 
@@ -422,7 +423,7 @@ const PostForm = ({ post, formType }) => {
         }
 
         <div id="post-title-div">
-          <h4>Title</h4>
+          {/* <h4>Title</h4> */}
           <input
             type="text"
             placeholder="Please give your post a title..."
@@ -439,7 +440,7 @@ const PostForm = ({ post, formType }) => {
         </div>
 
         <div id="post-content-div">
-          <h4>Content</h4>
+          {/* <h4>Content</h4> */}
           <textarea
             type="text"
             value={content}

@@ -124,7 +124,7 @@ const PostCard = ({ post }) => {
         <div id='text-like-box'>
           <div id="text-box">
             {post && <h4>{post?.title}</h4>}
-            {post && <p> {post?.creator?.username}</p>}
+            {post && <h6> {post?.creator?.username}</h6>}
             {post && <p>{createdDate}</p>}
           </div>
           <div id="like-box">

@@ -16,7 +16,12 @@ width:120%;
 height:120%;
 object-fit:cover;
 }
-
+#comment-creator-username{
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
 #comment-creator-div{
   display: flex;
   align-items: center;

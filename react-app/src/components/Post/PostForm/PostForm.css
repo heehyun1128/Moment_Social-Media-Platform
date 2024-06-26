@@ -4,8 +4,8 @@ input[type=file] {
 }
 
 #upload-img-preview {
-  width: 150px;
-  height: 150px;
+  width: 11vw;
+  height: 11vw;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -29,9 +29,9 @@ input[type=file] {
   
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-
+height: 100vh;
 }
 
 #post-form-div>*, #create-post-form>*,#post-title-div>*, #post-content-div>*{
@@ -67,18 +67,16 @@ input[type=file] {
   background-color: #dea7a7;
 }
 
-#post-title-div,#post-content-div{
-  width: 100%;
-}
+
 #post-title-div input, #post-content-div textarea{
-  width: 90%;
+  width: 60vw;
   outline: none;
   border: 1px solid gray;
-
+  font-size: 12px;
   /* box-shadow: 2px 2px 5px gray; */
   border-radius: 10px;
   min-height: 40px;
-  padding: 5px;
+  padding-left: 15px;
 }
 
 #post-content-div textarea{
@@ -89,20 +87,27 @@ input[type=file] {
   height: 80px;
 } */
 
-#submit-post-btn{
-  height:40px;
-  width:80px;
-  padding: 5px;
-  border-radius: 10px;
-  border: none;
-  box-shadow: 2px 2px 4px gray;
-  cursor: pointer;
-}
 
-#submit-post-btn:hover{
-  background-color: #ada8a8;
-  color: white;
-}
+  #submit-post-btn{
+    height: 6vh;
+    width: 8vw;
+      cursor: pointer;
+      font-weight: 400 !important;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-size: 14px;
+      color: black;
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      margin-right: 20px;
+  }
+  #submit-post-btn:hover {
+    background-color: #bd9898;
+    color: rgb(255, 255, 255);
+  }
 #create-post-input-label input, #edit-post-input-label input{
   display: none;
 }
@@ -140,11 +145,11 @@ input[type=file] {
 }
 #plus-icon{
   font-size: 40px;
-  color: rgb(178, 129, 137);
+  color: gray;
  
 }
 #plus-icon:hover{
-  color: #e8d69d;
+  color: rgb(178, 129, 137);
  
 }
 
@@ -156,13 +161,15 @@ input[type=file] {
 }
 
 #create-post-main,#edit-post-main{
+  width:90vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 
 #create-post-form{
-  width: 80%;
+  width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,13 +177,14 @@ input[type=file] {
 
 #post-title-div, #post-content-div{
   display: flex;
-    flex-direction: column;
+  justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
+
 #post-form-div h4{
-  width: 100%;
-  margin-left:80px;
+ margin-right: 20px;
 }
 
 #post-form-header {

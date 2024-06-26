@@ -31,7 +31,7 @@ const AllPost = () => {
 
     <div id='all-post-container'>
     
-        <h1 style={{'textAlign':'center'}}>ALL POSTS</h1>
+        <h2 style={{'textAlign':'center','marginTop':"20px"}}>ALL POSTS</h2>
       <div id='all-post-div' >
 
         {allPosts && allPosts.map(post => {

@@ -9,6 +9,7 @@ import { useSearchContext } from '../../context/Search';
 import logo from '../images/logo.JPG'
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
+import Tooltip from '@mui/material/Tooltip';
 
 
 import { logout } from "../../store/session";
