@@ -158,6 +158,9 @@ const PostDetail = () => {
     <div id='post-detail-container'>
       {isLoading ? (<div id='loader'><PageLoader/></div>):(<>
         <div id="post-detail-div">
+        <div id="post-form-header">
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
+      </div>
           <div id="post-img-container">
             {images?.map((image, index) => (
               <>

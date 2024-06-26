@@ -162,10 +162,16 @@ align-items: center;
 
 #text-box p{
   justify-content: flex-start !important;
+  font-size: 12px;
 }
 #text-box h4{
- font-size: 16px;
+ font-size: 14px;
  font-weight: 400;
+}
+#text-box h6{
+ text-transform: capitalize;
+ font-size: 14px;
+ color: gray;
 }
 
 
