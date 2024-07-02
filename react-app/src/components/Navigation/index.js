@@ -20,10 +20,13 @@ import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
 import PermitErrorModal from '../ErrorModal/PermitErrorModal';
 import { useModal } from '../../context/Modal';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
+	const location=useLocation()
+	const currLocation = location.pathname;
 
 	const { searchContent, setSearchContent } = useSearchContext()
 
@@ -77,7 +80,7 @@ function Navigation({ isLoaded }) {
 						setSearchContent={setSearchContent} />
 				</div>
 				<div id='title-div'>
-					<NavLink exact to="/">MOMENT</NavLink>
+					<NavLink exact to={currLocation === "/posts/all" ? "/" : "/posts/all"}>MOMENT</NavLink>
 				</div>
 				<div id='nav-right-div'>
 					{!sessionUser && <>

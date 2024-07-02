@@ -21,15 +21,23 @@ object-fit:cover;
   align-items: center;
   padding: 0;
   margin: 0;
+  font-size: 18px!important;
 }
 #comment-creator-div{
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  border-bottom: 0.5px dashed gray;
+ 
   padding: 5px 0 10px;
+  }
+  #comment-top{
+  border-bottom: 0.5px dashed gray;
+  display: flex;
+  justify-content: space-between;
+  height: 30%;
 }
-
+#comment-top p{
+  font-size: 14px;
+}
 #comment-card-div{
   background-color: #ffffff;
   box-shadow: 2px 2px 4px rgb(192, 192, 192);

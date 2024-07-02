@@ -28,7 +28,7 @@ const PostDetail = () => {
   const commentArr = commentObj && Object.values(commentObj)
   
   // get post comments
-  const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id))
+  const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id)).sort((a,b)=>new Date(b.id)-new Date(a.id))
 
 
   const sessionUser = useSelector(state => state.session?.user)
