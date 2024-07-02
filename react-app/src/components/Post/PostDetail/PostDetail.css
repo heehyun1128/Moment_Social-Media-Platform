@@ -140,15 +140,21 @@
 .enlarged-view {
   position: fixed;
   top: 10vh;
+  
   left: 0;
   height: 120vh;
   width: 100vw;
   background-color: rgba(43, 43, 43, .8);
+  
+}
+.enlarged-view:hover img{
+  opacity: 1;
 }
 
 .enlarged-view img {
   height: 80%;
-
+  transition: all 0.5s;
+  opacity: 0;
 }
 
 #click-image-detail {
