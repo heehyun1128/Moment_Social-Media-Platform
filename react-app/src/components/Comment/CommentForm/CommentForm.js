@@ -89,10 +89,10 @@ const CommentForm = () => {
   }
 
   return (
-    <div>
+    <div id='comment-form-main' >
 
       <div id='comment-form-div'>
-        <div></div>
+      
         <h4>Add your comment here</h4>
         <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
           <textarea

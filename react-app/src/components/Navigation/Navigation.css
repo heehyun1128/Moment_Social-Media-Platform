@@ -3,7 +3,7 @@
   position: fixed;
   right: 35%;
   top: 40%;
-  background-color: rgba(255, 255, 255, .8);
+  background-color: rgba(255, 255, 255, .95);
   border-radius: 15px;
   padding: 10px;
   width: 25vw;
@@ -113,16 +113,17 @@ img#profile-img {
 }
 
 #navigation-tab:hover #icon-nav-div {
-  display: block;
+  opacity: 1;
 }
 
 #icon-nav-div {
-  display: none;
+  opacity: 0;
   height: fit-content;
   position: absolute;
   right: 130px;
   top: 110px;
   z-index: 999 !important;
+  transition: all 0.2s;
 }
 
 #icon-nav-div li {

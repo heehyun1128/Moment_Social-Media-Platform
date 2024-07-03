@@ -41,4 +41,7 @@
 #post-nav {
   height: fit-content;
   margin-bottom: 30px;
+  width: 36vw;
+  display: flex;
+  justify-content: space-between;
 }

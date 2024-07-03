@@ -29,7 +29,7 @@ const DeletePostModal = ({postId}) => {
   return (
     <div id="delete-modal-container">
       <h3 id='delete-modal-header'>CONFIRM DELETION</h3>
-      <h4 className="delete-modal-msg">
+      <h4 className="delete-modal-msg" style={{textTransform:"capitalize"}}>
         Are you sure you want to remove this post?
       </h4>
       <button onClick={handleDelete} className="delete-modal-btn yes">{`CONFIRM DELETION`}</button>

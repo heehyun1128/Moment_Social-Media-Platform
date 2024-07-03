@@ -9,7 +9,7 @@ const Like = () => {
   const dispatch = useDispatch()
   const likedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
   const likedPostArr = likedPosts && Object.values(likedPosts)
-  
+  console.log(likedPostArr)
   useEffect(() => {
     dispatch(fetchUserLikedPosts(userId))
   }, [dispatch, userId])

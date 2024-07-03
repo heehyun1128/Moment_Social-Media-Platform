@@ -10,7 +10,7 @@ import PermitErrorModal from "../../ErrorModal/PermitErrorModal";
 
 
 const PostCard = ({ post }) => {
- 
+
   const history = useHistory()
   const dispatch = useDispatch()
   const createdDate = post?.createdAt?.slice(0, 16)
@@ -23,6 +23,9 @@ const PostCard = ({ post }) => {
   const userLikedPosts = useSelector(state => state.users?.singleUser?.likedPosts)
   const postLikedUsers = post && post.likeUsers
 
+  const allPostsObj = useSelector(state => state.posts?.Posts)
+
+  
   const handleClickPostCard = (e) => {
     e.preventDefault()
     history.push(`/posts/${post?.id}`)
@@ -109,9 +112,14 @@ const PostCard = ({ post }) => {
     }
   }, [dispatch, postLikedUsers])
 
-  // if (!sessionUser) {
-  //   return null
-  // }
+  
+  if (!allPostsObj || Object.values(allPostsObj).length === 0) {
+    return null
+  }
+  const allPosts = allPostsObj && Object.values(allPostsObj)
+
+  const likedPostCreator=allPosts?.filter(lpost=>Number(lpost.id)===Number(post.id))[0]
+console.log(likedPostCreator)
   return (
    post && <div id='post-card-div' onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
@@ -124,7 +132,7 @@ const PostCard = ({ post }) => {
         <div id='text-like-box'>
           <div id="text-box">
             {post && <h4>{post?.title}</h4>}
-            {post && <h6> {post?.creator?.username}</h6>}
+            {post && <h6> {likedPostCreator?.creator?.username}</h6>}
             {post && <p>{createdDate}</p>}
           </div>
           <div id="like-box">

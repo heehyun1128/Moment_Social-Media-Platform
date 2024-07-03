@@ -40,14 +40,15 @@ const FollowerCard = ({ follower, sessionUser }) => {
         {follower?.profileImage ? <div id='new-profile-pic'><img src={follower?.profileImage} alt="" /></div> : <div id='profile-img-li'><i class="fa-solid fa-user fa-xl"></i></div>}
         <p>{follower?.username}</p>
       </div>
-{/*    
-      {sessionUser && sessionUser?.id !== follower?.id && <div id="follow-btn" onClick={() => handleRemoveFollowUser(follower)}>
-        {followStatus && 'REMOVE FOLLOWER'}
-      </div>} */}
+
       {sessionUser && sessionUser?.id !== follower?.id &&
         <Button 
         variant="outlined" 
-          style={{ color: 'gray', borderColor: 'gray' }}
+        style={{
+          color: "rgb(224, 216, 217)",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          
+        }}
         onClick={() => handleRemoveFollowUser(follower)} startIcon={<DeleteIcon />}>
           {followStatus && 'REMOVE FOLLOWER'}
         </Button>
