@@ -245,3 +245,32 @@ height: 100vh;
   border:5px solid rgb(224, 188, 56);
   
 }
+
+
+@media screen and (max-width: 600px) {
+  #submit-post-btn {
+    width: 20vw;
+  }
+
+  #create-post-form{
+    width:90vw;
+  }
+  #create-post-main{
+    justify-content: space-between;
+  }
+
+  #upload-img-preview{
+    width: 15vw;
+    height: 15vw;
+  }
+
+  #post-title-div input, #post-content-div textarea{
+    width:90vw;
+  }
+
+  #post-form-header{
+    width:90vw
+  }
+
+ 
+}

@@ -96,3 +96,9 @@ height: 20px !important;
 #signup-input-label input{
  display: none; 
 }
+
+@media screen and (max-width: 600px) {
+  #signup-modal-div{
+    width: 85vw;
+  }
+}
