@@ -254,7 +254,7 @@ img#profile-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: white;
+  background-color: transparent;
   border: none !important;
   box-shadow: none !important;
   display: flex;
@@ -263,6 +263,8 @@ img#profile-img {
   cursor: pointer;
   transition: 0.5s;
 }
+
+
 
 #search-btn i {
   /* width: fit-content; */
@@ -441,12 +443,15 @@ img#profile-img {
     width: 100vw;
     /* height: 240px; */
   }
+
+ 
 }
 @media screen and (max-width: 600px) {
   #navigation-section {
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
     padding: 0;
-    padding-right: 20px;
+   
     width: 100vw;
     /* height: 240px; */
   }
@@ -455,6 +460,16 @@ img#profile-img {
     margin-bottom: 10px;
     margin-right: 10vw;
     position: static;
+  }
+
+  #title-div{
+    margin: 0;
+  }
+  #nav-right-div{
+   width: 80vw;
+   display: flex;
+   justify-content: flex-end;
+    margin-right: 0;
   }
 
   #search-bar {
@@ -469,7 +484,7 @@ img#profile-img {
   
   
   #search-bar-hidden #search-box {
-    left:10vw;
+    left:7vw;
     /* position:absolute; */
 
     width: 85vw;
@@ -491,6 +506,30 @@ img#profile-img {
     width: 60vw;
   }
 
+  .profile-dropdown{
+    width: 70vw;
+    left:15vw;
+  }
+  #icon-nav {
+
+    margin-top: 60px;
+  }
+  #icon-nav-div{
+    right: 10px;
+  }
+
+  #nav-right-div>*{
+    margin-right: 15px;
+  }
  
- 
+  #button-section{
+    flex-direction: column;
+    justify-content: center;
+  }
+  #logout-btn{
+    margin-top: 15px;
+  }
+  #button-section button{
+    margin-top:10px;
+  }
 }

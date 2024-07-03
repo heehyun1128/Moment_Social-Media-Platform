@@ -52,3 +52,9 @@ cursor: pointer;
   background-color: #ddaaaa;
   color: white;
 }
+
+@media screen and (max-width: 600px) {
+  #login-modal{
+    width: 85vw !important;
+  }
+}

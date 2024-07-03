@@ -96,13 +96,13 @@ const Home = () => {
         <NavLink exact to='/posts/all' class="button " style={{fontSize:"22px", paddingTop:"0px !important"}}>DISCOVER</NavLink>
     </div>
       <div id="intro">
-        <h2>SHARE YOUR </h2>
-        <h1>MOMENT</h1>
+        <h2 className="text-focus-in_top">SHARE YOUR </h2>
+        <h1 className="text-focus-in">MOMENT</h1>
         <p style={{ color: '#c1cad9' }}>Welcome to Moment,
           <br />
           where every post is a cherished memory waiting to be shared. <br />Connect with friends and make moments</p>
 
-        <ul class="actions">
+        <ul className="actions puff-in-center ">
           <li><a href="#home-header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
         </ul>
       </div>

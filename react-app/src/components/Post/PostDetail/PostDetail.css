@@ -202,3 +202,40 @@
 
 }
 
+@media screen and (max-width: 800px) {
+  /* .enlarged-view img{
+   width: 100vw;
+   height: auto;
+  } */
+ #post-img-container{
+  width: 100vw !important;
+ }
+}
+@media screen and (max-width: 600px) {
+
+ #post-img-container{
+  min-width: 90vw !important;
+ }
+
+ #post-detail-container{
+  width: 100vw;
+ }
+
+ #post-detail-div {
+  margin: 5px;
+ }
+.enlarged-view{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+ .enlarged-view img{
+  width: 100vw;
+  height: auto;
+  opacity: 1;
+ }
+
+ .enlarged-view img:hover {
+  opacity: 1;
+}
+}

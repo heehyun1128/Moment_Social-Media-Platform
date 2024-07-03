@@ -1,70 +1,82 @@
-#comment-creator-pic-div{
+#comment-creator-pic-div {
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  height:50px;
-  width:50px;
+  height: 50px;
+  width: 50px;
   overflow: hidden;
   background-color: #efdddd;
   margin-right: 10px;
 }
 
-#comment-creator-pic-div img{
-
-width:120%;
-height:120%;
-object-fit:cover;
+#comment-creator-pic-div img {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
 }
-#comment-creator-username{
+#comment-creator-username {
   display: flex;
   align-items: center;
   padding: 0;
   margin: 0;
-  font-size: 18px!important;
+  font-size: 18px !important;
 }
-#comment-creator-div{
+#comment-creator-div {
   display: flex;
   align-items: center;
- 
+
   padding: 5px 0 10px;
-  }
-  #comment-top{
+}
+#comment-top {
   border-bottom: 0.5px dashed gray;
   display: flex;
   justify-content: space-between;
   height: 30%;
 }
-#comment-top p{
+#comment-top p {
   font-size: 14px;
 }
-#comment-card-div{
+#comment-card-div {
   background-color: #ffffff;
   box-shadow: 2px 2px 4px rgb(192, 192, 192);
-  margin:15px 30px;
+  margin: 15px 30px;
   border-radius: 30px;
-  padding:20px;
+  padding: 20px;
 }
-#comment-img-div{
+#comment-img-div {
   max-width: 240px;
   border-radius: 20px;
   overflow: hidden;
   max-height: 240px;
 }
-#comment-img-div img{
+#comment-img-div img {
   object-fit: cover;
   max-width: 260px;
   max-height: 320px;
 }
 
-
-#comment-content-div{
+#comment-content-div {
   display: flex;
   align-items: center;
 }
-#comment-content{
-  width:60vw;
-margin-bottom: 15px;
-    overflow-wrap: break-word;
-    height: fit-content;
+#comment-content {
+  width: 60vw;
+  margin-bottom: 15px;
+  overflow-wrap: break-word;
+  height: fit-content;
+}
+
+@media screen and (max-width: 600px) {
+  #comment-card-div {
+    margin: 20px 0;
+  }
+  #comment-detail-div {
+    width: 90vw;
+    padding: 0;
+  }
+
+  #comment-detail-div h4{
+    margin: 10px 5px;
+  }
 }
