@@ -272,5 +272,30 @@ height: 100vh;
     width:90vw
   }
 
- 
+ #remove-image-div{
+  font-size: 8px;
+  height: fit-content;
+ }
+
+ #edit-post-div{
+  padding: 5px;
+ }
+ #edit-post-div h4{
+  margin-left: 20px;
+ }
+
+ #edit-post-main{
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+ }
+
+ #edit-post-input-div{
+  align-items: center;
+  margin-right: 10px;
+ }
+
+ #upload-img-preview{
+  margin:0;
+ }
 }

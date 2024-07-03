@@ -443,6 +443,8 @@ img#profile-img {
     width: 100vw;
     /* height: 240px; */
   }
+
+ 
 }
 @media screen and (max-width: 600px) {
   #navigation-section {
@@ -520,4 +522,14 @@ img#profile-img {
     margin-right: 15px;
   }
  
+  #button-section{
+    flex-direction: column;
+    justify-content: center;
+  }
+  #logout-btn{
+    margin-top: 15px;
+  }
+  #button-section button{
+    margin-top:10px;
+  }
 }
