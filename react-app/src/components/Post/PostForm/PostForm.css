@@ -67,7 +67,9 @@ height: 100vh;
   background-color: #dea7a7;
 }
 
-
+#post-title-section{
+  display: flex;
+}
 #post-title-div input, #post-content-div textarea{
   width: 60vw;
   outline: none;
@@ -246,6 +248,17 @@ height: 100vh;
   
 }
 
+#ai-btn, #revert-btn{
+ font-size: 12px;
+ background-color: #ae7a7a;
+ margin-right: 10px;
+ margin-left: 10px;
+ padding: 5px;
+ border-radius: 3rem;
+}
+
+
+
 
 @media screen and (max-width: 600px) {
   #submit-post-btn {
@@ -299,3 +312,4 @@ height: 100vh;
   margin:0;
  }
 }
+
