@@ -9,6 +9,7 @@ import { useSearchContext } from '../../context/Search';
 import logo from '../images/logo.JPG'
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
+import Tooltip from '@mui/material/Tooltip';
 
 
 import { logout } from "../../store/session";
@@ -19,10 +20,13 @@ import './Navigation.css'
 import { fetchUserProfileImage } from "../../store/user";
 import PermitErrorModal from '../ErrorModal/PermitErrorModal';
 import { useModal } from '../../context/Modal';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	const history = useHistory()
+	const location=useLocation()
+	const currLocation = location.pathname;
 
 	const { searchContent, setSearchContent } = useSearchContext()
 
@@ -75,8 +79,8 @@ function Navigation({ isLoaded }) {
 						searchContent={searchContent}
 						setSearchContent={setSearchContent} />
 				</div>
-				<div id='title-div'>
-					<NavLink exact to="/">MOMENT</NavLink>
+				<div id='title-div'className='tracking-in-expand'>
+					<NavLink exact to={currLocation === "/posts/all" ? "/" : "/posts/all"}>MOMENT</NavLink>
 				</div>
 				<div id='nav-right-div'>
 					{!sessionUser && <>

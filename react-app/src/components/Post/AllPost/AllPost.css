@@ -6,10 +6,10 @@
   background-color: #fff !important;
   align-items: end ; */
   box-sizing: border-box;
-  width: 85vw;
-  margin: 60px auto 20px;
+  width: 82vw;
+  margin: 20px auto 20px;
   columns: 3;
-  column-gap: 5px;
+  column-gap: 10px;
   z-index: -999999 !important;
   min-height: 100vh;
   

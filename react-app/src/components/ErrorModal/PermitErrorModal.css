@@ -49,6 +49,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 #permit-err-div button:hover{
   background-color: #bb9595;

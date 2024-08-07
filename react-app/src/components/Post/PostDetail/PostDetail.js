@@ -28,7 +28,7 @@ const PostDetail = () => {
   const commentArr = commentObj && Object.values(commentObj)
   
   // get post comments
-  const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id))
+  const postComments = commentArr?.filter(comment => Number(comment?.postId) === Number(post?.id)).sort((a,b)=>new Date(b.id)-new Date(a.id))
 
 
   const sessionUser = useSelector(state => state.session?.user)
@@ -158,11 +158,14 @@ const PostDetail = () => {
     <div id='post-detail-container'>
       {isLoading ? (<div id='loader'><PageLoader/></div>):(<>
         <div id="post-detail-div">
-          <div id="post-img-container">
+        <div id="post-form-header">
+        <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
+      </div>
+          <div id="post-img-container" className="focus-in-contract">
             {images?.map((image, index) => (
               <>
                 <div
-                  className='post-image'
+                  className='post-image '
                   // id={image?.preview === true ? 'active' : image?.id === imageId ? 'active' : ''}
                   id={isActive[index]}
                   key={index}

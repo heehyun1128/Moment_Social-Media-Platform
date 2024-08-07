@@ -41,4 +41,42 @@
 #post-nav {
   height: fit-content;
   margin-bottom: 30px;
+  width: 36vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  #post-nav {
+    width: 90vw;
+  }
+  #post-nav>*{
+    margin-right: 0;
+  }
+
+  .nav-link-div p, #follower p, #following p{
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  #profile-info-div{
+    width: 90vw;
+  }
+
+  #follower-content, #follow-div{
+    width: 85vw;
+  }
+
+  #follower-content button{
+    font-size: 10px;
+  }
+
+  #profile-info-img-div{
+    height: 40px;
+    width: 40px;
+  }
+
+  #profile-info-div h4{
+    font-size: 12px;
+  }
 }

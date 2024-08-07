@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .post_hashtags import post_hashtags
 
 class Post(db.Model):
   __tablename__ = 'posts'
@@ -20,6 +21,8 @@ class Post(db.Model):
   comments=db.relationship("Comment",back_populates="post",cascade="all, delete, delete-orphan")
   like_users=db.relationship("User",secondary='likes',back_populates='like_posts')
 
+  all_hashtags = db.relationship(
+        "Hashtag", secondary=post_hashtags, back_populates="posts")
   def to_dict(self):
         return {
             'id': self.id,

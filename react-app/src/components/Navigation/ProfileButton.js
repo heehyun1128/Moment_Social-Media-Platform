@@ -38,6 +38,8 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
+      setRenderUpdateBtn(false)
+      
       if (!ulRef?.current?.contains(e.target)) {
         setShowMenu(false);
         setProfilePic(null)
