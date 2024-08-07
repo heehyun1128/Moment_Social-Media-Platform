@@ -490,7 +490,7 @@ const PostForm = ({ post, formType }) => {
                                 // setPostPic(e.target.files[0])
                               }}
                             />
-                            <Tooltip title="Add Image">
+                            <Tooltip title="Add Image" placement="top">
                               <div id="plus-icon">+</div>
                             </Tooltip>
                           </label>
