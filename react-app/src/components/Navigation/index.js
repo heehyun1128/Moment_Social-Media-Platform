@@ -79,7 +79,7 @@ function Navigation({ isLoaded }) {
 						searchContent={searchContent}
 						setSearchContent={setSearchContent} />
 				</div>
-				<div id='title-div'>
+				<div id='title-div'className='tracking-in-expand'>
 					<NavLink exact to={currLocation === "/posts/all" ? "/" : "/posts/all"}>MOMENT</NavLink>
 				</div>
 				<div id='nav-right-div'>

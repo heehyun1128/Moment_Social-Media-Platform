@@ -35,7 +35,7 @@ const Footer = () => {
       </div> */}
       <div id='footer-sub-divs'>
         <h4>STACK</h4>
-        <p>React, Redux, Flask, SQLAlchemy, PostgreSQL, CSS3</p>
+        <p>React, Redux, Flask, OPENAI API, SQLAlchemy, PostgreSQL, JavaScript, Python, CSS3</p>
       </div>
     </div>
   )

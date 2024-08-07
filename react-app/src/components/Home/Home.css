@@ -450,17 +450,20 @@
   z-index: 1;
   position: relative;
   height: 75px;
+  
 }
 
 #head-icon-div>* {
   margin: 20px 40px 0;
   color: rgba(0, 0, 0, .8);
   font-family: "Merriweather", Georgia, serif;
+  
   /* font-weight: 700; */
 }
 
 #head-icon-div p {
   color: rgba(0, 0, 0, .6);
+  
 }
 
 
@@ -485,6 +488,9 @@
   color: rgba(0, 0, 0, .8);
   font-family: "Merriweather", Georgia, serif;
 }
+#home #head-icon-div #home-login-signup button:hover{
+  color:white;
+}
 
 #home-logout {
   display: flex;
@@ -496,6 +502,10 @@
 
 #home-logout>* {
   margin-right: 20px;
+}
+#home-logout .logout:hover {
+
+  color:white;
 }
 
 .actions {

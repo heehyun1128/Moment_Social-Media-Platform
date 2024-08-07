@@ -28,7 +28,7 @@ const AboutModal = ({ type }) => {
         Looking for something specific or seeking inspiration? Our search feature is your trusty companion. MOMENT is all about building connections, creating lasting memories, and sparking meaningful conversations in the digital realm. 
         <br/>
         <div>...</div>
-        Join us today and start sharing your story!"
+        Join us today and start sharing your story!
       </h4>
 
       <button onClick={closeCurrModal} >{`CLOSE WINDOW`}</button>

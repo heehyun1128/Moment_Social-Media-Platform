@@ -28,6 +28,7 @@ const PostCard = ({ post }) => {
   
   const handleClickPostCard = (e) => {
     e.preventDefault()
+    sessionStorage.setItem('scrollPosition', window.scrollY);
     history.push(`/posts/${post?.id}`)
   }
 
@@ -121,7 +122,7 @@ const PostCard = ({ post }) => {
   const likedPostCreator=allPosts?.filter(lpost=>Number(lpost.id)===Number(post.id))[0]
 console.log(likedPostCreator)
   return (
-   post && <div id='post-card-div' onClick={handleClickPostCard}>
+   post && <div id='post-card-div' className="swing-in-top-fwd " onClick={handleClickPostCard}>
       <div id='post-card-img-div'>
         <div id='img-box'>
           {post && <img src={post && post?.previewImg} alt="" />}

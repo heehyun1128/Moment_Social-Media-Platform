@@ -13,10 +13,22 @@ const AllPost = () => {
   const allPostsObj = useSelector(state => state.posts?.Posts)
 
 
+  // useEffect(() => {
+  //   dispatch(fetchAllPosts())
+  //   window.scrollTo(0, 0)
+  // }, [dispatch])
+
   useEffect(() => {
     dispatch(fetchAllPosts())
-    window.scrollTo(0, 0)
-  }, [dispatch])
+    // Restore the scroll position if it exists
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem('scrollPosition'); // Clean up after restoring
+    }else{
+      window.scrollTo(0, 0)
+    }
+  }, [dispatch]);
 
 
   if (!allPostsObj || Object.values(allPostsObj).length === 0) {

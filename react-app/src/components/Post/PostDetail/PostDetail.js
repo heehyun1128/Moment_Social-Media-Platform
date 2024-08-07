@@ -161,11 +161,11 @@ const PostDetail = () => {
         <div id="post-form-header">
         <h3 id='back-to-all-posts' onClick={() => { history.push('/posts/all') }}><i class="fa-solid fa-backward"></i>{` ALL POSTS `}</h3>
       </div>
-          <div id="post-img-container">
+          <div id="post-img-container" className="focus-in-contract">
             {images?.map((image, index) => (
               <>
                 <div
-                  className='post-image'
+                  className='post-image '
                   // id={image?.preview === true ? 'active' : image?.id === imageId ? 'active' : ''}
                   id={isActive[index]}
                   key={index}

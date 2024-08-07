@@ -87,7 +87,7 @@ function LoginFormModal() {
         {errors && errors.EmPwValidationErr &&
           <p className="errors">{errors.EmPwValidationErr}</p>
         }
-        <button className="login-form-submit-btn" onClick={handleDemoUserLogin}>DEMO USER</button>
+        <button className="login-form-submit-btn demo" onClick={handleDemoUserLogin}>DEMO USER LOGIN</button>
         <button className="login-form-submit-btn" type="submit">LOG IN</button>
       </form>
     </div>

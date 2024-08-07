@@ -52,6 +52,7 @@ const PostForm = ({ post, formType }) => {
   const [originalTitle, setOriginalTitle] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [aiUsed, setAiUsed] = useState(false);
+  const [postSubmitted,setPostSubmitted]= useState(false);
 
   // GET INITIAL IMAGE URLS
 
@@ -249,9 +250,13 @@ const PostForm = ({ post, formType }) => {
         setErrors(textData.errors);
         return;
       }
-
-      textData && history.push(`/posts/${textData?.id}`);
-      resetForm();
+      setPostSubmitted(true)
+      setTimeout(() => {
+        if (textData) {
+          history.push(`/posts/${textData.id}`);
+        }
+        resetForm();
+      }, 3000);
     } else if (formType === "updatePost") {
       post = {
         ...post,
@@ -296,7 +301,7 @@ const PostForm = ({ post, formType }) => {
           !isImageValid(postPic)
         ) {
           // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          // alert('Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
+          // alert(rgb(224, 216, 217)'Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false);
           const redBd = [...redBorderClass];
@@ -360,7 +365,9 @@ const PostForm = ({ post, formType }) => {
   };
 
   return (
-    <div id="post-form-div">
+    <div id="post-form-div" 
+    className={postSubmitted?`blur-out-expand-fwd`:`focus-in-contract-bck`}
+    >
       <div id="post-form-header">
         <h3
           id="back-to-all-posts"
@@ -418,7 +425,7 @@ const PostForm = ({ post, formType }) => {
                                 // setPostPic(e.target.files[0])
                               }}
                             />
-                            <Tooltip title="Add Image">
+                            <Tooltip title="Add Image" placement="top">
                               <div id="plus-icon">+</div>
                             </Tooltip>
                           </label>
@@ -510,25 +517,28 @@ const PostForm = ({ post, formType }) => {
               required
             />
             {errors && errors.title && <p className="errors">{errors.title}</p>}
+            <Tooltip title="AI Generation" placement="top">
+              <Button
+                id="ai-btn"
+                variant="contained"
+                onClick={() => generateDescription()}
+                className="heartbeat"
+              >
+                AI
+              </Button>
+            </Tooltip>
           </div>
-          <Tooltip title="AI Generation" placement="top">
-            <Button
-              id="ai-btn"
-              variant="contained"
-              onClick={() => generateDescription()}
-            >
-              AI
-            </Button>
-          </Tooltip>
-          {aiUsed && <Tooltip title="Revert to Original" placement="top">
-            <Button
-              id="revert-btn"
-              variant="contained"
-              onClick={() => revertToOriginal()}
-            >
-              <HistoryIcon />
-            </Button>
-          </Tooltip>}
+          {aiUsed && (
+            <Tooltip title="Revert to Original" placement="top">
+              <Button
+                id="revert-btn"
+                variant="contained"
+                onClick={() => revertToOriginal()}
+              >
+                <HistoryIcon />
+              </Button>
+            </Tooltip>
+          )}
         </div>
 
         <div id="post-content-div">
@@ -542,11 +552,10 @@ const PostForm = ({ post, formType }) => {
             }}
             required
           />
-
-          {errors && errors.content && (
-            <p className="errors">{errors.content}</p>
-          )}
+          <div style={{width:"122px"}}></div>
         </div>
+
+        {errors && errors.content && <p className="errors">{errors.content}</p>}
         <div>{/* <h4>Hashtags</h4> */}</div>
         {imageLoading ? (
           <>
@@ -554,7 +563,7 @@ const PostForm = ({ post, formType }) => {
             <p>Submitting...</p>
           </>
         ) : (
-          <button id="submit-post-btn" type="submit">
+          <button id="submit-post-btn" type="submit" >
             POST
           </button>
         )}

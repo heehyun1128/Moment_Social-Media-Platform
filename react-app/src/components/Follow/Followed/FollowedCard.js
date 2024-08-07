@@ -50,7 +50,7 @@ const FollowedCard = ({ followed, sessionUser }) => {
         <Button
           variant="contained"
           style={{
-            color: "rgb(224, 216, 217)",
+            // color: "rgb(224, 216, 217)",
             backgroundColor: "rgba(0,0,0,0.5)",
             
           }}
