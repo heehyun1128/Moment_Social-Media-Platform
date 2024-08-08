@@ -37,7 +37,7 @@ MarkupSafe==2.0.1
 openai==1.40.0
 pycparser==2.21
 pydantic==2.5.3
-pydantic_core==2.20.1
+pydantic_core==2.14.6
 python-dateutil==2.8.1
 python-dotenv==0.14.0
 python-editor==1.0.4
