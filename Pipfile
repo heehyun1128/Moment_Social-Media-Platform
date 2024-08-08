@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+openai = "*"
 click = "==7.1.2"
 gunicorn = "==20.1.0"
 itsdangerous = "==2.0.1"
