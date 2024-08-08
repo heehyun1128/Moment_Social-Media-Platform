@@ -28,6 +28,7 @@ email-validator = "*"
 boto3 = "*"
 flask-cors = "*"
 botocore = "*"
+openai = "*"
 
 [dev-packages]
 
