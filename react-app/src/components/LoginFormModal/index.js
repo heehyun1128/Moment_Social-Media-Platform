@@ -91,6 +91,8 @@ function LoginFormModal() {
         <button className="login-form-submit-btn" type="submit">LOG IN</button>
       </form>
     </div>
+
+    
   );
 }
 
