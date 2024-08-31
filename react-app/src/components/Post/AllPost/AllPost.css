@@ -16,11 +16,28 @@
 }
 
 #all-post-container{
-  min-height: 100vh;
+  height: fit-content;
+  /* position:fixed; */
+  /* overflow: auto; */
 }
 
 #all-post-container h1{
   font-size: 40px;
+}
+
+.post-nav p:hover{
+font-weight: bold;
+}
+
+.post-nav>*{
+  padding: 4px;
+  margin:0;
+  margin-bottom: 6px;
+}
+
+.underscore{
+  border-bottom: 1px solid gray;
+  font-weight: bold;
 }
 
 @media screen and (max-width: 1200px) {

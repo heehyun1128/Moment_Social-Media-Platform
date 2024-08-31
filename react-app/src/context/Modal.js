@@ -48,7 +48,7 @@ export function Modal() {
   return ReactDOM.createPortal(
     <div id="modal">
       <div id="modal-background" onClick={closeModal} />
-      <div id="modal-content " className='swing-in-top-fwd'>
+      <div id="modal-content " className='slide-in-fwd-center'>
         {modalContent}
       </div>
     </div>,

@@ -44,8 +44,9 @@ align-items: center;
   transition: all 0.8s;
   color:white;
   text-transform: uppercase;
-  font-family: 'Merriweather','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  /* font-family: 'Merriweather','Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
  font-size: 22px;
+ font-weight: 400;
 
 }
 
@@ -152,6 +153,8 @@ align-items: center;
   /* overflow-wrap: ellipsis; */
   text-overflow: ellipsis;
   /* white-space: nowrap; */
+  text-transform: capitalize;
+  font-weight: bold!important;
   overflow: hidden;
   display: block;
   max-width:100%;
@@ -160,6 +163,7 @@ align-items: center;
 #text-box p{
   justify-content: flex-start !important;
   font-size: 12px;
+  font-weight: 400!important;
 }
 #text-box h4{
  font-size: 14px;
@@ -168,7 +172,8 @@ align-items: center;
 #text-box h6{
  text-transform: capitalize;
  font-size: 14px;
- color: gray;
+ /* color: gray; */
+ font-weight: 400!important;
 }
 
 
@@ -202,6 +207,7 @@ min-width: fit-content;
 #like-btn{
   border: none;
   margin-right: 5px;
+  background-color: transparent;
 }
 #like-btn:hover{
   color:rgb(178, 129, 137);

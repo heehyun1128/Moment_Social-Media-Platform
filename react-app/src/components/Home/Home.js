@@ -73,7 +73,10 @@ const Home = () => {
           <div id="home-logout">
             <div>Hi, {sessionUser?.username}</div>
             <div>| </div>
-            <div className="logout" onClick={handleLogout}> LOG OUT</div>
+            <div className="logout" onClick={handleLogout}>
+              {" "}
+              LOG OUT
+            </div>
           </div>
         ) : (
           <div id="home-login-signup">
@@ -126,7 +129,9 @@ const Home = () => {
       <header id="home-header">
         <div id="main">
           <article class="post featured">
-            <span class="date">FEATURED POSTS</span>
+            <span style={{ fontFamily: "sans-serif" }} class="date">
+              FEATURED POSTS
+            </span>
 
             <div id="portfolio-container" className="animate__fadeInUp ">
               <div
@@ -144,7 +149,7 @@ const Home = () => {
                     <div id="niannian-img-div"></div>
                     <p>Nian Nian</p>
                   </div>
-                  <h3>
+                  <h3 style={{ fontFamily: "arial" }}>
                     My visit to Disney was a magical adventure filled with
                     enchanting rides, beloved characters, and a contagious
                     atmosphere of joy.
@@ -166,7 +171,7 @@ const Home = () => {
                     <div id="demo-img-div"></div>
                     <p>Demo</p>
                   </div>
-                  <h3>
+                  <h3 style={{ fontFamily: "arial" }}>
                     Dogs aren't just pets; they're family. My furry companion is
                     not just a pet but also my confidant, playmate, and
                     unwavering source of unconditional love. 🐾{" "}
@@ -188,7 +193,7 @@ const Home = () => {
                     <div id="bobbie-img-div"></div>
                     <p>Bobbie</p>
                   </div>
-                  <h3>
+                  <h3 style={{ fontFamily: "sans-serif" }}>
                     Today's hiking adventure was like stepping into a
                     breathtaking postcard. With every step, we uncovered hidden
                     treasures and felt a deep connection to the great outdoors.
@@ -198,7 +203,12 @@ const Home = () => {
             </div>
             <ul id="discover-at-bottom">
               <li>
-                <NavLink exact to="/posts/all" class="button large">
+                <NavLink
+                  exact
+                  to="/posts/all"
+                  style={{ fontFamily: "sans-serif", border:"none",backgroundColor:"#F6F4EB" }}
+                  class=" discover-btn"
+                >
                   DISCOVER MORE
                 </NavLink>
               </li>

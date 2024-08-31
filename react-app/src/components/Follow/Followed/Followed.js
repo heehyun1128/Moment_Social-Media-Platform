@@ -32,7 +32,7 @@ const Followed = () => {
   return (
     <div>
       {followedUserArr&&followedUserArr.length?
-      <div id='follower-content'>
+      <div id='follower-content' className='focus-in-contract-bck'>
         {followedUserArr.map((followed) => <FollowedCard id='follow-div' followed={followed} sessionUser={sessionUser} />)}
       </div>
       :

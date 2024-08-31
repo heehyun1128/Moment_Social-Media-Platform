@@ -265,7 +265,7 @@ body,
 input,
 select,
 textarea {
-  font-family: "Merriweather", Georgia, serif;
+  /* font-family: "Merriweather", Georgia, serif; */
   font-weight: 300;
   font-size: 1rem;
   line-height: 2.375;
@@ -307,7 +307,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
+  font-family: "Inter", sans-serif;
   font-weight: 900;
   line-height: 1.5;
   letter-spacing: 0.075em;
@@ -2455,7 +2456,7 @@ form>.fields>.field.quarter {
 
 label {
   display: block;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-weight: 900;
   line-height: 1.5;
   letter-spacing: 0.075em;
@@ -2549,7 +2550,7 @@ input[type="radio"]+label {
   display: inline-block;
   font-size: 1rem;
   letter-spacing: 0;
-  font-family: "Merriweather", Georgia, serif;
+  /* font-family: "Merriweather", Georgia, serif; */
   text-transform: none;
   font-weight: 300;
   padding-left: 2.8rem;
@@ -3170,7 +3171,7 @@ table td {
 }
 
 table th {
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.075em;
@@ -3271,7 +3272,7 @@ table.alt tbody tr td {
   transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
   border: solid 2px;
   display: inline-block;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.8rem;
   font-weight: 900;
   height: 3rem;
@@ -3725,7 +3726,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
   border-style: solid;
   border-color: #ffffff;
   border-width: 5px !important;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 2.25rem;
   font-weight: 900;
   letter-spacing: 0.075em;
@@ -3858,7 +3859,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
   -webkit-flex-shrink: 1;
   -ms-flex-shrink: 1;
   flex-shrink: 1;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-weight: 900;
   letter-spacing: 0.075em;
   list-style: none;
@@ -3962,11 +3963,18 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 
 #main>.post.featured {
   text-align: center;
-  background-image: url('../images/home-lower-bg-2.jpg');
+  background-color: white;
+  /* background-image: url('../images/home-lower-bg-2.jpg'); */
   width: 100vw;
   height: 100vh;
   
   padding: 5vh 10vw;
+}
+
+.discover-btn:hover{
+  color:black;
+  background-color: gray;
+  
 }
 
 @media screen and (max-width: 1280px) {
@@ -4571,7 +4579,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
   position: relative;
   color: rgba(255, 255, 255, 0.25);
   cursor: default;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.075em;
@@ -4689,7 +4697,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
   right: 0.75rem;
   border: 0;
   color: #ffffff;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.9rem;
   font-weight: 900;
   letter-spacing: 0.075em;
@@ -4781,7 +4789,7 @@ body.is-preload #intro:not(.hidden)+#header+#nav {
 #navPanel .links li a {
   border-bottom: 0;
   display: block;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  /* font-family: "Source Sans Pro", Helvetica, sans-serif; */
   font-size: 0.9rem;
   font-size: 0.9rem;
   font-weight: 900;
