@@ -227,6 +227,10 @@ min-width: fit-content;
   #view-more{
     font-size: 24px;
   }
+
+  #all-post-div{
+    width: 100vw;
+  }
 }
 
 .swing-in-top-fwd {

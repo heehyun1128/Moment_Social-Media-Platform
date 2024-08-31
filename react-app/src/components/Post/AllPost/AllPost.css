@@ -12,30 +12,29 @@
   column-gap: 10px;
   z-index: -999999 !important;
   min-height: 100vh;
-  
 }
 
-#all-post-container{
+#all-post-container {
   height: fit-content;
   /* position:fixed; */
   /* overflow: auto; */
 }
 
-#all-post-container h1{
+#all-post-container h1 {
   font-size: 40px;
 }
 
-.post-nav p:hover{
-font-weight: bold;
+.post-nav p:hover {
+  font-weight: bold;
 }
 
-.post-nav>*{
+.post-nav > * {
   padding: 4px;
-  margin:0;
+  margin: 0;
   margin-bottom: 6px;
 }
 
-.underscore{
+.underscore {
   border-bottom: 1px solid gray;
   font-weight: bold;
 }
@@ -48,7 +47,9 @@ font-weight: bold;
 
 @media screen and (max-width: 600px) {
   #all-post-div {
-
+    width: 96vw;
     columns: 1;
   }
+
+ 
 }

@@ -323,6 +323,10 @@ input[type="file"] {
   #upload-img-preview {
     margin: 0;
   }
+
+  #ai-btn{
+    bottom: 50px;
+  }
 }
 
 .focus-in-contract-bck {
