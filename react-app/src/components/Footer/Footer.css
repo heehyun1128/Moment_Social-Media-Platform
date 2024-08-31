@@ -4,7 +4,11 @@
   align-items: center;
   justify-content: center;
   margin:0 auto;
-  width: 30vw;
+  width: 90vw;
+}
+
+#footer-sub-divs p{
+font-size: 14px;
 }
 
 #about-btn:hover {
@@ -14,11 +18,12 @@ cursor: pointer;
 
 #footer-main{
   width: 100vw;
-  height: 20vh;
+  height: fit-content;
   display: flex;
   justify-content: center;
 border-top: 1px dotted gray;
   padding-top: 30px;
+  
 /* position: fixed;
 bottom: 0px; */
 }
@@ -38,4 +43,10 @@ bottom: 0px; */
   cursor: pointer;
   color: rgb(170, 128, 142);
   font-weight: bold;
+}
+
+@media screen and (max-width: 600px)  {
+  #footer-main{
+    flex-direction: row!important;
+  }
 }

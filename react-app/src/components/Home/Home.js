@@ -46,11 +46,12 @@ const Home = () => {
   }, [showMenu]);
   const closeMenu = () => setShowMenu(false);
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
     dispatch(logout());
     history.push("/");
     closeMenu();
+  
   };
   const videoRef = useRef(null);
   useEffect(() => {

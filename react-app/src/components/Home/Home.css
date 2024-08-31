@@ -350,7 +350,7 @@
 
     grid-template-columns: repeat(1, 2fr);
     justify-content: center;
-    align-items: center;
+    align-items: center!important;
 
   }
 
@@ -368,7 +368,7 @@
   }
 
   #portfolio-container .card {
-    width: 55vw;
+    width: 72vw;
     height: 90vw;
   }
 
@@ -538,6 +538,7 @@
 
 #discover-at-bottom {
   margin-top: 30px;
+  padding-bottom: 20px;
   font-size: 20px;
 
 }

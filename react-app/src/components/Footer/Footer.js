@@ -22,20 +22,11 @@ const Footer = () => {
   }
   return (
     <div id='footer-main'>
+   
       <div id='footer-sub-divs'>
-        <p id='about-btn' onClick={handleViewAbout}>Moment@2023 | ABOUT</p>
-      </div>
-      {/* <div id='footer-sub-divs'>
-        <h4>CONTACT DEVELOPER</h4>
-        <div id='contact-items'>
-          <p onClick={handleGoLinkedin}>LinkedIn</p>
-          <p onClick={handleGoGithub}>Github</p>
-          <p onClick={handleGoPortfolio}>Portfolio</p>
-        </div>
-      </div> */}
-      <div id='footer-sub-divs'>
-        <h4>STACK</h4>
+        <h6>STACK</h6>
         <p>React, Redux, Flask, OPENAI API, SQLAlchemy, PostgreSQL, JavaScript, Python, CSS3</p>
+      <p id='about-btn' onClick={handleViewAbout}>Moment@2023 | ABOUT</p>
       </div>
     </div>
   )
