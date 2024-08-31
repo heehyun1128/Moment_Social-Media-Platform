@@ -435,12 +435,11 @@ const PostForm = ({ post, formType }) => {
                     {selImageUrls[index] &&
                       !deleteImageCalled[index] &&
                       !isCancelImageUpdate[index] && (
-                        <div
-                          id="remove-image-div"
-                          onClick={() => handleRemoveImg(index)}
-                        >
-                          REMOVE IMAGE
-                        </div>
+                        <Tooltip title="Remove Image" placement="bottom">
+
+                          <i onClick={() => handleRemoveImg(index)} style={{zIndex:1000, color:"#ae7a7a", cursor:"pointer"}} className="fa-solid fa-2xl fa-square-minus"></i>
+                        </Tooltip>
+                        
                       )}
                     {/* {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div' onClick={() => handleUndoImageUpdate(index)}>DESELECT IMAGE */}
                     {/* {isCancelImageUpdate[index]} */}
@@ -492,6 +491,7 @@ const PostForm = ({ post, formType }) => {
                             />
                             <Tooltip title="Add Image" placement="top">
                               <div id="plus-icon">+</div>
+                              
                             </Tooltip>
                           </label>
                         )}
@@ -517,14 +517,14 @@ const PostForm = ({ post, formType }) => {
               required
             />
             {errors && errors.title && <p className="errors">{errors.title}</p>}
-            <Tooltip title="AI Generation" placement="top">
+            <Tooltip title="Refine post tile and content with AI" placement="top">
               <Button
                 id="ai-btn"
                 variant="contained"
                 onClick={() => generateDescription()}
                 className="heartbeat"
               >
-                AI
+                refine content with AI
               </Button>
             </Tooltip>
           </div>

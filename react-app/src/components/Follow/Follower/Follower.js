@@ -30,9 +30,9 @@ const Follower = () => {
 
 
   return (
-    <div>
+    <div >
       {followerArr&&followerArr.length?
-      <div id='follower-content'>
+      <div id='follower-content' className='focus-in-contract-bck'>
         {followerArr.map((follower) => <FollowerCard follower={follower} sessionUser={sessionUser}/>)}
       </div>
       :

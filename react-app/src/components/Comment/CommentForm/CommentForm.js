@@ -93,7 +93,7 @@ const CommentForm = () => {
 
       <div id='comment-form-div'>
       
-        <h4>Add your comment here</h4>
+        <h6>Add your comment here</h6>
         <form id='create-comment-form' onSubmit={handleSubmit} encType="multipart/form-data">
           <textarea
             type="text"

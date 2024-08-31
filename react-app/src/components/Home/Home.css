@@ -456,7 +456,7 @@
 #head-icon-div>* {
   margin: 20px 40px 0;
   color: rgba(0, 0, 0, .8);
-  font-family: "Merriweather", Georgia, serif;
+  /* font-family: "Merriweather", Georgia, serif; */
   
   /* font-weight: 700; */
 }
@@ -486,7 +486,7 @@
   margin-left: 45px !important;
   cursor: pointer;
   color: rgba(0, 0, 0, .8);
-  font-family: "Merriweather", Georgia, serif;
+  /* font-family: "Merriweather", Georgia, serif; */
 }
 #home #head-icon-div #home-login-signup button:hover{
   color:white;
@@ -543,7 +543,7 @@
 }
 
 #discover-at-bottom a {
-  font-family: "Merriweather", Georgia, serif;
+  /* font-family: "Merriweather", Georgia, serif; */
   padding: 15px;
   /* border-radius: 15px; */
   font-weight: 700;

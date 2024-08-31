@@ -46,6 +46,8 @@
   justify-content: space-between;
 }
 
+
+
 @media screen and (max-width: 600px) {
   #post-nav {
     width: 90vw;

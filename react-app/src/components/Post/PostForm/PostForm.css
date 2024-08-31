@@ -4,8 +4,8 @@ input[type="file"] {
 }
 
 #upload-img-preview {
-  width: 11vw;
-  height: 11vw;
+  width: 200px;
+  height: 200px;
   overflow: hidden;
   display: flex;
   align-items: flex-start;
@@ -14,7 +14,7 @@ input[type="file"] {
 }
 
 #upload-img-preview img {
-  max-width: 150px;
+  max-width: 200px;
   min-height: 100%;
   /* position: absolute; */
 }
@@ -151,7 +151,9 @@ input[type="file"] {
 }
 #plus-icon {
   font-size: 30px;
-  color: gray;
+  color: rgb(243, 155, 155);
+
+
 }
 #plus-icon:hover {
   color: rgb(178, 129, 137);
@@ -167,7 +169,7 @@ input[type="file"] {
 
 #create-post-main,
 #edit-post-main {
-  width: 90vw;
+  /* width: 90vw; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -183,6 +185,7 @@ input[type="file"] {
 #post-title-div,
 #post-content-div {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 73vw;
@@ -255,13 +258,18 @@ input[type="file"] {
 #revert-btn {
   font-size: 12px;
   background-color: #ae7a7a;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 0; /* Remove margin */
   padding: 5px;
   border-radius: 3rem;
   height: 60px;
-  width: 60px;
+  width: 260px;
+  position: fixed; /* Fixed positioning relative to viewport */
+  bottom: 200px; /* Distance from the bottom of the viewport */
+  right: 20px; /* Distance from the right edge of the viewport */
+  z-index: 1000; /* Ensure the button is above other content */
 }
+
+
 
 @media screen and (max-width: 600px) {
   #submit-post-btn {
@@ -360,10 +368,10 @@ input[type="file"] {
 }
 
 .heartbeat {
-  width: 100px; /* Fixed width */
-  height: 100px; /* Fixed height */
-  background-color: red; /* Heart color */
-  border-radius: 50%; /* Make it round */
+  width: 150px; 
+  height: 100px; 
+
+ 
   display: flex;
   align-items: center;
   justify-content: center;

@@ -3,6 +3,7 @@
   font-weight: 400 !important;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  font-size: 16px;
 }
 
 #about-me-txt>*{
@@ -14,7 +15,8 @@
 
 
 #about-me-div{
-  max-width: 60vw;
+  max-width: 50vw;
+  max-height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;

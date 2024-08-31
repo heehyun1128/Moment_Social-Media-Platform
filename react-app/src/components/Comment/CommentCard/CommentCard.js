@@ -7,8 +7,10 @@ import EditCommentModal from "../CommentModal/EditCommentModal";
 import DeleteCommentModal from "../CommentModal/DeleteCommentModal";
 
 const CommentCard = ({ comment }) => {
-  // const singleComment = useSelector(state => state.comments?.singleComment)
+
   const sessionUser = useSelector((state) => state.session.user);
+const post=useSelector(state=>state.posts)
+
   // const commentImages = useSelector(state => state.comments?.singleComment?.commentImages)
   const dispatch = useDispatch();
 
@@ -28,13 +30,17 @@ const CommentCard = ({ comment }) => {
             )}
           </div>
           {comment?.commentCreator?.username && (
-            <p id="comment-creator-username">
-              {comment?.commentCreator?.username}
-            </p>
+            <>
+              <p id="comment-creator-username">
+                {comment?.commentCreator?.username}
+              </p>
+             {post?.singlePost?.creator?.username===comment?.commentCreator?.username && <p style={{color:"red", fontSize:"12px"}}>Author</p>}
+            </>
           )}
-
         </div>
-          <p style={{ margin: "0px" }}>{new Date(comment?.createdAt).toLocaleDateString()}</p>
+        <p style={{ margin: "0px" }}>
+          {new Date(comment?.createdAt).toLocaleDateString()}
+        </p>
       </div>
       <div id="comment-content-div">
         <div id="comment-content">{comment?.content}</div>

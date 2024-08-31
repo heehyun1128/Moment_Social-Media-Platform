@@ -137,12 +137,12 @@
   display: none;
 }
 
-.enlarged-view {
-  position: fixed;
-  top: 10vh;
-  
+div.enlarged-view {
+  position:fixed;
+  top: 0;
+  z-index: 99999;
   left: 0;
-  height: 120vh;
+  height: 140vh;
   width: 100vw;
   background-color: rgba(43, 43, 43, .8);
   
@@ -160,6 +160,8 @@
 #click-image-detail {
   color: rgb(240, 240, 240);
   background-color: rgba(133, 133, 133, .8);
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
 }
 
 #follow-btn {

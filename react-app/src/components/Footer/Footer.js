@@ -23,7 +23,7 @@ const Footer = () => {
   return (
     <div id='footer-main'>
       <div id='footer-sub-divs'>
-        <h4 id='about-btn' onClick={handleViewAbout}>Moment@2023 | ABOUT</h4>
+        <p id='about-btn' onClick={handleViewAbout}>Moment@2023 | ABOUT</p>
       </div>
       {/* <div id='footer-sub-divs'>
         <h4>CONTACT DEVELOPER</h4>

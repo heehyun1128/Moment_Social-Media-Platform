@@ -79,7 +79,7 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  background-color: #fff;
+ border-bottom: 1px dashed rgb(226, 219, 219);
 }
 
 #user-profile-img-li {
@@ -228,7 +228,8 @@ img#profile-img {
   padding: 5px;
   border-radius: 50%;
   position: relative;
-  box-shadow: 0 0 5px gray;
+  /* box-shadow: 0 0 5px gray; */
+  border: 1px solid gray;
   background-color: white;
 }
 
@@ -433,6 +434,11 @@ img#profile-img {
 
 #search-bar-hidden {
   display: none;
+}
+
+.scale-in-ver-top {
+	-webkit-animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-ver-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 @media screen and (max-width: 800px) {
