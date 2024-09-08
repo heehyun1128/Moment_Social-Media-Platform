@@ -4,7 +4,8 @@
   justify-content: center !important;
   align-items: center !important;
   height: 30vh !important;
-  width:22vw !important;
+  width:100% !important;
+  margin-top: 20px;
 }
 
 #login-modal form{
