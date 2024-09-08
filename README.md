@@ -1,65 +1,76 @@
-# Moment
-
-
-## Project Summary
+# Project Summary
 This project aims to create a social media platform that allows people to establish connections with others and showcase their most cherished life experiences and moments within the community.
 
-## Wiki Link
+# Wiki Link
 https://github.com/heehyun1128/yc-Moment/wiki/Project-Highlight
 
-## Link to Live Site
+# Live / Production Site
 
 https://moment-2igd.onrender.com/
 
 
-## Technologies Used
+# Technologies Used
 
 React, Redux/Redux-thunk, HTML 5, CSS, Javascript, JSX, Flask, SQLAlchemy, PostgreSQL
 
-## Features
+# Features
 
+## Landing Page
 
-- Landing Page
+- Sign Up/ Log In/ Log Out
 
-  - Sign Up/ Log In/ Log Out
+## Posts
 
-      Posts
-
-            1.See All Posts and post details
-            2.See A User's Posts
-            3.Create A New Post with Image Upload via AWS S3 Bucket 
-            4.Update A Post with Image Update via AWS S3 Bucket 
-            5.Delete A Post
-
-      Comments
-            
-            1.See All Post Comments
-            2.Create A New Comment on A Post with Image Upload via AWS S3 Bucket
-            3.Update A Comment on A Post with Image Update via AWS S3 Bucket 
-            4.Delete A Comment
-
-      Search
-
-            Search For A Post By Username, Post Content, and Comment
-
-      Liking
-            
-            1.Like A Post
-            2.Remove Like On A Post
-            3.View All Posts Liked By User
-            4.View Total Likes Of A Post
-
-      Following
-            
-            1.Follow A User
-            2.Remove Followed Users
-            3.Remove Followers
-            4.View Followed Users
-            5.View Followers
+- See All Posts and post details
     
-      AI content generation
+- See A User's Posts
+    
+- Create A New Post with Image Upload via AWS S3 Bucket 
 
-            Integrated OpenAI into the application for post content recommendations
+- Update A Post with Image Update via AWS S3 Bucket 
+
+- Delete A Post
+
+## Comments
+    
+- See All Post Comments
+      
+- Create A New Comment on A Post with Image Upload via AWS S3 Bucket
+      
+- Update A Comment on A Post with Image Update via AWS S3 Bucket
+      
+- Delete A Comment
+
+## Search
+
+- Search For A Post By Username, Post Content, and Comment
+
+## Liking
+            
+- Like A Post
+    
+- Remove Like On A Post
+    
+- View All Posts Liked By User
+    
+- View Total Likes Of A Post
+
+## Following
+
+- Follow A User
+    
+- Remove Followed Users
+    
+- Remove Followers
+    
+- View Followed Users
+    
+- View Followers
+
+
+## AI content generation
+
+- Integrated OpenAI into the application for post content recommendations
 
 
 
