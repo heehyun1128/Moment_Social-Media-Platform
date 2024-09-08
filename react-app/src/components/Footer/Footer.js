@@ -5,18 +5,7 @@ import AboutModal from '../Modal/AboutModal/AboutModal'
 
 const Footer = () => {
   const { setModalContent, setOnModalClose } = useModal()
-  const handleGoLinkedin = e=>{
-    e.preventDefault()
-    window.open('https://www.linkedin.com/in/yi-c-452811132/')
-  }
-  const handleGoGithub = e=>{
-    e.preventDefault()
-    window.open('https://github.com/heehyun1128/yc-Moment')
-  }
-  const handleGoPortfolio = e=>{
-    e.preventDefault()
-    window.open('https://heehyun1128.github.io/')
-  }
+  
   const handleViewAbout = ()=>{
     setModalContent(<AboutModal />)
   }
