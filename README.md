@@ -6,74 +6,15 @@ This project aims to create a social media platform that allows people to establ
 
 ## Wiki Link
 https://github.com/heehyun1128/yc-Moment/wiki/Project-Highlight
+
 ## Link to Live Site
 
 https://moment-2igd.onrender.com/
 
 
-## Contact the Project Owner
-linkedin.com/in/yi-c-452811132
 ## Technologies Used
 
-Frameworks, Platforms, and Libraries
-> React
-
-> Redux/Redux-thunk
-
-> HTML 5
-
-> CSS
-
-> Javascript
-
-> JSX
-
-> Flask
-
-> SQLAlchemy
-
-Database
-> Development: SQLite3
-
-> Production: PostgreSQL
-
-Hosting:
-> Render.com
-
-
-
-## Getting Started
-
-
-* Start the project locally
-
-  - Clone github repo to you local directory
-    - git clone https://github.com/heehyun1128/API-project.git
-
-*  Install dependencies
-
-      >pipenv install -r requirements.txt
-
-*  Create a .env file based on the example with proper settings for your development environment
-
-*  Make sure the SQLite3 database connection URL is in the .env file
-*  Get into your pipenv, migrate your database, seed your database, and run your Flask app
-
-   ````bash
-   cd app
-   pipenv shell
-   flask db upgrade
-   flask seed all
-   flask run
-
-
-*  Start the project frontend
-    - cd to frontend directory and run npm start
-      ````bash
-      cd react-app
-      npm start
-    - the project will be running locally at http://localhost:3000/
-      
+React, Redux/Redux-thunk, HTML 5, CSS, Javascript, JSX, Flask, SQLAlchemy, PostgreSQL
 
 ## Features
 
