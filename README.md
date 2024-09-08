@@ -17,36 +17,56 @@ React, Redux/Redux-thunk, HTML 5, CSS, Javascript, JSX, Flask, SQLAlchemy, Postg
 
 ## Landing Page
 
-- Sign Up/ Log In/ Log Out
+
   
 <img width="1500" alt="Screenshot 2024-09-07 at 11 41 20 PM" src="https://github.com/user-attachments/assets/cc900662-eaaf-494c-9e36-3058d7e07b4c">
 
+<img width="1495" alt="Screenshot 2024-09-07 at 11 53 12 PM" src="https://github.com/user-attachments/assets/b56b7c9a-842b-46a4-bd37-494841be153d">
+
+## Sign Up/ Log In/ Log Out
+<img width="1495" alt="Screenshot 2024-09-07 at 11 52 42 PM" src="https://github.com/user-attachments/assets/d757c877-5224-42ae-8f84-53c5a2ad3f53">
+<img width="1497" alt="Screenshot 2024-09-07 at 11 52 50 PM" src="https://github.com/user-attachments/assets/4bd014c4-40d3-475e-b28e-df2dac46230f">
+
 ## Posts
 
-- See All Posts, posts from followed users, and post details
+- See All Posts, posts from followed users
+  
+<img width="1501" alt="Screenshot 2024-09-07 at 11 41 36 PM" src="https://github.com/user-attachments/assets/dc257ccc-08c0-4188-a1f2-68fc59f89c45">
+<img width="1500" alt="Screenshot 2024-09-07 at 11 55 02 PM" src="https://github.com/user-attachments/assets/9c94c60c-b543-4215-8d57-8e51aa7fb8fd">
+
+- View post details
+  
+<img width="1494" alt="Screenshot 2024-09-07 at 11 42 58 PM" src="https://github.com/user-attachments/assets/feaf6a37-af95-411b-a4f3-e1a6ae914bea">
 
 - See A User's Posts
-    
-- Create A New Post with Image Upload via AWS S3 Bucket 
+  
+<img width="1493" alt="Screenshot 2024-09-07 at 11 53 55 PM" src="https://github.com/user-attachments/assets/f4832ce4-8405-4ffd-b260-0f152cbdc800">
 
-- Update A Post with Image Update via AWS S3 Bucket 
+- Create, Update, and Delete A Post (Image Upload via AWS S3 Bucket)
+  
+<img width="1495" alt="Screenshot 2024-09-07 at 11 56 41 PM" src="https://github.com/user-attachments/assets/c91d6af6-c858-42a6-a2c8-180c34f4a297">
 
-- Delete A Post
+<img width="1501" alt="Screenshot 2024-09-07 at 11 57 32 PM" src="https://github.com/user-attachments/assets/8059e6fa-e4a2-4211-b407-7b3d496b0f32">
 
-<img width="1501" alt="Screenshot 2024-09-07 at 11 41 36 PM" src="https://github.com/user-attachments/assets/dc257ccc-08c0-4188-a1f2-68fc59f89c45">
-<img width="1494" alt="Screenshot 2024-09-07 at 11 42 58 PM" src="https://github.com/user-attachments/assets/feaf6a37-af95-411b-a4f3-e1a6ae914bea">
+
 
 ## Comments
     
 - See All Post Comments
-      
+  
+<img width="1458" alt="Screenshot 2024-09-08 at 12 01 40 AM" src="https://github.com/user-attachments/assets/fc0edfce-dfbf-4e6b-8c03-da82aeadbb12">
+
 - Create A New Comment on A Post with Image Upload via AWS S3 Bucket
-      
+  
+<img width="1299" alt="Screenshot 2024-09-07 at 11 59 56 PM" src="https://github.com/user-attachments/assets/77ac1de9-fa5c-4149-952b-4eb307c4ba10">
+
 - Update A Comment on A Post with Image Update via AWS S3 Bucket
-      
+  
+<img width="1398" alt="Screenshot 2024-09-08 at 12 00 13 AM" src="https://github.com/user-attachments/assets/ed573b82-059c-4fe5-a7a8-58c99700d2a6">
+
 - Delete A Comment
   
-<img width="1509" alt="Screenshot 2024-09-07 at 11 44 36 PM" src="https://github.com/user-attachments/assets/dae6eb1a-3604-45aa-a8f6-b5b2beffc368">
+<img width="1425" alt="Screenshot 2024-09-08 at 12 00 25 AM" src="https://github.com/user-attachments/assets/35503fcd-20d7-4846-95b8-5c6bcc27180c">
 
 ## Search
 
