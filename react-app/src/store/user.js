@@ -3,8 +3,7 @@ const LOAD_SINGLE_USER = 'users/LOAD_SINGLE_USER'
 const LOAD_USER_POST = 'users/LOAD_USER_POST'
 const EDIT_USER_IMAGE = 'users/EDIT_USER_IMAGE'
 const LOAD_USER_LIKE_POST = 'users/LOAD_USER_LIKE_POST'
-// const ADD_LIKE = 'users/ADD_LIKE'
-// const DELETE_LIKE = 'users/DELETE_LIKE'
+
 const ADD_USER_POST_LIKE = 'users/ADD_USER_POST_LIKE'
 const DELETE_USER_POST_LIKE = 'users/DELETE_USER_POST_LIKE'
 const LOAD_FOLLOWER = 'users/LOAD_FOLLOWER'
@@ -358,9 +357,7 @@ const userReducer = (state = initialState, action) => {
       return newState
 
     case DELETE_USER_POST_LIKE:
-      // const currentNumLikes = state.singleUser.userPosts[action.postId].numOfLikes;
-     
-      // const newNumLikes = currentNumLikes - 1; 
+    
      
       newState = {
         ...state,
@@ -379,14 +376,14 @@ const userReducer = (state = initialState, action) => {
                 ...state.singleUser.userPosts[action.postId]?.likeUsers,
                 [action.userId]: null
               },
-              // numOfLikes: newNumLikes
+            
             },
            
           }
 
         }
       }
-      // delete newState.singleUser.likedPosts[action.postId]
+      
       return newState
   
     case LOAD_FOLLOWER:
@@ -422,7 +419,7 @@ const userReducer = (state = initialState, action) => {
 
         }
       }
-      // delete newState.singleUser.followers[action.userId]
+      
       return newState
     case LOAD_FOLLOWED:
       newState = {

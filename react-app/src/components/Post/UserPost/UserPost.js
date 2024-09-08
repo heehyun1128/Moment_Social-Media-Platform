@@ -13,24 +13,12 @@ const UserPost = ({userPostArr}) => {
   const sessionUser = useSelector(state => state.session?.user)
 
 
-  // const singleUser = useSelector(state => state.users?.singleUser)
-  // console.log(singleUser)
+ 
   if (!sessionUser || (sessionUser && Number(sessionUser.id) !== Number(userId))) {
     history.push('/')
   }
 
-  // const userPosts = useSelector(state => state.users?.singleUser?.userPosts)
-
-  // useEffect(() => {
-  //   dispatch(fetchSingleUser(userId))
-  // }, [dispatch, userId])
-  // useEffect(() => {
-  //   dispatch(fetchUserPosts(sessionUser.id))
-  // }, [dispatch, sessionUser.id])
-
-
-  // if (!userPosts) { return null }
-  // const userPostArr = Object.values(userPosts)
+ 
 
 
   if (!sessionUser ) { return null }

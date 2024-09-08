@@ -44,8 +44,3 @@ const Follower = () => {
 
 export default Follower
 
-// {
-//   profilePic ? <img src={selImage} id='new-profile-pic' alt='' /> : <div id='profile-img-li'>
-//     {user?.profileImage ? <img id='profile-img' src={user?.profileImage} alt="" /> : <i class="fa-solid fa-user fa-xl"></i>}
-//   </div>
-// }

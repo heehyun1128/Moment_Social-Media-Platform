@@ -11,8 +11,7 @@ const CommentCard = ({ comment }) => {
   const sessionUser = useSelector((state) => state.session.user);
 const post=useSelector(state=>state.posts)
 
-  // const commentImages = useSelector(state => state.comments?.singleComment?.commentImages)
-  const dispatch = useDispatch();
+const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchSingleComment(comment.id));

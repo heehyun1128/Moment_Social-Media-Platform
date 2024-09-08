@@ -169,17 +169,10 @@ export const fetchCreateCommentImage = (formData) => async (dispatch) => {
 // UPDATE a comment image 
 export const fetchUpdateCommentImage = (formData, imageId) => async (dispatch) => {
  
-  // Access all keys using an iterator
+  
   const entriesIterator = formData.entries();
 
-  // for (const [key, value] of entriesIterator) {
-  //   // Check if the value is an object
-  //   if (typeof value === 'object' && value !== null) {
-  //     console.log(key + ': ' + JSON.stringify(value, null, 2));
-  //   } else {
-  //     console.log(key + ': ' + value);
-  //   }
-  // }
+  
 
   const commentId = formData.get('comment_id')
   const res = await fetch(`/api/comments/${commentId}/images/${imageId}/edit`, {

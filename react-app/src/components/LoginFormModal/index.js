@@ -16,7 +16,6 @@ function LoginFormModal() {
     const handleEnterKeyDown = e => {
       if (e.code === "Enter" || e.code === "NumpadEnter") {
         if (!email || !password) {
-          // alert('Email and password are required for login!')
           setErrors({ 'EmPwValidationErr': 'Email and password are required for login!' });
           e.preventDefault();
           return

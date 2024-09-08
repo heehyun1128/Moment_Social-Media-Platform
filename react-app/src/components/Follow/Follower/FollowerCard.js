@@ -17,7 +17,7 @@ const FollowerCard = ({ follower, sessionUser }) => {
 
     // unfollow
     await dispatch(fetchRemoveFollower(sessionUser?.id, follower?.id))
-    // alert("Successfully unfollowed user!")
+    
     setModalContent(<FollowModal type='removefollower' />)
 
     setFollowStatus(false)
@@ -45,7 +45,7 @@ const FollowerCard = ({ follower, sessionUser }) => {
         <Button 
         variant="outlined" 
         style={{
-          // color: "rgb(224, 216, 217)",
+          
           backgroundColor: "rgba(0,0,0,0.5)",
           
         }}

@@ -11,7 +11,6 @@ const PageLoader = () => {
         
         height="150"
         width="150"
-        // color="#4fa94d"
         ariaLabel="line-wave"
         wrapperStyle={{}}
         wrapperClass=""

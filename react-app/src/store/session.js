@@ -72,17 +72,7 @@ export const signUp = (formData) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		body: formData
-		// headers: {
-		// 	"Content-Type": "application/json",
-		// },
-		// body: JSON.stringify({
-		// 	profile_image_url:profilePic,
-		// 	username,
-		// 	first_name:firstname,
-		// 	last_name:lastname,
-		// 	email,
-		// 	password,
-		// }),
+		
 	});
 
 	if (response.ok) {

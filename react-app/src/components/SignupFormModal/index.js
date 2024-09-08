@@ -49,7 +49,7 @@ function SignupFormModal() {
 			formData.append('password', password)
 		
 			const data = await dispatch(signUp(formData));
-			// const data = await dispatch(signUp(profilePic, username, firstname, lastname, email, password));
+			
 			if (data) {
 				setErrors(data);
 				
@@ -78,7 +78,7 @@ function SignupFormModal() {
 					id='select-profile-pic'
 						type="file"
 						accept="image/*"
-						// value={profilePic}
+						
 						onChange={(e) => {
 							
 							setProfilePic(e.target.files[0])

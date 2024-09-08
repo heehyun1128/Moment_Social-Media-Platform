@@ -46,21 +46,15 @@ const CommentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!sessionUser) {
-      // alert('Please log in to create a comment.')
-      // setIsPermitError(true)
+     
       setModalContent(<PermitErrorModal />);
     }
     const comment = {
       content
     }
-    // const textData = await dispatch(fetchCreateComment(postId,comment));
-    // if(textData && textData.errors){
-    //   setErrors(textData.errors)
-    //   return
-    // }
+  
     const formData = new FormData()
     if (image && !isImageValid(image)) {
-      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
       setModalContent(<ImageValidationModal />);
       return
     } else {
@@ -115,7 +109,7 @@ const CommentForm = () => {
               <input
                 type="file"
                 accept="image/*"
-                // value={profilePic}
+               
                 onChange={(e) => {
 
                   setImage(e.target.files[0])
