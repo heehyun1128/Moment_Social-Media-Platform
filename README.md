@@ -59,6 +59,8 @@ React, Redux/Redux-thunk, HTML 5, CSS, Javascript, JSX, Flask, SQLAlchemy, Postg
     
       AI content generation
 
+            Integrated OpenAI into the application for post content recommendations
+
 
 
 
