@@ -14,7 +14,7 @@ const Search = () => {
   const queryTerm = new URLSearchParams(location.search).get('q');
   
 
-  // const allPostsObj = useSelector(state => state.posts.Posts)
+ 
   const searchedPosts = useSelector(state => state.posts.searchPosts)
 
   useEffect(() => {

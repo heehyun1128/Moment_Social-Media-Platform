@@ -114,17 +114,16 @@ const PostDetail = () => {
     } else {
       // unfollow
       await dispatch(fetchRemoveFollower(postCreator?.id, sessionUser?.id));
-      // alert("Successfully unfollowed user!")
+      
       setModalContent(<FollowModal type="unfollow" />);
-      // await dispatch(fetchRemoveFollowed(sessionUser?.id, postCreator?.id))
       setIsFollowed(false);
     }
   };
   useEffect(() => {
-    // console.log('Loading started');
+    
     dispatch(fetchSinglePost(postId)).then(() => setIsLoading(false));
     window.scrollTo(0, 0);
-    // console.log('Loading completed');
+    
   }, [dispatch, postId]);
 
   // set follow status

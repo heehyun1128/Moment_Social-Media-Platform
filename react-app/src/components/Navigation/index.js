@@ -37,7 +37,6 @@ function Navigation({ isLoaded }) {
 
 	const handleViewAllPosts = () => {
 		if (!sessionUser) {
-			// alert('Please Sign Up or Log In to view your posts.')
 			setModalContent(<PermitErrorModal />);
 		}else{
 
@@ -48,7 +47,6 @@ function Navigation({ isLoaded }) {
 
 	const handleGoToPostForm = e => {
 		if (!sessionUser) {
-			// alert('Please Sign Up or Log In to create a post.')
 			setIsPermitError(true)
 		}
 		e.preventDefault()

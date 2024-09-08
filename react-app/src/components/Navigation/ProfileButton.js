@@ -25,10 +25,7 @@ function ProfileButton({ user }) {
   const sessionUser = useSelector(state => state.session?.user)
   const [renderUpdateBtn, setRenderUpdateBtn] = useState(false)
   const { setModalContent, setOnModalClose } = useModal();
-  // const handleViewAllPosts = () => {
-  //   history.push(`/profile/${sessionUser.id}`)
-  //   closeMenu()
-  // }
+ 
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
@@ -86,9 +83,7 @@ function ProfileButton({ user }) {
     const formData = new FormData()
    
     if (!isImageValid(profilePic)) {
-      // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
-      setModalContent(<ImageValidationModal />);
+     setModalContent(<ImageValidationModal />);
       setImageLoading(false)
       return
     } else {
@@ -134,7 +129,7 @@ function ProfileButton({ user }) {
                       <input
                         type="file"
                         accept="image/*"
-                        // value={profilePic}
+                    
                         onChange={(e) => {
                         
                           setProfilePic(e.target.files[0])
@@ -168,23 +163,3 @@ function ProfileButton({ user }) {
 
 export default ProfileButton;
 
-// {/* (
-//           <div id='signup-login-div'>
-//             <h4 id='signup-login-h4'>Hi there,please </h4>
-
-//             <OpenModalButton
-//               id='login-btn'
-//               buttonText=" LOG IN"
-//               onItemClick={closeMenu}
-//               modalComponent={<LoginFormModal />}
-//             />
-//             <h4 id='signup-login-h4'>or </h4>
-//             <OpenModalButton
-//               id='signup-btn'
-//               buttonText=" SIGN UP"
-//               onItemClick={closeMenu}
-//               modalComponent={<SignupFormModal />}
-//             />
-
-//           </div>
-//         ) */}

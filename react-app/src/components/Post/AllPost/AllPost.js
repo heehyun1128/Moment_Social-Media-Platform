@@ -12,10 +12,7 @@ const AllPost = () => {
   const allPostsObj = useSelector((state) => state.posts?.Posts);
   const [isViewFollowing, setIsViewFollowing] = useState(false);
   const [followedUserIds, setFollowedUserIds] = useState([]);
-  // useEffect(() => {
-  //   dispatch(fetchAllPosts())
-  //   window.scrollTo(0, 0)
-  // }, [dispatch])
+ 
 
   const sessionUser = useSelector((state) => state.session.user);
   console.log("sessionUser", sessionUser);
@@ -26,9 +23,7 @@ const AllPost = () => {
     const followedUsersArr = Object.values(data);
     const followedUserIds = followedUsersArr.map((user) => user.id);
     setFollowedUserIds(followedUserIds);
-    // followedUsersArr.forEach(user => {
-    //   console.log("useruser",user.id)
-    // });
+   
   };
 
   useEffect(() => {

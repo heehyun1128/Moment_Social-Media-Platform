@@ -28,8 +28,7 @@ const EditCommentModal = ({ comment }) => {
   useEffect(() => {
     const initialImgUrl = comment?.commentImages[0]?.commentImageUrl
 
-    // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
-
+   
     initialImgUrl && setSelImage(initialImgUrl)
     initialImgUrl && setInitialUrl(initialImgUrl)
   }, [comment?.commentImages])
@@ -59,16 +58,13 @@ const EditCommentModal = ({ comment }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // if (!sessionUser) {
-    //   history.push('/')
-    // }
+   
     comment = {
       'id': comment.id,
       content
     }
 
     if (image && !isImageValid(image)) {
-      // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
       setModalContent(<ImageValidationModal />)
       return
     } else {
@@ -129,7 +125,7 @@ const EditCommentModal = ({ comment }) => {
               <input
                 type="file"
                 accept="image/*"
-                // value={profilePic}
+               
                 onChange={(e) => {
 
                   setImage(e.target.files[0])

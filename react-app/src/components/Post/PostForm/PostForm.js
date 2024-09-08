@@ -35,7 +35,7 @@ const PostForm = ({ post, formType }) => {
   const [selImageUrls, setSelImageUrls] = useState([]);
   const [backgroundImg, setBackgroundImg] = useState("");
   const { setModalContent, setOnModalClose } = useModal();
-  // const [edittedImgIdList, setEdittedImgIdList] = useState([])
+  
   const [imgInputIdList, setImgInputIdList] = useState(
     postPics.map((pic) => pic?.id)
   );
@@ -58,7 +58,6 @@ const PostForm = ({ post, formType }) => {
 
   useEffect(() => {
     const initialUrls = post?.postImages?.map((pic) => pic?.postImageUrl);
-    // const initialUrls = post?.postImages?.map(pic => pic?.postImageUrl)
 
     initialUrls && setSelImageUrls(initialUrls);
   }, [post?.postImages]);
@@ -87,7 +86,7 @@ const PostForm = ({ post, formType }) => {
     deselectImage[index] = true;
     setDeleteImageCalled(deselectImage);
 
-    const imgUpdateBtnClicked = [...isCancelImageUpdate]; //[]
+    const imgUpdateBtnClicked = [...isCancelImageUpdate]; 
     imgUpdateBtnClicked[index] = true;
 
     setIsCancelImageUpdate(imgUpdateBtnClicked);
@@ -117,11 +116,11 @@ const PostForm = ({ post, formType }) => {
     const newPics = [...postPics];
     newPics[index] = null;
 
-    // setPostPics(newPics.filter(pic => pic !== null))
+    
     setPostPics(newPics);
 
     const redBd = [...redBorderClass];
-    // const index = postPics.indexOf(postPic)
+   
     redBd[index] = "";
     setRedBorderClass(redBd);
   };
@@ -143,7 +142,7 @@ const PostForm = ({ post, formType }) => {
     const imageUrls = [...selImageUrls];
     const imageInputIds = [...imgInputIdList];
     const redBd = [...redBorderClass];
-    // console.log(redBd)
+   
     redBd[index] = "";
     setRedBorderClass(redBd);
     if (e.target.files[0]) {
@@ -154,6 +153,7 @@ const PostForm = ({ post, formType }) => {
 
       fileNames[index] = e.target.files[0].name;
       setSelFileNames(fileNames);
+
       // get selected image URL
       imageUrls[index] = URL.createObjectURL(e.target.files[0]);
       setSelImageUrls(imageUrls);
@@ -211,7 +211,7 @@ const PostForm = ({ post, formType }) => {
       if (postPics?.every((item) => isImageValid(item) || item === null)) {
         textData = await dispatch(fetchCreatePost(post));
       }
-      // postPics?.map(async postPic => {
+     
       let preview = false;
       for (const postPic of postPics) {
         if (postPic === null || postPic === undefined) continue;
@@ -225,9 +225,7 @@ const PostForm = ({ post, formType }) => {
         }
 
         if (!isImageValid(postPic)) {
-          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          // alert('Pictures must end with "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "gif", "GIF" ')
-          setModalContent(<ImageValidationModal />);
+         setModalContent(<ImageValidationModal />);
           setImageLoading(false);
           const redBd = [...redBorderClass];
           const index = postPics.indexOf(postPic);
@@ -294,14 +292,12 @@ const PostForm = ({ post, formType }) => {
           preview = false;
         }
 
-        // console.log(postPic !== null)
+      
         if (
           postPic !== null &&
           !postPic?.postImageUrl?.startsWith("http") &&
           !isImageValid(postPic)
         ) {
-          // setImgErrors({ 'image': 'Pictures must end with "pdf", "png", "jpg", "jpeg", or "gif" ' })
-          // alert(rgb(224, 216, 217)'Pictures must end with "png","PNG", "jpg", "JPG","jpeg","JPEG", "gif","GIF" ')
           setModalContent(<ImageValidationModal />);
           setImageLoading(false);
           const redBd = [...redBorderClass];
@@ -324,7 +320,7 @@ const PostForm = ({ post, formType }) => {
                 fetchUpdatePostImage(formData, edittedImgId)
               );
             } else if (postPic) {
-              // console.log('called')
+             
               await dispatch(fetchCreatePostImage(formData));
             }
             setImageLoading(true);
@@ -332,16 +328,9 @@ const PostForm = ({ post, formType }) => {
         }
       }
 
-      // if (textData.errors) {
-      //   console.log(errors)
-      //   setErrors(textData.errors);
-
-      // } else {
-      //   setImageLoading(true)
-
-      // }
+   
       textData && history.push(`/posts/${textData?.id}`);
-      // resetForm()
+   
     }
   };
 
@@ -422,7 +411,7 @@ const PostForm = ({ post, formType }) => {
                               onChange={(e) => {
                                 handleImageChange(e, index);
 
-                                // setPostPic(e.target.files[0])
+                               
                               }}
                             />
                             <Tooltip title="Add Image" placement="top">
@@ -482,11 +471,11 @@ const PostForm = ({ post, formType }) => {
                             <input
                               type="file"
                               accept="image/*"
-                              // value={profilePic}
+                             
                               onChange={(e) => {
                                 handleImageChange(e, index);
 
-                                // setPostPic(e.target.files[0])
+                               
                               }}
                             />
                             <Tooltip title="Add Image" placement="top">

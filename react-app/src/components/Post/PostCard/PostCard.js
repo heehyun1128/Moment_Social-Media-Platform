@@ -34,7 +34,7 @@ const PostCard = ({ post }) => {
 
   const handleLike = async (e) => {
     if (!sessionUser) {
-      // alert('Please log in to like a post')
+      
       setModalContent(<PermitErrorModal />);
       
     }
@@ -61,13 +61,7 @@ const PostCard = ({ post }) => {
      });
      }
 
-    //  setTimeout(()=>{
-    //   setIsBtnClicked(false)
-    //  },1500)
-    
-      // else {
-      //   console.log(likedPost?.errors)
-      // }
+  
     } else {
       const dislikedPost = sessionUser && post && sessionUser.id && post.id && await dispatch(fetchRemovePostLike(post?.id, sessionUser?.id))
     
@@ -75,7 +69,6 @@ const PostCard = ({ post }) => {
 
         setIsLiked(false)
        
-        // setTotalLikes(prevLike => Number(prevLike) - 1)
         setTotalLikes(prevLike => {
           prevLike = Number(prevLike)
           prevLike -= 1

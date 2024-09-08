@@ -15,7 +15,8 @@ const FollowedCard = ({ followed, sessionUser }) => {
   const handleRemoveFollowUser = async (followed) => {
     // unfollow
     await dispatch(fetchRemoveFollowed(sessionUser?.id, followed?.id));
-    // alert("Successfully unfollowed user!")
+    
+    
     setModalContent(<FollowModal type="unfollow" />);
     setFollowdStatus(false);
   };
@@ -43,14 +44,12 @@ const FollowedCard = ({ followed, sessionUser }) => {
         <p>{followed.username}</p>
       </div>
 
-      {/* {sessionUser && sessionUser?.id !== followed?.id && <div id="follow-btn" onClick={() => handleRemoveFollowUser(followed)}>
-        {followdStatus && 'UNFOLLOW'}
-      </div>} */}
+     
       {sessionUser && sessionUser?.id !== followed?.id && (
         <Button
           variant="contained"
           style={{
-            // color: "rgb(224, 216, 217)",
+          
             backgroundColor: "rgba(0,0,0,0.5)",
             
           }}
