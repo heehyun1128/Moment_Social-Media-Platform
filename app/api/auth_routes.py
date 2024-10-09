@@ -63,10 +63,6 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
-    print('1111111111111111',form.data)
-    
-    # data=request.files
-    # print('7777777777777',data)
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -75,11 +71,10 @@ def sign_up():
         image = form.data["profile_image_url"] #<FileStorage: 'usethisurl.png' ('image/png')>
         if image:
             image.filename = get_unique_filename(image.filename)
-            print('xxxxxxxxxxxxxxxxxxxxx',image)
+
             upload = upload_file_to_s3(image)
 
             if "url" not in upload:
-                # print({'errors': "profile image is not a valid url"})
                 url=None
             else:
                 url = upload["url"]
@@ -97,8 +92,8 @@ def sign_up():
         login_user(user)
         return user.to_dict()
     if form.errors:
-        print('dataaaa',form.data)
-        print('yyyyyyyyyyy',form.errors)
+        print('form.data',form.data)
+        print('form.errors',form.errors)
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

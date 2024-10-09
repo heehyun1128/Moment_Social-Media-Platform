@@ -12,10 +12,12 @@ from .s3_helpers import (
 
 post_routes = Blueprint('posts', __name__)
 
-# GET SINGLE POST
+
 @post_routes.route('/<int:postId>')
 def get_post_detail(postId):
-  # check to see if post exists
+  """
+  GET SINGLE POST
+  """
   post=Post.query.get(postId)
   if not post:
     return {"errors":'Post not found'},404
@@ -25,7 +27,7 @@ def get_post_detail(postId):
   comments_data =[]
   for comment in post_comments:
     if comment:
-      print('ooooooooo',comment.to_dict())
+      
       images=CommentImage.query.filter_by(comment_id=comment.id)
       comment_image_urls=[]
       for img in images:
@@ -55,9 +57,12 @@ def get_post_detail(postId):
 
   return data
   
-# GET ALL POSTS & POST IMAGES & POST COMMENTS
+
 @post_routes.route('/')
 def get_all_posts():
+  """
+  GET ALL POSTS & POST IMAGES & POST COMMENTS
+  """
   posts=Post.query.all()
   post_dict={}
   for post in posts:
@@ -68,7 +73,6 @@ def get_all_posts():
     like_users=post.like_users
     num_of_likes=len(like_users)
     data['numOfLikes']=num_of_likes
-    print('1111OOOOOOOOOOOO',like_users)
 
     for img in images:
       if img.preview:
@@ -78,7 +82,6 @@ def get_all_posts():
 
     data['likeUsers']=[]
     for user in like_users:
-      print('OOOOOOOOOOOO',user.to_dict())
       if user:
         user_data = user.to_dict()
         data['likeUsers'].append(user_data)
@@ -97,9 +100,12 @@ def get_all_posts():
   # return({'Posts':{idx+1:post.to_dict() for idx,post in enumerate(posts)}})
 
 
-# GET ALL POST COMMENTS
+
 @post_routes.route('/<int:postId>/comments')
 def get_all_postcomments(postId):
+  """
+  GET ALL POST COMMENTS
+  """
   post=Post.query.get(postId)
   comments=post.comments
 
@@ -129,12 +135,15 @@ def get_all_postcomments(postId):
       comments_data.append(comment_data)
 
   return {'Comments':comments_data}
-  # return {'Comments':comments_data}
 
-# CREATE A POST
+
+
 @post_routes.route('/new',methods=['POST'])
 @login_required
 def post_post():
+  """
+  CREATE A POST
+  """
   form=PostForm()
   
   form['csrf_token'].data = request.cookies['csrf_token']
@@ -149,11 +158,13 @@ def post_post():
     return new_post.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# CREATE A POST IMAGE
+
 @post_routes.route('/<int:postId>/images',methods=['POST'])
 @login_required
 def post_image(postId):
-  print('innnnnnnnnnnnn')
+  """
+  CREATE A POST IMAGE
+  """
   post=Post.query.get(postId)
   if not post:
     return {'errors':'Post not found'},404
@@ -161,13 +172,11 @@ def post_image(postId):
     return {'errors':'Unauthorized'},401
   
   form = PostImageForm()
-  print('ooooooo',form.data)
 
   form['csrf_token'].data = request.cookies['csrf_token']
   if form.validate_on_submit():
     image=form.data['post_image_url']
     image.filename = get_unique_filename(image.filename)
-    print('imaggggggggeeeee',image)
     upload = upload_file_to_s3(image)
 
     if "url" not in upload:
@@ -182,7 +191,7 @@ def post_image(postId):
 
     db.session.add(new_image)
     db.session.commit()
-    print('0000000000',new_image)
+    
     return jsonify({
             'id': new_image.id,
             'preview': new_image.preview,
@@ -196,10 +205,13 @@ def post_image(postId):
         return {'errors':form.errors}
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-#CREATE A POST COMMENT
+
 @post_routes.route('/<int:postId>/comments/new',methods=['POST'])
 @login_required
 def post_comment(postId):
+  """
+  CREATE A POST COMMENT
+  """
   post=Post.query.get(postId)
  
   if not post:
@@ -242,11 +254,14 @@ def post_comment(postId):
     return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-#create likes
+
 
 @post_routes.route('/<int:postId>/likes',methods=['POST'])
 @login_required
 def create_like(postId):
+  """
+  create likes
+  """
   post=Post.query.get(postId)
   if not post:
         return {'errors': "Post not found"}, 404
@@ -259,14 +274,16 @@ def create_like(postId):
   # return {"message": "Successfully liked post"}
 
 
-# EDIT A POST IMAGE
+
 @post_routes.route('/<int:postId>/images/<int:imageId>/edit',methods=['PUT'])
 @login_required
 def edit_image(postId,imageId):
+  """
+  EDIT A POST IMAGE
+  """
   post=Post.query.get(postId)
   postImage = PostImage.query.get(imageId)
-  # print('000000000000000000000000',postImage.to_dict())
-  # print('12345678909876543234567',form.data['preview'])
+
   if not post:
     return {'errors':'Post not found'},404
   if not postImage:
@@ -277,7 +294,7 @@ def edit_image(postId,imageId):
   form = PostImageForm()
   form['csrf_token'].data = request.cookies['csrf_token']
 
-  print('qqqqqqqqqqqqqqqq',form.data['preview'])
+  
   if form.validate_on_submit():
     imgFile=form.data["post_image_url"] 
     imgFile.filename = get_unique_filename(imgFile.filename)
@@ -298,10 +315,13 @@ def edit_image(postId,imageId):
     return postImage.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
-# EDIT A POST
+
 @post_routes.route('/<int:postId>/edit',methods=['PUT'])
 @login_required
 def edit_post(postId):
+  """
+  EDIT A POST
+  """
   post = Post.query.get(postId)
   if not post:
     return {'errors':'Post not found'},404
@@ -320,12 +340,15 @@ def edit_post(postId):
 
 
 
-#DELETE A POST
+
 @post_routes.route('/<int:postId>',methods=['DELETE'])
 @login_required
 def delete_post(postId):
+  """
+  DELETE A POST
+  """
   post=Post.query.get(postId)
-  print('QQQQQQQQQQQ',post)
+  
   if not post:
     return {'errors':'404 Post not found'},404
   if post.creator_id != current_user.id:
@@ -371,7 +394,7 @@ def add_one_hashtag(postId):
     hashtag_detail = request.get_json()["detail"]
     hashtag_list = Hashtag.query.all()
     hashtag_details = [hashtag.detail for hashtag in hashtag_list]
-    print(hashtag_details)
+    
 
     if hashtag_detail in hashtag_details:
         existing_hashtag = Hashtag.query.filter_by(detail = hashtag_detail).first()

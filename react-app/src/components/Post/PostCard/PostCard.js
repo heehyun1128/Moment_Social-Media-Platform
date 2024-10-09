@@ -28,15 +28,16 @@ const PostCard = ({ post }) => {
   
   const handleClickPostCard = (e) => {
     e.preventDefault()
+    // memorize the scoll-Y position, so that when a user returns back to the list of posts,
+    // the user can quickly find the post he/she last reads
     sessionStorage.setItem('scrollPosition', window.scrollY);
     history.push(`/posts/${post?.id}`)
   }
 
+  // like a post
   const handleLike = async (e) => {
     if (!sessionUser) {
-      
       setModalContent(<PermitErrorModal />);
-      
     }
     e.preventDefault()
     e.stopPropagation()
@@ -52,8 +53,7 @@ const PostCard = ({ post }) => {
      if(likedPost && Object.values(likedPost)){
 
      setIsLiked(true)
-     
-    
+
      setTotalLikes(prevLike => {
        prevLike=Number(prevLike) 
          prevLike+= 1
@@ -88,8 +88,8 @@ const PostCard = ({ post }) => {
     sessionUser && dispatch(fetchUserLikedPosts(sessionUser?.id))
   }, [dispatch, sessionUser?.id])
 
+  
   useEffect(() => {
- 
     if (userLikedPosts && post && Object.keys(userLikedPosts).includes(post.id + '')) {
       setIsLiked(true)
     } else { 
@@ -113,7 +113,7 @@ const PostCard = ({ post }) => {
   const allPosts = allPostsObj && Object.values(allPostsObj)
 
   const likedPostCreator=allPosts?.filter(lpost=>Number(lpost.id)===Number(post.id))[0]
-console.log(likedPostCreator)
+
   return (
    post && <div id='post-card-div' className="swing-in-top-fwd " onClick={handleClickPostCard}>
       <div id='post-card-img-div'>

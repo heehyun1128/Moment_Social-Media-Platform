@@ -11,11 +11,13 @@ from flask_login import current_user, login_required
 
 commentimage_routes = Blueprint('commentimages', __name__)
 
-#DELETE A comment IMAGE
+
 @commentimage_routes.route('/<int:imageId>',methods=['DELETE'])
 @login_required
 def delete_commentimage(imageId):
-
+  """
+  DELETE A comment IMAGE
+  """
   
   image=CommentImage.query.get(imageId)
 

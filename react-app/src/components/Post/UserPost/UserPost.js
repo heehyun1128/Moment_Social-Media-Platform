@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import {  useSelector } from "react-redux";
 import PostCard from '../PostCard/PostCard'
-import { useParams, useHistory, useLocation, NavLink } from "react-router-dom";
-import { fetchSingleUser, fetchUserPosts } from "../../../store/user";
+import { useParams, useHistory} from "react-router-dom";
+
 import './UserPost.css'
 const UserPost = ({userPostArr}) => {
   const { userId } = useParams()
-  const dispatch = useDispatch()
   const history = useHistory();
-  const location = useLocation()
-  const currentPath = location.pathname
   const sessionUser = useSelector(state => state.session?.user)
 
 

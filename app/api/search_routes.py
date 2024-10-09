@@ -8,6 +8,9 @@ search_routes = Blueprint("search", __name__)
 
 @search_routes.route("/")
 def search():
+  """
+  search for a post/comment
+  """
   q = request.args.get("q")
   if q:
 
@@ -28,7 +31,7 @@ def search():
           if img.preview:
             data['previewImg'] = img.post_image_url
             break
-        # data['comments'] = [comment.to_dict() for comment in comments]
+        
         data['postImages'] = [image.to_dict() for image in images]
         data['creator']=postCreator.to_dict()
 

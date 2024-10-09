@@ -3,19 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts } from "../../../store/post";
 import PostCard from "../PostCard/PostCard";
 import "./AllPost.css";
-import { NavLink, useLocation } from "react-router-dom";
+
 
 const AllPost = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const currentPath = location.pathname;
   const allPostsObj = useSelector((state) => state.posts?.Posts);
   const [isViewFollowing, setIsViewFollowing] = useState(false);
   const [followedUserIds, setFollowedUserIds] = useState([]);
  
 
   const sessionUser = useSelector((state) => state.session.user);
-  console.log("sessionUser", sessionUser);
+  
 
   const fetchFollowed = async () => {
     const res = await fetch(`/api/users/${sessionUser?.id}/followed`);
@@ -26,6 +24,7 @@ const AllPost = () => {
    
   };
 
+  
   useEffect(() => {
     dispatch(fetchAllPosts());
     fetchFollowed();
