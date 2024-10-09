@@ -27,11 +27,8 @@ function SignupFormModal() {
 		setSelImage(imageUrl)
 	}
 
-	const handleDeselectImg = e => {
-		e.preventDefault()
-		setSelImage(null)
-	}
 
+	// handle user signup
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const formData = new FormData();

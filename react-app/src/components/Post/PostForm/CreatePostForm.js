@@ -7,7 +7,6 @@ const CreatePostForm = () => {
     content: '',
 
   }
-  const postImage = null
 
   const history = useHistory()
   const sessionUser = useSelector(state => state.session?.user)

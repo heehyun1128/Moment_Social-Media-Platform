@@ -19,7 +19,9 @@ user_routes = Blueprint('users', __name__)
 @user_routes.route('/<int:id>/posts')
 # @login_required
 def user(id):
-  
+    """
+    get all posts for the current user
+    """
     current_user = User.query.get(id)
     
     if not current_user:
@@ -43,13 +45,16 @@ def user(id):
                 break
         data['likeUsers']=[like.to_dict() for like in post_likes] 
         post_dict[str(post.id)] = data
-        print('OOOOOOOOOOOOOOOOOOO',post_dict)
+
     return post_dict
 
-# get followers
+
 @user_routes.route('/<int:id>/followers')
 @login_required
 def get_followers(id):
+    """
+    get the current user's followers
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -61,10 +66,13 @@ def get_followers(id):
         follower_dict[str(follower.id)]=data
     return follower_dict
 
-# get followed
+
 @user_routes.route('/<int:id>/followed')
 @login_required
 def get_followed(id):
+    """
+    get users who the current user followed
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -80,14 +88,16 @@ def get_followed(id):
 @user_routes.route('/<int:id>/likes')
 @login_required
 def get_likes(id):
-    
+    """
+    get the posts current user liked
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
 
     user_like_posts=curr_user.like_posts
     
-    print('OOOOOOOOOO',user_like_posts)
+    
     like_dict = {}
 
     for like in user_like_posts:
@@ -125,10 +135,13 @@ def users():
     return {'users': [user.to_dict() for user in users]}
 
 
-# create followers
+
 @user_routes.route('/<int:id>/followers/<int:followerId>',methods=['POST'])
 @login_required
 def add_followers(id,followerId):
+    """
+    create followers
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -138,10 +151,13 @@ def add_followers(id,followerId):
     db.session.commit()
     return {"message": "Successfully added followers"}
 
-# create followed
+
 @user_routes.route('/<int:id>/followed/<int:followedId>',methods=['POST'])
 @login_required
 def add_followed(id,followedId):
+    """
+    create a followed user
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -158,7 +174,7 @@ def update_profile(id):
     Creates a new user and logs them in
     """
     user=User.query.get(id)
-    # print('00000000000',user.to_dict())
+    
     if not user:
         return {"errors":'User not found'},404
     if user.id !=current_user.id:
@@ -170,30 +186,25 @@ def update_profile(id):
     if image:
        
         image.filename = get_unique_filename(image.filename)
-        print('xxxxxxxxxxxxxxxxxxxxx',image)
+        
         upload = upload_file_to_s3(image)
 
         if "url" not in upload:
-                # print({'errors': "profile image is not a valid url"})
             url=None
         else:
             user.profile_image_url= upload["url"]
-
-       
-    # user.profile_image_url=url
       
     db.session.commit()
       
     return jsonify({"profileImage":user.profile_image_url})
-    # if form.errors:
-    #     print('dataaaa',form.data)
-    #     print('yyyyyyyyyyy',form.errors)
-    # return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-# remove followers
+
 @user_routes.route('/<int:id>/followers/<int:followerId>/delete',methods=['DELETE'])
 @login_required
 def remove_followers(id,followerId):
+    """
+    remove followers
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -203,10 +214,13 @@ def remove_followers(id,followerId):
     db.session.commit()
     return {"message": "Successfully removed followers"}
 
-# remove followed
+
 @user_routes.route('/<int:id>/followed/<int:followedId>/delete',methods=['DELETE'])
 @login_required
 def remove_followed(id,followedId):
+    """
+    remove followed
+    """
     curr_user=User.query.get(id)
     if not curr_user:
         return {'errors':"User not found"}, 404
@@ -216,34 +230,4 @@ def remove_followed(id,followedId):
     db.session.commit()
     return {"message": "Successfully removed followed user"}
 
-# aws
 
-
-# @user_routes.route("", methods=["POST"])
-# def upload_image():
-#     form = ImageForm()
- 
-#     if form.validate_on_submit():
-          
-#         image = form.data["image"]
-#         image.filename = get_unique_filename(image.filename)
-#         upload = upload_file_to_s3(image)
-#         print(upload)
-
-#         if "url" not in upload:
-#         # if the dictionary doesn't have a url key
-#         # it means that there was an error when you tried to upload
-#         # so you send back that error message (and you printed it above)
-#             return render_template("post_form.html", form=form, errors=[upload])
-
-#         url = upload["url"]
-#         new_image = Post(image= url)
-#         db.session.add(new_image)
-#         db.session.commit()
-#         return redirect("/posts/all")
-
-#     if form.errors:
-#         print(form.errors)
-#         return render_template("post_form.html", form=form, errors=form.errors)
-
-    return render_template("post_form.html", form=form, errors=None)

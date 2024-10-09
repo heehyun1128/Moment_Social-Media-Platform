@@ -13,9 +13,12 @@ from .s3_helpers import (
 comment_routes = Blueprint('comments', __name__)
 
 
-# GET SINGLE COMMENT
+
 @comment_routes.route('/<int:commentId>')
 def get_comment_detail(commentId):
+  """
+  GET SINGLE COMMENT
+  """
   # check to see if comment exists
   comment=Comment.query.get(commentId)
   if not comment:
@@ -36,16 +39,18 @@ def get_comment_detail(commentId):
     'profileImage':user.profile_image_url,
     'commentCreator':User.query.get(comment.user_id).to_dict(),
   }
-  print('000000000',data)
+
 
   return data
   
 
-# CREATE A comment IMAGE
+
 @comment_routes.route('/<int:commentId>/images',methods=['POST'])
 @login_required
 def comment_image(commentId):
- 
+  """
+  CREATE A comment IMAGE
+  """
   comment=Comment.query.get(commentId)
   if not comment:
     return {'errors':'comment not found'},404
@@ -73,7 +78,6 @@ def comment_image(commentId):
     db.session.commit()
     image_list = [img.to_dict() for img in [new_image]]
     
-    print('OOOOOOOOOOOO',new_image)
     return new_image.to_dict()
 
   if form.errors:
@@ -81,11 +85,14 @@ def comment_image(commentId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-#EDIT A COMMENT
+
 
 @comment_routes.route('/<int:commentId>/edit',methods=['PUT'])
 @login_required
 def edit_comment(commentId):
+  """
+  EDIT A COMMENT
+  """
   comment=Comment.query.get(commentId)
   
   if not comment:
@@ -121,22 +128,23 @@ def edit_comment(commentId):
        'commentImages':[img.to_dict() for img in comment.comment_images],
     }
       db.session.commit()
-      print('YYYYYYYYOOOOOOOOUUUUUUUUUUUUUUUUU',comment_obj)
+      
       return comment_obj
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 
-# EDIT A comment IMAGE
+#
 @comment_routes.route('/<int:commentId>/images/<int:imageId>/edit',methods=['PUT'])
 @login_required
 def edit_image(commentId,imageId):
+  """
+  EDIT A comment IMAGE
+  """
   comment=Comment.query.get(commentId)
-  print('COMMENTTTTTTTTT',comment)
+  
   commentImage = CommentImage.query.get(imageId)
-  print('DDDDDDDDDDDD',commentImage)
-  # print('000000000000000000000000',CommentImage.to_dict())
-  # print('12345678909876543234567',form.data['preview'])
+  
   if not comment:
     return {'errors':'comment not found'},404
   if not commentImage:
@@ -166,12 +174,15 @@ def edit_image(commentId,imageId):
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-#DELETE A COMMENT
+
 @comment_routes.route('/<int:commentId>',methods=['DELETE'])
 @login_required
 def delete_comment(commentId):
+  """
+  DELETE A COMMENT
+  """
   comment=Comment.query.get(commentId)
-  print('QQQQQQQQQQQ',comment)
+  
   if not comment:
     return {'errors':'404 Comment not found'},404
   if comment.user_id != current_user.id:

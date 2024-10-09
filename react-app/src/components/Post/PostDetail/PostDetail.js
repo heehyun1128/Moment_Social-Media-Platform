@@ -7,7 +7,6 @@ import {
   fetchAddFollowed,
   fetchAddFollower,
   fetchFollowers,
-  fetchRemoveFollowed,
   fetchRemoveFollower,
   fetchSingleUser,
 } from "../../../store/user";
@@ -15,11 +14,10 @@ import CommentDetail from "../../Comment/CommentDetail/CommentDetail";
 import CommentForm from "../../Comment/CommentForm/CommentForm";
 import { fetchAllPostComments } from "../../../store/comment";
 import OpenModalButton from "../../OpenModalButton";
-import DeleteCommentModal from "../../Comment/CommentModal/DeleteCommentModal";
 import DeletePostModal from "../../Comment/CommentModal/DeletePostModal";
 import { useModal } from "../../../context/Modal";
 import FollowModal from "../../Modal/FollowModal/FollowModal";
-import Loading from "../../Loading/Loading";
+
 import PageLoader from "../../PageLoader/PageLoader";
 
 const PostDetail = () => {
@@ -45,7 +43,7 @@ const PostDetail = () => {
   const postCreatorFollowerArr =
     postCreatorFollowers && Object.values(postCreatorFollowers);
 
-  const [imageId, setImageId] = useState(null);
+
   const [isLoading, setIsLoading] = useState(true);
   // css
   const [isActive, setIsActive] = useState(["active", "", "", "", ""]);
@@ -56,18 +54,12 @@ const PostDetail = () => {
     "hidden",
     "hidden",
   ]);
-  const [isImageClicked, setIsImageClicked] = useState([
-    "no",
-    "no",
-    "no",
-    "no",
-    "no",
-  ]);
+
   const [isFollowed, setIsFollowed] = useState(false);
   const { setModalContent, setOnModalClose } = useModal();
   const images = post?.postImages;
 
-  const numOfComments = commentArr?.length;
+
   const handleMouseOver = (index) => {
     const activeDivs = [...isActive];
     for (let i = 0; i < activeDivs.length; i++) {
@@ -101,10 +93,7 @@ const PostDetail = () => {
     history.push(`/posts/${postId}/edit`);
   };
 
-  // const handleViewUserProfile = e => {
-  //   e.preventDefault();
-  //   history.push(`/profile/${post.creator.id}`)
-  // }
+  
   const handleFollowUser = async (e) => {
     e.preventDefault();
     if (!isFollowed) {
@@ -119,8 +108,8 @@ const PostDetail = () => {
       setIsFollowed(false);
     }
   };
+  
   useEffect(() => {
-    
     dispatch(fetchSinglePost(postId)).then(() => setIsLoading(false));
     window.scrollTo(0, 0);
     
@@ -131,6 +120,7 @@ const PostDetail = () => {
     dispatch(fetchFollowers(postCreator?.id));
   }, [dispatch, postCreator?.id]);
 
+  // update following status
   useEffect(() => {
     if (postCreatorFollowerArr) {
       for (let follower of postCreatorFollowerArr) {
@@ -141,9 +131,11 @@ const PostDetail = () => {
     }
   }, [dispatch, postCreatorFollowerArr, sessionUser?.id]);
 
+  // fetch post creator
   useEffect(() => {
     post && post.creatorId && dispatch(fetchSingleUser(post?.creatorId));
   }, [dispatch, post, post?.creatorId]);
+  
   // get all postcomments
   useEffect(() => {
     dispatch(fetchAllPostComments(postId));
@@ -247,7 +239,7 @@ const PostDetail = () => {
           </div>
           <div id="comment-section">
             <CommentForm />
-            {/* {post && <div> {numOfComments} Comments</div>} */}
+            
 
             <div id="comment-detail-div">
               <h4>All Comments</h4>

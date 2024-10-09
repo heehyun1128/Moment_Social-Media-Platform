@@ -12,12 +12,14 @@ from flask_login import current_user, login_required
 
 postimage_routes = Blueprint('postimages', __name__)
 
-#DELETE A POST IMAGE
+
 @postimage_routes.route('/<int:imageId>',methods=['DELETE'])
 @login_required
 def delete_postimage(imageId):
+  """
+  DELETE A POST IMAGE
+  """
 
-  
   image=PostImage.query.get(imageId)
 
   if not image:

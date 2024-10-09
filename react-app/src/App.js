@@ -15,8 +15,6 @@ import Search from "./components/Search/Search";
 import AllPost from "./components/Post/AllPost/AllPost";
 import { useLocation } from 'react-router-dom';
 import Footer from "./components/Footer/Footer";
-import Loading from "./components/Loading/Loading";
-import { LineWave } from "react-loader-spinner";
 import PageLoader from "./components/PageLoader/PageLoader";
 
 

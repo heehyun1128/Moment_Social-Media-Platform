@@ -8,11 +8,11 @@ import {
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./PostForm.css";
-import { fetchDeletePostImage } from "../../../store/postImage";
+
 import Loading from "../../Loading/Loading";
 import { useModal } from "../../../context/Modal";
 import ImageValidationModal from "../../Modal/ImageModal/ImageValidationModal";
-import ImageDeleteModal from "../../Modal/ImageModal/ImageDeleteModal";
+
 import ImageNotEmptyModal from "../../Modal/ImageModal/ImageNotEmptyModal";
 import ImageCantUndoneModal from "../../Modal/ImageModal/ImageCantUndoneModal";
 import { Button, Tooltip } from "@mui/material";
@@ -29,13 +29,11 @@ const PostForm = ({ post, formType }) => {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.content || "");
   const [errors, setErrors] = useState({});
-  const [imgErrors, setImgErrors] = useState({});
-  const [postImgArr, setPostImgArr] = useState([]);
   const [selFileNames, setSelFileNames] = useState([]);
   const [selImageUrls, setSelImageUrls] = useState([]);
-  const [backgroundImg, setBackgroundImg] = useState("");
+
   const { setModalContent, setOnModalClose } = useModal();
-  
+
   const [imgInputIdList, setImgInputIdList] = useState(
     postPics.map((pic) => pic?.id)
   );
@@ -52,7 +50,7 @@ const PostForm = ({ post, formType }) => {
   const [originalTitle, setOriginalTitle] = useState("");
   const [originalContent, setOriginalContent] = useState("");
   const [aiUsed, setAiUsed] = useState(false);
-  const [postSubmitted,setPostSubmitted]= useState(false);
+  const [postSubmitted, setPostSubmitted] = useState(false);
 
   // GET INITIAL IMAGE URLS
 
@@ -63,6 +61,7 @@ const PostForm = ({ post, formType }) => {
   }, [post?.postImages]);
 
   const handleRemoveImg = (index) => {
+    // render the modal for user to confirm removal of image
     setModalContent(
       <ImageCantUndoneModal
         imgInputIdList={imgInputIdList}
@@ -86,7 +85,7 @@ const PostForm = ({ post, formType }) => {
     deselectImage[index] = true;
     setDeleteImageCalled(deselectImage);
 
-    const imgUpdateBtnClicked = [...isCancelImageUpdate]; 
+    const imgUpdateBtnClicked = [...isCancelImageUpdate];
     imgUpdateBtnClicked[index] = true;
 
     setIsCancelImageUpdate(imgUpdateBtnClicked);
@@ -103,6 +102,8 @@ const PostForm = ({ post, formType }) => {
 
     setPostPics(newPics);
   };
+
+  // function to deselect image
   const handleDeselectImg = (index) => {
     const fileNames = [...selFileNames];
     const imageUrls = [...selImageUrls];
@@ -116,11 +117,10 @@ const PostForm = ({ post, formType }) => {
     const newPics = [...postPics];
     newPics[index] = null;
 
-    
     setPostPics(newPics);
 
     const redBd = [...redBorderClass];
-   
+
     redBd[index] = "";
     setRedBorderClass(redBd);
   };
@@ -135,6 +135,8 @@ const PostForm = ({ post, formType }) => {
     const newArr = [...postPics, ...new Array(5 - postPics.length).fill(null)];
     setPostPics(newArr);
   }
+
+  // update image array
   const handleImageChange = (e, index) => {
     e.preventDefault();
 
@@ -142,7 +144,7 @@ const PostForm = ({ post, formType }) => {
     const imageUrls = [...selImageUrls];
     const imageInputIds = [...imgInputIdList];
     const redBd = [...redBorderClass];
-   
+
     redBd[index] = "";
     setRedBorderClass(redBd);
     if (e.target.files[0]) {
@@ -171,6 +173,7 @@ const PostForm = ({ post, formType }) => {
     }
   };
 
+  // check if image has a valid extension
   const isImageValid = (postPic) => {
     const imageExtensions = [
       "png",
@@ -195,6 +198,7 @@ const PostForm = ({ post, formType }) => {
     }
   };
 
+  // handle post submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -208,10 +212,11 @@ const PostForm = ({ post, formType }) => {
         content,
       };
       let textData;
+      // if every image in the post is valid, then submit requests for post creation
       if (postPics?.every((item) => isImageValid(item) || item === null)) {
         textData = await dispatch(fetchCreatePost(post));
       }
-     
+
       let preview = false;
       for (const postPic of postPics) {
         if (postPic === null || postPic === undefined) continue;
@@ -225,7 +230,7 @@ const PostForm = ({ post, formType }) => {
         }
 
         if (!isImageValid(postPic)) {
-         setModalContent(<ImageValidationModal />);
+          setModalContent(<ImageValidationModal />);
           setImageLoading(false);
           const redBd = [...redBorderClass];
           const index = postPics.indexOf(postPic);
@@ -248,7 +253,7 @@ const PostForm = ({ post, formType }) => {
         setErrors(textData.errors);
         return;
       }
-      setPostSubmitted(true)
+      setPostSubmitted(true);
       setTimeout(() => {
         if (textData) {
           history.push(`/posts/${textData.id}`);
@@ -256,6 +261,7 @@ const PostForm = ({ post, formType }) => {
         resetForm();
       }, 3000);
     } else if (formType === "updatePost") {
+      // update post
       post = {
         ...post,
         title,
@@ -292,7 +298,6 @@ const PostForm = ({ post, formType }) => {
           preview = false;
         }
 
-      
         if (
           postPic !== null &&
           !postPic?.postImageUrl?.startsWith("http") &&
@@ -320,7 +325,6 @@ const PostForm = ({ post, formType }) => {
                 fetchUpdatePostImage(formData, edittedImgId)
               );
             } else if (postPic) {
-             
               await dispatch(fetchCreatePostImage(formData));
             }
             setImageLoading(true);
@@ -328,12 +332,11 @@ const PostForm = ({ post, formType }) => {
         }
       }
 
-   
       textData && history.push(`/posts/${textData?.id}`);
-   
     }
   };
 
+  // use OpenAI to optimize user post title and content
   const generateDescription = async () => {
     setOriginalTitle(title);
     setOriginalContent(content);
@@ -342,8 +345,7 @@ const PostForm = ({ post, formType }) => {
 
     const resTitle = res.data.title;
     const resContent = res.data.content;
-    console.log(resTitle);
-    console.log(resContent);
+
     setTitle(resTitle);
     setContent(resContent);
   };
@@ -354,8 +356,11 @@ const PostForm = ({ post, formType }) => {
   };
 
   return (
-    <div id="post-form-div" 
-    className={postSubmitted?`blur-out-expand-fwd`:`focus-in-contract-bck`}
+    <div
+      id="post-form-div"
+      className={
+        postSubmitted ? `blur-out-expand-fwd` : `focus-in-contract-bck`
+      }
     >
       <div id="post-form-header">
         <h3
@@ -410,8 +415,6 @@ const PostForm = ({ post, formType }) => {
                               id={imgInputIdList[index]}
                               onChange={(e) => {
                                 handleImageChange(e, index);
-
-                               
                               }}
                             />
                             <Tooltip title="Add Image" placement="top">
@@ -425,10 +428,16 @@ const PostForm = ({ post, formType }) => {
                       !deleteImageCalled[index] &&
                       !isCancelImageUpdate[index] && (
                         <Tooltip title="Remove Image" placement="bottom">
-
-                          <i onClick={() => handleRemoveImg(index)} style={{zIndex:1000, color:"#ae7a7a", cursor:"pointer"}} className="fa-solid fa-2xl fa-square-minus"></i>
+                          <i
+                            onClick={() => handleRemoveImg(index)}
+                            style={{
+                              zIndex: 1000,
+                              color: "#ae7a7a",
+                              cursor: "pointer",
+                            }}
+                            className="fa-solid fa-2xl fa-square-minus"
+                          ></i>
                         </Tooltip>
-                        
                       )}
                     {/* {selImageUrls[index] && isCancelImageUpdate[index] && <div id='deslect-image-div' onClick={() => handleUndoImageUpdate(index)}>DESELECT IMAGE */}
                     {/* {isCancelImageUpdate[index]} */}
@@ -471,16 +480,12 @@ const PostForm = ({ post, formType }) => {
                             <input
                               type="file"
                               accept="image/*"
-                             
                               onChange={(e) => {
                                 handleImageChange(e, index);
-
-                               
                               }}
                             />
                             <Tooltip title="Add Image" placement="top">
                               <div id="plus-icon">+</div>
-                              
                             </Tooltip>
                           </label>
                         )}
@@ -506,7 +511,10 @@ const PostForm = ({ post, formType }) => {
               required
             />
             {errors && errors.title && <p className="errors">{errors.title}</p>}
-            <Tooltip title="Refine post tile and content with AI" placement="top">
+            <Tooltip
+              title="Refine post tile and content with AI"
+              placement="top"
+            >
               <Button
                 id="ai-btn"
                 variant="contained"
@@ -541,7 +549,7 @@ const PostForm = ({ post, formType }) => {
             }}
             required
           />
-          <div style={{width:"122px"}}></div>
+          <div style={{ width: "122px" }}></div>
         </div>
 
         {errors && errors.content && <p className="errors">{errors.content}</p>}
@@ -552,7 +560,7 @@ const PostForm = ({ post, formType }) => {
             <p>Submitting...</p>
           </>
         ) : (
-          <button id="submit-post-btn" type="submit" >
+          <button id="submit-post-btn" type="submit">
             POST
           </button>
         )}

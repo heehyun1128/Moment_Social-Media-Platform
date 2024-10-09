@@ -7,6 +7,9 @@ like_routes=Blueprint('likes',__name__)
 @like_routes.route('/<int:postId>',methods=['DELETE'])
 @login_required
 def delete_like(postId):
+  """
+  remove a like
+  """
   post=Post.query.get(postId)
   if not post:
     return {'errors': "Post not found"}, 404

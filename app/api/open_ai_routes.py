@@ -13,6 +13,9 @@ open_ai_routes = Blueprint('ai', __name__)
 @open_ai_routes.route('/',methods=['POST'])
 @login_required
 def generate_post_info():
+    """
+    generate post title and content using OpenAI api
+    """
     data = request.get_json()
     if not data:
         return {"error": "Request data is missing or not JSON"}, 400
