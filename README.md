@@ -11,7 +11,13 @@ https://moment-2igd.onrender.com/
 
 # Technologies Used
 
-React, Redux/Redux-thunk, HTML 5, CSS, Javascript, JSX, Flask, SQLAlchemy, PostgreSQL
+- Frontend
+  
+  React, Redux, HTML 5, CSS, Javascript
+
+- Backend
+
+  Flask, AWS, PostgreSQL, SQLAlchemy, OpenAI 
 
 # Features
 
