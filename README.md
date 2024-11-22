@@ -1,15 +1,18 @@
-# Project Summary
-This project aims to create a social media platform that allows people to establish connections with others and showcase their most cherished life experiences and moments within the community.
+# Moment
+![vue_saved 6](https://github.com/user-attachments/assets/b3fe9e88-9f19-468a-8dbc-85eab986bc33)
 
-# Wiki Link
+## Project Summary
+This project is a social media platform that allows people to share with others their interests, news, hobbies, cherished life experiences and moments, and many more.
+
+## Wiki Link
 https://github.com/heehyun1128/yc-Moment/wiki/Project-Highlight
 
-# Live / Production Site
+## Live / Production Site
 
 https://moment-2igd.onrender.com/
 
 
-# Technologies Used
+## Technologies Used
 
 - Frontend
   
@@ -23,22 +26,24 @@ https://moment-2igd.onrender.com/
 
 ## Landing Page
 
-
-  
 <img width="1500" alt="Screenshot 2024-09-07 at 11 41 20 PM" src="https://github.com/user-attachments/assets/cc900662-eaaf-494c-9e36-3058d7e07b4c">
 
 <img width="1495" alt="Screenshot 2024-09-07 at 11 53 12 PM" src="https://github.com/user-attachments/assets/b56b7c9a-842b-46a4-bd37-494841be153d">
 
 ## Sign Up/ Log In/ Log Out
+  
 <img width="1495" alt="Screenshot 2024-09-07 at 11 52 42 PM" src="https://github.com/user-attachments/assets/d757c877-5224-42ae-8f84-53c5a2ad3f53">
 <img width="1497" alt="Screenshot 2024-09-07 at 11 52 50 PM" src="https://github.com/user-attachments/assets/4bd014c4-40d3-475e-b28e-df2dac46230f">
 
 ## Posts
 
-- See All Posts, posts from followed users
+- View All Posts
   
 <img width="1501" alt="Screenshot 2024-09-07 at 11 41 36 PM" src="https://github.com/user-attachments/assets/dc257ccc-08c0-4188-a1f2-68fc59f89c45">
+
+- View posts from followed users
 <img width="1500" alt="Screenshot 2024-09-07 at 11 55 02 PM" src="https://github.com/user-attachments/assets/9c94c60c-b543-4215-8d57-8e51aa7fb8fd">
+
 
 - View post details
   
@@ -53,7 +58,6 @@ https://moment-2igd.onrender.com/
 <img width="1495" alt="Screenshot 2024-09-07 at 11 56 41 PM" src="https://github.com/user-attachments/assets/c91d6af6-c858-42a6-a2c8-180c34f4a297">
 
 <img width="1501" alt="Screenshot 2024-09-07 at 11 57 32 PM" src="https://github.com/user-attachments/assets/8059e6fa-e4a2-4211-b407-7b3d496b0f32">
-
 
 
 ## Comments
@@ -112,6 +116,23 @@ https://moment-2igd.onrender.com/
 <img width="1453" alt="Screenshot 2024-09-07 at 11 47 45 PM" src="https://github.com/user-attachments/assets/fd8f0a1e-bb66-4548-8c7a-c52335a5cda5">
 
 <img width="1498" alt="Screenshot 2024-09-07 at 11 47 37 PM" src="https://github.com/user-attachments/assets/2deb8a3f-eca8-47ff-8121-e0ecff41d566">
+
+## User Home Page
+
+- View All Posts Created
+  
+![Screenshot 2024-11-21 at 5 51 23 PM](https://github.com/user-attachments/assets/0910f7b7-8c62-4191-a84f-5e9891ed537c)
+
+- View Liked Posts
+![Screenshot 2024-11-21 at 5 52 58 PM](https://github.com/user-attachments/assets/30f221f9-cb48-4157-b131-24d35d54c0f7)
+
+- View & Remove Followers
+
+![Screenshot 2024-11-21 at 5 53 21 PM](https://github.com/user-attachments/assets/9c033fc4-4355-4482-9464-4f70daf1d6b0)
+
+- View & Remove Following
+  
+![Screenshot 2024-11-21 at 5 53 53 PM](https://github.com/user-attachments/assets/677745ea-a7b1-47ab-a4f0-474af420b21e)
 
 ## AI content generation
 
