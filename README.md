@@ -7,9 +7,9 @@ This project is a social media platform that allows people to share with others 
 ## Wiki Link
 https://github.com/heehyun1128/yc-Moment/wiki/Project-Highlight
 
-## Live / Production Site
-
-https://moment-2igd.onrender.com/
+## Lagal
+All rights reserved. You may not use, distribute, or reproduce any part of this repository without the owner's explicit written permission.
+You must notify the owner before using this repository in any way.
 
 
 ## Technologies Used
